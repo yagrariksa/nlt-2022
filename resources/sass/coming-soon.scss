@@ -1,0 +1,111 @@
+body {
+    overflow: hidden; // INI NANTI HARUS DIHAPUS
+}
+
+.comingsoon {
+    width: 100%;
+    height: calc(100vh - 7rem);
+    margin: 3.5rem 0;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    @include blur-container;
+    background-color: rgba($white, .6);
+    border-radius: 3rem;
+
+    &__logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+
+        img {
+            height: 3rem;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+
+        h1 {
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        h4 {
+            text-align: center;
+            max-width: 50%;
+            color: $rich-black-60;
+        }
+    }
+
+    &__account {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.125rem;
+
+        a svg {
+            height: 2rem;
+        }
+    }
+
+    &__ornament {
+        position: absolute;
+        z-index: -1;
+        filter: blur(15px);
+
+        &--satu {
+            width: 50vw;
+            top: 0;
+            left: 0;
+            transform: translate(-20%, -40%);
+        }
+
+        &--dua {
+            width: 80vw;
+            bottom: 0;
+            right: 0;
+            transform: translate(50%, 50%);
+        }
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .comingsoon {
+        &__content {
+            max-width: 80%;
+            gap: 1.125rem;
+
+            h4 {
+                max-width: 100%;
+            }
+        }
+
+        &__account {
+            gap: 2.375rem;
+
+            a svg {
+                height: 1rem;
+            }
+        }
+
+        &__ornament {
+            &--satu {
+                width: 90vw;
+            }
+
+            &--dua {
+                width: 120vw;
+                transform: translate(50%, 45%);
+            }
+        }
+    }
+}

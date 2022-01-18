@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function peserta()
+    {
+        return $this->hasMany(Peserta::class, 'user_id', 'id');
+    }
+
+    public function travel()
+    {
+        return $this->hasMany(Travel::class, 'user_id', 'id');
+    }
 }

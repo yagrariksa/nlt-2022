@@ -45,12 +45,13 @@ h1,
   font-weight: 600;
   font-size: 3rem;
   line-height: 3.625rem;
-  letter-spacing: -0.03rem;
+  letter-spacing: -0.1rem;
 }
 h1.xl,
 .h1.xl {
   font-size: 6rem;
   line-height: 7.2rem;
+  letter-spacing: -0.2rem;
 }
 
 h2,
@@ -256,7 +257,7 @@ body {
 }
 .comingsoon__content h4 {
   text-align: center;
-  max-width: 50%;
+  max-width: 40%;
   color: #667175;
 }
 .comingsoon__account {

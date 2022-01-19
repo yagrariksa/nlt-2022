@@ -11,7 +11,7 @@
         <div class="comingsoon__content">
             <h1 class="xl">Coming Soon</h1>
             <h4>Pendaftaran untuk NLT-AMSA Leadership Training akan segera dibuka. Follow media sosial kami untuk informasi
-                lebih lanjut</h4>
+                lebih lanjut.</h4>
         </div>
         <div class="comingsoon__account">
             <a href="" class="btn-img">

@@ -11,14 +11,21 @@
     <link rel="stylesheet" href="{{ url('assets/scss/app.css') }}">
 
     {{-- Favicon --}}
-    {{-- <link rel="shortcut icon" href="{{ url('assets/img/favicon.png') }}" type="image/x-icon"> --}}
+    <link rel="shortcut icon" href="{{ url('assets/img/favicon.png') }}" type="image/x-icon">
+
+    {{-- SEO --}}
+    <meta name="description" content="@yield('seo-desc')">
+    <meta name="canonical" href=""> {{-- ini buat optimize page --}}
+    <meta property="og:title" content="@yield('title')">
+    <meta property="og:description" content="@yield('seo-desc')">
+    <meta property="og:image" content="@yield('seo-img')">
 </head>
 
-<body>
+<body style="@yield('overflow')">
     {{-- navbar --}}
     @yield('navbar')
 
-    <div class="content">
+    <div class="content @yield('addclass')">
         @yield('content')
     </div>
 

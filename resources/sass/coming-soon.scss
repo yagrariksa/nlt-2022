@@ -1,11 +1,6 @@
-body {
-    overflow: hidden; // INI NANTI HARUS DIHAPUS
-}
-
 .comingsoon {
     width: 100%;
     height: calc(100vh - 7rem);
-    margin: 3.5rem 0;
     padding: 3rem;
     display: flex;
     flex-direction: column;
@@ -15,6 +10,11 @@ body {
     @include blur-container;
     background-color: rgba($white, .6);
     border-radius: 3rem;
+
+    &__container {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+    }
 
     &__logos {
         display: flex;
@@ -58,7 +58,7 @@ body {
     }
 
     &__ornament {
-        position: absolute;
+        position: fixed;
         z-index: -1;
         filter: blur(15px);
 

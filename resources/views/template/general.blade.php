@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{{ url('assets/scss/app.css') }}">
 
     {{-- Favicon --}}
-    {{-- <link rel="shortcut icon" href="{{ url('assets/img/favicon.png') }}" type="image/x-icon"> --}}
+    <link rel="shortcut" href="{{ url('assets/img/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url('assets/img/favicon.png') }}" type="image/x-icon">
 </head>
 
 <body>

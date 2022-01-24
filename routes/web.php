@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // return view('welcome');
     if (Auth::user()) {
-        Auth::logout();
+        return view('be.d.landing');
     }
     return view('be.landing');
-});
+})->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::name('register')->prefix('regist')->group(function () {
@@ -36,7 +36,10 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('logout',function(){
+        Auth::logout();
+        return redirect()->route('home');
+    })->name('logout');
     Route::name('peserta')->prefix('/peserta')->group(function () {
         /**
          * view dashboard list / form add-peserta / form edit-peserta

@@ -2,6 +2,9 @@
 @if (Session::has('auth.msg'))
     <span class="error">{{ Session::get('auth.msg') }}</span>
 @endif
+@if (Session::has('error'))
+    <span class="error">{{ Session::get('error') }}</span>
+@endif
 <form action="{{ route('login') }}" method="post">
     @csrf
     <select name="univ" id="">

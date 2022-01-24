@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $msg = [
+        'required' => ':attribute wajib',
+        'file' => 'harap upload file untuk :attribute',
+        'min' => 'minimal :min karakter',
+        'mimes' => 'file harus bertipe png, jpg, jpeg',
+        'email' => ':attribute harus berupa email'
+    ];
 }

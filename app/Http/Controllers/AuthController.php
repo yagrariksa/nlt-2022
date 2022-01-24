@@ -31,7 +31,10 @@ class AuthController extends Controller
     {
         if (User::where('email', $request->univ)->first()) {
             // bring it to login with message
-            return redirect()->route('login')->with('auth.msg','ketua sudah melakukan pendaftaran, silahkan login');
+            return redirect()->route('login')->with([
+                'auth.msg' => 'ketua sudah melakukan pendaftaran, silahkan login',
+                'univ' => $request->univ
+            ]);
         }
 
         $rules = [
@@ -44,28 +47,18 @@ class AuthController extends Controller
             'vegan' => 'required'
         ];
 
-        $msg = [
-            'required' => ':attribute wajib',
-            'file' => 'harap upload file untuk :attribute',
-            'min' => 'minimal :min karakter',
-            'mimes' => 'file harus bertipe png, jpg, jpeg',
-        ];
-
-        Validator::make($request->all(), $rules, $messages = $msg)->validate();
+        Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
 
         // please do validate in FrontEnd, 
         // idk how to handle files to keep in touch with input
 
-        // check if it already registered
-       
-
         if ($request->hasFile('pas')) {
-            $foto_url = join("_", [time(), $request->nama, "foto", $request->pas->extension()]);
+            $foto_url = join("_", [time(), $request->nama, "foto"]) . "." . $request->pas->extension();
             $request->pas->storeAs('public', $foto_url);
         }
 
         if ($request->hasFile('ktp')) {
-            $ktp_url = join("_", [time(), $request->nama, "ktp", $request->ktp->extension()]);
+            $ktp_url = join("_", [time(), $request->nama, "ktp"])  . "." . $request->pas->extension();
             $request->ktp->storeAs('public', $ktp_url);
         }
 
@@ -97,7 +90,21 @@ class AuthController extends Controller
 
     public function action_login(Request $request)
     {
-        return true;
+        if (!User::where('email', $request->univ)->first()) {
+            return redirect()->route('register')->with([
+                'univ' => $request->univ,
+                'message' => 'ketua belum melakukan pendaftaran, harap ketua bla bla bla'
+            ]);
+        }
+
+        if (Auth::attempt([
+            'email' => $request->univ,
+            'password' => $request->password
+        ])) {
+            return redirect()->route('home');
+        }
+
+        return redirect()->back()->with('error', 'password salah');
     }
 
     public function action_acc_setting(Request $request)

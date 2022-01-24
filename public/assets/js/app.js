@@ -2101,9 +2101,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*****************************!*\
   !*** ./resources/js/env.js ***!
   \*****************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-// CHANGE COLOR BUTTON IMAGE ON CLICK
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    values = _require.values; // CHANGE COLOR BUTTON IMAGE ON CLICK
+
+
 $('.btn-img').click(function (e) {// e.target.setAttribute("fill", "#AE2012")
 }); // CHANGE COLOR BUTTON IMAGE ON HOVER
 
@@ -2180,7 +2183,7 @@ window.addEventListener('resize', function () {
     $('.form-group__input-file .button .lg')[0].style.display = 'unset';
     $('.form-group__input-file .button .sm')[0].style.display = 'none';
   }
-}); // MANIPULATE INPUT SELECT
+}); // MANIPULATE INPUT SELECT -> STYLE
 
 var selectItem = $('.form-group--select'); //x
 
@@ -2188,9 +2191,9 @@ var selectLength = selectItem.length; //l
 
 for (var i = 0; i < selectItem.length; i++) {
   var selectElement = selectItem[i].getElementsByTagName('select')[0];
-  var newSelectedElm = document.createElement('div');
+  var newSelectedElm = document.createElement('input');
   newSelectedElm.setAttribute('class', 'form-group__selected');
-  newSelectedElm.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+  newSelectedElm.placeholder = selectElement.options[selectElement.selectedIndex].innerHTML;
   selectItem[i].prepend(newSelectedElm);
   var newOptionContainerElm = document.createElement('div');
   newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');
@@ -2253,11 +2256,35 @@ function closeAllSelect(elm) {
   for (i = 0; i < x.length; i++) {
     if (arrNo.indexOf(i)) {
       x[i].classList.add("form-group__select-hide");
+      x[i].childNodes.forEach(function (x) {
+        x.style.display = 'block';
+      });
     }
   }
 }
 
-document.addEventListener('click', closeAllSelect); // CHANGE COLOR INPUT RADIO/CHECKBOX
+document.addEventListener('click', closeAllSelect); // MANIPULATE INPUT SELECT -> SEARCHABLE
+
+$('.form-group__select-items').click(function (e) {
+  e.target.parentElement.nextSibling.value = e.target.parentElement.nextSibling.textContent;
+});
+$('.form-group__selected').on('input', function (e) {
+  var options = [];
+  var optionsParent = e.target.previousSibling;
+  optionsParent.childNodes.forEach(function (x) {
+    options.push(x.childNodes[0].data);
+  });
+  var regex = new RegExp(e.target.value, 'i');
+  regex.ignoreCase;
+  options.map(function (option, index) {
+    if (!regex.test(option)) {
+      optionsParent.childNodes[index].style.display = 'none';
+    } else {
+      optionsParent.childNodes[index].style.display = 'block';
+    }
+  });
+}); //get value -> $('.form-group__select-items .form-group__same-as-selected')[0].innerText
+// CHANGE COLOR INPUT RADIO/CHECKBOX
 
 var inputWillCHangeLabel = $('input[type="radio"], input[type="checkbox"]');
 

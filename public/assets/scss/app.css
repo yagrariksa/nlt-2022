@@ -59,7 +59,7 @@ h1,
   font-weight: 600;
   font-size: 3rem;
   line-height: 3.625rem;
-  letter-spacing: -0.3rem;
+  letter-spacing: -0.2rem;
 }
 h1.xl,
 .h1.xl {
@@ -248,7 +248,7 @@ label {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background-image: url(/images/dropdown-arrow.svg?662fe868c0cf0ed973372d0fb759b272);
+  background-image: url(/images/dropdown-arrow.svg?512ef9cca648640097afb8e35273d5d4);
   background-repeat: no-repeat;
   background-size: cover;
   transition: transform 0.3s ease-in-out 0s;
@@ -257,6 +257,8 @@ label {
   transform: translateY(-50%) rotate(180deg);
 }
 .form-group__select-items {
+  max-height: 40vh;
+  overflow-y: auto;
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
@@ -279,6 +281,8 @@ label {
 }
 .form-group__select-items div:hover, .form-group__same-as-selected {
   background-color: #E3CE8F;
+  color: #001219 !important;
+  font-weight: 500;
 }
 .form-group__input-file {
   width: 100%;
@@ -320,7 +324,7 @@ label {
 .form-group textarea:valid ~ .form-group__control-label,
 .form-group textarea.form-file ~ .form-group__control-label,
 .form-group textarea.has-value ~ .form-group__control-label {
-  font-size: 0.75rem;
+  font-size: 0.83rem;
   color: #B3B8BA;
   top: -1.5rem;
   left: 0;
@@ -634,7 +638,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: center;
   gap: 2.125rem;
 }
-.comingsoon__account a svg {
+.comingsoon__account a path {
   height: 2rem;
 }
 .comingsoon__ornament {

@@ -22,14 +22,13 @@
                 lebih lanjut.</h4>
         </div>
         <div class="comingsoon__account">
-            <a href="{{ url('https://www.instagram.com/amsaunair/') }}" target="_blank" class="btn-img">
+            <a href="{{ url('https://www.instagram.com/amsaindonesia/') }}" target="_blank" class="btn-img">
                 @include('component.instagram')
             </a>
-            <a href="{{ url('https://line.me/ti/p/%40323ucnji') }}" target="_blank" class="btn-img">
-                @include('component.line')
+            <a href="{{ url('https://amsaindonesia.org/amsa-indonesia/') }}" target="_blank" class="btn-img">
+                @include('component.web')
             </a>
-            <a href="{{ url('https://www.youtube.com/channel/UC-wMfFLL_52AGQ1JkNTpsLQ') }}" target="_blank"
-                class="btn-img">
+            <a href="{{ url('https://youtube.com/user/AMSAIndonesia') }}" target="_blank" class="btn-img">
                 @include('component.youtube')
             </a>
         </div>

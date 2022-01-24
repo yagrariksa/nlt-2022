@@ -1,3 +1,5 @@
+const { values } = require("lodash");
+
 // CHANGE COLOR BUTTON IMAGE ON CLICK
 $('.btn-img').click(e => {
     // e.target.setAttribute("fill", "#AE2012")
@@ -84,16 +86,16 @@ window.addEventListener('resize', ()=> {
     }
 })
 
-// MANIPULATE INPUT SELECT
+// MANIPULATE INPUT SELECT -> STYLE
 let selectItem = $('.form-group--select'); //x
 let selectLength = selectItem.length; //l
 
 for (let i = 0; i < selectItem.length; i++) {
     let selectElement = selectItem[i].getElementsByTagName('select')[0];
 
-    let newSelectedElm = document.createElement('div');
+    let newSelectedElm = document.createElement('input');
     newSelectedElm.setAttribute('class', 'form-group__selected');
-    newSelectedElm.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+    newSelectedElm.placeholder = selectElement.options[selectElement.selectedIndex].innerHTML;
     selectItem[i].prepend(newSelectedElm);
 
     let newOptionContainerElm = document.createElement('div');
@@ -147,11 +149,39 @@ function closeAllSelect(elm) {
   for (i = 0; i < x.length; i++) {
     if (arrNo.indexOf(i)) {
       x[i].classList.add("form-group__select-hide");
+      x[i].childNodes.forEach(x => {
+          x.style.display = 'block';
+      })
     }
   }
 }
 
 document.addEventListener('click', closeAllSelect);
+
+// MANIPULATE INPUT SELECT -> SEARCHABLE
+$('.form-group__select-items').click(e => {
+    e.target.parentElement.nextSibling.value = e.target.parentElement.nextSibling.textContent;
+})
+
+$('.form-group__selected').on('input', e => {
+    let options = [];
+    let optionsParent = e.target.previousSibling;
+    optionsParent.childNodes.forEach(x => {
+        options.push(x.childNodes[0].data)
+    })
+
+    let regex = new RegExp(e.target.value, 'i');
+    regex.ignoreCase;
+    options.map((option, index) => {
+        if(!regex.test(option)) {
+            optionsParent.childNodes[index].style.display = 'none';
+        }
+        else {
+            optionsParent.childNodes[index].style.display = 'block';
+        }
+    })
+})
+//get value -> $('.form-group__select-items .form-group__same-as-selected')[0].innerText
 
 // CHANGE COLOR INPUT RADIO/CHECKBOX
 let inputWillCHangeLabel = $('input[type="radio"], input[type="checkbox"]');

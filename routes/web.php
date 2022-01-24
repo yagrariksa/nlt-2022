@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('test');
     return view('coming-soon');
+});
+
+Route::get('test', function () {
+    return view('test');
 });
 
 Route::middleware('guest')->group(function () {

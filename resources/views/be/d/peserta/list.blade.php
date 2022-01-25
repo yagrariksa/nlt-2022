@@ -4,6 +4,10 @@
     'object' => 'peserta'
 ])}}">tambah peserta</a>
 
+@if (Session::has('success'))
+    <span class="error">{{Session::get('success')}}</span>
+@endif
+
 <table>
     <thead>
         <tr>
@@ -22,7 +26,15 @@
                 <td class="row row--no-space row-center">
                     <a href="#">Edit</a>
                     <a href="#">View Full Identity</a>
-                    <a href="#">Delete</a>
+                    <form class="no-space" action="{{route('peserta',[
+                        'mode' => 'delete',
+                        'object' => 'peserta',
+                        'uid' => $p->uid
+                    ])}}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
                 </td>
                 </tr>        
         @endforeach

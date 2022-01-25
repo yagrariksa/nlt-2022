@@ -51,9 +51,16 @@
             color: inherit;
         }
 
-        th, td {
+        th,
+        td {
             padding: .2rem;
             border: 1px solid black;
+        }
+
+        form.no-space {
+            padding: 0;
+            gap: 0;
+            margin: 0
         }
 
     </style>
@@ -74,6 +81,7 @@
                     'mode' => 'list',
                     'object' => 'travel',
                 ]) }}">travel</a>
+            <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>
     @endauth

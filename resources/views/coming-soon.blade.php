@@ -15,7 +15,7 @@
         </div>
         <div class="comingsoon__account">
             <a href="" class="btn-img">
-                @include('component.instagram')
+                <x-icon.instagram/>
             </a>
             <a href="" class="btn-img">
                 @include('component.tiktok')

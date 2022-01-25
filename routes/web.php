@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     if (Auth::user()) {
         return view('be.d.landing');
     }
@@ -51,6 +50,7 @@ Route::middleware('auth')->group(function () {
         // response from dashboard to dashboard
         // gunakan URL-params [Mode=edit/add,Object=peserta/travel,uid=uid?]
         Route::post('/', [PesertaController::class, 'd_action']);
+        Route::delete('/', [PesertaController::class, 'd_action']);
     });
 
     Route::name('akun.setting')->prefix('setting')->group(function () {

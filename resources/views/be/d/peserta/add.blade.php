@@ -12,6 +12,12 @@
     @if ($errors->has('nama'))
         <span class="error">{{ $errors->first('nama') }}</span>
     @endif
+    <select name="jabatan" id="">
+        <option value="" selected disabled>--pilih jabatan--</option>
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+    </select>
     <input type="text" placeholder="no HP" name="handphone" id="" value="{{ old('handphone') }}">
     @if ($errors->has('handphone'))
         <span class="error">{{ $errors->first('handphone') }}</span>

@@ -109,6 +109,20 @@ class AuthController extends Controller
 
     public function action_acc_setting(Request $request)
     {
-        return true;
+        $rules = [
+            'password_lama' => 'required',
+            'password_baru' => 'required|min:8|confirmed'
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        if (Hash::check($request->password_lama, Auth::user()->password)) {
+            $u = User::find(Auth::user()->id);
+            $u->password =  Hash::make($request->password_baru);
+            $u->save();
+        }else{
+            return redirect()->back()->with('password_lama','Password Lama Salah');
+        }
+        return redirect()->back()->with('success','Sukses ganti password');
     }
 }

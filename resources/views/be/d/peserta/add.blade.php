@@ -32,6 +32,8 @@
     @if ($errors->has('pas'))
         <span class="error">{{ $errors->first('pas') }}</span>
     @endif
+    
+    <h4>vegan</h4>
     <div class="row">
         <input type="radio" id="yes" name="vegan" value="yes"
         @if (old('vegan') ==  'yes')

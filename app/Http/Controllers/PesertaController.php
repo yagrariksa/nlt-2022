@@ -115,7 +115,10 @@ class PesertaController extends Controller
 
     protected function d_view_edit_peserta($uid)
     {
-        return 'edit peserta - ' . $uid;
+        $p = Peserta::where('uid', $uid)->first();
+        return view('be.d.peserta.edit', [
+            'data' => $p
+        ]);
     }
 
     protected function d_view_add_travel()
@@ -178,7 +181,7 @@ class PesertaController extends Controller
             case 'edit':
                 switch ($object) {
                     case 'peserta':
-                        return $this->d_action_edit_peserta($uid);
+                        return $this->d_action_edit_peserta($request, $uid);
                         break;
 
                     case 'travel':
@@ -237,12 +240,12 @@ class PesertaController extends Controller
         $u = Auth::user();
 
         if ($request->hasFile('pas')) {
-            $foto_url = join("_", [time(), $request->nama, "foto"])  . "." . $request->pas->extension();
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
             $request->pas->storeAs('public', $foto_url);
         }
 
         if ($request->hasFile('ktp')) {
-            $ktp_url = join("_", [time(), $request->nama, "ktp"])  . "." . $request->pas->extension();
+            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
             $request->ktp->storeAs('public', $ktp_url);
         }
 
@@ -269,9 +272,64 @@ class PesertaController extends Controller
         return 'add peserta';
     }
 
-    protected function d_action_edit_peserta($uid)
+    protected function d_action_edit_peserta(Request $request, $uid)
     {
-        return 'edit peserta - ' . $uid;
+        // dd($request->all());
+
+        $rules = [
+            'email' => 'required|email',
+            'nama' => 'required|string|min:5',
+            'jabatan' => 'required',
+            'handphone' => 'required',
+            'vegan' => 'required',
+            'ktp' => 'mimes:png,jpg,jpeg'
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        $p = Peserta::where('uid', $uid)->first();
+        if (!$p) {
+            # code...
+        }
+
+        if ($p->email != $request->email)
+            $p->email = $request->email;
+
+        if ($p->nama != $request->nama)
+            $p->nama = $request->nama;
+
+        if ($p->jabatan != $request->jabatan)
+            $p->jabatan = $request->jabatan;
+
+        if ($p->handphone != $request->handphone)
+            $p->handphone = $request->handphone;
+
+        if ($p->alergi != $request->alergi)
+            $p->alergi = $request->alergi;
+
+        $vegan = $request->vegan == 'yes' ? true : false;
+        if ($p->vegan != $vegan)
+            $p->vegan = $vegan;
+
+        if ($request->pas) {
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
+            $request->pas->storeAs('public', $foto_url);
+            $p->foto_url = $foto_url;
+        }
+
+        if ($request->ktp) {
+            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
+            $request->ktp->storeAs('public', $ktp_url);
+            $p->ktp_url = $ktp_url;
+        }
+
+        $p->save();
+
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta'
+        ])->with('success', 'sukses update info ' . $p->nama);
+        // return 'edit peserta - ' . $uid;
     }
 
     protected function d_action_delete_peserta($uid)

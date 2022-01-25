@@ -14,7 +14,7 @@ class TravelPergi extends Model
     protected $fillable = [
         'transportasi',
         'lokasi', 'tanggal', 'jam',
-        'bantuan', 'peserta_id'
+        'bantuan', 'peserta_id', 'city_tour'
     ];
 
     public function peserta()

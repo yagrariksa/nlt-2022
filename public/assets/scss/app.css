@@ -226,6 +226,23 @@ label {
 .form-group option:hover {
   background-color: #E9D8A6;
 }
+.form-group__see-password {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-image: url(/images/see.svg?7cc1c59bbae77854abfa83a016c3bdf7);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transition: background-image 0.5s ease;
+}
+.form-group__see-password.unsee {
+  background-image: url(/images/unsee.svg?f46ac4b509b9917ec3348bf102c78421);
+}
 .form-group__selected {
   font-size: 1.125rem;
   line-height: 1.5rem;
@@ -315,22 +332,17 @@ label {
   font-size: 1.125rem;
   line-height: 1.5rem;
 }
-.form-group__selected ~ .form-group__control-label,
 .form-group input:focus ~ .form-group__control-label,
-.form-group input:valid ~ .form-group__control-label,
-.form-group input.form-file ~ .form-group__control-label,
 .form-group input.has-value ~ .form-group__control-label,
 .form-group textarea:focus ~ .form-group__control-label,
-.form-group textarea:valid ~ .form-group__control-label,
-.form-group textarea.form-file ~ .form-group__control-label,
 .form-group textarea.has-value ~ .form-group__control-label {
   font-size: 0.83rem;
   color: #B3B8BA;
   top: -1.5rem;
   left: 0;
 }
-.form-group input[type=file]:valid ~ .form-group__control-label {
-  top: -0.5rem;
+.form-group .file-notnull {
+  top: -0.5rem !important;
 }
 .form-group__select-arrow-active,
 .form-group input:focus,
@@ -679,5 +691,122 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .comingsoon__ornament--dua {
     width: 120vw;
     transform: translate(50%, 45%);
+  }
+}
+.registrasi {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding: 4rem;
+  border-radius: 3rem;
+  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+}
+.registrasi form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr 0.7fr;
+  grid-template-areas: "title title title title" "form-left form-left form-right form-right" "pass confirm-pass form-right form-right" "alergi vegan none none" "alergi vegan to-masuk regis-btn";
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+.registrasi__title {
+  grid-area: title;
+}
+.registrasi__form-left {
+  grid-area: form-left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.registrasi__form-right {
+  grid-area: form-right;
+}
+.registrasi__password {
+  grid-area: pass;
+  align-self: flex-end;
+}
+.registrasi__confirm-password {
+  grid-area: confirm-pass;
+  align-self: flex-end;
+}
+.registrasi__alergi {
+  grid-area: alergi;
+  align-self: flex-end;
+}
+.registrasi__vegetarian {
+  grid-area: vegan;
+  margin-top: 2rem;
+}
+.registrasi__vegetarian h4 {
+  color: #B3B8BA;
+}
+.registrasi__to-masuk {
+  grid-area: to-masuk;
+  align-self: center;
+  font-weight: 500;
+}
+.registrasi__submit {
+  grid-area: regis-btn;
+}
+
+@media screen and (max-width: 991.9px) {
+  .registrasi {
+    grid-template-columns: 1fr;
+    grid-template-areas: "title" "to-masuk" "form-left" "pass" "confirm-pass" "form-right" "alergi" "vegan" "regis-btn";
+    gap: 0;
+  }
+  .registrasi__to-masuk {
+    margin-top: 1rem;
+  }
+  .registrasi__submit {
+    margin-top: 2rem;
+  }
+}
+@media screen and (max-width: 575.9px) {
+  .registrasi {
+    margin-left: 1.75rem;
+    margin-right: 1.75rem;
+    width: calc(100% - 3.5rem);
+  }
+}
+.masuk form {
+  width: 100%;
+  max-width: 36rem;
+  min-height: calc(100vh - 8rem);
+  margin: 4rem auto;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  border-radius: 3rem;
+  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+}
+.masuk__top {
+  display: flex;
+  flex-direction: column;
+}
+.masuk__lupa-password {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: end;
+}
+.masuk__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 575.9px) {
+  .masuk form {
+    min-height: calc(100vh - 2rem);
+    padding: 2.3rem;
+    margin: 1rem auto;
+  }
+  .masuk form h2 {
+    margin-top: 2.3rem;
+  }
+  .masuk__bottom {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 2rem;
   }
 }

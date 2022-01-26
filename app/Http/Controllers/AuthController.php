@@ -14,12 +14,14 @@ class AuthController extends Controller
 {
     public function view_regist()
     {
-        return view('be.auth.reg');
+        // return view('be.auth.reg');
+        return view('container.registrasi');
     }
 
     public function view_login()
     {
-        return view('be.auth.login');
+        // return view('be.auth.login');
+        return view('container.masuk');
     }
 
     public function view_acc_setting()
@@ -41,6 +43,7 @@ class AuthController extends Controller
             'univ' => 'required',
             'nama' => 'required|string',
             'password' => 'required|min:8',
+            // 'confirm-password' => 'required|same',
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
@@ -78,14 +81,14 @@ class AuthController extends Controller
             'foto_url' => $foto_url,
             'ktp_url' => $ktp_url,
             'alergi' => $request->alergi,
-            'vegan' => $request->vegan == 'yes' ? true : false,
+            'vegan' => $request->vegan == 'Iya' ? true : false,
             'uid' => join('-', [
                 Str::random(10),
                 join('-', explode(" ", $request->nama))
             ])
         ]);
 
-        dd(Auth::user());
+        return('dah masok niy');
     }
 
     public function action_login(Request $request)

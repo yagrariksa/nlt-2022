@@ -2131,8 +2131,26 @@ $('.btn-img').mouseout(function (e) {
   }
 }); // MANIPULATE INPUT FILE
 
-var inputFile = function inputFile(id) {
-  $('#' + id).change(function (e) {
+$('input[type="file"]').change(function (e) {
+  var id = e.target.id;
+  var str = e.target.files[0].name;
+  var n;
+
+  if (window.innerWidth < 425) {
+    n = 25;
+  } else if (window.innerWidth < 576) {
+    n = 30;
+  } else if (window.innerWidth < 992) {
+    n = 40;
+  } else if (window.innerWidth < 1200) {
+    n = 60;
+  } else {
+    n = 80;
+  }
+
+  str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
+  $('span[for=' + id + ']')[0].innerHTML = str;
+  window.addEventListener('resize', function () {
     var str = e.target.files[0].name;
     var n;
 
@@ -2150,30 +2168,8 @@ var inputFile = function inputFile(id) {
 
     str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
     $('span[for=' + id + ']')[0].innerHTML = str;
-    window.addEventListener('resize', function () {
-      var str = e.target.files[0].name;
-      var n;
-
-      if (window.innerWidth < 425) {
-        n = 25;
-      } else if (window.innerWidth < 576) {
-        n = 30;
-      } else if (window.innerWidth < 992) {
-        n = 40;
-      } else if (window.innerWidth < 1200) {
-        n = 60;
-      } else {
-        n = 80;
-      }
-
-      str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
-      $('span[for=' + id + ']')[0].innerHTML = str;
-    });
   });
-}; //usage :: 
-
-
-inputFile('upload-1'); // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
+}); // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
 
 window.addEventListener('resize', function () {
   if (window.innerWidth < 768) {
@@ -2301,6 +2297,38 @@ var checkChange = function checkChange() {
 checkChange();
 inputWillCHangeLabel.click(function (e) {
   checkChange();
+}); // TOGGLE VIEW INPUT PASSWORD 
+
+$('.form-group__see-password').click(function (e) {
+  var elm = e.currentTarget.previousElementSibling;
+
+  if (elm.type == "password") {
+    elm.type = "text";
+    e.currentTarget.classList.add('unsee');
+  } else {
+    elm.type = "password";
+    e.currentTarget.classList.remove('unsee');
+  }
+}); // ALL INPUT WHEN HAVE VALUE(s)
+
+$('input, textarea').change(function (e) {
+  if (e.target.value != "") {
+    e.target.classList.add('has-value');
+  } else {
+    e.target.classList.remove('has-value');
+  }
+});
+$('.form-group__selected').click(function (e) {
+  if (e.target.childNodes[0] != "") {
+    e.target.classList.add('has-value');
+  } else {
+    e.target.classList.remove('has-value');
+  }
+});
+$('input[type="file"]').change(function (e) {
+  if (e.target.value != "") {
+    e.target.nextElementSibling.classList.add('file-notnull');
+  }
 });
 
 /***/ }),

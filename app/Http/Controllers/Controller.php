@@ -12,7 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $msg = [
-        'required' => ':attribute wajib',
+        'required' => 'Bagian ini wajib diisi',
         'file' => 'harap upload file untuk :attribute',
         'min' => 'minimal :min karakter',
         'mimes' => 'file harus bertipe png, jpg, jpeg',

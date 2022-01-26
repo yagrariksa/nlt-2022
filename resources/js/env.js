@@ -25,8 +25,8 @@ $('.btn-img').mouseout(e => {
 });
 
 // MANIPULATE INPUT FILE
-let inputFile = id => {
-    $('#' + id).change(e => {
+    $('input[type="file"]').change(e => {
+        let id = e.target.id;
         let str = e.target.files[0].name;
         let n;
         if (window.innerWidth < 425) {
@@ -69,9 +69,6 @@ let inputFile = id => {
             $('span[for=' + id + ']')[0].innerHTML = str;
         })
     })
-};
-//usage :: 
-inputFile('upload-1') 
 
 // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
 window.addEventListener('resize', ()=> {
@@ -200,3 +197,40 @@ checkChange();
 inputWillCHangeLabel.click(e => {
 checkChange();
 });
+
+// TOGGLE VIEW INPUT PASSWORD 
+$('.form-group__see-password').click(e => {
+    let elm = e.currentTarget.previousElementSibling;
+    if (elm.type == "password") {
+        elm.type = "text";
+        e.currentTarget.classList.add('unsee');
+    } else {
+        elm.type = "password";
+        e.currentTarget.classList.remove('unsee');
+    }
+})
+
+// ALL INPUT WHEN HAVE VALUE(s)
+$('input, textarea').change(e => {
+    if (e.target.value != ""){
+        e.target.classList.add('has-value')
+    }
+    else {
+        e.target.classList.remove('has-value')
+    }
+})
+
+$('.form-group__selected').click(e => {
+    if (e.target.childNodes[0] != ""){
+        e.target.classList.add('has-value')
+    }
+    else {
+        e.target.classList.remove('has-value')
+    }
+})
+
+$('input[type="file"]').change(e => {
+    if (e.target.value != ""){
+        e.target.nextElementSibling.classList.add('file-notnull')
+    }
+})

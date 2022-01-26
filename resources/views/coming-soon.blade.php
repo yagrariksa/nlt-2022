@@ -23,13 +23,13 @@
         </div>
         <div class="comingsoon__account">
             <a href="{{ url('https://www.instagram.com/amsaindonesia/') }}" target="_blank" class="btn-img">
-                @include('component.instagram')
+                @include('components.instagram')
             </a>
             <a href="{{ url('https://amsaindonesia.org/amsa-indonesia/') }}" target="_blank" class="btn-img">
-                @include('component.web')
+                @include('components.web')
             </a>
             <a href="{{ url('https://youtube.com/user/AMSAIndonesia') }}" target="_blank" class="btn-img">
-                @include('component.youtube')
+                @include('components.youtube')
             </a>
         </div>
     </div>

@@ -54,6 +54,8 @@
         <label for="input" class="form-group__control-label">text</label>
         <i class="form-group__bar"></i>
     </div>
+    <x-form.input-text label="ini labelnya" />
+
     <div class="form-group has-error">
         <input type="password" required value="password" />
         <label for="input" class="form-group__control-label">password</label>
@@ -65,7 +67,7 @@
             <span for="upload-1" class="form-group__filename"></span>
             <div class="button btn-primary">
                 <span class="lg">PILIH GAMBAR</span>
-                <span class="sm">@include('component.img')</span>
+                <span class="sm">@include('components.img')</span>
             </div>
         </div>
         <input type="file" required id="upload-1" />

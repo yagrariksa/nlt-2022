@@ -29,7 +29,7 @@ Route::get('test', function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::name('register')->prefix('regist')->group(function () {
+    Route::name('register')->prefix('registrasi')->group(function () {
         Route::get('/', [AuthController::class, 'view_regist']);
         Route::post('/', [AuthController::class, 'action_regist']);
     });

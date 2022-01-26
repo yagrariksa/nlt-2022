@@ -81,6 +81,10 @@
                     'mode' => 'list',
                     'object' => 'travel',
                 ]) }}">travel</a>
+            <a class="header__item"
+                href="{{ route('souvenir', [
+                    'mode' => 'list',
+                ]) }}">Souvenir</a>
             <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>

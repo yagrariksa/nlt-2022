@@ -469,4 +469,69 @@ class PesertaController extends Controller
     {
         return 'error page';
     }
+
+    public function a_view(Request $request)
+    {
+        $mode = $request->query('mode');
+        $object = $request->query('object');
+        $univ = $request->query('univ');
+        $peserta = $request->query('peserta');
+
+        switch ($object) {
+            case 'univ':
+                return $this->a_view_list_univ();
+
+            case 'peserta':
+                if ($univ) {
+                    return $this->a_view_list_peserta_by_univ($univ);
+                } else {
+                    return $this->a_view_list_peserta_all();
+                }
+                break;
+
+            case 'travel':
+                if ($univ) {
+                    return $this->a_view_list_travel_by_univ($univ);
+                } else {
+                    return $this->a_view_list_travel_all();
+                }
+                break;
+
+            default:
+                return $this->a_view_list_univ();
+                break;
+        }
+    }
+
+    protected function a_view_list_univ()
+    {
+        $data  = User::get();
+        return 'list univ';
+    }
+
+    protected function a_view_list_peserta_by_univ($univ)
+    {
+        $data = User::with(['peserta'])->where('email', $univ)->first();
+        $data = $data->peserta;
+        return 'list peserta univ';
+    }
+
+    protected function a_view_list_peserta_all()
+    {
+        $data = Peserta::get();
+        return 'list peserta all';
+    }
+
+    protected function a_view_list_travel_by_univ($univ)
+    {
+        $data = User::with(['peserta', 'peserta.datang', 'peserta.pergi'])->where('email', $univ)->first();
+        return 'list travel univ';
+    }
+
+    protected function a_view_list_travel_all()
+    {
+        $data = TravelDatang::get();
+        $data2 = TravelPergi::get();
+        return 'list travel all';
+    }
 }

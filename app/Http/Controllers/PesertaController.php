@@ -115,7 +115,10 @@ class PesertaController extends Controller
 
     protected function d_view_edit_peserta($uid)
     {
-        return 'edit peserta - ' . $uid;
+        $p = Peserta::where('uid', $uid)->first();
+        return view('be.d.peserta.edit', [
+            'data' => $p
+        ]);
     }
 
     protected function d_view_add_travel()
@@ -125,7 +128,19 @@ class PesertaController extends Controller
 
     protected function d_view_edit_travel($uid)
     {
-        return 'edit travel - ' . $uid;
+
+        $uid = explode("@", $uid);
+        $p = Peserta::with(['datang', 'pergi'])->where('uid', $uid[0])->first();
+        if ($uid[1] == 'KEDATANGAN') {
+            $data = TravelDatang::find($p->datang->id);
+        } else if ($uid[1] == 'KEPULANGAN') {
+            $data = TravelPergi::find($p->pergi->id);
+        }
+        return view('be.d.travel.edit', [
+            'data' => $data,
+            'peserta' => $p
+        ]);
+        // return 'edit travel - ' . $uid;
     }
 
     /**
@@ -166,11 +181,11 @@ class PesertaController extends Controller
             case 'edit':
                 switch ($object) {
                     case 'peserta':
-                        return $this->d_action_edit_peserta($uid);
+                        return $this->d_action_edit_peserta($request, $uid);
                         break;
 
                     case 'travel':
-                        return $this->d_action_edit_travel($uid);
+                        return $this->d_action_edit_travel($request, $uid);
                         break;
 
                     default:
@@ -213,6 +228,7 @@ class PesertaController extends Controller
         $rules = [
             'email' => 'required|email',
             'nama' => 'required|string',
+            'jabatan' => 'required',
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
@@ -224,19 +240,19 @@ class PesertaController extends Controller
         $u = Auth::user();
 
         if ($request->hasFile('pas')) {
-            $foto_url = join("_", [time(), $request->nama, "foto"])  . "." . $request->pas->extension();
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
             $request->pas->storeAs('public', $foto_url);
         }
 
         if ($request->hasFile('ktp')) {
-            $ktp_url = join("_", [time(), $request->nama, "ktp"])  . "." . $request->pas->extension();
+            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
             $request->ktp->storeAs('public', $ktp_url);
         }
 
         Peserta::create([
             'nama' => $request->nama,
             'user_id' => $u->id,
-            'jabatan' => 'ketua',
+            'jabatan' => $request->jabatan,
             'handphone' => $request->handphone,
             'foto_url' => $foto_url,
             'ktp_url' => $ktp_url,
@@ -256,18 +272,77 @@ class PesertaController extends Controller
         return 'add peserta';
     }
 
-    protected function d_action_edit_peserta($uid)
+    protected function d_action_edit_peserta(Request $request, $uid)
     {
-        return 'edit peserta - ' . $uid;
+        // dd($request->all());
+
+        $rules = [
+            'email' => 'required|email',
+            'nama' => 'required|string|min:5',
+            'jabatan' => 'required',
+            'handphone' => 'required',
+            'vegan' => 'required',
+            'ktp' => 'mimes:png,jpg,jpeg'
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        $p = Peserta::where('uid', $uid)->first();
+        if (!$p) {
+            # code...
+        }
+
+        if ($p->email != $request->email)
+            $p->email = $request->email;
+
+        if ($p->nama != $request->nama)
+            $p->nama = $request->nama;
+
+        if ($p->jabatan != $request->jabatan)
+            $p->jabatan = $request->jabatan;
+
+        if ($p->handphone != $request->handphone)
+            $p->handphone = $request->handphone;
+
+        if ($p->alergi != $request->alergi)
+            $p->alergi = $request->alergi;
+
+        $vegan = $request->vegan == 'yes' ? true : false;
+        if ($p->vegan != $vegan)
+            $p->vegan = $vegan;
+
+        if ($request->pas) {
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
+            $request->pas->storeAs('public', $foto_url);
+            $p->foto_url = $foto_url;
+        }
+
+        if ($request->ktp) {
+            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
+            $request->ktp->storeAs('public', $ktp_url);
+            $p->ktp_url = $ktp_url;
+        }
+
+        $p->save();
+
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta'
+        ])->with('success', 'sukses update info ' . $p->nama);
+        // return 'edit peserta - ' . $uid;
     }
 
     protected function d_action_delete_peserta($uid)
     {
-        return 'delete peserta - ' . $uid;
+        $p = Peserta::where('uid', $uid);
+        $p->delete();
+        return redirect()->back()->with('success', 'berhasil menghapus ' . $uid);
     }
 
     protected function d_action_add_travel(Request $request)
     {
+        $datetime = explode('T', $request->datetime);
+        // dd(join(' ', $datetime));
         $rules = [
             'peserta' => 'required|string',
             'lokasi' => 'required',
@@ -287,12 +362,11 @@ class PesertaController extends Controller
 
         if ($request->type == 'keberangkatan' && $p->datang) {
             return redirect()->back()->with('type', 'peserta sudah memiliki data keberangkatan');
-        }else if($request->type == 'kepulangan' && $p->pergi){
+        } else if ($request->type == 'kepulangan' && $p->pergi) {
             return redirect()->back()->with('type', 'peserta sudah memiliki data kepulangan');
         }
 
         if ($request->type == 'keberangkatan') {
-            $datetime = explode('T', $request->datetime);
             TravelDatang::create([
                 'transportasi' => $request->transportasi,
                 'lokasi' => $request->lokasi,
@@ -301,8 +375,7 @@ class PesertaController extends Controller
                 'peserta_id' => $p->id
             ]);
         } else {
-            $datetime = explode('T', $request->datetime);
-            TravelPergi::created([
+            TravelPergi::create([
                 'transportasi' => $request->transportasi,
                 'lokasi' => $request->lokasi,
                 'tanggal' => join(' ', $datetime),
@@ -317,18 +390,148 @@ class PesertaController extends Controller
         ]);
     }
 
-    protected function d_action_edit_travel($uid)
+    protected function d_action_edit_travel(Request $request, $uid)
     {
-        return 'edit travel - ' . $uid;
+        $rules = [
+            'lokasi' => 'required|min:5',
+            'datetime' => 'required',
+            'bantuan' => 'required',
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        // dump($uid);
+        // dd($request->all());
+
+        $uid = explode('@', $uid);
+        $datetime = explode('T', $request->datetime);
+
+        if ($uid[1] == 'KEDATANGAN') {
+            $t = TravelDatang::find($request->id);
+            if ($t->lokasi != $request->lokasi)
+                $t->lokasi = $request->lokasi;
+
+            if ($t->transportasi != $request->transportasi)
+                $t->transportasi = $request->transportasi;
+
+            $bantuan = $request->bantuan == 'perlu' ? true : false;
+            if ($t->bantuan != $bantuan)
+                $t->bantuan = !$t->bantuan;
+
+            if ($t->tanggal != $datetime[0])
+                $t->tanggal = $datetime[0];
+
+
+            if ($t->jam != $datetime[1])
+                $t->jam = $datetime[1];
+
+            $t->save();
+        } else if ($uid[1] == 'KEPULANGAN') {
+            $t = TravelPergi::find($request->id);
+            if ($t->lokasi != $request->lokasi)
+                $t->lokasi = $request->lokasi;
+
+            if ($t->transportasi != $request->transportasi)
+                $t->transportasi = $request->transportasi;
+
+            $bantuan = $request->bantuan == 'perlu' ? true : false;
+            if ($t->bantuan != $bantuan)
+                $t->bantuan = !$t->bantuan;
+
+            if ($t->tanggal != $datetime[0])
+                $t->tanggal = $datetime[0];
+
+
+            if ($t->jam != $datetime[1])
+                $t->jam = $datetime[1];
+
+            $t->save();
+        }
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'travel'
+        ]);
     }
 
     protected function d_action_delete_travel($uid)
     {
-        return 'delete travel - ' . $uid;
+        $uid = explode("@", $uid);
+        $p = Peserta::with(['datang', 'pergi'])->where('uid', $uid[0])->first();
+        if ($uid[1] == 'KEDATANGAN') {
+            TravelDatang::find($p->datang->id)->delete();
+        } else if ($uid[1] == 'KEPULANGAN') {
+            TravelPergi::find($p->pergi->id)->delete();
+        }
+        return redirect()->back()->with('success', 'berhasil menghapus ' . join('@', $uid));
     }
 
     protected function error_page()
     {
         return 'error page';
+    }
+
+    public function a_view(Request $request)
+    {
+        $mode = $request->query('mode');
+        $object = $request->query('object');
+        $univ = $request->query('univ');
+        $peserta = $request->query('peserta');
+
+        switch ($object) {
+            case 'univ':
+                return $this->a_view_list_univ();
+
+            case 'peserta':
+                if ($univ) {
+                    return $this->a_view_list_peserta_by_univ($univ);
+                } else {
+                    return $this->a_view_list_peserta_all();
+                }
+                break;
+
+            case 'travel':
+                if ($univ) {
+                    return $this->a_view_list_travel_by_univ($univ);
+                } else {
+                    return $this->a_view_list_travel_all();
+                }
+                break;
+
+            default:
+                return $this->a_view_list_univ();
+                break;
+        }
+    }
+
+    protected function a_view_list_univ()
+    {
+        $data  = User::get();
+        return 'list univ';
+    }
+
+    protected function a_view_list_peserta_by_univ($univ)
+    {
+        $data = User::with(['peserta'])->where('email', $univ)->first();
+        $data = $data->peserta;
+        return 'list peserta univ';
+    }
+
+    protected function a_view_list_peserta_all()
+    {
+        $data = Peserta::get();
+        return 'list peserta all';
+    }
+
+    protected function a_view_list_travel_by_univ($univ)
+    {
+        $data = User::with(['peserta', 'peserta.datang', 'peserta.pergi'])->where('email', $univ)->first();
+        return 'list travel univ';
+    }
+
+    protected function a_view_list_travel_all()
+    {
+        $data = TravelDatang::get();
+        $data2 = TravelPergi::get();
+        return 'list travel all';
     }
 }

@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PesertaController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SouvenirController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,13 +41,12 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-
 Route::middleware('auth')->group(function () {
-    Route::get('logout',function(){
+    Route::get('logout', function () {
         Auth::logout();
         return redirect()->route('home');
     })->name('logout');
-    Route::name('peserta')->prefix('/peserta')->group(function () {
+    Route::name('peserta')->prefix('peserta')->group(function () {
         /**
          * view dashboard list / form add-peserta / form edit-peserta
          * form add-travel / edit-travel
@@ -56,6 +57,12 @@ Route::middleware('auth')->group(function () {
         // response from dashboard to dashboard
         // gunakan URL-params [Mode=edit/add,Object=peserta/travel,uid=uid?]
         Route::post('/', [PesertaController::class, 'd_action']);
+        Route::delete('/', [PesertaController::class, 'd_action']);
+    });
+    Route::name('souvenir')->prefix('souvenir')->group(function(){
+        Route::get('/', [SouvenirController::class, 'd_view']);
+        Route::post('/', [SouvenirController::class, 'd_action']);
+        Route::delete('/', [SouvenirController::class, 'd_action']);
     });
 
     Route::name('akun.setting')->prefix('setting')->group(function () {
@@ -67,4 +74,16 @@ Route::middleware('auth')->group(function () {
     });
 
     // TODO : SOUVENIR dashboard-page
+});
+
+Route::name('a.')->prefix('mahavira')->group(function () {
+    Route::name('login')->prefix('login')->group(function () {
+        Route::get('/', function () {
+            return 'login-get';
+        });
+        Route::post('/', function () {
+            return 'login-post';
+        });
+    });
+    Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
 });

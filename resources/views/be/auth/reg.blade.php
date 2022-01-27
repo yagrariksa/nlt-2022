@@ -21,11 +21,13 @@
     @if ($errors->has('univ'))
         <span class="error">{{ $errors->first('univ') }}</span>
     @endif
+    <input type="text" name="jabatan" id="" value="Ketua" disabled>
     <input type="password" placeholder="password" name="password" id="">
     @if ($errors->has('password'))
         <span class="error">{{ $errors->first('password') }}</span>
     @endif
-    <input type="text" placeholder="email" name="email" id="">
+    <input type="password" placeholder="password confirmation" name="password_confirmation" id="">
+    <input type="text" placeholder="email" name="email" id="" value="{{ old('email') }}">
     @if ($errors->has('email'))
         <span class="error">{{ $errors->first('email') }}</span>
     @endif

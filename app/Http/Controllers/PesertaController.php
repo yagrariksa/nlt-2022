@@ -295,8 +295,15 @@ class PesertaController extends Controller
         if ($p->email != $request->email)
             $p->email = $request->email;
 
-        if ($p->nama != $request->nama)
+        if ($p->nama != $request->nama) {
             $p->nama = $request->nama;
+
+            if ($p->jabatan == 'ketua') {
+                User::find(Auth::user()->id)->update([
+                    'nama' => $request->nama
+                ]);
+            }
+        }
 
         if ($p->jabatan != $request->jabatan)
             $p->jabatan = $request->jabatan;

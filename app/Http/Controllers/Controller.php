@@ -16,7 +16,7 @@ class Controller extends BaseController
         'file' => 'harap upload file untuk :attribute',
         'min' => 'minimal :min karakter',
         'mimes' => 'file harus bertipe png, jpg, jpeg',
-        'email' => ':attribute harus berupa email',
+        'email' => 'kolom :attribute harus berupa email',
         'confirmed' => ':attribute tidak terkonfirmasi'
     ];
 }

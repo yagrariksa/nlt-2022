@@ -33,6 +33,10 @@ Route::middleware('guest')->group(function () {
         Route::get('/', [AuthController::class, 'view_login']);
         Route::post('/', [AuthController::class, 'action_login']);
     });
+    Route::name('forgot-password')->prefix('forgot-password')->group(function(){
+        Route::get('/', [AuthController::class, 'view_forgot_password']);
+        Route::post('/', [AuthController::class, 'action_forgot_password']);
+    });
 });
 
 Route::middleware('auth')->group(function () {

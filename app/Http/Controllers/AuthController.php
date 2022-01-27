@@ -27,6 +27,11 @@ class AuthController extends Controller
         return view('be.d.setting');
     }
 
+    public function view_forgot_password()
+    {
+        return view('be.auth.forgot');
+    }
+
     public function action_regist(Request $request)
     {
         if (User::where('email', $request->univ)->first()) {
@@ -38,9 +43,10 @@ class AuthController extends Controller
         }
 
         $rules = [
+            'email' => 'required|email',
             'univ' => 'required',
             'nama' => 'required|string',
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|confirmed',
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
@@ -120,9 +126,40 @@ class AuthController extends Controller
             $u = User::find(Auth::user()->id);
             $u->password =  Hash::make($request->password_baru);
             $u->save();
-        }else{
-            return redirect()->back()->with('password_lama','Password Lama Salah');
+        } else {
+            return redirect()->back()->with('password_lama', 'Password Lama Salah');
         }
-        return redirect()->back()->with('success','Sukses ganti password');
+        return redirect()->back()->with('success', 'Sukses ganti password');
+    }
+
+    public function action_forgot_password(Request $request)
+    {
+        $rules = [
+            'univ' => 'required',
+            'email' => 'required|email',
+            'nama' => 'required'
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        $u = User::where('email', $request->univ)->first();
+        $p = Peserta::where('email', $request->email)->first();
+        // dump($u);
+        // dd($p);
+        if ($u && $p) {
+            if ($p->user_id == $u->id && $p->nama == $request->nama) {
+                $u->password = Hash::make('12345678');
+                $u->save();
+                return redirect()->route('login', [
+                    'status' => 'success',
+                    'message' => 'password anda sudah diubah ke 12345678'
+                ]);
+            }
+        }
+
+        return redirect()->back()->with([
+            'status' => 'fail',
+            'message' => 'data tidak cocok, password tidak di reset'
+        ]);
     }
 }

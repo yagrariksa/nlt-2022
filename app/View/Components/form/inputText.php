@@ -6,17 +6,19 @@ use Illuminate\View\Component;
 
 class inputText extends Component
 {
-    public $label, $id, $class;
+    public $label, $id, $class, $value, $attr;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($label, $id, $class='')
+    public function __construct($label, $id, $class='', $value='', $attr='')
     {
         $this->label = $label;
         $this->id = $id;
         $this->class = $class;
+        $this->value = $value;
+        $this->attr = $attr;
     }
 
     /**

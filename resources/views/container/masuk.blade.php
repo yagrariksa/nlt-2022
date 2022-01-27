@@ -16,12 +16,12 @@
         @csrf
         <div class="masuk__top">
             <h2>Masuk</h2>
-            <x-form.select-options id="univ" label="Universitas" opsi1="---Pilih Universitas---" options='{
-                "1":"Universitas Airlangga",
-                "2":"Universitas Brawijaya",
-                "3":"Universitas Indonesia",
-                "4":"Universitas Bojonegoro"
-            }' />
+            <x-form.select-options id="univ" label="Universitas" options='{
+                    "1":"Universitas Airlangga",
+                    "2":"Universitas Brawijaya",
+                    "3":"Universitas Indonesia",
+                    "4":"Universitas Bojonegoro"
+                }' />
             <x-form.input-password-session-error id="password" label="Password" error="error" />
             <a href="" class="masuk__lupa-password">Lupa Password Anda?</a>
         </div>

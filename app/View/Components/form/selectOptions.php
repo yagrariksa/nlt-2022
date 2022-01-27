@@ -6,18 +6,18 @@ use Illuminate\View\Component;
 
 class selectOptions extends Component
 {
-    public $id, $class, $label, $opsi1, $options;
+    public $id, $class, $label, $options, $value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id, $class='', $label, $opsi1, $options)
+    public function __construct($id, $class='', $label, $options, $value='')
     {
         $this->id = $id;
         $this->class = $class;
         $this->label = $label;
-        $this->opsi1 = $opsi1;
+        $this->value = $value;
         $this->options = json_decode($options, true);
     }
 

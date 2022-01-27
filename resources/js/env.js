@@ -234,3 +234,13 @@ $('input[type="file"]').change(e => {
         e.target.nextElementSibling.classList.add('file-notnull')
     }
 })
+
+$('.form-group--select.readonly input').map(x => {
+    $('.form-group--select.readonly input.form-group__selected')[x].classList.add('has-value');
+    $('.form-group--select.readonly input.form-group__selected')[x].value = $('.form-group--select.readonly select')[x].value
+    $('.form-group--select.readonly input.form-group__selected')[x].setAttribute('readonly', true);
+})
+
+$('.form-group input[readonly]').map(x => {
+    $('.form-group input[readonly]')[x].classList.add('has-value')
+})

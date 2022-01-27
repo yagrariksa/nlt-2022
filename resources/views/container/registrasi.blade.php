@@ -35,17 +35,18 @@
             @endif
         </div>
         <div class="registrasi__form-right">
-            <x-form.select-options id="univ" label="Universitas" opsi1="---Pilih Universitas---" options='{
+            <x-form.select-options id="univ" label="Universitas" options='{
                 "1":"Universitas Airlangga",
                 "2":"Universitas Brawijaya",
                 "3":"Universitas Indonesia",
                 "4":"Universitas Bojonegoro"
             }' />
-            <x-form.select-options id="jabatan" label="Jabatan" opsi1="---Pilih Jabatan---" options='{
+            <x-form.input-text id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" attr="readonly" />
+            {{-- <x-form.select-options id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" options='{
                 "1":"Ketua AMSA Universitas",
                 "2":"Anggota AMSA Universitas",
                 "3":"Lainnya"
-            }' />
+            }' /> --}}
             <x-form.input-img id="ktp" label="Foto KTP (JPG atau PNG)" />
             <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" />
         </div>

@@ -3,7 +3,7 @@
         <span for="{{ $id }}" class="form-group__filename"></span>
         <div class="button btn-primary">
             <span class="lg">PILIH GAMBAR</span>
-            <span class="sm">@include('components.img')</span>
+            <span class="sm">@include('components.svg.img')</span>
         </div>
     </div>
     <input type="file" accept="image/png, image/jpeg" name="{{ $id }}" id="{{ $id }}" />

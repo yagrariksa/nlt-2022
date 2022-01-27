@@ -1,4 +1,4 @@
-<div class="form-group{{ $class }}@if ($errors->has($id)) has-error @endif">
+<div class="form-group{{ $class }}@if (Session::has($error)) has-error @endif">
     <input type="password" name="{{ $id }}" id="{{ $id }}" />
     <div class="form-group__see-password"></div>
     <label for="{{ $id }}" class="form-group__control-label">{{ $label }}</label>

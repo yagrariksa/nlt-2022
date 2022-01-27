@@ -234,14 +234,14 @@ label {
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
-  background-image: url(/images/see.svg?7cc1c59bbae77854abfa83a016c3bdf7);
+  background-image: url(/images/see.svg?f196ee479a2c167cccfcf4424b486f18);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   transition: background-image 0.5s ease;
 }
 .form-group__see-password.unsee {
-  background-image: url(/images/unsee.svg?f46ac4b509b9917ec3348bf102c78421);
+  background-image: url(/images/unsee.svg?be6a9afb096d875d394992b24d0954b8);
 }
 .form-group__selected {
   font-size: 1.125rem;

@@ -89,3 +89,11 @@
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>
     @endauth
+
+    @if (Session::has('admin'))
+        @if (Session::get('admin'))
+            <div class="row w-100 row-center header">
+                <a href="{{route('a.logout')}}" class="header__item">LogOut</a>
+            </div>
+        @endif
+    @endif

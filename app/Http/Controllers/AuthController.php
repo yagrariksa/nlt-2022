@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -96,6 +97,7 @@ class AuthController extends Controller
 
     public function action_login(Request $request)
     {
+        // buat ini hanya untuk 5 kali coba dalam 1 IP kemudian cooldown 10 menit
         if (!User::where('email', $request->univ)->first()) {
             return redirect()->route('register')->with([
                 'univ' => $request->univ,
@@ -161,5 +163,33 @@ class AuthController extends Controller
             'status' => 'fail',
             'message' => 'data tidak cocok, password tidak di reset'
         ]);
+    }
+
+    public function mahavira_view_login()
+    {
+        return view('be.a.login');
+    }
+
+    public function mahavira_action_login(Request $request)
+    {
+        // buat ini hanya untuk 5 kali coba dalam 1 IP kemudian cooldown 10 menit
+        $rules = [
+            'pw' => 'required'
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        if ($request->pw == 'passwordtulisdisini') {
+            Session::put('admin',true);
+            return redirect()->route('a.peserta');
+        }else{
+            return redirect()->back()->with('error','Password Salah');
+        }
+    }
+
+    public function mahavira_action_logout(Request $request)
+    {
+        Session::forget('admin');
+        return redirect()->route('a.login');
     }
 }

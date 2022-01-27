@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\SouvenirController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,12 +75,11 @@ Route::middleware('auth')->group(function () {
 
 Route::name('a.')->prefix('mahavira')->group(function () {
     Route::name('login')->prefix('login')->group(function () {
-        Route::get('/', function () {
-            return 'login-get';
-        });
-        Route::post('/', function () {
-            return 'login-post';
-        });
+        Route::get('/', [AuthController::class, 'mahavira_view_login']);
+        Route::post('/', [AuthController::class, 'mahavira_action_login']);
     });
-    Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
+    Route::middleware('admin')->group(function(){
+        Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
+        Route::get('logout', [AuthController::class, 'mahavira_action_logout'])->name('logout');
+    });
 });

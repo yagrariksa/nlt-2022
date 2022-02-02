@@ -5,7 +5,6 @@ use App\Http\Controllers\PesertaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SouvenirController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +38,10 @@ Route::middleware('guest')->group(function () {
     Route::name('login')->prefix('login')->group(function () {
         Route::get('/', [AuthController::class, 'view_login']);
         Route::post('/', [AuthController::class, 'action_login']);
+    });
+    Route::name('forgot-password')->prefix('forgot-password')->group(function(){
+        Route::get('/', [AuthController::class, 'view_forgot_password']);
+        Route::post('/', [AuthController::class, 'action_forgot_password']);
     });
 });
 
@@ -79,12 +82,11 @@ Route::middleware('auth')->group(function () {
 
 Route::name('a.')->prefix('mahavira')->group(function () {
     Route::name('login')->prefix('login')->group(function () {
-        Route::get('/', function () {
-            return 'login-get';
-        });
-        Route::post('/', function () {
-            return 'login-post';
-        });
+        Route::get('/', [AuthController::class, 'mahavira_view_login']);
+        Route::post('/', [AuthController::class, 'mahavira_action_login']);
     });
-    Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
+    Route::middleware('admin')->group(function(){
+        Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
+        Route::get('logout', [AuthController::class, 'mahavira_action_logout'])->name('logout');
+    });
 });

@@ -31,4 +31,9 @@ class Peserta extends Model
     {
         return $this->hasOne(TravelPergi::class, 'peserta_id', 'id');
     }
+
+    public function souvenir()
+    {
+        return $this->hasMany(Souvenir::class, 'peserta_id', 'id');
+    }
 }

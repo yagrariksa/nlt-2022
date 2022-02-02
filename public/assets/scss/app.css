@@ -1076,7 +1076,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    background-image: url(/images/arrow-next.svg?165325e903f5ef48b77cf4d8e1891f37);
+    background-image: url(/images/arrow-next.svg?b9a1f393ea1e6e14abf477862ab4e95d);
     background-size: contain;
     background-repeat: no-repeat;
   }

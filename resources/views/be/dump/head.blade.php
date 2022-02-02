@@ -63,6 +63,33 @@
             margin: 0
         }
 
+        #souvenir__list {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .card {
+            cursor: pointer;
+            max-width: 13rem;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 1px solid black;
+        }
+
+        .card:hover {
+            border-width: 3px
+        }
+
+        .card.hide {
+            display: none;
+        }
+
+        .card-title {
+            font-weight: 600;
+        }
+
     </style>
 </head>
 
@@ -89,3 +116,11 @@
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>
     @endauth
+
+    @if (Session::has('admin'))
+        @if (Session::get('admin'))
+            <div class="row w-100 row-center header">
+                <a href="{{ route('a.logout') }}" class="header__item">LogOut</a>
+            </div>
+        @endif
+    @endif

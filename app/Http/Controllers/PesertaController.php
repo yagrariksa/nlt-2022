@@ -298,8 +298,15 @@ class PesertaController extends Controller
         if ($p->email != $request->email)
             $p->email = $request->email;
 
-        if ($p->nama != $request->nama)
+        if ($p->nama != $request->nama) {
             $p->nama = $request->nama;
+
+            if ($p->jabatan == 'ketua') {
+                User::find(Auth::user()->id)->update([
+                    'nama' => $request->nama
+                ]);
+            }
+        }
 
         if ($p->jabatan != $request->jabatan)
             $p->jabatan = $request->jabatan;
@@ -509,7 +516,7 @@ class PesertaController extends Controller
     protected function a_view_list_univ()
     {
         $data  = User::get();
-        return 'list univ';
+        return view('be.a.list-univ', $data);
     }
 
     protected function a_view_list_peserta_by_univ($univ)

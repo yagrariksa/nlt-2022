@@ -69,18 +69,20 @@
 
 @media screen and (max-width: 991.9px) {
     .registrasi {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            'title'
-            'to-masuk'
-            'form-left'
-            'pass'
-            'confirm-pass'
-            'form-right'
-            'alergi'
-            'vegan'
-            'regis-btn';
-        gap: 0;
+        form {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                'title'
+                'to-masuk'
+                'form-left'
+                'pass'
+                'confirm-pass'
+                'form-right'
+                'alergi'
+                'vegan'
+                'regis-btn';
+            gap: 0;
+        }
 
         &__to-masuk {
             margin-top: 1rem;

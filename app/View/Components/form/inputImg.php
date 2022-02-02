@@ -6,16 +6,17 @@ use Illuminate\View\Component;
 
 class inputImg extends Component
 {
-    public $id, $label;
+    public $id, $label, $value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id, $label)
+    public function __construct($id, $label, $value='')
     {
         $this->id = $id;
         $this->label = $label;
+        $this->value = $value;
     }
 
     /**

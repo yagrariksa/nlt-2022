@@ -89,7 +89,8 @@ class PesertaController extends Controller
     protected function d_view_default()
     {
         $listPeserta = Auth::user()->peserta;
-        return view('be.d.peserta.list', [
+        // return view('be.d.peserta.list', [
+        return view('container.list-peserta', [
             'data' => $listPeserta,
         ]);
     }
@@ -110,13 +111,15 @@ class PesertaController extends Controller
 
     protected function d_view_add_peserta()
     {
-        return view('be.d.peserta.add');
+        // return view('be.d.peserta.add');
+        return view('container.add-peserta');
     }
 
     protected function d_view_edit_peserta($uid)
     {
         $p = Peserta::where('uid', $uid)->first();
-        return view('be.d.peserta.edit', [
+        // return view('be.d.peserta.edit', [
+        return view('container.edit-peserta', [
             'data' => $p
         ]);
     }

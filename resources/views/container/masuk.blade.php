@@ -4,7 +4,6 @@
 @section('seo-desc')
 @section('seo-img')
 
-@section('overflow')
 @section('addclass', 'masuk')
 
 @section('content')

@@ -30,19 +30,19 @@ $('.btn-img').mouseout(e => {
         let str = e.target.files[0].name;
         let n;
         if (window.innerWidth < 425) {
-            n = 25;
+            n = 16;
         }
         else if (window.innerWidth < 576) {
-            n = 30;
+            n = 20;
         }
         else if (window.innerWidth < 992) {
             n = 40;
         }
         else if (window.innerWidth < 1200) {
-            n = 60;
+            n = 20;
         }
         else {
-            n = 80;
+            n = 30;
         }
         str = (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
         $('span[for=' + id + ']')[0].innerHTML = str;
@@ -51,19 +51,19 @@ $('.btn-img').mouseout(e => {
             let str = e.target.files[0].name;
             let n;
             if (window.innerWidth < 425) {
-                n = 25;
+                n = 16;
             }
             else if (window.innerWidth < 576) {
-                n = 30;
+                n = 20;
             }
             else if (window.innerWidth < 992) {
                 n = 40;
             }
             else if (window.innerWidth < 1200) {
-                n = 60;
+                n = 20;
             }
             else {
-                n = 80;
+                n = 30;
             }
             str = (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
             $('span[for=' + id + ']')[0].innerHTML = str;
@@ -243,4 +243,16 @@ $('.form-group--select.readonly input').map(x => {
 
 $('.form-group input[readonly]').map(x => {
     $('.form-group input[readonly]')[x].classList.add('has-value')
+})
+
+$('.form-group input').map(x => {
+    if ($('.form-group input')[x].value != '') {
+        $('.form-group input')[x].classList.add('has-value');
+    }
+})
+
+$('.form-group__input-file .form-group__filename').map(x => {
+    if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
+        $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
+    }
 })

@@ -1,0 +1,111 @@
+.add-edit-peserta {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 4rem;
+
+    form {
+        min-height: calc(100vh - 16rem);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+        justify-content: space-between;
+    }
+
+    &__input {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.3fr .7fr;
+        grid-template-areas:
+            'form-left form-left form-right form-right'
+            'alergi vegan none none';
+        column-gap: 2rem;
+    }
+
+    &__form-left {
+        grid-area: form-left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__form-right {
+        grid-area: form-right;
+    }
+
+    &__alergi {
+        grid-area: alergi;
+        align-self: flex-end;
+    }
+
+    &__vegetarian {
+        grid-area: vegan;
+        margin-top: 2rem;
+
+        h4 {
+            color: $rich-black-40;
+        }
+    }
+
+    &__buttons {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 3rem;
+    }
+}
+
+@media screen and (max-width: 991.9px) {
+    .add-edit-peserta {
+        form {
+            gap: 3rem;
+        }
+
+        &__input {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                'form-left'
+                'form-right'
+                'alergi'
+                'vegan';
+            gap: 0;
+        }
+
+        &__buttons {
+            flex-direction: column-reverse;
+            gap: .5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .add-edit-peserta {
+        margin: 6rem auto 0 auto;
+        padding: 0;
+
+        &__title {
+            z-index: 2;
+            height: 5rem;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50%);
+
+            font-weight: 500;
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 575.9px) {
+    .add-edit-peserta {
+        margin-left: 1.75rem;
+        margin-right: 1.75rem;
+        width: calc(100% - 3.5rem);
+
+    }
+}

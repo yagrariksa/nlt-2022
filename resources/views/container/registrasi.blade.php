@@ -5,7 +5,6 @@
     'Segera daftarkan universitas anda untuk mengikuti NLT-AMSA 2022! (help aku gajago bikin kata-kata
     ginian dan ini keknya jelek bgt huehehe)',)
 
-@section('overflow')
 @section('addclass', 'registrasi')
 
 @section('content')

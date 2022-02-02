@@ -1,0 +1,204 @@
+.nav {
+    z-index: 1;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    &__brand {
+        width: 2rem;
+    }
+
+    &__mobile {
+        width: 100%;
+        height: inherit;
+        padding: 0 1.7rem;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $white;
+        border-bottom: 1px solid $rich-black-40;
+    }
+
+    &__burger {
+        cursor: pointer;
+
+        .line {
+            width: 1.5rem;
+            height: .3rem;
+            display: block;
+            border-radius: 2px;
+            background-color: $rich-black;
+
+            &:nth-child(2) {
+                margin-top: .5rem;
+            }
+        }
+
+        &.active {
+            .line:nth-child(1) {
+                transform: translateY(.4rem) rotate(45deg);
+            }
+
+            .line:nth-child(2) {
+                transform: translateY(-.4rem) rotate(-45deg);
+            }
+        }
+    }
+
+    &__group {
+        height: inherit;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $white
+    }
+
+    &__items {
+        height: inherit;
+        display: flex;
+        gap: 3rem;
+    }
+
+    &__item {
+        font-family: $montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        text-align: center;
+        text-decoration: none;
+
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $rich-black;
+
+        span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        &.active {
+            span {
+                background-color: $rich-black;
+            }
+        }
+    }
+
+    &__profile {
+        width: 2rem;
+        border-radius: 50%;
+        // border: 2px outset $rich-black-40;
+        // outline-offset: 2px;
+    }
+
+    &__right-btn {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__dropdown {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        visibility: hidden;
+        transform: translateY(40%);
+        opacity: 0;
+        transition: all .4s ease-in-out;
+        background-color: $white;
+        border: 1px solid $rich-black-40;
+        border-radius: .5rem;
+
+        &.active {
+            visibility: visible;
+            transform: translateY(60%);
+            opacity: 1;
+        }
+
+        .nav__item {
+            padding: 1.7rem;
+
+            &.active {
+                background-color: $medium-champagne;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .nav {
+        &__brand {
+            width: 1.5rem;
+        }
+
+        &__mobile {
+            display: flex;
+        }
+
+        &__group {
+            width: 100%;
+            height: fit-content;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+            z-index: -1;
+            transform: translateY(-120%);
+            transition: transform .5s ease-in-out;
+
+            img {
+                display: none;
+            }
+
+            &.active {
+                transform: translateY(0);
+            }
+        }
+
+        &__items {
+            width: 100%;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        &__dropdown {
+            position: relative;
+            align-items: center;
+            opacity: 1;
+            transform: none;
+            border: none;
+            visibility: visible;
+        }
+
+        &__item {
+            padding: 1.7rem 0;
+            background-color: $white;
+
+            &.logout {
+                color: $mahogany;
+            }
+
+            &.active {
+                background-color: $medium-champagne;
+            }
+
+            span {
+                display: none;
+            }
+        }
+    }
+}

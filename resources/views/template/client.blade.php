@@ -1,5 +1,5 @@
 @extends('template.general')
 
 @section('navbar')
-    @include('component.client-navbar')
+    <x-navbar.client />
 @endsection

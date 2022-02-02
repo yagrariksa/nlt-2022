@@ -21,7 +21,8 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 Route::get('/', function () {
     // return view('coming-soon');
     if (Auth::user()) {
-        return view('be.d.landing');
+        // return view('be.d.landing');
+        return view('container.dashboard-client');
     }
     return view('be.landing');
 })->name('home');

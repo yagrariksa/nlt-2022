@@ -1,35 +1,26 @@
 @include('be.dump.head')
-list univ
+list peserta
 <table>
     <thead>
         <tr>
             <th>no</th>
-            <th>univ</th>
+            <th>nama</th>
+            <th>jabatan</th>
             <th>aksi</th>
         </tr>
     </thead>
     <tbody>
-        @php
-            $loopir = $data->perPage() * $data->currentPage() - ($data->perPage() - 1);
-        @endphp
-        @foreach ($data as $univ)
+        @foreach ($data as $p)
             <tr>
-                <td>{{ $loopir }}</td>
-                @php
-                    $loopir++;
-                @endphp
-                <td>{{ $univ->email }}</td>
-                <td>
-                    <a
-                        href="{{ route('a.peserta', [
-                            'object' => 'peserta',
-                            'univ' => $univ->email,
-                        ]) }}">peserta</a>
-                </td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $p->nama }}</td>
+                <td>{{ $p->jabatan }}</td>
+                <td>{{ $p->aksi }}</td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
 <span>current page : {{ $data->currentPage() }}</span>
 <span>showing {{ $data->perPage() * $data->currentPage() - ($data->perPage() - 1) }} to
     {{ $data->perPage() * $data->currentPage() }} of {{ $data->total() }} result</span>
@@ -70,8 +61,5 @@ list univ
         <li></li>
     </ul>
 </span>
-<span>paginator laravel page : <a
-        href="https://laravel.com/docs/8.x/pagination#paginator-instance-methods">https://laravel.com/docs/8.x/pagination#paginator-instance-methods</a></span>
 @dump($data)
-{{ $data->links() }}
 @include('be.dump.foot')

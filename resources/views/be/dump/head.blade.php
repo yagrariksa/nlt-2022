@@ -120,6 +120,14 @@
     @if (Session::has('admin'))
         @if (Session::get('admin'))
             <div class="row w-100 row-center header">
+                <a href="{{ route('a.peserta', [
+                    'object' => 'univ',
+                ]) }}"
+                    class="header__item">per univ</a>
+                <a href="{{ route('a.peserta', [
+                    'object' => 'peserta',
+                ]) }}"
+                    class="header__item">peserta</a>
                 <a href="{{ route('a.logout') }}" class="header__item">LogOut</a>
             </div>
         @endif

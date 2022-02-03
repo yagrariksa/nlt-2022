@@ -37,4 +37,13 @@ class Peserta extends Model
     {
         return $this->hasMany(Souvenir::class, 'peserta_id', 'id');
     }
+
+    public function dokumen()
+    {
+        if ($this->doc_vaksin && $this->doc_pernyataan && $this->doc_izin) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

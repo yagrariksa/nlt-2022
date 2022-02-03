@@ -64,6 +64,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
+                    case 'dokumen':
+                        return $this->d_view_add_dokumen($uid);
+                        break;
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
                         break;
@@ -143,6 +146,14 @@ class PesertaController extends Controller
         // return 'edit travel - ' . $uid;
     }
 
+    public function d_view_add_dokumen($uid)
+    {
+        $data = Peserta::where('uid', $uid)->first();
+        return view('be.d.peserta.add-dokumen', [
+            'data' => $data,
+        ]);
+    }
+
     /**
      * untuk form-response dari dashboard user
      * method MAPPING
@@ -196,6 +207,10 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
+                    case 'dokumen':
+                        return $this->d_action_add_dokumen($request, $uid);
+                        break;
+
                     case 'peserta':
                         return $this->d_action_add_peserta($request);
                         break;
@@ -470,6 +485,51 @@ class PesertaController extends Controller
             TravelPergi::find($p->pergi->id)->delete();
         }
         return redirect()->back()->with('success', 'berhasil menghapus ' . join('@', $uid));
+    }
+
+    protected function d_action_add_dokumen(Request $request, $uid)
+    {
+        // dd($request);
+
+        $p = Peserta::where('uid', $uid)->first();
+
+        if ($request->doc_izin) {
+            $doc_izin_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_izin->extension();
+            $request->doc_izin->storeAs('public', $doc_izin_url);
+            $p->doc_izin = $doc_izin_url;
+        }
+
+        if ($request->doc_vaksin) {
+            $doc_vaksin_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_vaksin->extension();
+            $request->doc_vaksin->storeAs('public', $doc_vaksin_url);
+            $p->doc_vaksin = $doc_vaksin_url;
+        }
+
+        if ($request->doc_pernyataan) {
+            $doc_pernyataan_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_pernyataan->extension();
+            $request->doc_pernyataan->storeAs('public', $doc_pernyataan_url);
+            $p->doc_pernyataan = $doc_pernyataan_url;
+        }
+
+        $p->save();
+
+        return redirect()->route('peserta', [
+            'mode' => 'add',
+            'object' => 'dokumen',
+            'uid' => $uid
+        ]);
     }
 
     protected function error_page()

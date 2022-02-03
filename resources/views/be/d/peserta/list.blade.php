@@ -13,6 +13,7 @@
         <tr>
             <th>no</th>
             <th>nama</th>
+            <th>dokumen</th>
             <th>jabatan</th>
             <th>aksi</th>
         </tr>
@@ -22,8 +23,15 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->nama }}</td>
+                <td>{{$p->dokumen() ? 'sudah lengkap' : 'belum lengkap'}}</td>
                 <td>{{ $p->jabatan }}</td>
                 <td class="row row--no-space row-center">
+                    <a
+                        href="{{ route('peserta', [
+                            'mode' => 'add',
+                            'object' => 'dokumen',
+                            'uid' => $p->uid,
+                        ]) }}">Dokumen</a>
                     <a
                         href="{{ route('peserta', [
                             'mode' => 'edit',

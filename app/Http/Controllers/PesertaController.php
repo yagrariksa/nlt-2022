@@ -64,6 +64,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
+                    case 'dokumen':
+                        return $this->d_view_add_dokumen($uid);
+                        break;
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
                         break;
@@ -146,6 +149,14 @@ class PesertaController extends Controller
         // return 'edit travel - ' . $uid;
     }
 
+    public function d_view_add_dokumen($uid)
+    {
+        $data = Peserta::where('uid', $uid)->first();
+        return view('be.d.peserta.add-dokumen', [
+            'data' => $data,
+        ]);
+    }
+
     /**
      * untuk form-response dari dashboard user
      * method MAPPING
@@ -199,6 +210,10 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
+                    case 'dokumen':
+                        return $this->d_action_add_dokumen($request, $uid);
+                        break;
+
                     case 'peserta':
                         return $this->d_action_add_peserta($request);
                         break;
@@ -475,74 +490,53 @@ class PesertaController extends Controller
         return redirect()->back()->with('success', 'berhasil menghapus ' . join('@', $uid));
     }
 
+    protected function d_action_add_dokumen(Request $request, $uid)
+    {
+        // dd($request);
+
+        $p = Peserta::where('uid', $uid)->first();
+
+        if ($request->doc_izin) {
+            $doc_izin_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_izin->extension();
+            $request->doc_izin->storeAs('public', $doc_izin_url);
+            $p->doc_izin = $doc_izin_url;
+        }
+
+        if ($request->doc_vaksin) {
+            $doc_vaksin_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_vaksin->extension();
+            $request->doc_vaksin->storeAs('public', $doc_vaksin_url);
+            $p->doc_vaksin = $doc_vaksin_url;
+        }
+
+        if ($request->doc_pernyataan) {
+            $doc_pernyataan_url = join("_", [
+                time(),
+                join('-', explode(' ', $p->nama)),
+                "surat_izin_orang_tua"
+            ])  . "." . $request->doc_pernyataan->extension();
+            $request->doc_pernyataan->storeAs('public', $doc_pernyataan_url);
+            $p->doc_pernyataan = $doc_pernyataan_url;
+        }
+
+        $p->save();
+
+        return redirect()->route('peserta', [
+            'mode' => 'add',
+            'object' => 'dokumen',
+            'uid' => $uid
+        ]);
+    }
+
     protected function error_page()
     {
         return 'error page';
-    }
-
-    public function a_view(Request $request)
-    {
-        $mode = $request->query('mode');
-        $object = $request->query('object');
-        $univ = $request->query('univ');
-        $peserta = $request->query('peserta');
-
-        switch ($object) {
-            case 'univ':
-                return $this->a_view_list_univ();
-
-            case 'peserta':
-                if ($univ) {
-                    return $this->a_view_list_peserta_by_univ($univ);
-                } else {
-                    return $this->a_view_list_peserta_all();
-                }
-                break;
-
-            case 'travel':
-                if ($univ) {
-                    return $this->a_view_list_travel_by_univ($univ);
-                } else {
-                    return $this->a_view_list_travel_all();
-                }
-                break;
-
-            default:
-                return $this->a_view_list_univ();
-                break;
-        }
-    }
-
-    protected function a_view_list_univ()
-    {
-        $data  = User::get();
-        // return view('be.a.list-univ', $data);
-        return view('container.admin.dashboard', $data);
-    }
-
-    protected function a_view_list_peserta_by_univ($univ)
-    {
-        $data = User::with(['peserta'])->where('email', $univ)->first();
-        $data = $data->peserta;
-        return 'list peserta univ';
-    }
-
-    protected function a_view_list_peserta_all()
-    {
-        $data = Peserta::get();
-        return 'list peserta all';
-    }
-
-    protected function a_view_list_travel_by_univ($univ)
-    {
-        $data = User::with(['peserta', 'peserta.datang', 'peserta.pergi'])->where('email', $univ)->first();
-        return 'list travel univ';
-    }
-
-    protected function a_view_list_travel_all()
-    {
-        $data = TravelDatang::get();
-        $data2 = TravelPergi::get();
-        return 'list travel all';
     }
 }

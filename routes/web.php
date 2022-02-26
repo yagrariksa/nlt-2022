@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PesertaController;
 use Illuminate\Support\Facades\Auth;
@@ -86,7 +87,7 @@ Route::name('a.')->prefix('mahavira')->group(function () {
         Route::post('/', [AuthController::class, 'mahavira_action_login']);
     });
     Route::middleware('admin')->group(function(){
-        Route::get('/', [PesertaController::class, 'a_view'])->name('peserta');
+        Route::get('/', [AdminController::class, 'a_view'])->name('peserta');
         Route::get('logout', [AuthController::class, 'mahavira_action_logout'])->name('logout');
     });
 });

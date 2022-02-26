@@ -14,7 +14,8 @@ class Peserta extends Model
     protected $fillable = [
         'nama', 'jabatan', 'handphone',
         'foto_url', 'ktp_url', 'alergi', 'vegan',
-        'user_id', 'travel_id',  'uid', 'email'
+        'user_id', 'travel_id',  'uid', 'email',
+        'doc_vaksin', 'doc_izin', 'doc_pernyataan'
     ];
 
     public function univ()
@@ -35,5 +36,14 @@ class Peserta extends Model
     public function souvenir()
     {
         return $this->hasMany(Souvenir::class, 'peserta_id', 'id');
+    }
+
+    public function dokumen()
+    {
+        if ($this->doc_vaksin && $this->doc_pernyataan && $this->doc_izin) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

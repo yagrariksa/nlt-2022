@@ -7,11 +7,13 @@
 
 @section('content')
     {{ $data }}
-    <form action="{{ route('peserta', [
-        'mode' => 'add',
-        'object' => 'peserta',
-    ]) }}" method="post"
-        enctype="multipart/form-data">
+    <form
+        action="{{ route('peserta', [
+            'mode' => 'edit',
+            'object' => 'peserta',
+            'uid' => app('request')->input('uid'),
+        ]) }}"
+        method="post" enctype="multipart/form-data">
         @csrf
         <h2 class="add-edit-peserta__title">Edit Peserta</h2>
         <div class="add-edit-peserta__input">

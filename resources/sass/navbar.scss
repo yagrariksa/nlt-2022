@@ -59,6 +59,9 @@
 
     &__items {
         height: inherit;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         gap: 3rem;
     }

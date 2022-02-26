@@ -516,7 +516,8 @@ class PesertaController extends Controller
     protected function a_view_list_univ()
     {
         $data  = User::get();
-        return view('be.a.list-univ', $data);
+        // return view('be.a.list-univ', $data);
+        return view('container.admin.dashboard', $data);
     }
 
     protected function a_view_list_peserta_by_univ($univ)

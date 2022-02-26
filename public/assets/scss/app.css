@@ -680,6 +680,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .nav__items {
   height: inherit;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 3rem;
 }
@@ -1103,6 +1106,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   width: 100%;
   height: calc(100vh - 13rem);
   overflow-y: auto;
+  padding-right: 0.5rem;
 }
 .list-peserta__table {
   width: 100%;
@@ -1379,4 +1383,86 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     margin-right: 1.75rem;
     width: calc(100% - 3.5rem);
   }
+}
+.adm-login {
+  min-height: calc(100vh - 8rem);
+  margin: 4rem auto;
+  display: flex;
+}
+.adm-login__left {
+  width: 50%;
+  padding: 4rem 2.5rem 4rem 4rem;
+  border-radius: 3rem 0 0 3rem;
+  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+}
+.adm-login__left form {
+  height: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.adm-login__left form .form-group {
+  width: 100%;
+}
+.adm-login__right {
+  width: 50%;
+  border-radius: 0 3rem 3rem 0;
+  background-image: url(/images/admin-login.jpg?f6b1607ee4fd604554f3a8405dd11679);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+}
+
+.color-champagne {
+  color: #E9D8A6 !important;
+}
+
+.adm-dashboard__title {
+  margin-bottom: 4rem;
+}
+.adm-dashboard__table-container {
+  width: 100%;
+  height: calc(100vh - 15rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.adm-dashboard__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.adm-dashboard__table th {
+  background-color: #001219;
+}
+.adm-dashboard__table th:first-child {
+  border-top-left-radius: 1rem;
+}
+.adm-dashboard__table th:last-child {
+  border-top-right-radius: 1rem;
+}
+.adm-dashboard__table th > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFFFFF;
+}
+.adm-dashboard__table th > span > span {
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+.adm-dashboard__table th,
+.adm-dashboard__table td {
+  padding: 1.5rem 1rem;
+}
+.adm-dashboard__btn {
+  padding: 0.25rem 0.5rem;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  color: #FFFFFF;
+  background-color: #005F73;
 }

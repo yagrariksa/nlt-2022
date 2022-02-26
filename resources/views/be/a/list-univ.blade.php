@@ -1,3 +1,3 @@
 @include('be.dump.head')
-list peserta
+list univ
 @include('be.dump.foot')

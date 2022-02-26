@@ -170,7 +170,8 @@ class AuthController extends Controller
 
     public function mahavira_view_login()
     {
-        return view('be.a.login');
+        // return view('be.a.login');
+        return view('container.admin.masuk');
     }
 
     public function mahavira_action_login(Request $request)

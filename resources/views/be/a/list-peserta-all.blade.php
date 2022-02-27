@@ -5,6 +5,7 @@ list peserta
         <tr>
             <th>no</th>
             <th>nama</th>
+            <th>univ</th>
             <th>jabatan</th>
             <th>aksi</th>
         </tr>
@@ -14,8 +15,9 @@ list peserta
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->nama }}</td>
+                <td>{{ $p->univ->email }}</td>
                 <td>{{ $p->jabatan }}</td>
-                <td>{{ $p->aksi }}</td>
+                <td><a href="#">View Details</a></td>
             </tr>
         @endforeach
     </tbody>
@@ -29,7 +31,7 @@ list peserta
         @if ($data->currentPage() != 1)
             <li><a
                     href="{{ route('a.peserta', [
-                        'object' => 'univ',
+                        'object' => 'peserta',
                         'page' => 1,
                     ]) }}">First
                     Page</a></li>
@@ -37,7 +39,7 @@ list peserta
         @for ($i = 2; $i < $data->currentPage(); $i++)
             <li><a
                     href="{{ route('a.peserta', [
-                        'object' => 'univ',
+                        'object' => 'peserta',
                         'page' => $i,
                     ]) }}">
                     Page {{ $i }}</a></li>
@@ -45,7 +47,7 @@ list peserta
         @for ($i = $data->currentPage() + 1; $i < $data->lastPage(); $i++)
             <li><a
                     href="{{ route('a.peserta', [
-                        'object' => 'univ',
+                        'object' => 'peserta',
                         'page' => $i,
                     ]) }}">Page
                     {{ $i }}</a></li>
@@ -53,7 +55,7 @@ list peserta
         @if ($data->currentPage() != $data->lastPage())
             <li><a
                     href="{{ route('a.peserta', [
-                        'object' => 'univ',
+                        'object' => 'peserta',
                         'page' => $data->lastPage(),
                     ]) }}">Last
                     Page</a></li>

@@ -31,10 +31,6 @@ class PesertaController extends Controller
                         return $this->d_view_list_peserta();
                         break;
 
-                    case 'travel':
-                        return $this->d_view_list_travel();
-                        break;
-
                     default:
                         // tampilkan list biasa
                         return $this->d_view_default();
@@ -50,10 +46,6 @@ class PesertaController extends Controller
                             return $this->d_view_edit_peserta($uid);
                             break;
 
-                        case 'travel':
-                            return $this->d_view_edit_travel($uid);
-                            break;
-
                         default:
                             // tampilkan list biasa
                             return $this->d_view_default();
@@ -67,12 +59,9 @@ class PesertaController extends Controller
                     case 'dokumen':
                         return $this->d_view_add_dokumen($uid);
                         break;
+
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
-                        break;
-
-                    case 'travel':
-                        return $this->d_view_add_travel($uid);
                         break;
 
                     default:
@@ -124,28 +113,6 @@ class PesertaController extends Controller
         ]);
     }
 
-    protected function d_view_add_travel()
-    {
-        return view('be.d.travel.add');
-    }
-
-    protected function d_view_edit_travel($uid)
-    {
-
-        $uid = explode("@", $uid);
-        $p = Peserta::with(['datang', 'pergi'])->where('uid', $uid[0])->first();
-        if ($uid[1] == 'KEDATANGAN') {
-            $data = TravelDatang::find($p->datang->id);
-        } else if ($uid[1] == 'KEPULANGAN') {
-            $data = TravelPergi::find($p->pergi->id);
-        }
-        return view('be.d.travel.edit', [
-            'data' => $data,
-            'peserta' => $p
-        ]);
-        // return 'edit travel - ' . $uid;
-    }
-
     public function d_view_add_dokumen($uid)
     {
         $data = Peserta::where('uid', $uid)->first();
@@ -180,10 +147,6 @@ class PesertaController extends Controller
                         return $this->d_action_delete_peserta($uid);
                         break;
 
-                    case 'travel':
-                        return $this->d_action_delete_travel($uid);
-                        break;
-
                     default:
                         return $this->error_page();
                         break;
@@ -193,10 +156,6 @@ class PesertaController extends Controller
                 switch ($object) {
                     case 'peserta':
                         return $this->d_action_edit_peserta($request, $uid);
-                        break;
-
-                    case 'travel':
-                        return $this->d_action_edit_travel($request, $uid);
                         break;
 
                     default:
@@ -213,10 +172,6 @@ class PesertaController extends Controller
 
                     case 'peserta':
                         return $this->d_action_add_peserta($request);
-                        break;
-
-                    case 'travel':
-                        return $this->d_action_add_travel($request);
                         break;
 
                     default:
@@ -238,8 +193,6 @@ class PesertaController extends Controller
 
     protected function d_action_add_peserta(Request $request)
     {
-        // dd($request);
-
         $rules = [
             'email' => 'required|email',
             'nama' => 'required|string',
@@ -247,7 +200,7 @@ class PesertaController extends Controller
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
-            'vegan' => 'required'
+            'line' => 'required'
         ];
 
         Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
@@ -269,10 +222,10 @@ class PesertaController extends Controller
             'user_id' => $u->id,
             'jabatan' => $request->jabatan,
             'handphone' => $request->handphone,
+            'line' => $request->line,
+            'email' => $request->email,
             'foto_url' => $foto_url,
             'ktp_url' => $ktp_url,
-            'alergi' => $request->alergi,
-            'vegan' => $request->vegan == 'yes' ? true : false,
             'uid' => join('-', [
                 Str::random(10),
                 join('-', explode(" ", $request->nama))
@@ -359,132 +312,6 @@ class PesertaController extends Controller
         $p = Peserta::where('uid', $uid);
         $p->delete();
         return redirect()->back()->with('success', 'berhasil menghapus ' . $uid);
-    }
-
-    protected function d_action_add_travel(Request $request)
-    {
-        $datetime = explode('T', $request->datetime);
-        // dd(join(' ', $datetime));
-        $rules = [
-            'peserta' => 'required|string',
-            'lokasi' => 'required',
-            'transportasi' => 'required|min:5',
-            'datetime' => 'required',
-            'bantuan' => 'required',
-            'type' => 'required'
-        ];
-
-        Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
-
-        $p = Peserta::with(['datang', 'pergi'])->where('uid', $request->peserta)->first();
-
-        if (!$p) {
-            // peserta not found
-        }
-
-        if ($request->type == 'keberangkatan' && $p->datang) {
-            return redirect()->back()->with('type', 'peserta sudah memiliki data keberangkatan');
-        } else if ($request->type == 'kepulangan' && $p->pergi) {
-            return redirect()->back()->with('type', 'peserta sudah memiliki data kepulangan');
-        }
-
-        if ($request->type == 'keberangkatan') {
-            TravelDatang::create([
-                'transportasi' => $request->transportasi,
-                'lokasi' => $request->lokasi,
-                'tanggal' => join(' ', $datetime),
-                'bantuan' => $request->bantuan == 'perlu' ? true : false,
-                'peserta_id' => $p->id
-            ]);
-        } else {
-            TravelPergi::create([
-                'transportasi' => $request->transportasi,
-                'lokasi' => $request->lokasi,
-                'tanggal' => join(' ', $datetime),
-                'bantuan' => $request->bantuan == 'perlu' ? true : false,
-                'peserta_id' => $p->id
-            ]);
-        }
-
-        return redirect()->route('peserta', [
-            'mode' => 'list',
-            'object' => 'travel'
-        ]);
-    }
-
-    protected function d_action_edit_travel(Request $request, $uid)
-    {
-        $rules = [
-            'lokasi' => 'required|min:5',
-            'datetime' => 'required',
-            'bantuan' => 'required',
-        ];
-
-        Validator::make($request->all(), $rules, $this->msg)->validate();
-
-        // dump($uid);
-        // dd($request->all());
-
-        $uid = explode('@', $uid);
-        $datetime = explode('T', $request->datetime);
-
-        if ($uid[1] == 'KEDATANGAN') {
-            $t = TravelDatang::find($request->id);
-            if ($t->lokasi != $request->lokasi)
-                $t->lokasi = $request->lokasi;
-
-            if ($t->transportasi != $request->transportasi)
-                $t->transportasi = $request->transportasi;
-
-            $bantuan = $request->bantuan == 'perlu' ? true : false;
-            if ($t->bantuan != $bantuan)
-                $t->bantuan = !$t->bantuan;
-
-            if ($t->tanggal != $datetime[0])
-                $t->tanggal = $datetime[0];
-
-
-            if ($t->jam != $datetime[1])
-                $t->jam = $datetime[1];
-
-            $t->save();
-        } else if ($uid[1] == 'KEPULANGAN') {
-            $t = TravelPergi::find($request->id);
-            if ($t->lokasi != $request->lokasi)
-                $t->lokasi = $request->lokasi;
-
-            if ($t->transportasi != $request->transportasi)
-                $t->transportasi = $request->transportasi;
-
-            $bantuan = $request->bantuan == 'perlu' ? true : false;
-            if ($t->bantuan != $bantuan)
-                $t->bantuan = !$t->bantuan;
-
-            if ($t->tanggal != $datetime[0])
-                $t->tanggal = $datetime[0];
-
-
-            if ($t->jam != $datetime[1])
-                $t->jam = $datetime[1];
-
-            $t->save();
-        }
-        return redirect()->route('peserta', [
-            'mode' => 'list',
-            'object' => 'travel'
-        ]);
-    }
-
-    protected function d_action_delete_travel($uid)
-    {
-        $uid = explode("@", $uid);
-        $p = Peserta::with(['datang', 'pergi'])->where('uid', $uid[0])->first();
-        if ($uid[1] == 'KEDATANGAN') {
-            TravelDatang::find($p->datang->id)->delete();
-        } else if ($uid[1] == 'KEPULANGAN') {
-            TravelPergi::find($p->pergi->id)->delete();
-        }
-        return redirect()->back()->with('success', 'berhasil menghapus ' . join('@', $uid));
     }
 
     protected function d_action_add_dokumen(Request $request, $uid)

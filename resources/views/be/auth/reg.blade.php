@@ -35,11 +35,14 @@
     @if ($errors->has('nama'))
         <span class="error">{{ $errors->first('nama') }}</span>
     @endif
+    <input type="text" placeholder="line" name="line" id="">
+    @if ($errors->has('line'))
+        <span class="error">{{ $errors->first('line') }}</span>
+    @endif
     <input type="text" placeholder="no HP" name="handphone" id="" value="{{ old('handphone') }}">
     @if ($errors->has('handphone'))
         <span class="error">{{ $errors->first('handphone') }}</span>
     @endif
-    <input type="text" placeholder="alergi" name="alergi makanan" id="">
 
     <input type="file" placeholder="ktp" name="ktp">
     @if ($errors->has('ktp'))
@@ -48,19 +51,6 @@
     <input type="file" placeholder="pas" name="pas" value="{{ old('pas') }}">
     @if ($errors->has('pas'))
         <span class="error">{{ $errors->first('pas') }}</span>
-    @endif
-    <div class="row">
-        <input type="radio" id="yes" name="vegan" value="yes">
-        <label for="yes">yes</label>
-    </div>
-
-    <div class="row">
-        <input type="radio" id="no" name="vegan" value="no">
-        <label for="no">no</label>
-    </div>
-
-    @if ($errors->has('vegan'))
-        <span class="error">{{ $errors->first('vegan') }}</span>
     @endif
     <button type="submit">register</button>
     <a href="{{ route('login') }}">login</a>

@@ -104,11 +104,6 @@
                     'object' => 'peserta',
                 ]) }}">peserta</a>
             <a class="header__item"
-                href="{{ route('peserta', [
-                    'mode' => 'list',
-                    'object' => 'travel',
-                ]) }}">travel</a>
-            <a class="header__item"
                 href="{{ route('souvenir', [
                     'mode' => 'list',
                 ]) }}">Souvenir</a>

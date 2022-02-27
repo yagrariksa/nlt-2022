@@ -51,7 +51,7 @@ class AuthController extends Controller
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
-            'vegan' => 'required'
+            'line' => 'required'
         ];
 
         Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
@@ -84,14 +84,15 @@ class AuthController extends Controller
             'handphone' => $request->handphone,
             'foto_url' => $foto_url,
             'ktp_url' => $ktp_url,
-            'alergi' => $request->alergi,
-            'vegan' => $request->vegan == 'yes' ? true : false,
+            'line' => $request->line,
+            'email' => $request->email,
             'uid' => join('-', [
                 Str::random(10),
                 join('-', explode(" ", $request->nama))
             ])
         ]);
 
+        return redirect()->route('home');
         dd(Auth::user());
     }
 

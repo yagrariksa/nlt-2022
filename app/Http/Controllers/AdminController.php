@@ -65,7 +65,7 @@ class AdminController extends Controller
 
     protected function a_view_list_peserta_all()
     {
-        $data = Peserta::paginate(10);
+        $data = Peserta::with('univ')->paginate(10);
         return view('be.a.list-peserta-all', [
             'data' => $data
         ]);

@@ -29,14 +29,6 @@ class AdminController extends Controller
                 }
                 break;
 
-            case 'travel':
-                if ($univ) {
-                    return $this->a_view_list_travel_by_univ($univ);
-                } else {
-                    return $this->a_view_list_travel_all();
-                }
-                break;
-
             default:
                 return $this->a_view_list_univ($request);
                 break;
@@ -71,16 +63,4 @@ class AdminController extends Controller
         ]);
     }
 
-    protected function a_view_list_travel_by_univ($univ)
-    {
-        $data = User::with(['peserta', 'peserta.datang', 'peserta.pergi'])->where('email', $univ)->first();
-        return 'list travel univ';
-    }
-
-    protected function a_view_list_travel_all()
-    {
-        $data = TravelDatang::get();
-        $data2 = TravelPergi::get();
-        return 'list travel all';
-    }
 }

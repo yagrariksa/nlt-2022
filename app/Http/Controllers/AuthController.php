@@ -168,6 +168,10 @@ class AuthController extends Controller
 
     public function mahavira_view_login()
     {
+        if (Session::has('admin') && Session::get('admin') == true) {
+            return redirect()->route('a.peserta');
+        }
+
         return view('be.a.login');
     }
 
@@ -181,10 +185,10 @@ class AuthController extends Controller
         Validator::make($request->all(), $rules, $this->msg)->validate();
 
         if ($request->pw == 'passwordtulisdisini') {
-            Session::put('admin',true);
+            Session::put('admin', true);
             return redirect()->route('a.peserta');
-        }else{
-            return redirect()->back()->with('error','Password Salah');
+        } else {
+            return redirect()->back()->with('error', 'Password Salah');
         }
     }
 

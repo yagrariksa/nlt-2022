@@ -258,7 +258,10 @@ class PesertaController extends Controller
         return redirect()->route('peserta', [
             'mode' => 'list',
             'object' => 'peserta'
-        ])->with('success', 'Anda berhasil menambahkan ' . $request->nama)->with('success-title', 'Berhasil Menambahkan Peserta!');
+        ])->with([
+            'success' => 'Anda berhasil menambahkan ' . $request->nama,
+            'success-title' => 'Berhasil Menambahkan Peserta!'
+    ]);
 
         return 'add peserta';
     }
@@ -272,7 +275,7 @@ class PesertaController extends Controller
             'nama' => 'required|string|min:5',
             'jabatan' => 'required',
             'handphone' => 'required',
-            // 'vegan' => 'required',
+            'line' => 'required',
             'ktp' => 'mimes:png,jpg,jpeg'
         ];
 
@@ -326,7 +329,10 @@ class PesertaController extends Controller
         return redirect()->route('peserta', [
             'mode' => 'list',
             'object' => 'peserta'
-        ])->with('success', 'Anda berhasil memperbarui data ' . $p->nama)->with('success-title', 'Berhasil Memperbarui!');
+        ])->with([
+            'success' => 'Anda berhasil memperbarui data ' . $p->nama,
+            'success-title' => 'Berhasil Memperbarui!'
+        ]);
         // return 'edit peserta - ' . $uid;
     }
 
@@ -337,7 +343,10 @@ class PesertaController extends Controller
         return redirect()->route('peserta', [
             'mode' => 'list',
             'object' => 'peserta'
-        ])->with('success', 'Anda berhasil menghapus ' . $uid)->with('success-title', 'Berhasil Menghapus!');
+        ])->with([
+            'success' => 'Anda berhasil menghapus ' . $uid,
+            'success-title' => 'Berhasil Menghapus!'
+            ]);
     }
 
     protected function d_action_add_dokumen(Request $request, $uid)

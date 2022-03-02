@@ -36,8 +36,8 @@
 
     {{-- ini yang gabisa --}}
     @if (Session::has('status'))
-        @if (Session::get('status') == 'success')
-            <x-alert.sukses title="Judul" desc="{{ Session::get('message') }}" />
-        @endif
+        {{-- @if (Session::get('status') == 'success') --}}
+        <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('message') }}" />
+        {{-- @endif --}}
     @endif
 @endsection

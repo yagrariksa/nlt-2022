@@ -49,7 +49,8 @@ class AdminController extends Controller
 
         // dd($data);
         // dd($data);
-        return view('be.a.list-univ', [
+        // return view('be.a.list-univ', [
+        return view('container.admin.dashboard', [
             'data' => $data
         ]);
     }
@@ -77,10 +78,10 @@ class AdminController extends Controller
         return 'list travel univ';
     }
 
-    protected function a_view_list_travel_all()
-    {
-        $data = TravelDatang::get();
-        $data2 = TravelPergi::get();
-        return 'list travel all';
-    }
+    // protected function a_view_list_travel_all()
+    // {
+    //     $data = TravelDatang::get();
+    //     $data2 = TravelPergi::get();
+    //     return 'list travel all';
+    // }
 }

@@ -146,7 +146,10 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('password_lama', 'Password Lama Salah');
         }
-        return redirect()->back()->with('success', 'Sukses ganti password');
+        return redirect()->back()->with([
+            'success' => 'Anda telah berhasil mengganti password akun.',
+            'title' => 'Berhasil Mengganti Password!'
+        ]);
     }
 
     public function action_forgot_password(Request $request)
@@ -169,7 +172,8 @@ class AuthController extends Controller
                 $u->save();
                 return redirect()->route('login', [
                     'status' => 'success',
-                    'message' => 'password anda sudah diubah ke 12345678'
+                    'title' => 'Password Berhasil direset!',
+                    'message' => 'Password anda sudah diubah ke 12345678. Segera ubah password anda di halaman Ubah Password.'
                 ]);
             }
         }

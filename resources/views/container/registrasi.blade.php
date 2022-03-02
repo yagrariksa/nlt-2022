@@ -23,12 +23,12 @@
             class=" registrasi__confirm-password" />
         <div class="registrasi__form-right">
             <x-form.select-options id="univ" label="Universitas" options='{
-                    "1":"Universitas Airlangga",
-                    "2":"Universitas Brawijaya",
-                    "3":"Universitas Indonesia",
-                    "4":"Universitas Bojonegoro"
-                }' class="" />
-            <x-form.input-text id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" attr="readonly" />
+                "1":"Universitas Airlangga",
+                "2":"Universitas Brawijaya",
+                "3":"Universitas Indonesia",
+                "4":"Universitas Bojonegoro"
+            }' class="" />
+            <x-form.input-text id="jabatan" label="Jabatan" value="EB AMSA-Indonesia" attr="readonly" />
             {{-- <x-form.select-options id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" options='{
                 "1":"Ketua AMSA Universitas",
                 "2":"Anggota AMSA Universitas",

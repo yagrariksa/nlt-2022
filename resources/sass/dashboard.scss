@@ -40,12 +40,14 @@
     &__menu--souvenir {
         grid-area: souvenir;
         background-image: url('./../img/dashboard/souvenir.jpg');
+        filter: grayscale(1);
     }
 
     &__menu--absensi {
         grid-area: absensi;
         background-image: url('./../img/dashboard/absensi.jpg');
         background-position-y: 100%;
+        filter: grayscale(1);
     }
 }
 

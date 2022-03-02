@@ -22,10 +22,10 @@
             </div>
             <div class="add-edit-peserta__form-right">
                 <x-form.select-options id="jabatan" label="Jabatan" options='{
-                        "1":"Ketua AMSA Universitas",
-                        "2":"Anggota AMSA Universitas",
-                        "3":"Lainnya"
-                    }' value="{{ old('jabatan') }}" class="" />
+                    "1":"EB AMSA-Indonesia",
+                    "2":"Representative AMSA Universitas",
+                    "3":"Member"
+                }' value="{{ old('jabatan') }}" class="" />
                 <x-form.input-img id="ktp" label="Foto KTP (JPG atau PNG)" value="{{ old('ktp') }}" />
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ old('pas') }}" />
             </div>

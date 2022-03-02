@@ -2054,6 +2054,36 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/add-edit-peserta.js":
+/*!******************************************!*\
+  !*** ./resources/js/add-edit-peserta.js ***!
+  \******************************************/
+/***/ (() => {
+
+$('.add-edit-peserta__buttons a').click(function (e) {
+  e.preventDefault();
+  $('.add-edit-peserta__dialog')[0].classList.add('active');
+});
+$('.add-edit-peserta__batal').click(function () {
+  $('.add-edit-peserta__dialog')[0].classList.remove('active');
+});
+
+/***/ }),
+
+/***/ "./resources/js/alert.js":
+/*!*******************************!*\
+  !*** ./resources/js/alert.js ***!
+  \*******************************/
+/***/ (() => {
+
+$('.alert__close').click(function (e) {
+  e.target.parentElement.style.visibility = 'hidden';
+  e.target.parentElement.style.transform = 'translate(-50%, -50%)';
+  e.target.parentElement.style.opacity = 0;
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2064,7 +2094,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./env */ "./resources/js/env.js");
 
+__webpack_require__(/*! ./alert */ "./resources/js/alert.js");
+
+__webpack_require__(/*! ./dialog */ "./resources/js/dialog.js");
+
 __webpack_require__(/*! ./navbar */ "./resources/js/navbar.js");
+
+__webpack_require__(/*! ./list-peserta */ "./resources/js/list-peserta.js");
+
+__webpack_require__(/*! ./detail-peserta */ "./resources/js/detail-peserta.js");
+
+__webpack_require__(/*! ./add-edit-peserta */ "./resources/js/add-edit-peserta.js");
 
 /***/ }),
 
@@ -2096,6 +2136,34 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/detail-peserta.js":
+/*!****************************************!*\
+  !*** ./resources/js/detail-peserta.js ***!
+  \****************************************/
+/***/ (() => {
+
+$('button.detail-peserta__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+
+/***/ }),
+
+/***/ "./resources/js/dialog.js":
+/*!********************************!*\
+  !*** ./resources/js/dialog.js ***!
+  \********************************/
+/***/ (() => {
+
+$('.dialog__bg').click(function () {
+  $('.dialog').map(function (x) {
+    if ($('.dialog')[x].classList.contains('active')) {
+      $('.dialog')[x].classList.remove('active');
+    }
+  });
+});
 
 /***/ }),
 
@@ -2353,6 +2421,30 @@ $('.form-group__input-file .form-group__filename').map(function (x) {
 
 /***/ }),
 
+/***/ "./resources/js/list-peserta.js":
+/*!**************************************!*\
+  !*** ./resources/js/list-peserta.js ***!
+  \**************************************/
+/***/ (() => {
+
+// // SORTING DI LIST PESERTA
+// const List = require("list.js");
+var userList = new List('d-list-peserta', {
+  valueNames: ['list-peserta__nama', 'list-peserta__jabatan']
+}); // DIALOG DELETE
+
+$('button.list-peserta__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+$('button.card__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+$('.button.list-peserta__batal').click(function (e) {
+  e.currentTarget.parentElement.parentElement.classList.remove('active');
+});
+
+/***/ }),
+
 /***/ "./resources/js/navbar.js":
 /*!********************************!*\
   !*** ./resources/js/navbar.js ***!
@@ -2368,33 +2460,25 @@ $(document).ready(function () {
     e.currentTarget.nextElementSibling.classList.toggle("active");
   });
 });
-$('.nav__item').click(function (e) {
-  console.log(e.currentTarget.id);
+window.addEventListener('click', function (e) {
+  if ($('.nav__dropdown')[0].classList.contains('active') && e.target.className != 'nav__profile') {
+    $('.nav__dropdown')[0].classList.remove('active');
+  }
 });
 
 if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--peserta')[0].classList.add('active');
-  $('#nav__item--travel')[0].classList.remove('active');
-  $('#nav__item--souvenir')[0].classList.remove('active');
-  $('#nav__item--password')[0].classList.remove('active');
-} else if (window.location.search == '?mode=list&object=travel') {
-  $('#nav__item--peserta')[0].classList.remove('active');
-  $('#nav__item--travel')[0].classList.add('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.remove('active');
 } else if (window.location.search == '?mode=list&object=souvenir') {
   $('#nav__item--peserta')[0].classList.remove('active');
-  $('#nav__item--travel')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.add('active');
   $('#nav__item--password')[0].classList.remove('active');
 } else if (window.location.pathname == '/setting') {
   $('#nav__item--peserta')[0].classList.remove('active');
-  $('#nav__item--travel')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.add('active');
 }
-
-console.log();
 
 /***/ }),
 

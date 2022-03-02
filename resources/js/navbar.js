@@ -9,33 +9,24 @@ $(document).ready(function(){
     })
 });
 
-$('.nav__item').click(e => {
-    console.log(e.currentTarget.id)
-})
+window.addEventListener('click', e => {
+    if ($('.nav__dropdown')[0].classList.contains('active') && e.target.className != 'nav__profile') {
+        $('.nav__dropdown')[0].classList.remove('active')
+    }
+});
 
 if (window.location.search == '?mode=list&object=peserta') {
     $('#nav__item--peserta')[0].classList.add('active')
-    $('#nav__item--travel')[0].classList.remove('active')
-    $('#nav__item--souvenir')[0].classList.remove('active')
-    $('#nav__item--password')[0].classList.remove('active')
-}
-else if (window.location.search == '?mode=list&object=travel') {
-    $('#nav__item--peserta')[0].classList.remove('active')
-    $('#nav__item--travel')[0].classList.add('active')
     $('#nav__item--souvenir')[0].classList.remove('active')
     $('#nav__item--password')[0].classList.remove('active')
 }
 else if (window.location.search == '?mode=list&object=souvenir') {
     $('#nav__item--peserta')[0].classList.remove('active')
-    $('#nav__item--travel')[0].classList.remove('active')
     $('#nav__item--souvenir')[0].classList.add('active')
     $('#nav__item--password')[0].classList.remove('active')
 }
 else if (window.location.pathname == '/setting') {
     $('#nav__item--peserta')[0].classList.remove('active')
-    $('#nav__item--travel')[0].classList.remove('active')
     $('#nav__item--souvenir')[0].classList.remove('active')
     $('#nav__item--password')[0].classList.add('active')
 }
-
-console.log()

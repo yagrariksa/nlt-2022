@@ -19,12 +19,8 @@
     ]) }}" class="dashboard__menu dashboard__menu--souvenir">
         <h1>Souvenir <span></span></h1>
     </a>
-    <a href="{{ route('peserta', [
-        'mode' => 'list',
-        'object' => 'travel',
-    ]) }}"
-        class="dashboard__menu dashboard__menu--travel-plan">
-        <h1>Travel Plan <span></span></h1>
+    <a href="#" class="dashboard__menu dashboard__menu--absensi">
+        <h1>Absensi <span></span></h1>
     </a>
 @endsection
 

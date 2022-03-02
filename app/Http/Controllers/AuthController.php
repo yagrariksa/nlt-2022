@@ -27,12 +27,14 @@ class AuthController extends Controller
 
     public function view_acc_setting()
     {
-        return view('be.d.setting');
+        // return view('be.d.setting');
+        return view('container.ubah-pass');
     }
 
     public function view_forgot_password()
     {
-        return view('be.auth.forgot');
+        // return view('be.auth.forgot');
+        return view('container.reset-pass');
     }
 
     public function action_regist(Request $request)
@@ -40,7 +42,8 @@ class AuthController extends Controller
         if (User::where('email', $request->univ)->first()) {
             // bring it to login with message
             return redirect()->route('login')->with([
-                'auth.msg' => 'ketua sudah melakukan pendaftaran, silahkan login',
+                'auth.title' => 'Silakan Masuk!',
+                'auth.msg' => 'ketua sudah melakukan pendaftaran, silakan masuk.',
                 'univ' => $request->univ
             ]);
         }
@@ -104,6 +107,7 @@ class AuthController extends Controller
         if (!User::where('email', $request->univ)->first()) {
             return redirect()->route('register')->with([
                 'univ' => $request->univ,
+                'title' => 'Daftarkan Universitas Anda(?)',
                 'message' => 'ketua belum melakukan pendaftaran, harap ketua bla bla bla'
             ]);
         }
@@ -164,7 +168,8 @@ class AuthController extends Controller
 
         return redirect()->back()->with([
             'status' => 'fail',
-            'message' => 'data tidak cocok, password tidak di reset'
+            'title' => 'Data Tidak Cocok!',
+            'message' => 'data tidak cocok, password tidak di reset.'
         ]);
     }
 

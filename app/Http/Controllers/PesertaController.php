@@ -82,6 +82,18 @@ class PesertaController extends Controller
                 }
                 break;
 
+            case 'detail':
+                switch($object) {
+                    case 'peserta':
+                        return $this->d_view_detail_peserta($uid);
+                        break;
+                    default:
+                        // tampilkan list biasa
+                        return $this->d_view_default();
+                        break;
+                }
+            break;
+
             default:
                 // tampilkan list biasa
                 return $this->d_view_default();
@@ -154,6 +166,14 @@ class PesertaController extends Controller
         $data = Peserta::where('uid', $uid)->first();
         return view('be.d.peserta.add-dokumen', [
             'data' => $data,
+        ]);
+    }
+
+    public function d_view_detail_peserta($uid)
+    {
+        $p = Peserta::where('uid', $uid)->first();
+        return view('container.detail-peserta', [
+            'data' => $p
         ]);
     }
 
@@ -250,7 +270,7 @@ class PesertaController extends Controller
             'handphone' => 'required|min:10',
             'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
-            'vegan' => 'required'
+            // 'vegan' => 'required'
         ];
 
         Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
@@ -274,8 +294,8 @@ class PesertaController extends Controller
             'handphone' => $request->handphone,
             'foto_url' => $foto_url,
             'ktp_url' => $ktp_url,
-            'alergi' => $request->alergi,
-            'vegan' => $request->vegan == 'yes' ? true : false,
+            // 'alergi' => $request->alergi,
+            // 'vegan' => $request->vegan == 'yes' ? true : false,
             'uid' => join('-', [
                 Str::random(10),
                 join('-', explode(" ", $request->nama))
@@ -285,7 +305,7 @@ class PesertaController extends Controller
         return redirect()->route('peserta', [
             'mode' => 'list',
             'object' => 'peserta'
-        ]);
+        ])->with('success', 'Anda berhasil menambahkan ' . $request->nama)->with('success-title', 'Berhasil Menambahkan Peserta!');
 
         return 'add peserta';
     }
@@ -299,7 +319,7 @@ class PesertaController extends Controller
             'nama' => 'required|string|min:5',
             'jabatan' => 'required',
             'handphone' => 'required',
-            'vegan' => 'required',
+            // 'vegan' => 'required',
             'ktp' => 'mimes:png,jpg,jpeg'
         ];
 
@@ -353,7 +373,7 @@ class PesertaController extends Controller
         return redirect()->route('peserta', [
             'mode' => 'list',
             'object' => 'peserta'
-        ])->with('success', 'sukses update info ' . $p->nama);
+        ])->with('success', 'Anda berhasil memperbarui data ' . $p->nama)->with('success-title', 'Berhasil Memperbarui!');
         // return 'edit peserta - ' . $uid;
     }
 
@@ -361,7 +381,10 @@ class PesertaController extends Controller
     {
         $p = Peserta::where('uid', $uid);
         $p->delete();
-        return redirect()->back()->with('success', 'berhasil menghapus ' . $uid);
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta'
+        ])->with('success', 'Anda berhasil menghapus ' . $uid)->with('success-title', 'Berhasil Menghapus!');
     }
 
     protected function d_action_add_travel(Request $request)

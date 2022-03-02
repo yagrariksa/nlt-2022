@@ -74,6 +74,7 @@
         line-height: 1.25rem;
         text-align: center;
         text-decoration: none;
+        white-space: nowrap;
 
         position: relative;
         display: flex;
@@ -174,6 +175,7 @@
 
         &__items {
             width: 100%;
+            position: relative;
             flex-direction: column;
             gap: 0;
         }

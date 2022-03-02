@@ -12,43 +12,26 @@
     ]) }}" method="post"
         enctype="multipart/form-data">
         @csrf
-        <h2 class="add-edit-peserta__title">Tambah Peserta</h2>
         <div class="add-edit-peserta__input">
+            <h2 class="add-edit-peserta__title">Tambah Peserta</h2>
             <div class="add-edit-peserta__form-left">
                 <x-form.input-text id="email" label="Email" value="{{ old('email') }}" />
                 <x-form.input-text id="nama" label="Nama" value="{{ old('nama') }}" />
                 <x-form.input-text id="handphone" label="Nomor Telepon" value="{{ old('handphone') }}" />
-            </div>
-            <x-form.input-text-with-help id="alergi" label="Alergi Makan Apa?*" helper="*Kosongi bila tidak ada"
-                class=" add-edit-peserta__alergi" value="{{ old('alergi') }}" />
-            <div class="add-edit-peserta__vegetarian form-radio @if ($errors->has('vegan')) has-error @endif">
-                <h4>Vegetarian?</h4>
-                @if (old('vegan') == 'Iya')
-                    <x-form.input-radio name="vegan" label="Iya" checked="checked" />
-                @else
-                    <x-form.input-radio name="vegan" label="Iya" />
-                @endif
-                @if (old('vegan') == 'Tidak')
-                    <x-form.input-radio name="vegan" label="Tidak" checked="checked" />
-                @else
-                    <x-form.input-radio name="vegan" label="Tidak" />
-                @endif
-                @if ($errors->has('vegan'))
-                    <h6 class="form-help" style="bottom: -1rem;"> {{ $errors->first('vegan') }}</h6>
-                @endif
+                <x-form.input-text id="line" label="ID Line" value="{{ old('line') }}" />
             </div>
             <div class="add-edit-peserta__form-right">
                 <x-form.select-options id="jabatan" label="Jabatan" options='{
-                                            "1":"Ketua AMSA Universitas",
-                                            "2":"Anggota AMSA Universitas",
-                                            "3":"Lainnya"
-                                        }' value="{{ old('jabatan') }}" />
+                        "1":"Ketua AMSA Universitas",
+                        "2":"Anggota AMSA Universitas",
+                        "3":"Lainnya"
+                    }' value="{{ old('jabatan') }}" class="" />
                 <x-form.input-img id="ktp" label="Foto KTP (JPG atau PNG)" value="{{ old('ktp') }}" />
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ old('pas') }}" />
             </div>
         </div>
         <div class="add-edit-peserta__buttons">
-            <a href="{{ URL::previous() }}">Batalkan</a>
+            <a href="">Batalkan</a>
             <button type="submit" class="btn-primary">TAMBAH PESERTA</button>
         </div>
     </form>
@@ -56,4 +39,14 @@
 
 @section('other')
     {{-- it can be modal, etc. --}}
+    <div class="add-edit-peserta__dialog dialog">
+        <h3 class="dialog__title blue">Batalkan Menambahkan Peserta?</h3>
+        <h4 class="dialog__message">Apakah anda ingin membatalkan penambahan data peserta? Semua Informasi yang anda
+            masukkan tidak akan disimpan.</h4>
+        <div class="dialog__btn">
+            <span class="button dialog__btn-yes add-edit-peserta__batal">Tidak</span>
+            <a href="{{ route('peserta') }}" class="button dialog__btn-no">Ya, Batalkan</a>
+        </div>
+    </div>
+    <div class="dialog__bg"></div>
 @endsection

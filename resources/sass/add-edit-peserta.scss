@@ -1,10 +1,10 @@
 .add-edit-peserta {
     margin-top: 4rem;
     margin-bottom: 4rem;
-    padding: 4rem;
+    padding: 4rem 4rem 0 4rem;
 
     form {
-        min-height: calc(100vh - 16rem);
+        min-height: calc(100vh - 12rem);
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -14,11 +14,16 @@
 
     &__input {
         display: grid;
-        grid-template-columns: 1fr 1fr 1.3fr .7fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-areas:
-            'form-left form-left form-right form-right'
-            'alergi vegan none none';
+            'title title'
+            'form-left form-right';
         column-gap: 2rem;
+    }
+
+    &__title {
+        grid-area: title;
+        margin-bottom: 32px;
     }
 
     &__form-left {
@@ -30,20 +35,6 @@
 
     &__form-right {
         grid-area: form-right;
-    }
-
-    &__alergi {
-        grid-area: alergi;
-        align-self: flex-end;
-    }
-
-    &__vegetarian {
-        grid-area: vegan;
-        margin-top: 2rem;
-
-        h4 {
-            color: $rich-black-40;
-        }
     }
 
     &__buttons {
@@ -73,7 +64,7 @@
 
         &__buttons {
             flex-direction: column-reverse;
-            gap: .5rem;
+            gap: 1rem;
         }
     }
 }

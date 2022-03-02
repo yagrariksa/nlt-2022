@@ -23,12 +23,6 @@
                 ]) }} --}}
                 " class="nav__item" id="nav__item--peserta">LIST PESERTA <span></span></a>
                     <a href="
-                {{-- {{ route('peserta', [
-                    'mode' => 'list',
-                    'object' => 'travel',
-                ]) }} --}}
-                " class="nav__item" id="nav__item--travel">TRAVEL PLAN <span></span></a>
-                    <a href="
                 {{-- {{ route('souvenir', [
                     'mode' => 'list',
                 ]) }} --}}

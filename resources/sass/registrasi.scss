@@ -1,9 +1,14 @@
 .registrasi {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin-top: 0;
     padding: 4rem;
     border-radius: 3rem;
     @include box-shadow;
+
+    &__body {
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+    }
 
     form {
         display: grid;
@@ -11,9 +16,8 @@
         grid-template-areas:
             'title title title title'
             'form-left form-left form-right form-right'
-            'pass confirm-pass form-right form-right'
-            'alergi vegan none none'
-            'alergi vegan to-masuk regis-btn';
+            'pass confirm-pass none none'
+            'empty empty to-masuk regis-btn';
         column-gap: 2rem;
     }
 
@@ -42,20 +46,6 @@
         align-self: flex-end;
     }
 
-    &__alergi {
-        grid-area: alergi;
-        align-self: flex-end;
-    }
-
-    &__vegetarian {
-        grid-area: vegan;
-        margin-top: 2rem;
-
-        h4 {
-            color: $rich-black-40;
-        }
-    }
-
     &__to-masuk {
         grid-area: to-masuk;
         align-self: center;
@@ -78,8 +68,6 @@
                 'pass'
                 'confirm-pass'
                 'form-right'
-                'alergi'
-                'vegan'
                 'regis-btn';
             gap: 0;
         }

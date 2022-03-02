@@ -38,7 +38,8 @@ class SouvenirController extends Controller
 
     protected function d_view_list_souvenir()
     {
-        return view('be.d.souvenir.list');
+        // return view('be.d.souvenir.list');
+        return view('container.list-souvenir');
     }
 
     protected function d_view_add_souvenir($s_id)

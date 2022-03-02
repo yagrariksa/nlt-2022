@@ -1,0 +1,174 @@
+.detail-peserta {
+    &__lg {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-grow: 1;
+        gap: 10rem;
+    }
+
+    &__info {
+        margin-bottom: 4rem;
+        min-height: calc(100vh - 10rem);
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    &__imgs {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
+    &__img {
+        height: 26vh;
+        border-radius: 8px;
+    }
+
+    &__value-label {
+        display: grid;
+        grid-template-areas:
+            'label-1 value-1'
+            'label-2 value-2'
+            'label-3 value-3'
+            'label-4 value-4'
+            'label-5 value-5';
+        gap: 1rem 5rem;
+    }
+
+    &__label {
+        color: $rich-black-60;
+    }
+
+    &__value {
+        color: $rich-black;
+    }
+
+    &__label--nama {
+        grid-area: label-1;
+    }
+
+    &__value--nama {
+        grid-area: value-1;
+    }
+
+    &__label--jabatan {
+        grid-area: label-2;
+    }
+
+    &__value--jabatan {
+        grid-area: value-2;
+    }
+
+    &__label--email {
+        grid-area: label-3;
+    }
+
+    &__value--email {
+        grid-area: value-3;
+    }
+
+    &__label--notelp {
+        grid-area: label-4;
+    }
+
+    &__value--notelp {
+        grid-area: value-4;
+    }
+
+    &__label--line {
+        grid-area: label-5;
+    }
+
+    &__value--line {
+        grid-area: value-5;
+    }
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    &__btn {
+        width: fit-content;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        border-radius: 50rem;
+        text-decoration: none;
+        color: $white !important;
+        cursor: pointer;
+
+        &--edit {
+            background-color: $gamboge;
+        }
+
+        &--delete {
+            background-color: $mahogany;
+        }
+
+        &:hover {
+            background-color: $rich-black;
+        }
+
+        &:disabled {
+            opacity: .7;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+    }
+
+    &__ornament {
+        width: 40%;
+        height: calc(100vh - 10rem);
+        position: fixed;
+        right: 0;
+        top: 6rem;
+        border-radius: 3rem 0 0 3rem;
+        background-image: url('./../img/admin-login.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        @include box-shadow;
+        z-index: 1;
+    }
+
+    &__sm {
+        min-height: 100vh;
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        z-index: 2;
+        // background-color: rgba($rich-black, 80%);
+        margin-bottom: 2rem;
+    }
+
+    @media screen and (max-width: 767.9px) {
+        &__lg {
+            display: none;
+        }
+
+        &__sm {
+            display: flex;
+        }
+
+        &__img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

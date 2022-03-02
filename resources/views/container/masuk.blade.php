@@ -11,12 +11,13 @@
         @csrf
         <div class="masuk__top">
             <h2>Masuk</h2>
-            <x-form.select-options id="univ" label="Universitas" options='{
-                "1":"Universitas Airlangga",
-                "2":"Universitas Brawijaya",
-                "3":"Universitas Indonesia",
-                "4":"Universitas Bojonegoro"
-            }' class="" />
+            {{-- <x-form.select-options id="univ" label="Universitas" options='{
+                    "1":"Universitas Airlangga",
+                    "2":"Universitas Brawijaya",
+                    "3":"Universitas Indonesia",
+                    "4":"Universitas Bojonegoro"
+                }' class="" /> --}}
+            <x-form.input-text id="univ" label="Universitas Email Spesial" />
             <x-form.input-password-session-error id="password" label="Password" error="error" />
             <a href="{{ route('forgot-password') }}" class="masuk__lupa-password">Lupa Password Anda?</a>
         </div>

@@ -75,8 +75,15 @@ class AuthController extends Controller
             $request->ktp->storeAs('public', $ktp_url);
         }
 
+        $univ = explode(' ', $request->univ);
+        for ($i = 0; $i < sizeof($univ); $i++) {
+            $univ[$i] = strtolower($univ[$i]);
+        }
+        $univ = join('_', $univ) .  '@nlt2022.com';
+
         $u = User::create([
-            'email' => $request->univ,
+            'univ' => $request->univ,
+            'email' => $univ,
             'ketua' => $request->nama,
             'password' => Hash::make($request->password)
         ]);
@@ -190,10 +197,10 @@ class AuthController extends Controller
         Validator::make($request->all(), $rules, $this->msg)->validate();
 
         if ($request->pw == 'passwordtulisdisini') {
-            Session::put('admin',true);
+            Session::put('admin', true);
             return redirect()->route('a.peserta');
-        }else{
-            return redirect()->back()->with('error','Password Salah');
+        } else {
+            return redirect()->back()->with('error', 'Password Salah');
         }
     }
 

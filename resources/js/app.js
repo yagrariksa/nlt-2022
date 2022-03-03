@@ -6,3 +6,4 @@ require('./navbar');
 require('./list-peserta');
 require('./detail-peserta');
 require('./add-edit-peserta');
+require('./admin/filter');

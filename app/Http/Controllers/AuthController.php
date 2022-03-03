@@ -51,6 +51,7 @@ class AuthController extends Controller
         $rules = [
             'email' => 'required|email',
             'univ' => 'required',
+            'email-univ' => 'required',
             'nama' => 'required|string',
             'password' => 'required|min:8|confirmed',
             // 'confirm-password' => 'required|same',
@@ -77,7 +78,7 @@ class AuthController extends Controller
 
         $u = User::create([
             'univ' => $request->univ,
-            'email' => $request->email,
+            'email' => $request['email-univ'],
             'akronim' => $request->akronim,
             'ketua' => $request->nama,
             'password' => Hash::make($request->password)

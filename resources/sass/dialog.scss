@@ -74,6 +74,24 @@
         display: none;
     }
 
+    &__filter {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &--quest-box {
+            display: flex;
+            flex-direction: column;
+            gap: .1rem;
+        }
+
+        &--radio {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+    }
+
     &.active {
         display: flex;
         animation: fadein .2s ease-in-out;

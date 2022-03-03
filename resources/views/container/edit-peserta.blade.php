@@ -24,13 +24,20 @@
                 <x-form.input-text id="line" label="ID Line" value="{{ old('line') ? old('line') : $data->line }}" />
             </div>
             <div class="add-edit-peserta__form-right">
-                <x-form.input-text id="jabatan" label="Jabatan" value="{{ $data->jabatan }}" attr="readonly" />
                 {{-- <x-form.select-options id="jabatan" label="Jabatan" options='{
                     "1":"Ketua AMSA Universitas",
                     "2":"Anggota AMSA Universitas",
                     "3":"Lainnya"
                 }' /> --}}
-                <x-form.input-img id="ktp" label="Foto KTP (JPG atau PNG)" value="{{ $data->ktp_url }}" />
+                @if ($data->jabatan == 'Representative AMSA Universitas')
+                    <x-form.input-text id="jabatan" label="Jabatan" value="{{ $data->jabatan }}" attr="readonly" />
+                @else
+                    <x-form.select-options id="jabatan" label="Jabatan" options='{
+                        "1":"EB AMSA-Indonesia",
+                        "2":"Member"
+                    }' value="{{ old('jabatan') ? old('jabatan') : $data->jabatan }}" class="" />
+                @endif
+
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ $data->foto_url }}" />
             </div>
         </div>

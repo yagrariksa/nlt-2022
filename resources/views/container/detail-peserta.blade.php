@@ -37,7 +37,7 @@
                     class="detail-peserta__btn detail-peserta__btn--edit"><img src="{{ url('assets/img/edit.svg') }}">
                     EDIT
                     PESERTA</a>
-                @if ($data->jabatan != 'EB AMSA-Indonesia')
+                @if ($data->jabatan != 'Representative AMSA Universitas')
                     <button class="detail-peserta__btn detail-peserta__btn--delete"><img
                             src="{{ url('assets/img/delete.svg') }}"></button>
                 @else

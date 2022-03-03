@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'ketua',
         'email',
+        'univ',
         'password',
     ];
 

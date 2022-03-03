@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function action_regist(Request $request)
     {
-        if (User::where('email', $request->email)->first()) {
+        if (User::where('email', $request['email-univ'])->first()) {
             // bring it to login with message
             return redirect()->route('login')->with([
                 'auth.title' => 'Silakan Masuk!',
@@ -56,7 +56,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|confirmed',
             // 'confirm-password' => 'required|same',
             'handphone' => 'required|min:10',
-            'ktp' => 'required|file|mimes:png,jpg,jpeg',
+            // 'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
             'line' => 'required'
         ];
@@ -92,7 +92,7 @@ class AuthController extends Controller
             'jabatan' => 'ketua',
             'handphone' => $request->handphone,
             'foto_url' => $foto_url,
-            'ktp_url' => $ktp_url,
+            'ktp_url' => '$ktp_url',
             'line' => $request->line,
             'email' => $request->email,
             'uid' => join('-', [
@@ -103,10 +103,9 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with([
             'email' => $u->email,
-            'status' => 'success',
             'title' => 'Berhasil Registrasi',
-            'message' => 'Gunakan EMAIL UNIK UNIVERSITAS serta password yang telah didaftarkan untuk masuk.
-            Email : ' . $u->email
+            'success.regis' => 'Gunakan EMAIL UNIK UNIVERSITAS serta password yang telah didaftarkan untuk masuk.
+            Email : '
                 ]);
         dd(Auth::user());
     }

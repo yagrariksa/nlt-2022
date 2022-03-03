@@ -24,7 +24,8 @@ Route::get('/', function () {
         // return view('be.d.landing');
         return view('container.dashboard-client');
     }
-    return view('be.landing');
+    // return view('be.landing');
+    return view('container.home');
 })->name('home');
 
 Route::get('test', function () {

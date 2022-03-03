@@ -178,8 +178,11 @@ class AuthController extends Controller
 
     public function mahavira_view_login()
     {
-        // return view('be.a.login');
-        return view('container.admin.masuk');
+        if (Session::has('admin') && Session::get('admin') == true) {
+            return redirect()->route('a.peserta');
+        }
+
+        return view('be.a.login');
     }
 
     public function mahavira_action_login(Request $request)

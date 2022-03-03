@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Peserta::class, 'user_id', 'id');
     }
 
+    public function jumlahPeserta()
+    {
+        return sizeof($this->peserta);
+    }
+
 }

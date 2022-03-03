@@ -200,4 +200,8 @@
     @if (Session::has('success'))
         <x-alert.sukses title="{{ Session::get('success-title') }}" desc="{{ Session::get('success') }}" />
     @endif
+
+    @if (Session::has('error'))
+        <x-alert.error title="{{ Session::get('error-title') }}" desc="{{ Session::get('error') }}" />
+    @endif
 @endsection

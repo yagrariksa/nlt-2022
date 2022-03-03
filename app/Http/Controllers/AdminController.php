@@ -37,7 +37,7 @@ class AdminController extends Controller
 
     protected function a_view_list_univ(Request $request)
     {
-        $data  = User::paginate(10)->withQueryString();
+        $data  = User::with('peserta')->get();
 
         // dd($data);
         // dd($data);

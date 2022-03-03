@@ -13,8 +13,6 @@
             <div class="detail-peserta__imgs">
                 <img src="{{ url('storage') . '/' . $data->foto_url }}" alt=""
                     class="detail-peserta__img detail-peserta__img--foto">
-                <img src="{{ url('storage') . '/' . $data->ktp_url }}" alt=""
-                    class="detail-peserta__img detail-peserta__img--ktp">
             </div>
             <div class="detail-peserta__value-label">
                 <h4 class="detail-peserta__label detail-peserta__label--nama">Nama</h4>
@@ -71,8 +69,7 @@
     <div class="detail-peserta__sm">
         <img src="{{ url('storage') . '/' . $data->foto_url }}" alt=""
             class="detail-peserta__img detail-peserta__img--foto">
-        <img src="{{ url('storage') . '/' . $data->ktp_url }}" alt=""
-            class="detail-peserta__img detail-peserta__img--ktp">
+        
         <a href="{{ route('peserta', [
             'mode' => 'list',
             'object' => 'peserta',

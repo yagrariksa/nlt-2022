@@ -13,8 +13,7 @@ class Peserta extends Model
 
     protected $fillable = [
         'nama', 'jabatan', 'handphone', 'line',
-        'foto_url', 'akronim', 'alergi', 'vegan',
-        'user_id',  'uid', 'email',
+        'foto_url', 'user_id',  'uid', 'email',
     ];
 
     public function univ()

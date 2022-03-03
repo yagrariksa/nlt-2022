@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peserta;
-use App\Models\TravelDatang;
-use App\Models\TravelPergi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,9 +54,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
-                    case 'dokumen':
-                        return $this->d_view_add_dokumen($uid);
-                        break;
+                    // case 'dokumen':
+                    //     return $this->d_view_add_dokumen($uid);
+                    //     break;
 
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
@@ -72,7 +70,7 @@ class PesertaController extends Controller
                 break;
 
             case 'detail':
-                switch($object) {
+                switch ($object) {
                     case 'peserta':
                         return $this->d_view_detail_peserta($uid);
                         break;
@@ -81,7 +79,7 @@ class PesertaController extends Controller
                         return $this->d_view_default();
                         break;
                 }
-            break;
+                break;
 
             default:
                 // tampilkan list biasa
@@ -189,9 +187,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
-                    case 'dokumen':
-                        return $this->d_action_add_dokumen($request, $uid);
-                        break;
+                    // case 'dokumen':
+                    //     return $this->d_action_add_dokumen($request, $uid);
+                    //     break;
 
                     case 'peserta':
                         return $this->d_action_add_peserta($request);
@@ -221,7 +219,6 @@ class PesertaController extends Controller
             'nama' => 'required|string',
             'jabatan' => 'required',
             'handphone' => 'required|min:10',
-            'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
             'line' => 'required'
         ];
@@ -235,11 +232,6 @@ class PesertaController extends Controller
             $request->pas->storeAs('public', $foto_url);
         }
 
-        if ($request->hasFile('ktp')) {
-            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
-            $request->ktp->storeAs('public', $ktp_url);
-        }
-
         Peserta::create([
             'nama' => $request->nama,
             'user_id' => $u->id,
@@ -248,7 +240,6 @@ class PesertaController extends Controller
             'line' => $request->line,
             'email' => $request->email,
             'foto_url' => $foto_url,
-            'ktp_url' => $ktp_url,
             'uid' => join('-', [
                 Str::random(10),
                 join('-', explode(" ", $request->nama))
@@ -261,7 +252,7 @@ class PesertaController extends Controller
         ])->with([
             'success' => 'Anda berhasil menambahkan ' . $request->nama,
             'success-title' => 'Berhasil Menambahkan Peserta!'
-    ]);
+        ]);
 
         return 'add peserta';
     }
@@ -276,7 +267,6 @@ class PesertaController extends Controller
             'jabatan' => 'required',
             'handphone' => 'required',
             'line' => 'required',
-            'ktp' => 'mimes:png,jpg,jpeg'
         ];
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
@@ -292,9 +282,9 @@ class PesertaController extends Controller
         if ($p->nama != $request->nama) {
             $p->nama = $request->nama;
 
-            if ($p->jabatan == 'ketua') {
+            if ($p->jabatan == 'Representative AMSA Universitas') {
                 User::find(Auth::user()->id)->update([
-                    'nama' => $request->nama
+                    'ketua' => $request->nama
                 ]);
             }
         }
@@ -305,23 +295,10 @@ class PesertaController extends Controller
         if ($p->handphone != $request->handphone)
             $p->handphone = $request->handphone;
 
-        if ($p->alergi != $request->alergi)
-            $p->alergi = $request->alergi;
-
-        $vegan = $request->vegan == 'yes' ? true : false;
-        if ($p->vegan != $vegan)
-            $p->vegan = $vegan;
-
         if ($request->pas) {
             $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
             $request->pas->storeAs('public', $foto_url);
             $p->foto_url = $foto_url;
-        }
-
-        if ($request->ktp) {
-            $ktp_url = join("_", [time(), join('-', explode(' ', $request->nama)), "ktp"])  . "." . $request->ktp->extension();
-            $request->ktp->storeAs('public', $ktp_url);
-            $p->ktp_url = $ktp_url;
         }
 
         $p->save();
@@ -339,60 +316,70 @@ class PesertaController extends Controller
     protected function d_action_delete_peserta($uid)
     {
         $p = Peserta::where('uid', $uid);
-        $p->delete();
-        return redirect()->route('peserta', [
-            'mode' => 'list',
-            'object' => 'peserta'
-        ])->with([
-            'success' => 'Anda berhasil menghapus ' . $uid,
-            'success-title' => 'Berhasil Menghapus!'
+        if ($p->jabatan != 'Representative AMSA Universitas') {
+            $p->delete();
+            return redirect()->route('peserta', [
+                'mode' => 'list',
+                'object' => 'peserta'
+            ])->with([
+                'success' => 'Anda berhasil menghapus ' . $uid,
+                'success-title' => 'Berhasil Menghapus!'
             ]);
+        }else{
+            return redirect()->route('peserta', [
+                'mode' => 'list',
+                'object' => 'peserta'
+            ])->with([
+                'error' => 'Anda tidak menghapus ' . $uid . ', karena Representative AMSA Universitas',
+                'error-title' => 'Gagal Menghapus!'
+            ]);
+        }
     }
 
-    protected function d_action_add_dokumen(Request $request, $uid)
-    {
-        // dd($request);
+    // protected function d_action_add_dokumen(Request $request, $uid)
+    // {
+    //     // dd($request);
 
-        $p = Peserta::where('uid', $uid)->first();
+    //     $p = Peserta::where('uid', $uid)->first();
 
-        if ($request->doc_izin) {
-            $doc_izin_url = join("_", [
-                time(),
-                join('-', explode(' ', $p->nama)),
-                "surat_izin_orang_tua"
-            ])  . "." . $request->doc_izin->extension();
-            $request->doc_izin->storeAs('public', $doc_izin_url);
-            $p->doc_izin = $doc_izin_url;
-        }
+    //     if ($request->doc_izin) {
+    //         $doc_izin_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_izin->extension();
+    //         $request->doc_izin->storeAs('public', $doc_izin_url);
+    //         $p->doc_izin = $doc_izin_url;
+    //     }
 
-        if ($request->doc_vaksin) {
-            $doc_vaksin_url = join("_", [
-                time(),
-                join('-', explode(' ', $p->nama)),
-                "surat_izin_orang_tua"
-            ])  . "." . $request->doc_vaksin->extension();
-            $request->doc_vaksin->storeAs('public', $doc_vaksin_url);
-            $p->doc_vaksin = $doc_vaksin_url;
-        }
+    //     if ($request->doc_vaksin) {
+    //         $doc_vaksin_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_vaksin->extension();
+    //         $request->doc_vaksin->storeAs('public', $doc_vaksin_url);
+    //         $p->doc_vaksin = $doc_vaksin_url;
+    //     }
 
-        if ($request->doc_pernyataan) {
-            $doc_pernyataan_url = join("_", [
-                time(),
-                join('-', explode(' ', $p->nama)),
-                "surat_izin_orang_tua"
-            ])  . "." . $request->doc_pernyataan->extension();
-            $request->doc_pernyataan->storeAs('public', $doc_pernyataan_url);
-            $p->doc_pernyataan = $doc_pernyataan_url;
-        }
+    //     if ($request->doc_pernyataan) {
+    //         $doc_pernyataan_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_pernyataan->extension();
+    //         $request->doc_pernyataan->storeAs('public', $doc_pernyataan_url);
+    //         $p->doc_pernyataan = $doc_pernyataan_url;
+    //     }
 
-        $p->save();
+    //     $p->save();
 
-        return redirect()->route('peserta', [
-            'mode' => 'add',
-            'object' => 'dokumen',
-            'uid' => $uid
-        ]);
-    }
+    //     return redirect()->route('peserta', [
+    //         'mode' => 'add',
+    //         'object' => 'dokumen',
+    //         'uid' => $uid
+    //     ]);
+    // }
 
     protected function error_page()
     {

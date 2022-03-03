@@ -83,7 +83,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        Auth::login($u);
+        // Auth::login($u);
 
         Peserta::create([
             'nama' => $request->nama,
@@ -100,14 +100,20 @@ class AuthController extends Controller
             ])
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('login')->with([
+            'email' => $u->email,
+            'status' => 'success',
+            'title' => 'Berhasil Registrasi',
+            'message' => 'Gunakan EMAIL UNIK UNIVERSITAS serta password yang telah didaftarkan untuk masuk.
+            Email : ' . $u->email
+                ]);
         dd(Auth::user());
     }
 
     public function action_login(Request $request)
     {
         // buat ini hanya untuk 5 kali coba dalam 1 IP kemudian cooldown 10 menit
-        if (!User::where('email', $request->univ)->first()) {
+        if (!User::where('email', $request->email)->first()) {
             return redirect()->route('register')->with([
                 'univ' => $request->univ,
                 'title' => 'Daftarkan Universitas Anda(?)',
@@ -116,7 +122,7 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt([
-            'email' => $request->univ,
+            'email' => $request->email,
             'password' => $request->password
         ])) {
             return redirect()->route('home');
@@ -141,7 +147,10 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->with('password_lama', 'Password Lama Salah');
         }
-        return redirect()->back()->with('success', 'Sukses ganti password');
+        return redirect()->back()->with([
+            'success' => 'Anda telah berhasil mengganti password akun.',
+            'title' => 'Berhasil Mengganti Password!'
+        ]);
     }
 
     public function action_forgot_password(Request $request)
@@ -162,9 +171,10 @@ class AuthController extends Controller
             if ($p->user_id == $u->id && $p->nama == $request->nama) {
                 $u->password = Hash::make('12345678');
                 $u->save();
-                return redirect()->route('login', [
+                return redirect()->route('login')->with([
                     'status' => 'success',
-                    'message' => 'password anda sudah diubah ke 12345678'
+                    'title' => 'Password Berhasil direset!',
+                    'message' => 'Password anda sudah diubah ke 12345678. Segera ubah password anda di halaman Ubah Password.'
                 ]);
             }
         }

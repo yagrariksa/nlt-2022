@@ -37,7 +37,7 @@
                     class="detail-peserta__btn detail-peserta__btn--edit"><img src="{{ url('assets/img/edit.svg') }}">
                     EDIT
                     PESERTA</a>
-                @if ($data->jabatan != 'Ketua AMSA Universitas')
+                @if ($data->jabatan != 'EB AMSA-Indonesia')
                     <button class="detail-peserta__btn detail-peserta__btn--delete"><img
                             src="{{ url('assets/img/delete.svg') }}"></button>
                 @else
@@ -73,7 +73,11 @@
             class="detail-peserta__img detail-peserta__img--foto">
         <img src="{{ url('storage') . '/' . $data->ktp_url }}" alt=""
             class="detail-peserta__img detail-peserta__img--ktp">
-        <button class="detail-peserta__btn btn-primary">TUTUP</button>
+        <a href="{{ route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta',
+        ]) }}"
+            class="button detail-peserta__btn btn-primary">TUTUP</a>
     </div>
 @endsection
 

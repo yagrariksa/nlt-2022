@@ -17,7 +17,8 @@
                     "3":"Universitas Indonesia",
                     "4":"Universitas Bojonegoro"
                 }' class="" /> --}}
-            <x-form.input-text id="univ" label="Universitas Email Spesial" />
+            <x-form.input-text id="email" label="Universitas Email Spesial"
+                value="{{ Session::has('email') ? Session::get('email') : '' }}" />
             <x-form.input-password-session-error id="password" label="Password" error="error" />
             <a href="{{ route('forgot-password') }}" class="masuk__lupa-password">Lupa Password Anda?</a>
         </div>
@@ -33,11 +34,9 @@
     @if (Session::has('auth.msg'))
         <x-alert.error title="{{ Session::get('auth.title') }}" desc="{{ Session::get('auth.msg') }}" />
     @endif
-
-    {{-- ini yang gabisa --}}
     @if (Session::has('status'))
         @if (Session::get('status') == 'success')
-            <x-alert.sukses title="Judul" desc="{{ Session::get('message') }}" />
+            <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('message') }}" />
         @endif
     @endif
 @endsection

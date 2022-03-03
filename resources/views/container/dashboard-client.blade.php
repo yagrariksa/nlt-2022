@@ -19,7 +19,9 @@
     ]) }}" class="dashboard__menu dashboard__menu--souvenir">
         <h1>Souvenir <span></span></h1>
     </a>
-    <a href="#" class="dashboard__menu dashboard__menu--absensi">
+    <a href="{{ route('souvenir', [
+        'mode' => 'list',
+    ]) }}" class="dashboard__menu dashboard__menu--absensi">
         <h1>Absensi <span></span></h1>
     </a>
 @endsection

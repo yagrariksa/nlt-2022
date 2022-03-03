@@ -39,10 +39,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        gap: 16px;
     }
 
     &__btn-yes {
+        width: 100%;
         border-radius: 1rem;
         background-color: $rich-black;
         color: $white;
@@ -55,6 +56,7 @@
     }
 
     &__btn-no {
+        width: 100%;
         border-radius: 1rem;
         background-color: transparent;
         outline: 3px solid transparent;

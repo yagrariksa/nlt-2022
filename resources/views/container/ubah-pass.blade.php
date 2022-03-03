@@ -24,5 +24,7 @@
 @endsection
 
 @section('other')
-    {{-- it can be modal, etc. --}}
+    @if (Session::has('success'))
+        <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success') }}" />
+    @endif
 @endsection

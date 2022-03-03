@@ -41,7 +41,8 @@ class AdminController extends Controller
 
         // dd($data);
         // dd($data);
-        return view('be.a.list-univ', [
+        // return view('be.a.list-univ', [
+        return view('container.admin.dashboard', [
             'data' => $data
         ]);
     }
@@ -63,4 +64,16 @@ class AdminController extends Controller
         ]);
     }
 
+    protected function a_view_list_travel_by_univ($univ)
+    {
+        $data = User::with(['peserta', 'peserta.datang', 'peserta.pergi'])->where('email', $univ)->first();
+        return 'list travel univ';
+    }
+
+    // protected function a_view_list_travel_all()
+    // {
+    //     $data = TravelDatang::get();
+    //     $data2 = TravelPergi::get();
+    //     return 'list travel all';
+    // }
 }

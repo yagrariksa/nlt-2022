@@ -79,7 +79,7 @@
                                 ]) }}"
                                     class="list-peserta__btn list-peserta__btn--view"><img
                                         src="{{ url('assets/img/view-details.svg') }}"></a>
-                                @if ($p->jabatan != 'Ketua AMSA Universitas')
+                                @if ($p->jabatan != 'EB AMSA-Indonesia')
                                     <button class="list-peserta__btn list-peserta__btn--delete"><img
                                             src="{{ url('assets/img/delete.svg') }}"></button>
                                 @else
@@ -144,7 +144,7 @@
                         ]) }}"
                             class="card__btn card__btn--view"><img src="{{ url('assets/img/view-details.svg') }}"> LIHAT
                             KTP & PAS FOTO</a>
-                        @if ($p->jabatan != 'Ketua AMSA Universitas')
+                        @if ($p->jabatan != 'EB AMSA-Indonesia')
                             <button class="card__btn card__btn--delete"><img src="{{ url('assets/img/delete.svg') }}">
                                 HAPUS</button>
                         @else

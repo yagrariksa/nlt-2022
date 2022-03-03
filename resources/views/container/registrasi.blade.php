@@ -13,22 +13,25 @@
         @csrf
         <h2 class="registrasi__title">Registrasi</h2>
         <div class="registrasi__form-left">
-            <x-form.input-text id="email" label="Email" />
-            <x-form.input-text id="nama" label="Nama" />
-            <x-form.input-text id="handphone" label="Nomor Telepon" />
-            <x-form.input-text id="line" label="ID Line" />
+            <x-form.input-text id="email" label="Email" value="{{ old('email') ? old('email') : '' }}" />
+            <x-form.input-text id="nama" label="Nama" value="{{ old('nama') ? old('nama') : '' }}" />
+            <x-form.input-text id="handphone" label="Nomor Telepon"
+                value="{{ old('handphone') ? old('handphone') : '' }}" />
+            <x-form.input-text id="line" label="ID Line" value="{{ old('line') ? old('line') : '' }}" />
         </div>
         <x-form.input-password id="password" label="Password" class=" registrasi__password" />
         <x-form.input-password id="password_confirmation" label="Konfirmasi Password"
             class=" registrasi__confirm-password" />
         <div class="registrasi__form-right">
             <x-form.select-options id="univ" label="Universitas" options='{
-                    "1":"Universitas Airlangga",
-                    "2":"Universitas Brawijaya",
-                    "3":"Universitas Indonesia",
-                    "4":"Universitas Bojonegoro"
-                }' class="" />
-            <x-form.input-text id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" attr="readonly" />
+                                            "1":"Universitas Airlangga",
+                                            "2":"Universitas Brawijaya",
+                                            "3":"Universitas Indonesia",
+                                            "4":"Universitas Bojonegoro"
+                                        }' class=""
+                value="{{ Session::get('univ') ? Session::get('univ') : '' }}"
+                value="{{ old('univ') ? old('univ') : '' }}" />
+            <x-form.input-text id="jabatan" label="Jabatan" value="EB AMSA-Indonesia" attr="readonly" />
             {{-- <x-form.select-options id="jabatan" label="Jabatan" value="Ketua AMSA Universitas" options='{
                 "1":"Ketua AMSA Universitas",
                 "2":"Anggota AMSA Universitas",

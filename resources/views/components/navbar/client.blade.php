@@ -20,7 +20,10 @@
                     'object' => 'peserta',
                 ]) }}"
                     class="nav__item" id="nav__item--peserta">LIST PESERTA <span></span></a>
-                <a href="" class="nav__item" id="nav__item--absensi">ABSENSI <span></span></a>
+                <a href="{{ route('souvenir', [
+                    'mode' => 'list',
+                ]) }}"
+                    class="nav__item" id="nav__item--absensi">ABSENSI <span></span></a>
                 <a href="{{ route('souvenir', [
                     'mode' => 'list',
                 ]) }}"

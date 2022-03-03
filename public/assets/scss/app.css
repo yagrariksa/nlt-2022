@@ -214,10 +214,24 @@ label {
   z-index: -1;
 }
 .form-group input:-moz-read-only {
-  color: #B3B8BA;
+  color: #001219;
+  cursor: context-menu;
 }
 .form-group input:read-only {
+  color: #001219;
+  cursor: context-menu;
+}
+.form-group input:-moz-read-only:focus ~ .form-group__control-label {
   color: #B3B8BA;
+}
+.form-group input:read-only:focus ~ .form-group__control-label {
+  color: #B3B8BA;
+}
+.form-group input:-moz-read-only:focus ~ .form-group__bar::before {
+  width: 0;
+}
+.form-group input:read-only:focus ~ .form-group__bar::before {
+  width: 0;
 }
 .form-group textarea {
   resize: vertical;
@@ -630,6 +644,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 
 .alert {
+  max-width: 30rem;
   padding: 16px;
   position: absolute;
   left: 50%;
@@ -640,9 +655,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   grid-template-areas: "ic title close" "ic desc close";
   gap: 4px 16px;
   border-radius: 16px;
+  z-index: 1;
   visibility: visible;
   opacity: 1;
   transition: all 0.4s ease-in-out;
+  -webkit-animation: fadeout 0.8s ease-in-out 30s forwards;
+          animation: fadeout 0.8s ease-in-out 30s forwards;
 }
 .alert__icon {
   grid-area: ic;
@@ -661,7 +679,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   width: 28px;
   height: 28px;
   grid-area: close;
-  margin-left: 80px;
+  margin-left: 50px;
   cursor: pointer;
   font-size: 24px;
   font-weight: 600;
@@ -681,6 +699,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   background-color: #CCD4FC;
   border: 1px solid #2B4BF2;
 }
+.alert.not-out {
+  -webkit-animation: none;
+          animation: none;
+}
 @media screen and (max-width: 767.9px) {
   .alert {
     max-width: 328px;
@@ -690,6 +712,19 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
 }
 
+@-webkit-keyframes fadeout {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
 .dialog {
   width: 370px;
   padding: 32px;
@@ -726,9 +761,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 }
 .dialog__btn-yes {
+  width: 100%;
   border-radius: 1rem;
   background-color: #001219;
   color: #FFFFFF;
@@ -739,6 +775,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   background-color: #E3CE8F;
 }
 .dialog__btn-no {
+  width: 100%;
   border-radius: 1rem;
   background-color: transparent;
   outline: 3px solid transparent;
@@ -797,7 +834,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
 }
 .nav {
-  z-index: 1;
+  z-index: 2;
   height: 5rem;
   position: fixed;
   top: 0;
@@ -881,6 +918,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .nav__profile {
   width: 2rem;
   border-radius: 50%;
+  cursor: pointer;
 }
 .nav__right-btn {
   display: flex;
@@ -1265,11 +1303,13 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .dashboard__menu--souvenir {
   grid-area: souvenir;
   background-image: url(/images/souvenir.jpg?840f38d6579533e8b9b717568c65aff4);
+  filter: grayscale(1);
 }
 .dashboard__menu--absensi {
   grid-area: absensi;
   background-image: url(/images/absensi.jpg?a72304b452b3726adf56e2ccaa2230ce);
   background-position-y: 100%;
+  filter: grayscale(1);
 }
 
 @media screen and (max-width: 991.9px) {
@@ -1654,8 +1694,6 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
-  z-index: 1;
 }
 .detail-peserta__sm {
   min-height: 100vh;
@@ -1791,7 +1829,6 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
 }
 
 .color-champagne {

@@ -699,6 +699,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   background-color: #CCD4FC;
   border: 1px solid #2B4BF2;
 }
+.alert.not-out {
+  -webkit-animation: none;
+          animation: none;
+}
 @media screen and (max-width: 767.9px) {
   .alert {
     max-width: 328px;
@@ -914,6 +918,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .nav__profile {
   width: 2rem;
   border-radius: 50%;
+  cursor: pointer;
 }
 .nav__right-btn {
   display: flex;

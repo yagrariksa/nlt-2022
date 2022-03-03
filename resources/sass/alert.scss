@@ -64,6 +64,10 @@
         border: 1px solid #2B4BF2;
     }
 
+    &.not-out {
+        animation: none;
+    }
+
     @media screen and (max-width: 767.9px) {
         max-width: 328px;
 

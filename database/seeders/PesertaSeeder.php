@@ -21,6 +21,8 @@ class PesertaSeeder extends Seeder
             $str = Str::random(10);
             $u = User::create([
                 'email' => $str,
+                'univ' => $str,
+                'akronim' => $str,
                 'ketua' => $str,
                 'password' => Hash::make($str)
             ]);
@@ -32,9 +34,8 @@ class PesertaSeeder extends Seeder
                     'jabatan' => $sstr,
                     'handphone' => $sstr,
                     'foto_url' => $sstr,
-                    'ktp_url' => $sstr,
-                    'alergi' => $sstr,
-                    'vegan' =>  true,
+                    'line' => $sstr,
+                    'email' => $sstr,
                     'uid' => join('-', [
                         Str::random(10),
                         join('-', explode(" ", $sstr))

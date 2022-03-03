@@ -39,12 +39,12 @@ class AuthController extends Controller
 
     public function action_regist(Request $request)
     {
-        if (User::where('email', $request->univ)->first()) {
+        if (User::where('email', $request->email)->first()) {
             // bring it to login with message
             return redirect()->route('login')->with([
                 'auth.title' => 'Silakan Masuk!',
                 'auth.msg' => 'ketua sudah melakukan pendaftaran, silakan masuk.',
-                'univ' => $request->univ
+                'univ' => $request->email
             ]);
         }
 
@@ -75,15 +75,10 @@ class AuthController extends Controller
             $request->ktp->storeAs('public', $ktp_url);
         }
 
-        $univ = explode(' ', $request->univ);
-        for ($i = 0; $i < sizeof($univ); $i++) {
-            $univ[$i] = strtolower($univ[$i]);
-        }
-        $univ = join('_', $univ) .  '@nlt2022.com';
-
         $u = User::create([
             'univ' => $request->univ,
-            'email' => $univ,
+            'email' => $request->email,
+            'akronim' => $request->akronim,
             'ketua' => $request->nama,
             'password' => Hash::make($request->password)
         ]);

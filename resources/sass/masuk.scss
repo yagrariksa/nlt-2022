@@ -37,8 +37,9 @@
     }
 }
 
-@media screen and (max-width: 767.9px) {
-    .masuk form {}
+.alert .alert__desc span {
+    word-break: break-all;
+    color: inherit;
 }
 
 @media screen and (max-width: 575.9px) {

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Montserrat:wght@500;600&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;800&family=Montserrat:wght@500;600&display=swap);
 * {
   margin: 0;
   padding: 0;
@@ -64,7 +64,7 @@ h1,
 h1.xl,
 .h1.xl {
   font-size: 6rem;
-  line-height: 7.2rem;
+  line-height: 6.25rem;
   letter-spacing: -0.3rem;
 }
 
@@ -637,6 +637,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .form-group__input-file .btn-primary .lg {
     display: none;
   }
+  .form-group__select-items {
+    max-height: 20vh;
+  }
 }
 .table-sort {
   width: 1.125rem;
@@ -770,6 +773,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   color: #FFFFFF;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
 }
 .dialog__btn-yes:hover {
   background-color: #E3CE8F;
@@ -782,6 +786,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   color: #667175;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
 }
 .dialog__btn-no:hover {
   color: #BB3E03;
@@ -1141,10 +1146,15 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .registrasi__to-masuk {
   grid-area: to-masuk;
   align-self: center;
+  text-align: end;
   font-weight: 500;
 }
 .registrasi__submit {
   grid-area: regis-btn;
+}
+
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 991.9px) {
@@ -1155,6 +1165,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .registrasi__to-masuk {
     margin-top: 1rem;
+    text-align: start;
   }
   .registrasi__submit {
     margin-top: 2rem;
@@ -1199,6 +1210,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .masuk__to-registrasi {
   text-align: center;
+}
+
+.alert .alert__desc span {
+  word-break: break-all;
+  color: inherit;
 }
 
 @media screen and (max-width: 575.9px) {
@@ -1285,7 +1301,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .dashboard__menu h1 {
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1836,42 +1852,50 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 
 .adm-dashboard__title {
+  margin-top: 4rem;
   margin-bottom: 4rem;
 }
-.adm-dashboard__table-container {
+
+.adm-table__table-container {
   width: 100%;
-  height: calc(100vh - 15rem);
   overflow-y: auto;
-  padding-right: 0.5rem;
+  overflow-x: hidden;
+  border-radius: 0 0 16px 16px;
+  border: 1px solid rgba(0, 18, 25, 0.15);
 }
-.adm-dashboard__table {
+.adm-table__table-head {
   width: 100%;
   border-collapse: collapse;
 }
-.adm-dashboard__table th {
+.adm-table__table-head th {
+  padding: 1.5rem 1rem;
   background-color: #001219;
 }
-.adm-dashboard__table th:first-child {
+.adm-table__table-head th:first-child {
   border-top-left-radius: 1rem;
 }
-.adm-dashboard__table th:last-child {
+.adm-table__table-head th:last-child {
   border-top-right-radius: 1rem;
 }
-.adm-dashboard__table th > span {
+.adm-table__table-head th span {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #FFFFFF;
-}
-.adm-dashboard__table th > span > span {
+  gap: 8px;
   color: #FFFFFF;
   white-space: nowrap;
 }
-.adm-dashboard__table th,
-.adm-dashboard__table td {
+.adm-table__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.adm-table__table td {
   padding: 1.5rem 1rem;
 }
-.adm-dashboard__btn {
+.adm-table__table tr {
+  border-bottom: 0.7px solid rgba(0, 18, 25, 0.15);
+}
+.adm-table__btn {
   padding: 0.25rem 0.5rem;
   font-weight: 500;
   font-size: 1.125rem;
@@ -1882,7 +1906,16 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   color: #FFFFFF;
   background-color: #005F73;
 }
+.adm-table__btn:hover {
+  color: #FFFFFF;
+  background-color: #001219;
+}
 
+@media screen and (max-width: 992px) {
+  .adm-table__table-head, .adm-table__table-container {
+    display: none;
+  }
+}
 .soon {
   width: 100%;
   height: calc(100vh - 12rem);
@@ -1935,5 +1968,148 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     flex-direction: column-reverse;
     justify-content: center;
     gap: 2rem;
+  }
+}
+.home {
+  margin-top: 0;
+}
+
+.landing {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.landing__mahavira {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.landing__sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.landing__sub hr {
+  opacity: 1;
+  width: 100%;
+  border: 2px solid #E9D8A6;
+  background-color: #E9D8A6;
+  border-radius: 50rem;
+}
+.landing__title {
+  font-weight: 100;
+  font-size: 14rem;
+  line-height: 271px;
+  letter-spacing: -0.3rem;
+  color: #BB3E03;
+}
+.landing__year {
+  font-weight: 500;
+  color: #BB3E03;
+}
+.landing__nlt {
+  color: #B3B8BA;
+}
+.landing__by {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #005F73;
+}
+
+.about {
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.about__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.about__title--highlight {
+  color: #BB3E03;
+}
+.about__title--light {
+  font-weight: 200;
+}
+.about__desc {
+  width: 50%;
+  max-width: 660px;
+  line-height: 35px;
+  text-align: justify;
+  border-top: 2px solid #BB3E03;
+}
+
+.highlighted-agenda {
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+.highlighted-agenda__title {
+  color: #BB3E03;
+}
+.highlighted-agenda__agendas {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 0.5fr 1fr;
+  grid-template-areas: "satu satu dua dua" "tiga empat empat lima";
+  gap: 4rem 6rem;
+}
+.highlighted-agenda__agenda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.highlighted-agenda__agenda h2,
+.highlighted-agenda__agenda h4 {
+  text-align: center;
+}
+.highlighted-agenda__agenda:nth-child(1) {
+  grid-area: satu;
+}
+.highlighted-agenda__agenda:nth-child(2) {
+  grid-area: dua;
+}
+.highlighted-agenda__agenda:nth-child(3) {
+  grid-area: tiga;
+}
+.highlighted-agenda__agenda:nth-child(4) {
+  grid-area: empat;
+}
+.highlighted-agenda__agenda:nth-child(5) {
+  grid-area: lima;
+}
+
+@media screen and (max-width: 1400px) {
+  .landing__title {
+    font-size: 12rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .landing__title {
+    font-size: 9.5rem;
+  }
+}
+@media screen and (max-width: 992px) {
+  .landing__title {
+    font-size: 7rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .landing__title {
+    font-size: 7rem;
   }
 }

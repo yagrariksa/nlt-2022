@@ -39,4 +39,8 @@
             <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('message') }}" />
         @endif
     @endif
+    @if (Session::has('success.regis'))
+        <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success.regis') }}"
+            another="{{ Session::get('email') }}" />
+    @endif
 @endsection

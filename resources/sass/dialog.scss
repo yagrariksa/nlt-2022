@@ -49,6 +49,7 @@
         color: $white;
         font-weight: 600;
         cursor: pointer;
+        white-space: nowrap;
 
         &:hover {
             background-color: $flax;
@@ -63,6 +64,7 @@
         color: $rich-black-60;
         font-weight: 600;
         cursor: pointer;
+        white-space: nowrap;
 
         &:hover {
             color: $mahogany;

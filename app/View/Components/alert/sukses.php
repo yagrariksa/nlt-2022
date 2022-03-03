@@ -6,17 +6,18 @@ use Illuminate\View\Component;
 
 class sukses extends Component
 {
-    public $title, $desc, $class;
+    public $title, $desc, $class, $another;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $desc, $class='')
+    public function __construct($title, $desc, $class='', $another='')
     {
         $this->title = $title;
         $this->desc = $desc;
         $this->class = $class;
+        $this->another = $another;
     }
 
     /**

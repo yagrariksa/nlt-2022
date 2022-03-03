@@ -49,12 +49,17 @@
     &__to-masuk {
         grid-area: to-masuk;
         align-self: center;
+        text-align: end;
         font-weight: 500;
     }
 
     &__submit {
         grid-area: regis-btn;
     }
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and (max-width: 991.9px) {
@@ -74,6 +79,7 @@
 
         &__to-masuk {
             margin-top: 1rem;
+            text-align: start;
         }
 
         &__submit {

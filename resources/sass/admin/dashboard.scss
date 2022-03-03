@@ -4,21 +4,27 @@
 
 .adm-dashboard {
     &__title {
+        margin-top: 4rem;
         margin-bottom: 4rem;
     }
+}
 
+.adm-table {
     &__table-container {
         width: 100%;
-        height: calc(100vh - 15rem);
+        // height: calc(100vh - 21rem);
         overflow-y: auto;
-        padding-right: 0.5rem;
+        overflow-x: hidden;
+        border-radius: 0 0 16px 16px;
+        border: 1px solid $rich-black-10;
     }
 
-    &__table {
+    &__table-head {
         width: 100%;
         border-collapse: collapse;
 
         th {
+            padding: 1.5rem 1rem;
             background-color: $rich-black;
 
             &:first-child {
@@ -29,22 +35,27 @@
                 border-top-right-radius: 1rem;
             }
 
-            >span {
+            span {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                gap: 8px;
                 color: $white;
-
-                >span {
-                    color: $white;
-                    white-space: nowrap;
-                }
+                white-space: nowrap;
             }
         }
+    }
 
-        th,
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+
         td {
             padding: 1.5rem 1rem;
+        }
+
+        tr {
+            border-bottom: .7px solid $rich-black-10;
         }
     }
 
@@ -58,5 +69,20 @@
         border-radius: .5rem;
         color: $white;
         background-color: $blue-sapphire;
+
+        &:hover {
+            color: $white;
+            background-color: $rich-black;
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .adm-table {
+
+        &__table-head,
+        &__table-container {
+            display: none;
+        }
     }
 }

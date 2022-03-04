@@ -11,12 +11,6 @@
         @csrf
         <div class="masuk__top">
             <h2>Masuk</h2>
-            {{-- <x-form.select-options id="univ" label="Universitas" options='{
-                    "1":"Universitas Airlangga",
-                    "2":"Universitas Brawijaya",
-                    "3":"Universitas Indonesia",
-                    "4":"Universitas Bojonegoro"
-                }' class="" /> --}}
             <x-form.input-text id="email" label="Universitas Email Spesial"
                 value="{{ Session::has('email') ? Session::get('email') : '' }}" />
             <x-form.input-password-session-error id="password" label="Password" error="error" />

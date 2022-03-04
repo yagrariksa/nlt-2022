@@ -16,6 +16,8 @@
     <button type="submit">ganti password</button>
 </form>
 @if (Session::has('success'))
-    <h4>{{ Session::get('success') }}</h4>
+    @if (Session::get('success') != [])
+        <h4>{{ Session::get('success') }}</h4>
+    @endif
 @endif
 @include('be.dump.foot')

@@ -21,10 +21,8 @@
                 <x-form.input-text id="line" label="ID Line" value="{{ old('line') }}" />
             </div>
             <div class="add-edit-peserta__form-right">
-                <x-form.select-options id="jabatan" label="Jabatan" options='{
-                    "1":"EB AMSA-Indonesia",
-                    "2":"Member"
-                }' value="{{ old('jabatan') }}" class="" />
+                <x-form.select-options id="jabatan" label="Jabatan" options='EB AMSA-Indonesia,Member'
+                    value="{{ old('jabatan') }}" class="" />
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ old('pas') }}" />
             </div>
         </div>

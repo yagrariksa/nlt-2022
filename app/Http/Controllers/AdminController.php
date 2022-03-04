@@ -15,7 +15,7 @@ class AdminController extends Controller
         $mode = $request->query('mode');
         $object = $request->query('object');
         $univ = $request->query('univ');
-        $peserta = $request->query('peserta');
+        $uid = $request->query('uid');
 
         switch ($object) {
             case 'univ':
@@ -24,7 +24,9 @@ class AdminController extends Controller
             case 'peserta':
                 if ($univ) {
                     return $this->a_view_list_peserta_by_univ($univ);
-                } else {
+                } else if($uid) {
+                    return $this->a_view_detail_peserta($uid);
+                }else {
                     return $this->a_view_list_peserta_all();
                 }
                 break;
@@ -51,15 +53,25 @@ class AdminController extends Controller
     {
         $data = User::with(['peserta'])->where('email', $univ)->first();
         $data = $data->peserta;
-        return view('be.a.list-peserta', [
+        // return view('be.a.list-peserta', [
+        return view('container.admin.list-peserta-univ', [
             'data' => $data
         ]);
     }
 
     protected function a_view_list_peserta_all()
     {
-        $data = Peserta::with('univ')->paginate(10);
-        return view('be.a.list-peserta-all', [
+        $data = Peserta::with('univ')->get();
+        // return view('be.a.list-peserta-all', [
+        return view('container.admin.list-peserta-all', [
+            'data' => $data
+        ]);
+    }
+
+    protected function a_view_detail_peserta($uid)
+    {
+        $data = Peserta::where('uid', $uid)->first();
+        return view('container.admin.detail-peserta', [
             'data' => $data
         ]);
     }

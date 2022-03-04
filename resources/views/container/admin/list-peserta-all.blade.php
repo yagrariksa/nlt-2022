@@ -1,13 +1,14 @@
 @extends('template.admin')
 
-@section('title', 'Hai, Admin!')
+@section('title', 'List Peserta')
 @section('seo-desc')
 
 @section('addclass', 'adm-dashboard')
 
 @section('content')
-    <h1 class="adm-dashboard__title">List Universitas</h1>
-    <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
+    <h1 class="adm-dashboard__title">List Peserta</h1>
+    {{-- {{ $data->akronim }} --}}
+    {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
     <div class="dialog">
         <h3 class="dialog__title">Urutkan Disini</h3>
         <div class="dialog__filter">
@@ -36,7 +37,7 @@
         </div>
     </div>
     <div class="dialog__bg"></div>
-    <input type="text" class="adm-dashboard__input-search" id="filter-search">
+    <input type="text" class="adm-dashboard__input-search" id="filter-search"> --}}
 
     <table class="adm-table__table-head">
         <colgroup>
@@ -52,14 +53,18 @@
                     </span>
                 </th>
                 <th><span>
-                        <span>Nama Universitas | <span class="color-champagne"> Total: {{ sizeof($data) }}</span></span>
+                        <span>Nama</span>
                     </span>
                 </th>
                 <th><span>
-                        <span>Jumlah Peserta | <span class="color-champagne"> Total: 1328</span></span>
+                        <span>Asal Universitas</span>
                     </span>
                 </th>
-                <th></th>
+                <th><span>
+                        <span>Jabatan</span>
+                    </span>
+                </th>
+                {{-- <th></th> --}}
             </tr>
         </thead>
     </table>
@@ -72,19 +77,20 @@
                 <col span="1" style="width: 17%;">
             </colgroup>
             <tbody>
-                @foreach ($data as $univ)
+                @foreach ($data as $p)
                     <tr class="adm-table__record">
                         <td>{{ $loop->iteration }}</td>
-                        <td class="adm-table__univ">{{ $univ->univ }}</td>
-                        <td class="adm-table__peserta">{{ $univ->jumlahPeserta() }}</td>
-                        <td>
+                        <td class="adm-table__nama">{{ $p->nama }}</td>
+                        <td class="adm-table__univ">{{ $p->univ->univ }}</td>
+                        <td class="adm-table__peserta">{{ $p->jabatan }}</td>
+                        {{-- <td>
                             <a class="adm-table__btn"
                                 href="{{ route('a.peserta', [
                                     'object' => 'peserta',
-                                    'univ' => $univ->email,
+                                    'uid' => $p->uid,
                                 ]) }}"><img
                                     src="{{ url('assets/img/view-details.svg') }}"> Detail</a>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </tbody>

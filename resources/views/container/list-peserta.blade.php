@@ -143,7 +143,7 @@
                             'uid' => $p->uid,
                         ]) }}"
                             class="card__btn card__btn--view"><img src="{{ url('assets/img/view-details.svg') }}"> LIHAT
-                            KTP & PAS FOTO</a>
+                            PAS FOTO</a>
                         @if ($p->jabatan != 'Representative AMSA Universitas')
                             <button class="card__btn card__btn--delete"><img src="{{ url('assets/img/delete.svg') }}">
                                 HAPUS</button>
@@ -182,10 +182,10 @@
             @endforeach
         </div>
         <div class="list-peserta__sort-add">
-            <div class="list-peserta__sort">
+            {{-- <div class="list-peserta__sort">
                 <h4>A - Z</h4>
                 <img src="{{ url('assets/img/sort.svg') }}" alt="" class="">
-            </div>
+            </div> --}}
             <a href="{{ route('peserta', [
                 'mode' => 'add',
                 'object' => 'peserta',

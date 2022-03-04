@@ -114,10 +114,12 @@ class AuthController extends Controller
     {
         // buat ini hanya untuk 5 kali coba dalam 1 IP kemudian cooldown 10 menit
         if (!User::where('email', $request->email)->first()) {
-            return redirect()->route('register')->with([
+            // flow baru buat salah masukin email
+            return redirect()->back()->with([
                 'univ' => $request->univ,
-                'title' => 'Daftarkan Universitas Anda(?)',
-                'message' => 'ketua belum melakukan pendaftaran, harap ketua bla bla bla'
+                'auth.
+                title' => 'Email Tidak Terdaftar',
+                'auth.msg' => 'Harap periksa kembali email yang anda masukkan, atau daftarkan universitas anda.'
             ]);
         }
 
@@ -192,8 +194,8 @@ class AuthController extends Controller
             return redirect()->route('a.peserta');
         }
 
-        return view('container.admin.masuk');
         // return view('be.a.login');
+        return view('container.admin.masuk');
     }
 
     public function mahavira_action_login(Request $request)

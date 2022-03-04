@@ -2599,7 +2599,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--peserta')[0].classList.add('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.remove('active');
-} else if (window.location.search == '?mode=list&object=souvenir') {
+} else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.add('active');
   $('#nav__item--password')[0].classList.remove('active');
@@ -2607,6 +2607,10 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.add('active');
+} else if (window.location.search == '?object=peserta') {
+  $('#nav__item--a-peserta')[0].classList.add('active');
+  $('#nav__item--a-souvenir')[0].classList.remove('active');
+  $('#nav__item--a-absensi')[0].classList.remove('active');
 }
 
 /***/ }),
@@ -2822,6 +2826,7 @@ $('.form-group__select-items').click(function () {
   }
 
   $('#email-univ')[0].value = email;
+  $('#akronim')[0].value = akronim;
 });
 
 /***/ }),

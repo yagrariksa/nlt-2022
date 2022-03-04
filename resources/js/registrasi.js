@@ -202,4 +202,5 @@ $('.form-group__select-items').click(() => {
         }
     }
     $('#email-univ')[0].value = email;
+    $('#akronim')[0].value = akronim;
 })

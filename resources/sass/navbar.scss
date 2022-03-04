@@ -5,6 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
+    background-color: $white;
 
     &__brand {
         width: 2rem;
@@ -98,8 +99,8 @@
     }
 
     &__profile {
-        width: 2rem;
-        border-radius: 50%;
+        // width: 2rem;
+        // border-radius: 50%;
         cursor: pointer;
         // border: 2px outset $rich-black-40;
         // outline-offset: 2px;

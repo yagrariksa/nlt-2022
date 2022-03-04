@@ -16,6 +16,17 @@
                 <h3 class="landing__nlt">National <br>Leadership <br>Training</h3>
             </div>
         </div>
+        <div class="landing__mahavira--sm">
+            <h1 class="landing__title">MAHA</h1>
+            <div class="landing__2nd-title">
+                <h1 class="landing__title">VIRA</h1>
+                <div class="landing__sub">
+                    <h1 class="landing__year">2022</h1>
+                    <hr>
+                    <h3 class="landing__nlt">National <br>Leadership <br>Training</h3>
+                </div>
+            </div>
+        </div>
         <h5 class="landing__by">by AMSA UNAIR</h5>
     </div>
 
@@ -73,6 +84,61 @@
                     have participated in MAHAVIRA 2022, which includes several guest stars.</h4>
             </div>
         </div>
+    </div>
+
+    <div class="guideline">
+        <div class="guideline__text">
+            <h1 class="xl guideline__title">Grab Our Guideline Book</h1>
+            <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
+            <h4 class="guideline__desc">
+                For more details and requirements of MAHAVIRA 2022, please refer to this guideline!
+                <a href="#" class="button btn-primary guideline__btn">DOWNLOAD GUIDELINE</a>
+            </h4>
+        </div>
+        <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img">
+    </div>
+
+    <div class="timeline">
+        <h1 class="xl timeline__title">Timeline <img src="{{ url('assets/img/ic-timeline.svg') }}" alt=""></h1>
+        <div class="timeline__desc">
+            {{-- <img src="{{ url('assets/img/timeline-ornament.svg') }}" alt="" class="timeline__ornament"> --}}
+            <div class="timeline__ornament">
+                @for ($i = 0; $i < 20; $i++)
+                    <hr />
+                @endfor
+            </div>
+            <div class="timeline__block">
+                <hr class="timeline__line timeline__line--green">
+                <h3 class="timeline__event">Registration</h3>
+                <h4 class="timeline__date">5 March 2022</h4>
+            </div>
+            <div class="timeline__block">
+                <hr class="timeline__line">
+                <h3 class="timeline__event">D, Day of Event</h3>
+                <h4 class="timeline__date">3 April 2022 <br>9 - 10 April 2022</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="video">
+        <h1 class="xl video__title--sm">Check Our Video</h1>
+        <div class="video__container">
+            <h1 class="video__title">Check Our <br>Profile Video!</h1>
+            <a href="#" class="button video__btn">CLICK HERE</a>
+            <a href="#" class="button video__btn--sm"><img src="{{ url('assets/img/play.svg') }}" alt=""></a>
+        </div>
+    </div>
+
+    <div class="foreword">
+        {{-- here --}}
+    </div>
+
+    <div class="sponsors">
+        {{-- here --}}
+    </div>
+
+    <div class="footer">
+        {{-- here --}}
     </div>
 @endsection
 

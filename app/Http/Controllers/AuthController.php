@@ -192,7 +192,8 @@ class AuthController extends Controller
             return redirect()->route('a.peserta');
         }
 
-        return view('be.a.login');
+        return view('container.admin.masuk');
+        // return view('be.a.login');
     }
 
     public function mahavira_action_login(Request $request)
@@ -208,7 +209,7 @@ class AuthController extends Controller
             Session::put('admin', true);
             return redirect()->route('a.peserta');
         } else {
-            return redirect()->back()->with('error', 'Password Salah');
+            return redirect()->back()->withErrors(['pw' => 'Password Salah!']);
         }
     }
 

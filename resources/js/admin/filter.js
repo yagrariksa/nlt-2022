@@ -84,6 +84,23 @@ const sortByJml = () => {
     replaceTbody(manipulate)
 }
 
+const doSearch = (value) => {
+    var data = tbody.querySelectorAll('tr')
+    data.forEach(e => {
+        e.style.display = 'none'
+    });
+    data.forEach(e => {
+        if(e.innerHTML.includes(value)){
+            e.style.display = 'table-row'
+        }
+    })
+    if(value == null){
+        data.forEach(e => {
+            e.style.display = 'table-row'
+        })
+    }
+}
+
 $('button.adm-dashboard__btn-filter').click(e => {
     e.currentTarget.nextElementSibling.classList.add('active')
 })
@@ -96,4 +113,9 @@ $('.button.adm-dashboard__dialog-filter--no').click(e => {
 $('.button.adm-dashboard__dialog-filter--yes').click(e => {
     e.currentTarget.parentElement.parentElement.classList.remove('active')
     doSort()
+})
+
+$('input#filter-search').on('input', e => {
+    console.log(e.currentTarget.value)
+    doSearch(e.currentTarget.value)
 })

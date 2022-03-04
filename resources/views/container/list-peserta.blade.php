@@ -198,7 +198,9 @@
 @section('other')
     {{-- it can be modal, etc. --}}
     @if (Session::has('success'))
-        <x-alert.sukses title="{{ Session::get('success-title') }}" desc="{{ Session::get('success') }}" />
+        @if (Session::get('success') != [])
+            <x-alert.sukses title="{{ Session::get('success-title') }}" desc="{{ Session::get('success') }}" />
+        @endif
     @endif
 
     @if (Session::has('error'))

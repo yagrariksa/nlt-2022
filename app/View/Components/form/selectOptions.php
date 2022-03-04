@@ -19,6 +19,7 @@ class selectOptions extends Component
         $this->label = $label;
         $this->value = $value;
         $this->options = explode(",", $options);
+        // $this->options = $options;
     }
 
     /**

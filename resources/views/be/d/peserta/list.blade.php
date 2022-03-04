@@ -5,7 +5,9 @@
 ]) }}">tambah peserta</a>
 
 @if (Session::has('success'))
-    <span class="error">{{ Session::get('success') }}</span>
+    @if (Session::get('success') != [])
+        <span class="error">{{ Session::get('success') }}</span>
+    @endif
 @endif
 
 <table>

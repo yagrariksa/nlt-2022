@@ -25,6 +25,8 @@
 
 @section('other')
     @if (Session::has('success'))
-        <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success') }}" />
+        @if (Session::get('success') != [])
+            <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success') }}" />
+        @endif
     @endif
 @endsection

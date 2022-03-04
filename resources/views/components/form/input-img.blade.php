@@ -7,7 +7,7 @@
         </div>
     </div>
     <input type="file" accept="image/png, image/jpeg" name="{{ $id }}" id="{{ $id }}"
-        value="{{ $value }}" />
+        value="{{ $value ?? '' }}" />
     <label for="input" class="form-group__control-label">{{ $label }}</label>
     <i class="form-group__bar"></i>
     @if ($errors->has($id))

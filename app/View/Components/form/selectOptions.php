@@ -18,7 +18,7 @@ class selectOptions extends Component
         $this->class = $class;
         $this->label = $label;
         $this->value = $value;
-        $this->options = json_decode($options, true);
+        $this->options = explode(",", $options);
     }
 
     /**

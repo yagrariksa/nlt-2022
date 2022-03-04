@@ -11,12 +11,6 @@
         @csrf
         <div class="reset-pass__top">
             <h2>Reset Password</h2>
-            {{-- <x-form.select-options id="univ" label="Universitas" options='{
-                        "1":"Universitas Airlangga",
-                        "2":"Universitas Brawijaya",
-                        "3":"Universitas Indonesia",
-                        "4":"Universitas Bojonegoro"
-                    }' class="" /> --}}
             <x-form.input-text id="univ" label="Universitas Email Spesial" />
             <x-form.input-text id="email" label="Email Ketua" />
             <x-form.input-text id="nama" label="Nama Ketua" />

@@ -2163,15 +2163,16 @@ var doSearch = function doSearch(value) {
   data.forEach(function (e) {
     e.style.display = 'none';
   });
-  data.forEach(function (e) {
-    if (e.innerHTML.includes(value)) {
-      e.style.display = 'table-row';
-    }
-  });
 
   if (value == null) {
     data.forEach(function (e) {
       e.style.display = 'table-row';
+    });
+  } else {
+    data.forEach(function (e) {
+      if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+        e.style.display = 'table-row';
+      }
     });
   }
 };

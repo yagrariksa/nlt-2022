@@ -89,14 +89,15 @@ const doSearch = (value) => {
     data.forEach(e => {
         e.style.display = 'none'
     });
-    data.forEach(e => {
-        if(e.innerHTML.includes(value)){
-            e.style.display = 'table-row'
-        }
-    })
-    if(value == null){
+    if (value == null) {
         data.forEach(e => {
             e.style.display = 'table-row'
+        })
+    } else {
+        data.forEach(e => {
+            if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+                e.style.display = 'table-row'
+            }
         })
     }
 }

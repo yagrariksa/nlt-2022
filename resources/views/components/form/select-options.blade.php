@@ -1,5 +1,5 @@
 <div
-    class="form-group form-group--select{{ $class }}@if ($errors->has($id)) 
+    class="form-group form-group--select {{ $class ?? '' }} @if ($errors->has($id)) 
         has-error 
     @endif @if ($value != '')
         readonly

@@ -1,4 +1,4 @@
-<div class="form-group{{ $class }}@if ($errors->has($id)) has-error @endif">
+<div class="form-group {{ $class ?? ''}} @if ($errors->has($id)) has-error @endif">
     <input type="text" name="{{ $id }}" id="{{ $id }}" value="{{ $value }}"
         {{ $attr }} />
     <label for="{{ $id }}" class="form-group__control-label">{{ $label }}</label>

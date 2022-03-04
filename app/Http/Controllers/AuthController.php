@@ -89,7 +89,7 @@ class AuthController extends Controller
         Peserta::create([
             'nama' => $request->nama,
             'user_id' => $u->id,
-            'jabatan' => 'ketua',
+            'jabatan' => 'Representative AMSA Universitas',
             'handphone' => $request->handphone,
             'foto_url' => $foto_url,
             'ktp_url' => '$ktp_url',

@@ -77,6 +77,10 @@
             background-color: $rich-black;
         }
     }
+
+    &--sm {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -85,6 +89,10 @@
         &__table-head,
         &__table-container {
             display: none;
+        }
+
+        &--sm {
+            display: unset;
         }
     }
 }

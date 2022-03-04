@@ -143,7 +143,7 @@
                             'uid' => $p->uid,
                         ]) }}"
                             class="card__btn card__btn--view"><img src="{{ url('assets/img/view-details.svg') }}"> LIHAT
-                            KTP & PAS FOTO</a>
+                            PAS FOTO</a>
                         @if ($p->jabatan != 'Representative AMSA Universitas')
                             <button class="card__btn card__btn--delete"><img src="{{ url('assets/img/delete.svg') }}">
                                 HAPUS</button>

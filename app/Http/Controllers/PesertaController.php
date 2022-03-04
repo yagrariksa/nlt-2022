@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PesertaController extends Controller
 {
@@ -260,9 +261,14 @@ class PesertaController extends Controller
     protected function d_action_edit_peserta(Request $request, $uid)
     {
         // dd($request->all());
+        $p = Peserta::where('uid', $uid)->first();
 
         $rules = [
-            'email' => 'required|email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('pesertas')->ignore($p->id)
+            ],
             'nama' => 'required|string|min:5',
             'jabatan' => 'required',
             'handphone' => 'required',
@@ -271,7 +277,6 @@ class PesertaController extends Controller
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
 
-        $p = Peserta::where('uid', $uid)->first();
         if (!$p) {
             # code...
         }

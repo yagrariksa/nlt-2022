@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PesertaExport;
 use App\Models\Peserta;
-use App\Models\TravelDatang;
-use App\Models\TravelPergi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -24,12 +24,19 @@ class AdminController extends Controller
             case 'peserta':
                 if ($univ) {
                     return $this->a_view_list_peserta_by_univ($univ);
-                } else if($uid) {
+                } else if ($uid) {
                     return $this->a_view_detail_peserta($uid);
-                }else {
+                } else {
                     return $this->a_view_list_peserta_all();
                 }
                 break;
+
+            case 'excel':
+                if ($univ) {
+                    return $this->a_excel_peserta_by_univ($univ);
+                } else {
+                    return $this->a_excel_peserta_all();
+                }
 
             default:
                 return $this->a_view_list_univ($request);
@@ -52,10 +59,16 @@ class AdminController extends Controller
     protected function a_view_list_peserta_by_univ($univ)
     {
         $data = User::with(['peserta'])->where('email', $univ)->first();
+        $univ = $data->univ;
+        $akronim = $data->akronim;
+        $email = $data->email;
         $data = $data->peserta;
         // return view('be.a.list-peserta', [
         return view('container.admin.list-peserta-univ', [
-            'data' => $data
+            'data' => $data,
+            'univ' => $univ,
+            'akronim' => $akronim,
+            'email' => $email
         ]);
     }
 
@@ -88,4 +101,17 @@ class AdminController extends Controller
     //     $data2 = TravelPergi::get();
     //     return 'list travel all';
     // }
+
+    protected function a_excel_peserta_by_univ($univ)
+    {
+        
+        $u = User::where('email', $univ)->first();
+        return Excel::download(new PesertaExport($univ), 'Response.xlsx');
+        // return Excel::download(new PesertaExport($univ), $u->akronim . '_Peserta_' . date('H-i_d-M') . '.xlsx');
+    }
+
+    protected function a_excel_peserta_all()
+    {
+        return Excel::download(new PesertaExport('ALL'), 'all-data_Peserta_' . date('H-i_d-M') . '.xlsx');
+    }
 }

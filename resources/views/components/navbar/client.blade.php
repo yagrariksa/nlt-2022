@@ -20,7 +20,7 @@
                     'object' => 'peserta',
                 ]) }}"
                     class="nav__item" id="nav__item--peserta">LIST PESERTA <span></span></a>
-                <a href="{{ route('souvenir', [
+                <a href="{{ route('absensi', [
                     'mode' => 'list',
                 ]) }}"
                     class="nav__item" id="nav__item--absensi">ABSENSI <span></span></a>
@@ -30,7 +30,7 @@
                     class="nav__item" id="nav__item--souvenir">SOUVENIR <span></span></a>
                 {{-- <a href="" class="nav__item" id="nav__item--about">ABOUT <span></span></a> --}}
             </div>
-            <h4 class="nav__profile">Halo, UNAIR</h4>
+            <h4 class="nav__profile">Halo, {{Auth::user()->akronim}}</h4>
             <div class="nav__dropdown">
                 <a href="{{ route('akun.setting') }}" class="nav__item" id="nav__item--password"">UBAH PASSWORD</a>
                 <a href=" {{ route('logout') }}" class="   nav__item logout">LOGOUT</a>

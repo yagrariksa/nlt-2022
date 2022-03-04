@@ -36,7 +36,7 @@ class SouvenirController extends Controller
         }
     }
 
-    protected function d_view_list_souvenir()
+protected function d_view_list_souvenir()
     {
         // return view('be.d.souvenir.list');
         return view('container.list-souvenir');

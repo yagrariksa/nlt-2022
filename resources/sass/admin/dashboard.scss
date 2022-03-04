@@ -3,9 +3,24 @@
 }
 
 .adm-dashboard {
+
     &__title {
         margin-top: 4rem;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    &__filter-div {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: .7rem;
+        justify-content: flex-end;
+
+        input {
+            border-radius: 100rem;
+            padding: .5rem 1rem;
+            outline: none;
+            border: 1px solid black;
+        }
     }
 }
 

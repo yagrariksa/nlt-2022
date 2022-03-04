@@ -39,6 +39,7 @@ class AuthController extends Controller
 
     public function action_regist(Request $request)
     {
+        // dd($request->all());
         if (User::where('email', $request['email-univ'])->first()) {
             // bring it to login with message
             return redirect()->route('login')->with([
@@ -49,7 +50,7 @@ class AuthController extends Controller
         }
 
         $rules = [
-            'email' => 'required|email',
+            'email' => 'required|email|unique:App\Models\Peserta,email',
             'univ' => 'required',
             'email-univ' => 'required',
             'nama' => 'required|string',
@@ -190,6 +191,9 @@ class AuthController extends Controller
 
     public function mahavira_view_login()
     {
+        if(Auth::user()){
+            Auth::logout();
+        }
         if (Session::has('admin') && Session::get('admin') == true) {
             return redirect()->route('a.peserta');
         }

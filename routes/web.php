@@ -70,6 +70,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [SouvenirController::class, 'd_action']);
         Route::delete('/', [SouvenirController::class, 'd_action']);
     });
+    Route::get('absensi', function(){
+        return view('container.list-absensi');
+    })->name('absensi');
 
     Route::name('akun.setting')->prefix('setting')->group(function () {
         // view account settings

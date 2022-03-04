@@ -182,10 +182,10 @@
             @endforeach
         </div>
         <div class="list-peserta__sort-add">
-            <div class="list-peserta__sort">
+            {{-- <div class="list-peserta__sort">
                 <h4>A - Z</h4>
                 <img src="{{ url('assets/img/sort.svg') }}" alt="" class="">
-            </div>
+            </div> --}}
             <a href="{{ route('peserta', [
                 'mode' => 'add',
                 'object' => 'peserta',

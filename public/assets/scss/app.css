@@ -1476,6 +1476,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   left: 1.75rem;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
 }
 .list-peserta__sort-add > * {

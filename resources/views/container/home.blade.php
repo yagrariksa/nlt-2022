@@ -92,7 +92,8 @@
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
             <h4 class="guideline__desc">
                 For more details and requirements of MAHAVIRA 2022, please refer to this guideline!
-                <a href="#" class="button btn-primary guideline__btn">DOWNLOAD GUIDELINE</a>
+                <a href="{{ url('https://drive.google.com/file/d/1LBbvvln-tWASnWQ4gQLhQmxnoVXBGPRr/view?usp=sharing') }}"
+                    class="button btn-primary guideline__btn">DOWNLOAD GUIDELINE</a>
             </h4>
         </div>
         <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img">
@@ -124,9 +125,10 @@
         <h1 class="xl video__title--sm">Check Our Video</h1>
         <div class="video__container">
             <h1 class="video__title">Check Our <br>Profile Video!</h1>
-            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn">CLICK HERE</a>
-            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn--sm"><img
-                    src="{{ url('assets/img/play.svg') }}" alt=""></a>
+            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn" target="_blank"
+                rel="noopener noreferrer">CLICK HERE</a>
+            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn--sm" target="_blank"
+                rel="noopener noreferrer"><img src="{{ url('assets/img/play.svg') }}" alt=""></a>
         </div>
     </div>
 

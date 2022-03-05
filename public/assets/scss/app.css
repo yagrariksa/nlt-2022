@@ -2463,9 +2463,15 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   gap: 1rem;
 }
+.footer__desc--item svg {
+  width: 2rem;
+}
 .footer__desc a {
   text-decoration: none;
   color: #001219;
+}
+.footer__desc a:hover {
+  color: #E3CE8F;
 }
 .footer img {
   border-radius: 16px;
@@ -2567,6 +2573,14 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .video__container {
     height: 420px;
     padding: 0 5rem;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    gap: 5rem;
+  }
+  .footer img {
+    display: none;
   }
 }
 @media screen and (max-width: 767.9px) {

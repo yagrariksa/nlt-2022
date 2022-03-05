@@ -382,11 +382,19 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+
+            svg {
+                width: 2rem;
+            }
         }
 
         a {
             text-decoration: none;
             color: $rich-black;
+
+            &:hover {
+                color: $flax;
+            }
         }
     }
 
@@ -530,6 +538,17 @@
         &__container {
             height: 420px;
             padding: 0 5rem;
+        }
+    }
+
+    .footer {
+        &__content {
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        img {
+            display: none;
         }
     }
 }

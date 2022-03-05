@@ -12,9 +12,8 @@ class Peserta extends Model
     protected $table = 'pesertas';
 
     protected $fillable = [
-        'nama', 'jabatan', 'handphone',
-        'foto_url', 'ktp_url', 'alergi', 'vegan',
-        'user_id', 'travel_id',  'city_tour'
+        'nama', 'jabatan', 'handphone', 'line',
+        'foto_url', 'user_id',  'uid', 'email',
     ];
 
     public function univ()
@@ -22,13 +21,8 @@ class Peserta extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function datang()
+    public function souvenir()
     {
-        return $this->hasOne(TravelDatang::class, 'peserta_id', 'id');
-    }
-
-    public function pergi()
-    {
-        return $this->hasOne(TravelPergi::class, 'peserta_id', 'id');
+        return $this->hasMany(Souvenir::class, 'peserta_id', 'id');
     }
 }

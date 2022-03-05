@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'ketua',
         'email',
+        'univ',
         'password',
+        'akronim'
     ];
 
     /**
@@ -47,8 +49,9 @@ class User extends Authenticatable
         return $this->hasMany(Peserta::class, 'user_id', 'id');
     }
 
-    public function travel()
+    public function jumlahPeserta()
     {
-        return $this->hasMany(Travel::class, 'user_id', 'id');
+        return sizeof($this->peserta);
     }
+
 }

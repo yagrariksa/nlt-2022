@@ -1,0 +1,133 @@
+.dialog {
+    width: 370px;
+    padding: 32px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    z-index: 9;
+    border-radius: 32px;
+    background-color: $white;
+    @include dialog-shadow;
+
+    &__title,
+    &__message {
+        text-align: center;
+    }
+
+    &__title {
+        font-family: $inter;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: $mahogany;
+
+        &.blue {
+            color: $blue-sapphire;
+        }
+    }
+
+    &__message {
+        color: $rich-black-60;
+    }
+
+    &__btn {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__btn-yes {
+        width: 100%;
+        border-radius: 1rem;
+        background-color: $rich-black;
+        color: $white;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: $flax;
+        }
+    }
+
+    &__btn-no {
+        width: 100%;
+        border-radius: 1rem;
+        background-color: transparent;
+        outline: 3px solid transparent;
+        color: $rich-black-60;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            color: $mahogany;
+            outline: 3px solid $mahogany;
+        }
+    }
+
+    &__bg {
+        display: none;
+    }
+
+    &__filter {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &--quest-box {
+            display: flex;
+            flex-direction: column;
+            gap: .1rem;
+        }
+
+        &--radio {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+    }
+
+    &.active {
+        display: flex;
+        animation: fadein .2s ease-in-out;
+
+        +.dialog__bg {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: unset;
+            z-index: 8;
+            background-color: rgba($rich-black, 24%);
+            animation: fadein .2s ease-in-out;
+
+        }
+    }
+
+
+    @media screen and (max-width: 767.9px) {
+        gap: 16px;
+
+        &__message {
+            margin-bottom: 16px;
+        }
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

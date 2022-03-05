@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/assets/img
+/public/assets/json
 /storage/*.key
 /vendor
 .env
@@ -14,5 +15,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-
-/resources/views/test.blade.php

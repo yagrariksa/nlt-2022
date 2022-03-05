@@ -2054,6 +2054,297 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/add-edit-peserta.js":
+/*!******************************************!*\
+  !*** ./resources/js/add-edit-peserta.js ***!
+  \******************************************/
+/***/ (() => {
+
+$('.add-edit-peserta__buttons a').click(function (e) {
+  e.preventDefault();
+  $('.add-edit-peserta__dialog')[0].classList.add('active');
+});
+$('.add-edit-peserta__batal').click(function () {
+  $('.add-edit-peserta__dialog')[0].classList.remove('active');
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/filter.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/filter.js ***!
+  \**************************************/
+/***/ (() => {
+
+// global var
+var ascending = true;
+var columnSort = 'univ';
+var asli = null;
+var tbody = null; // clone tbody Node
+
+if (window.location.search == '?univ=list') {
+  asli = $('#tableAdmDashboard tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmDashboard tbody');
+} else if (window.location.search == '?object=peserta') {
+  asli = $('#tableAdmListPesertaAll tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmListPesertaAll tbody');
+} else if (window.location.search == '?object=peserta&mode=tampilan%20penuh') {
+  asli = $('#tableAdmListPesertaAllFull tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmListPesertaAllFull tbody');
+} // select tr
+
+
+asli = asli.querySelectorAll('tr'); // nodelist to array
+
+asli = Array.from(asli);
+var manipulate = Array.from(asli); // function listener
+
+var doSort = function doSort() {
+  ascending = $('#select-column-sorter-ascending')[0].value == 'A-Z' ? true : false;
+  columnSort = $('#select-column-sorter-column')[0].value;
+  console.log(ascending);
+  console.log(columnSort);
+
+  switch (columnSort) {
+    case 'Nama Universitas':
+      sortByUniv();
+      break;
+
+    case 'Jumlah Peserta':
+      sortByJml();
+      break;
+
+    case 'Nama':
+      sortByName();
+      break;
+
+    case 'Asal Universitas':
+      sortByUnivPAll();
+      break;
+
+    case 'Jabatan':
+      sortByJabatan();
+      break;
+
+    default:
+      alert('default');
+      break;
+  }
+}; // replace data
+
+
+var replaceTbody = function replaceTbody(data) {
+  tbody.innerHTML = '';
+
+  if (ascending) {
+    data.forEach(function (e) {
+      tbody.appendChild(e);
+    });
+  } else {
+    for (var i = data.length - 1; i >= 0; i--) {
+      data[i].classList.add("bruh-".concat(i));
+      tbody.appendChild(data[i]);
+    }
+  }
+};
+
+var resetSort = function resetSort() {
+  tbody.innerHTML = '';
+  asli.forEach(function (e) {
+    tbody.appendChild(e);
+  });
+}; // sort
+
+
+var sortByUniv = function sortByUniv() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__univ');
+    var bb = b.querySelector('.adm-table__univ');
+    console.log('sort by univ');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmDashboard');
+};
+
+var sortByJml = function sortByJml() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__peserta');
+    var bb = b.querySelector('.adm-table__peserta');
+    return parseInt(aa.innerHTML) - parseInt(bb.innerHTML);
+  });
+  replaceTbody(manipulate, 'tableAdmDashboard');
+};
+
+var sortByName = function sortByName() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__nama');
+    var bb = b.querySelector('.adm-table__nama');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
+};
+
+var sortByUnivPAll = function sortByUnivPAll() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__univ');
+    var bb = b.querySelector('.adm-table__univ');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
+};
+
+var sortByJabatan = function sortByJabatan() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__jabatan');
+    var bb = b.querySelector('.adm-table__jabatan');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
+};
+
+var sortByPesertaName = function sortByPesertaName() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__nama');
+    var bb = b.querySelector('.adm-table__nama');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate);
+};
+
+var sortByPesertaUniv = function sortByPesertaUniv() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__univ');
+    var bb = b.querySelector('.adm-table__univ');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate);
+};
+
+var sortByPesertaJabatan = function sortByPesertaJabatan() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__jabatan');
+    var bb = b.querySelector('.adm-table__jabatan');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate);
+};
+
+var doSearch = function doSearch(value) {
+  var data = tbody.querySelectorAll('tr');
+  data.forEach(function (e) {
+    e.style.display = 'none';
+  });
+
+  if (value == null) {
+    data.forEach(function (e) {
+      e.style.display = 'table-row';
+    });
+  } else {
+    data.forEach(function (e) {
+      if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+        e.style.display = 'table-row';
+      }
+    });
+  }
+};
+
+$('button.adm-dashboard__btn-filter').click(function (e) {
+  console.log('ok');
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+$('.button.adm-dashboard__dialog-filter--no').click(function (e) {
+  e.currentTarget.parentElement.parentElement.classList.remove('active');
+  resetSort();
+});
+$('.button.adm-dashboard__dialog-filter--yes').click(function (e) {
+  e.currentTarget.parentElement.parentElement.classList.remove('active');
+  doSort();
+});
+$('input#filter-search').on('input', function (e) {
+  // console.log(e.currentTarget.value)
+  // console.log(e.currentTarget.attributes['aria-idtable'].value)
+  doSearch(e.currentTarget.value);
+});
+
+/***/ }),
+
+/***/ "./resources/js/alert.js":
+/*!*******************************!*\
+  !*** ./resources/js/alert.js ***!
+  \*******************************/
+/***/ (() => {
+
+$('.alert__close').click(function (e) {
+  e.target.parentElement.style.visibility = 'hidden';
+  e.target.parentElement.style.transform = 'translate(-50%, -50%)';
+  e.target.parentElement.style.opacity = 0;
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2063,6 +2354,22 @@ module.exports = {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./env */ "./resources/js/env.js");
+
+__webpack_require__(/*! ./alert */ "./resources/js/alert.js");
+
+__webpack_require__(/*! ./dialog */ "./resources/js/dialog.js");
+
+__webpack_require__(/*! ./navbar */ "./resources/js/navbar.js");
+
+__webpack_require__(/*! ./registrasi */ "./resources/js/registrasi.js");
+
+__webpack_require__(/*! ./list-peserta */ "./resources/js/list-peserta.js");
+
+__webpack_require__(/*! ./detail-peserta */ "./resources/js/detail-peserta.js");
+
+__webpack_require__(/*! ./add-edit-peserta */ "./resources/js/add-edit-peserta.js");
+
+__webpack_require__(/*! ./admin/filter */ "./resources/js/admin/filter.js");
 
 /***/ }),
 
@@ -2094,6 +2401,34 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/detail-peserta.js":
+/*!****************************************!*\
+  !*** ./resources/js/detail-peserta.js ***!
+  \****************************************/
+/***/ (() => {
+
+$('button.detail-peserta__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+
+/***/ }),
+
+/***/ "./resources/js/dialog.js":
+/*!********************************!*\
+  !*** ./resources/js/dialog.js ***!
+  \********************************/
+/***/ (() => {
+
+$('.dialog__bg').click(function () {
+  $('.dialog').map(function (x) {
+    if ($('.dialog')[x].classList.contains('active')) {
+      $('.dialog')[x].classList.remove('active');
+    }
+  });
+});
 
 /***/ }),
 
@@ -2131,49 +2466,45 @@ $('.btn-img').mouseout(function (e) {
   }
 }); // MANIPULATE INPUT FILE
 
-var inputFile = function inputFile(id) {
-  $('#' + id).change(function (e) {
+$('input[type="file"]').change(function (e) {
+  var id = e.target.id;
+  var str = e.target.files[0].name;
+  var n;
+
+  if (window.innerWidth < 425) {
+    n = 16;
+  } else if (window.innerWidth < 576) {
+    n = 20;
+  } else if (window.innerWidth < 992) {
+    n = 40;
+  } else if (window.innerWidth < 1200) {
+    n = 20;
+  } else {
+    n = 30;
+  }
+
+  str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
+  $('span[for=' + id + ']')[0].innerHTML = str;
+  window.addEventListener('resize', function () {
     var str = e.target.files[0].name;
     var n;
 
     if (window.innerWidth < 425) {
-      n = 25;
+      n = 16;
     } else if (window.innerWidth < 576) {
-      n = 30;
+      n = 20;
     } else if (window.innerWidth < 992) {
       n = 40;
     } else if (window.innerWidth < 1200) {
-      n = 60;
+      n = 20;
     } else {
-      n = 80;
+      n = 30;
     }
 
     str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
     $('span[for=' + id + ']')[0].innerHTML = str;
-    window.addEventListener('resize', function () {
-      var str = e.target.files[0].name;
-      var n;
-
-      if (window.innerWidth < 425) {
-        n = 25;
-      } else if (window.innerWidth < 576) {
-        n = 30;
-      } else if (window.innerWidth < 992) {
-        n = 40;
-      } else if (window.innerWidth < 1200) {
-        n = 60;
-      } else {
-        n = 80;
-      }
-
-      str = str.length > n ? str.substr(0, n - 1) + '&hellip;' : str;
-      $('span[for=' + id + ']')[0].innerHTML = str;
-    });
   });
-}; //usage :: 
-
-
-inputFile('upload-1'); // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
+}); // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
 
 window.addEventListener('resize', function () {
   if (window.innerWidth < 768) {
@@ -2233,6 +2564,12 @@ for (var i = 0; i < selectItem.length; i++) {
     e.stopPropagation();
     closeAllSelect(this);
     this.previousSibling.classList.toggle('form-group__select-hide');
+    this.classList.toggle('form-group__select-arrow-active');
+  });
+  $('.form-group__selected').keypress(function (e) {
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.previousSibling.classList.remove('form-group__select-hide');
     this.classList.toggle('form-group__select-arrow-active');
   });
 }
@@ -2301,6 +2638,351 @@ var checkChange = function checkChange() {
 checkChange();
 inputWillCHangeLabel.click(function (e) {
   checkChange();
+}); // TOGGLE VIEW INPUT PASSWORD 
+
+$('.form-group__see-password').click(function (e) {
+  var elm = e.currentTarget.previousElementSibling;
+
+  if (elm.type == "password") {
+    elm.type = "text";
+    e.currentTarget.classList.add('unsee');
+  } else {
+    elm.type = "password";
+    e.currentTarget.classList.remove('unsee');
+  }
+}); // ALL INPUT WHEN HAVE VALUE(s)
+
+$('input, textarea').change(function (e) {
+  if (e.target.value != "") {
+    e.target.classList.add('has-value');
+  } else {
+    e.target.classList.remove('has-value');
+  }
+});
+$('.form-group__selected').click(function (e) {
+  if (e.target.childNodes[0] != "") {
+    e.target.classList.add('has-value');
+  } else {
+    e.target.classList.remove('has-value');
+  }
+});
+$('input[type="file"]').change(function (e) {
+  if (e.target.value != "") {
+    e.target.nextElementSibling.classList.add('file-notnull');
+  }
+});
+$('.form-group--select.readonly input').map(function (x) {
+  $('.form-group--select.readonly input.form-group__selected')[x].classList.add('has-value');
+  $('.form-group--select.readonly input.form-group__selected')[x].value = $('.form-group--select.readonly select')[x].value;
+  $('.form-group--select.readonly input.form-group__selected')[x].setAttribute('readonly', true);
+});
+$('.form-group input[readonly]').map(function (x) {
+  $('.form-group input[readonly]')[x].classList.add('has-value');
+});
+$('.form-group input').map(function (x) {
+  if ($('.form-group input')[x].value != '') {
+    $('.form-group input')[x].classList.add('has-value');
+  }
+});
+$('.form-group__input-file .form-group__filename').map(function (x) {
+  if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
+    $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/list-peserta.js":
+/*!**************************************!*\
+  !*** ./resources/js/list-peserta.js ***!
+  \**************************************/
+/***/ (() => {
+
+// // SORTING DI LIST PESERTA
+// const List = require("list.js");
+var userList = new List('d-list-peserta', {
+  valueNames: ['list-peserta__nama', 'list-peserta__jabatan']
+}); // DIALOG DELETE
+
+$('button.list-peserta__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+$('button.card__btn--delete').click(function (e) {
+  e.currentTarget.nextElementSibling.classList.add('active');
+});
+$('.button.list-peserta__batal').click(function (e) {
+  e.currentTarget.parentElement.parentElement.classList.remove('active');
+});
+
+/***/ }),
+
+/***/ "./resources/js/navbar.js":
+/*!********************************!*\
+  !*** ./resources/js/navbar.js ***!
+  \********************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  $(".nav__burger").click(function (e) {
+    e.currentTarget.classList.toggle("active");
+    e.currentTarget.parentNode.nextElementSibling.classList.toggle("active");
+  });
+  $(".nav__profile").click(function (e) {
+    e.currentTarget.nextElementSibling.classList.toggle("active");
+  });
+});
+window.addEventListener('click', function (e) {
+  if ($('.nav__dropdown')[0].classList.contains('active') && e.target.className != 'nav__profile') {
+    $('.nav__dropdown')[0].classList.remove('active');
+  }
+});
+
+if (window.location.search == '?mode=list&object=peserta') {
+  $('#nav__item--peserta')[0].classList.add('active');
+  $('#nav__item--souvenir')[0].classList.remove('active');
+  $('#nav__item--absensi')[0].classList.remove('active');
+  $('#nav__item--password')[0].classList.remove('active');
+} else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list') {
+  $('#nav__item--peserta')[0].classList.remove('active');
+  $('#nav__item--souvenir')[0].classList.add('active');
+  $('#nav__item--absensi')[0].classList.remove('active');
+  $('#nav__item--password')[0].classList.remove('active');
+} else if (window.location.pathname == '/absensi') {
+  $('#nav__item--peserta')[0].classList.remove('active');
+  $('#nav__item--souvenir')[0].classList.remove('active');
+  $('#nav__item--absensi')[0].classList.add('active');
+  $('#nav__item--password')[0].classList.remove('active');
+} else if (window.location.pathname == '/setting') {
+  $('#nav__item--peserta')[0].classList.remove('active');
+  $('#nav__item--souvenir')[0].classList.remove('active');
+  $('#nav__item--absensi')[0].classList.remove('active');
+  $('#nav__item--password')[0].classList.add('active');
+} else if (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
+  $('#nav__item--a-peserta')[0].classList.add('active');
+  $('#nav__item--a-souvenir')[0].classList.remove('active');
+  $('#nav__item--a-absensi')[0].classList.remove('active');
+  $('#nav__item--a-univ')[0].classList.remove('active');
+} else if (window.location.pathname == '/mahavira' && window.location.search == '?univ=list') {
+  $('#nav__item--a-peserta')[0].classList.remove('active');
+  $('#nav__item--a-souvenir')[0].classList.remove('active');
+  $('#nav__item--a-absensi')[0].classList.remove('active');
+  $('#nav__item--a-univ')[0].classList.add('active');
+}
+
+/***/ }),
+
+/***/ "./resources/js/registrasi.js":
+/*!************************************!*\
+  !*** ./resources/js/registrasi.js ***!
+  \************************************/
+/***/ (() => {
+
+var dataUniv = {
+  0: {
+    univ: 'Universitas Sriwijaya',
+    akronim: 'UNSRI',
+    email: 'universitas_sriwijaya@nlt2022.com'
+  },
+  1: {
+    univ: 'Universitas Jambi',
+    akronim: 'UNJA',
+    email: 'universitas_jambi@nlt2022.com'
+  },
+  2: {
+    univ: 'Universitas Syiah Kuala',
+    akronim: 'USK',
+    email: 'universitas_syiah@nlt2022.com'
+  },
+  3: {
+    univ: 'Universitas Batam',
+    akronim: 'UNIBA',
+    email: 'universitas_batam@nlt2022.com'
+  },
+  4: {
+    univ: 'Universitas Muhammadiyah Palembang',
+    akronim: 'UMP',
+    email: 'muhammadiyah_palembang@nlt2022.com'
+  },
+  5: {
+    univ: 'Universitas Indonesia',
+    akronim: 'UI',
+    email: 'universitas_indonesia@nlt2022.com'
+  },
+  6: {
+    univ: 'Universitas Katolik Indonesia Atma Jaya',
+    akronim: 'UAJ',
+    email: 'atma_jaya@nlt2022.com'
+  },
+  7: {
+    univ: 'Universitas Kristen Krida Wacana',
+    akronim: 'UKRIDA',
+    email: 'krida_wacana@nlt2022.com'
+  },
+  8: {
+    univ: 'Universitas Tarumanagara',
+    akronim: 'UNTAR',
+    email: 'universitas_tarumanagara@nlt2022.com'
+  },
+  9: {
+    univ: 'Universitas Trisakti',
+    akronim: 'USAKTI',
+    email: 'universitas_trisakti@nlt2022.com'
+  },
+  10: {
+    univ: 'Universitas Pelita Harapan',
+    akronim: 'UPH',
+    email: 'pelita_harapan@nlt2022.com'
+  },
+  11: {
+    univ: 'Universitas Kristen Indonesia',
+    akronim: 'UKI',
+    email: 'universitas_kristen@nlt2022.com'
+  },
+  12: {
+    univ: 'Universitas Pembangunan Nasional Veteran Jakarta',
+    akronim: 'UPN',
+    email: 'upn_vj@nlt2022.com'
+  },
+  13: {
+    univ: 'Universitas Padjadjaran',
+    akronim: 'UNPAD',
+    email: 'universitas_padjadjaran@nlt2022.com'
+  },
+  14: {
+    univ: 'Universitas Jenderal Achmad Yani',
+    akronim: 'UNJANI',
+    email: 'unjani@nlt2022.com'
+  },
+  15: {
+    univ: 'Maranatha Christian University',
+    akronim: 'MCU',
+    email: 'mcu@nlt2022.com'
+  },
+  16: {
+    univ: 'Universitas Swadaya Gunung Jati',
+    akronim: 'UGJ',
+    email: 'swadaya_gunung_jati@nlt2022.com'
+  },
+  17: {
+    univ: 'Universitas Gadjah Mada',
+    akronim: 'UGM',
+    email: 'gadjah_mada@nlt2022.com'
+  },
+  18: {
+    univ: 'Universitas Sebelas Maret',
+    akronim: 'UNS',
+    email: 'sebelas_maret@nlt2022.com'
+  },
+  19: {
+    univ: 'Universitas Diponegoro',
+    akronim: 'UNDIP',
+    email: 'universitas_diponegoro@nlt2022.com'
+  },
+  20: {
+    univ: 'Universitas Palangka Raya',
+    akronim: 'UPR',
+    email: 'palangka_raya@nlt2022.com'
+  },
+  21: {
+    univ: 'Universitas Brawijaya',
+    akronim: 'UB',
+    email: 'universitas_brawijaya@nlt2022.com'
+  },
+  22: {
+    univ: 'Universitas Airlangga',
+    akronim: 'UNAIR',
+    email: 'universitas_airlangga@nlt2022.com'
+  },
+  23: {
+    univ: 'Universitas Hang Tuah',
+    akronim: 'UHT',
+    email: 'hang_tuah@nlt2022.com'
+  },
+  24: {
+    univ: 'Universitas Muhammadiyah Malang',
+    akronim: 'UMM',
+    email: 'muhammadiyah_malang@nlt2022.com'
+  },
+  25: {
+    univ: 'Universitas Jember',
+    akronim: 'JEMBER',
+    email: 'universitas_jember@nlt2022.com'
+  },
+  26: {
+    univ: 'Universitas Hasanuddin',
+    akronim: 'UNHAS',
+    email: 'universitas_hasanuddin@nlt2022.com'
+  },
+  27: {
+    univ: 'Universitas Muslim Indonesia',
+    akronim: 'UMI',
+    email: 'muslim_indonesia@nlt2022.com'
+  },
+  28: {
+    univ: 'Universitas Sam Ratulangi',
+    akronim: 'UNSRAT',
+    email: 'sam_ratulangi@nlt2022.com'
+  },
+  29: {
+    univ: 'Universitas Alkhairaat',
+    akronim: 'UNISA',
+    email: 'universitas_alkhairaat@nlt2022.com'
+  },
+  30: {
+    univ: 'Universitas Tadulako',
+    akronim: 'UNTAD',
+    email: 'universitas_tadulako@nlt2022.com'
+  },
+  31: {
+    univ: 'Universitas Pattimura',
+    akronim: 'UNPATTI',
+    email: 'universitas_pattimura@nlt2022.com'
+  },
+  32: {
+    univ: 'Universitas Muhammadiyah Makassar',
+    akronim: 'UNISMUH',
+    email: 'muhammadiya_makassar@nlt2022.com'
+  },
+  33: {
+    univ: 'Universitas Halu Oleo',
+    akronim: 'UHO',
+    email: 'halu_oleo@nlt2022.com'
+  },
+  34: {
+    univ: 'Universitas Bosowa',
+    akronim: 'UNIBOS',
+    email: 'universitas_bosowa@nlt2022.com'
+  },
+  35: {
+    univ: 'Universitas Khairun',
+    akronim: 'UNKHAIR',
+    email: 'universitas_khairun@nlt2022.com'
+  },
+  36: {
+    univ: 'Universitas Mataram',
+    akronim: 'UNRAM',
+    email: 'universitas_mataram@nlt2022.com'
+  },
+  37: {
+    univ: 'Universitas Islam Negeri Maulana Malik Ibrahim Malang',
+    akronim: 'UINMA',
+    email: 'uinma@nlt2022.com'
+  }
+};
+$('.form-group__select-items').click(function () {
+  var univ = $('#univ')[0].value;
+  var akronim, email;
+
+  for (var i = 0; i < 38; i++) {
+    if (univ == dataUniv[i].univ) {
+      akronim = dataUniv[i].akronim;
+      email = dataUniv[i].email;
+      break;
+    }
+  }
+
+  $('#email-univ')[0].value = email;
+  $('#akronim')[0].value = akronim;
 });
 
 /***/ }),

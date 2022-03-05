@@ -1,0 +1,97 @@
+.registrasi {
+    margin-top: 0;
+    padding: 4rem;
+    border-radius: 3rem;
+    @include box-shadow;
+
+    &__body {
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.3fr .7fr;
+        grid-template-areas:
+            'title title title title'
+            'form-left form-left form-right form-right'
+            'pass confirm-pass none none'
+            'empty empty to-masuk regis-btn';
+        column-gap: 2rem;
+    }
+
+    &__title {
+        grid-area: title;
+    }
+
+    &__form-left {
+        grid-area: form-left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__form-right {
+        grid-area: form-right;
+    }
+
+    &__password {
+        grid-area: pass;
+        align-self: flex-end;
+    }
+
+    &__confirm-password {
+        grid-area: confirm-pass;
+        align-self: flex-end;
+    }
+
+    &__to-masuk {
+        grid-area: to-masuk;
+        align-self: center;
+        text-align: end;
+        font-weight: 500;
+    }
+
+    &__submit {
+        grid-area: regis-btn;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (max-width: 991.9px) {
+    .registrasi {
+        form {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                'title'
+                'to-masuk'
+                'form-left'
+                'pass'
+                'confirm-pass'
+                'form-right'
+                'regis-btn';
+            gap: 0;
+        }
+
+        &__to-masuk {
+            margin-top: 1rem;
+            text-align: start;
+        }
+
+        &__submit {
+            margin-top: 2rem;
+        }
+    }
+}
+
+@media screen and (max-width: 575.9px) {
+    .registrasi {
+        margin-left: 1.75rem;
+        margin-right: 1.75rem;
+        width: calc(100% - 3.5rem);
+    }
+}

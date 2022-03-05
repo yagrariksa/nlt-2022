@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peserta;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PesertaController extends Controller
 {
@@ -18,6 +24,18 @@ class PesertaController extends Controller
         $uid = $request->query('uid');
 
         switch ($mode) {
+            case 'list':
+                switch ($object) {
+                    case 'peserta':
+                        return $this->d_view_list_peserta();
+                        break;
+
+                    default:
+                        // tampilkan list biasa
+                        return $this->d_view_default();
+                        break;
+                }
+                break;
             case 'edit':
                 if (!$uid) {
                     return $this->d_view_default();
@@ -25,10 +43,6 @@ class PesertaController extends Controller
                     switch ($object) {
                         case 'peserta':
                             return $this->d_view_edit_peserta($uid);
-                            break;
-
-                        case 'travel':
-                            return $this->d_view_edit_travel($uid);
                             break;
 
                         default:
@@ -41,14 +55,26 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
+                    // case 'dokumen':
+                    //     return $this->d_view_add_dokumen($uid);
+                    //     break;
+
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
                         break;
 
-                    case 'travel':
-                        return $this->d_view_add_travel($uid);
+                    default:
+                        // tampilkan list biasa
+                        return $this->d_view_default();
                         break;
+                }
+                break;
 
+            case 'detail':
+                switch ($object) {
+                    case 'peserta':
+                        return $this->d_view_detail_peserta($uid);
+                        break;
                     default:
                         // tampilkan list biasa
                         return $this->d_view_default();
@@ -65,27 +91,56 @@ class PesertaController extends Controller
 
     protected function d_view_default()
     {
-        return 'list peserta';
+        $listPeserta = Auth::user()->peserta;
+        // return view('be.d.peserta.list', [
+        return view('container.list-peserta', [
+            'data' => $listPeserta,
+        ]);
+    }
+
+    protected function d_view_list_peserta()
+    {
+        return $this->d_view_default();
+    }
+
+    protected function d_view_list_travel()
+    {
+
+        // $datang = User::with(['peserta','peserta.datang'])->find(Auth::user()->id);
+        // $datang = Auth::user()->peserta[0]->datang;
+        // dd($datang);
+        return view('be.d.travel.list');
     }
 
     protected function d_view_add_peserta()
     {
-        return 'add peserta';
+        // return view('be.d.peserta.add');
+        return view('container.add-peserta');
     }
 
     protected function d_view_edit_peserta($uid)
     {
-        return 'edit peserta - ' . $uid;
+        $p = Peserta::where('uid', $uid)->first();
+        // return view('be.d.peserta.edit', [
+        return view('container.edit-peserta', [
+            'data' => $p
+        ]);
     }
 
-    protected function d_view_add_travel()
+    public function d_view_add_dokumen($uid)
     {
-        return 'add travel';
+        $data = Peserta::where('uid', $uid)->first();
+        return view('be.d.peserta.add-dokumen', [
+            'data' => $data,
+        ]);
     }
 
-    protected function d_view_edit_travel($uid)
+    public function d_view_detail_peserta($uid)
     {
-        return 'edit travel - ' . $uid;
+        $p = Peserta::where('uid', $uid)->first();
+        return view('container.detail-peserta', [
+            'data' => $p
+        ]);
     }
 
     /**
@@ -102,40 +157,43 @@ class PesertaController extends Controller
         if (!$mode)
             return $this->d_action_default();
 
-        if ($mode == 'edit')
+        if ($mode == 'edit' | $mode == 'delete')
             if (!$uid)
                 return $this->d_action_default();
 
 
         switch ($mode) {
+            case 'delete':
+                switch ($object) {
+                    case 'peserta':
+                        return $this->d_action_delete_peserta($uid);
+                        break;
+
+                    default:
+                        return $this->error_page();
+                        break;
+                }
+                break;
             case 'edit':
-                if (!$uid) {
-                    return $this->error_page();
-                } else {
-                    switch ($object) {
-                        case 'peserta':
-                            return $this->d_view_edit_peserta($uid);
-                            break;
+                switch ($object) {
+                    case 'peserta':
+                        return $this->d_action_edit_peserta($request, $uid);
+                        break;
 
-                        case 'travel':
-                            return $this->d_view_edit_travel($uid);
-                            break;
-
-                        default:
-                            return $this->error_page();
-                            break;
-                    }
+                    default:
+                        return $this->error_page();
+                        break;
                 }
                 break;
 
             case 'add':
                 switch ($object) {
-                    case 'peserta':
-                        return $this->d_view_add_peserta($uid);
-                        break;
+                    // case 'dokumen':
+                    //     return $this->d_action_add_dokumen($request, $uid);
+                    //     break;
 
-                    case 'travel':
-                        return $this->d_view_add_travel($uid);
+                    case 'peserta':
+                        return $this->d_action_add_peserta($request);
                         break;
 
                     default:
@@ -155,25 +213,178 @@ class PesertaController extends Controller
         return 'list peserta';
     }
 
-    protected function d_action_add_peserta()
+    protected function d_action_add_peserta(Request $request)
     {
+        $rules = [
+            'email' => 'required|email',
+            'nama' => 'required|string',
+            'jabatan' => 'required',
+            'handphone' => 'required|min:10',
+            'pas' => 'required|file|mimes:png,jpg,jpeg',
+            'line' => 'required'
+        ];
+
+        Validator::make($request->all(), $rules, $messages = $this->msg)->validate();
+
+        $u = Auth::user();
+
+        if ($request->hasFile('pas')) {
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
+            $request->pas->storeAs('public', $foto_url);
+        }
+
+        Peserta::create([
+            'nama' => $request->nama,
+            'user_id' => $u->id,
+            'jabatan' => $request->jabatan,
+            'handphone' => $request->handphone,
+            'line' => $request->line,
+            'email' => $request->email,
+            'foto_url' => $foto_url,
+            'uid' => join('-', [
+                Str::random(10),
+                join('-', explode(" ", $request->nama))
+            ])
+        ]);
+
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta'
+        ])->with([
+            'success' => 'Anda berhasil menambahkan ' . $request->nama,
+            'success-title' => 'Berhasil Menambahkan Peserta!'
+        ]);
+
         return 'add peserta';
     }
 
-    protected function d_action_edit_peserta($uid)
+    protected function d_action_edit_peserta(Request $request, $uid)
     {
-        return 'edit peserta - ' . $uid;
+        // dd($request->all());
+        $p = Peserta::where('uid', $uid)->first();
+
+        $rules = [
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('pesertas')->ignore($p->id)
+            ],
+            'nama' => 'required|string|min:5',
+            'jabatan' => 'required',
+            'handphone' => 'required',
+            'line' => 'required',
+        ];
+
+        Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        if (!$p) {
+            # code...
+        }
+
+        if ($p->email != $request->email)
+            $p->email = $request->email;
+
+        if ($p->nama != $request->nama) {
+            $p->nama = $request->nama;
+
+            if ($p->jabatan == 'Representative AMSA Universitas') {
+                User::find(Auth::user()->id)->update([
+                    'ketua' => $request->nama
+                ]);
+            }
+        }
+
+        if ($p->jabatan != $request->jabatan)
+            $p->jabatan = $request->jabatan;
+
+        if ($p->handphone != $request->handphone)
+            $p->handphone = $request->handphone;
+
+        if ($request->pas) {
+            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
+            $request->pas->storeAs('public', $foto_url);
+            $p->foto_url = $foto_url;
+        }
+
+        $p->save();
+
+        return redirect()->route('peserta', [
+            'mode' => 'list',
+            'object' => 'peserta'
+        ])->with([
+            'success' => 'Anda berhasil memperbarui data ' . $p->nama,
+            'success-title' => 'Berhasil Memperbarui!'
+        ]);
+        // return 'edit peserta - ' . $uid;
     }
 
-    protected function d_action_add_travel()
+    protected function d_action_delete_peserta($uid)
     {
-        return 'add travel';
+        $p = Peserta::where('uid', $uid)->first();
+        if ($p->jabatan != 'Representative AMSA Universitas') {
+            $p->delete();
+            return redirect()->route('peserta', [
+                'mode' => 'list',
+                'object' => 'peserta'
+            ])->with([
+                'success' => 'Anda berhasil menghapus ' . $uid,
+                'success-title' => 'Berhasil Menghapus!'
+            ]);
+        }else{
+            return redirect()->route('peserta', [
+                'mode' => 'list',
+                'object' => 'peserta'
+            ])->with([
+                'error' => 'Anda tidak menghapus ' . $uid . ', karena Representative AMSA Universitas',
+                'error-title' => 'Gagal Menghapus!'
+            ]);
+        }
     }
 
-    protected function d_action_edit_travel($uid)
-    {
-        return 'edit travel - ' . $uid;
-    }
+    // protected function d_action_add_dokumen(Request $request, $uid)
+    // {
+    //     // dd($request);
+
+    //     $p = Peserta::where('uid', $uid)->first();
+
+    //     if ($request->doc_izin) {
+    //         $doc_izin_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_izin->extension();
+    //         $request->doc_izin->storeAs('public', $doc_izin_url);
+    //         $p->doc_izin = $doc_izin_url;
+    //     }
+
+    //     if ($request->doc_vaksin) {
+    //         $doc_vaksin_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_vaksin->extension();
+    //         $request->doc_vaksin->storeAs('public', $doc_vaksin_url);
+    //         $p->doc_vaksin = $doc_vaksin_url;
+    //     }
+
+    //     if ($request->doc_pernyataan) {
+    //         $doc_pernyataan_url = join("_", [
+    //             time(),
+    //             join('-', explode(' ', $p->nama)),
+    //             "surat_izin_orang_tua"
+    //         ])  . "." . $request->doc_pernyataan->extension();
+    //         $request->doc_pernyataan->storeAs('public', $doc_pernyataan_url);
+    //         $p->doc_pernyataan = $doc_pernyataan_url;
+    //     }
+
+    //     $p->save();
+
+    //     return redirect()->route('peserta', [
+    //         'mode' => 'add',
+    //         'object' => 'dokumen',
+    //         'uid' => $uid
+    //     ]);
+    // }
 
     protected function error_page()
     {

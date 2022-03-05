@@ -1,0 +1,16 @@
+[
+    {
+        "uid": "123-totebag",
+        "nama": "ToteBag",
+        "img": "https://nlt2022.com/assets/img/souvenir/123-totebag.png",
+        "desc": "halo halo halo\nbla bla bla\nhey hey hey",
+        "price": 123000
+    },
+    {
+        "uid": "345-t-shirt",
+        "nama": "T-Shirt",
+        "img": "https://nlt2022.com/assets/img/souvenir/345-t-shirt.png",
+        "desc": "halo halo halo\nbla bla bla\nhey hey hey",
+        "price": 45000
+    }
+]

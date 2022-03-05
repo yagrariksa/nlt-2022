@@ -1,0 +1,58 @@
+.reset-pass {
+    margin-top: 0;
+
+    form {
+        width: 100%;
+        max-width: 36rem;
+        min-height: calc(100vh - 8rem);
+        margin: 4rem auto;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+        border-radius: 3rem;
+        @include box-shadow;
+    }
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__lupa-password {
+        width: 100%;
+        margin-top: 2rem;
+        text-align: end;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__to-login {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 575.9px) {
+    .reset-pass {
+        form {
+            min-height: calc(100vh - 2rem);
+            padding: 2.3rem;
+            margin: 1rem auto;
+
+            h2 {
+                margin-top: 2.3rem;
+            }
+        }
+
+        &__bottom {
+            flex-direction: column-reverse;
+            justify-content: center;
+            gap: 2rem;
+        }
+    }
+}

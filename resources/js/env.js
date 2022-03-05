@@ -25,24 +25,24 @@ $('.btn-img').mouseout(e => {
 });
 
 // MANIPULATE INPUT FILE
-let inputFile = id => {
-    $('#' + id).change(e => {
+    $('input[type="file"]').change(e => {
+        let id = e.target.id;
         let str = e.target.files[0].name;
         let n;
         if (window.innerWidth < 425) {
-            n = 25;
+            n = 16;
         }
         else if (window.innerWidth < 576) {
-            n = 30;
+            n = 20;
         }
         else if (window.innerWidth < 992) {
             n = 40;
         }
         else if (window.innerWidth < 1200) {
-            n = 60;
+            n = 20;
         }
         else {
-            n = 80;
+            n = 30;
         }
         str = (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
         $('span[for=' + id + ']')[0].innerHTML = str;
@@ -51,27 +51,24 @@ let inputFile = id => {
             let str = e.target.files[0].name;
             let n;
             if (window.innerWidth < 425) {
-                n = 25;
+                n = 16;
             }
             else if (window.innerWidth < 576) {
-                n = 30;
+                n = 20;
             }
             else if (window.innerWidth < 992) {
                 n = 40;
             }
             else if (window.innerWidth < 1200) {
-                n = 60;
+                n = 20;
             }
             else {
-                n = 80;
+                n = 30;
             }
             str = (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
             $('span[for=' + id + ']')[0].innerHTML = str;
         })
     })
-};
-//usage :: 
-inputFile('upload-1') 
 
 // CHANGE INPUT FILE BUTTON IN WIDTH < 768PX
 window.addEventListener('resize', ()=> {
@@ -131,6 +128,12 @@ for (let i = 0; i < selectItem.length; i++) {
         e.stopPropagation();
         closeAllSelect(this);
         this.previousSibling.classList.toggle('form-group__select-hide');
+        this.classList.toggle('form-group__select-arrow-active');
+    });
+    $('.form-group__selected').keypress(function(e) {
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.previousSibling.classList.remove('form-group__select-hide');
         this.classList.toggle('form-group__select-arrow-active');
     });
 }
@@ -200,3 +203,62 @@ checkChange();
 inputWillCHangeLabel.click(e => {
 checkChange();
 });
+
+// TOGGLE VIEW INPUT PASSWORD 
+$('.form-group__see-password').click(e => {
+    let elm = e.currentTarget.previousElementSibling;
+    if (elm.type == "password") {
+        elm.type = "text";
+        e.currentTarget.classList.add('unsee');
+    } else {
+        elm.type = "password";
+        e.currentTarget.classList.remove('unsee');
+    }
+})
+
+// ALL INPUT WHEN HAVE VALUE(s)
+$('input, textarea').change(e => {
+    if (e.target.value != ""){
+        e.target.classList.add('has-value')
+    }
+    else {
+        e.target.classList.remove('has-value')
+    }
+})
+
+$('.form-group__selected').click(e => {
+    if (e.target.childNodes[0] != ""){
+        e.target.classList.add('has-value')
+    }
+    else {
+        e.target.classList.remove('has-value')
+    }
+})
+
+$('input[type="file"]').change(e => {
+    if (e.target.value != ""){
+        e.target.nextElementSibling.classList.add('file-notnull')
+    }
+})
+
+$('.form-group--select.readonly input').map(x => {
+    $('.form-group--select.readonly input.form-group__selected')[x].classList.add('has-value');
+    $('.form-group--select.readonly input.form-group__selected')[x].value = $('.form-group--select.readonly select')[x].value
+    $('.form-group--select.readonly input.form-group__selected')[x].setAttribute('readonly', true);
+})
+
+$('.form-group input[readonly]').map(x => {
+    $('.form-group input[readonly]')[x].classList.add('has-value')
+})
+
+$('.form-group input').map(x => {
+    if ($('.form-group input')[x].value != '') {
+        $('.form-group input')[x].classList.add('has-value');
+    }
+})
+
+$('.form-group__input-file .form-group__filename').map(x => {
+    if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
+        $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
+    }
+})

@@ -1,0 +1,303 @@
+.list-peserta {
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+    padding-top: 1rem;
+
+    &__body {
+        overflow: hidden;
+    }
+
+    &__lg {
+        width: 100%;
+    }
+
+    &__top {
+        width: 100%;
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__table-container {
+        width: 100%;
+        height: calc(100vh - 21rem);
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 0 0 16px 16px;
+        border: 1px solid $rich-black-10;
+    }
+
+    &__table-head {
+        width: 100%;
+        border-collapse: collapse;
+
+        th {
+            padding: 1.5rem 1rem;
+            background-color: $rich-black;
+
+            &:first-child {
+                border-top-left-radius: 1rem;
+            }
+
+            &:last-child {
+                border-top-right-radius: 1rem;
+            }
+
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                color: $white;
+            }
+        }
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td {
+            padding: 1.5rem 1rem;
+        }
+
+        tr {
+            border-bottom: .7px solid $rich-black-10;
+        }
+    }
+
+    &__aksi {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+    }
+
+    &__btn {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: .25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: .25rem;
+        cursor: pointer;
+
+        &--view {
+            background-color: $blue-sapphire;
+        }
+
+        &--delete {
+            background-color: $mahogany;
+        }
+
+        &--edit {
+            background-color: $gamboge;
+        }
+
+        &:hover {
+            background-color: $rich-black;
+        }
+
+        &:disabled {
+            opacity: .7;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+    }
+
+    &__sm {
+        display: none;
+    }
+
+    &__sort-add {
+        width: calc(100% - 3.5rem);
+        position: fixed;
+        bottom: 1.75rem;
+        left: 1.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+
+        >* {
+            height: 54px;
+            border-radius: 1rem;
+            padding: 16px;
+        }
+    }
+
+    &__sort {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $rich-black;
+
+        h4 {
+            color: $white;
+        }
+    }
+
+    &__add {
+        width: 54px;
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .list-peserta {
+        &__body {
+            overflow-y: auto;
+        }
+
+        &__lg {
+            display: none;
+        }
+
+        &__sm {
+            display: unset;
+
+            >h4 {
+                z-index: 2;
+                height: 5rem;
+                position: fixed;
+                top: 0;
+                left: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(-50%);
+            }
+        }
+
+
+        &__cards {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: .5rem;
+        }
+
+        &__card {
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            border-radius: 1rem;
+            background-color: $white;
+            @include box-shadow;
+        }
+
+        .card {
+            &__value-label {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    'label-1 value-1'
+                    'label-2 value-2'
+                    'label-3 value-3'
+                    'label-4 value-4';
+                gap: .5rem;
+            }
+
+            &__label {
+                font-weight: 500;
+                color: $rich-black-40;
+            }
+
+            &__value {
+                font-weight: 500;
+                text-align: end;
+                color: $rich-black;
+            }
+
+            &__label--jabatan {
+                grid-area: label-1;
+            }
+
+            &__value--jabatan {
+                grid-area: value-1;
+            }
+
+            &__label--email {
+                grid-area: label-2;
+            }
+
+            &__value--email {
+                grid-area: value-2;
+            }
+
+            &__label--notelp {
+                grid-area: label-3;
+            }
+
+            &__value--notelp {
+                grid-area: value-3;
+            }
+
+            &__label--line {
+                grid-area: label-4;
+            }
+
+            &__value--line {
+                grid-area: value-4;
+            }
+
+            &__buttons {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas:
+                    'view view'
+                    'delete edit';
+                gap: 8px;
+            }
+
+            &__btn {
+                width: 100%;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                border-radius: 50rem;
+                text-decoration: none;
+                color: $white;
+
+                &--delete {
+                    grid-area: delete;
+                    background-color: $mahogany;
+                }
+
+                &--edit {
+                    grid-area: edit;
+                    background-color: $gamboge;
+                }
+
+                &--view {
+                    grid-area: view;
+                    background-color: $blue-sapphire;
+                }
+
+                &:hover {
+                    background-color: $rich-black;
+                }
+
+                &:disabled {
+                    opacity: .7;
+
+                    &:hover {
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+    }
+}

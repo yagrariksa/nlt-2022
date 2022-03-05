@@ -27,6 +27,12 @@ class RedirectIfAuthenticated
             }
         }
 
+        if ($request->session()->has('admin')) {
+            if ($request->session()->get('admin')) {
+                return redirect()->route('a.login');
+            }
+        }
+
         return $next($request);
     }
 }

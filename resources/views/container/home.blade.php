@@ -88,7 +88,7 @@
 
     <div class="guideline">
         <div class="guideline__text">
-            <h1 class="xl guideline__title">Grab Our Guideline Book</h1>
+            <h1 class="xl guideline__title">Grab Our Guideline Book !</h1>
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
             <h4 class="guideline__desc">
                 For more details and requirements of MAHAVIRA 2022, please refer to this guideline!

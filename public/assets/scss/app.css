@@ -713,10 +713,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 @media screen and (max-width: 767.9px) {
   .alert {
-    max-width: 328px;
+    width: 28rem;
   }
   .alert__close {
     margin-left: 0;
+    justify-self: end;
   }
 }
 
@@ -878,7 +879,6 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   justify-content: space-between;
   background-color: #FFFFFF;
-  border-bottom: 1px solid #B3B8BA;
 }
 .nav__burger {
   cursor: pointer;
@@ -943,6 +943,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .nav__profile {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav__profile-img {
+  width: 1.3rem;
 }
 .nav__right-btn {
   display: flex;
@@ -1642,6 +1648,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .detail-peserta__img {
   height: 26vh;
   border-radius: 8px;
+  max-width: 40vw;
 }
 .detail-peserta__value-label {
   display: grid;
@@ -1748,10 +1755,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .detail-peserta__sm {
     display: flex;
+    min-height: 75vh;
   }
   .detail-peserta__img {
     width: 100%;
     height: auto;
+    max-width: none;
   }
 }
 

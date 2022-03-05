@@ -56,7 +56,7 @@ class AuthController extends Controller
             'nama' => 'required|string',
             'password' => 'required|min:8|confirmed',
             // 'confirm-password' => 'required|same',
-            'handphone' => 'required|min:10',
+            'handphone' => 'required|min:10|integer',
             // 'ktp' => 'required|file|mimes:png,jpg,jpeg',
             'pas' => 'required|file|mimes:png,jpg,jpeg',
             'line' => 'required'

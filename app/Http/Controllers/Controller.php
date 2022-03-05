@@ -18,6 +18,7 @@ class Controller extends BaseController
         'mimes' => 'file harus bertipe png, jpg, jpeg',
         'email' => 'kolom :attribute harus berupa email',
         'confirmed' => ':attribute tidak terkonfirmasi',
-        'unique' => ':attribute harus unik / :attribute telah terdaftar'
+        'unique' => ':attribute harus unik / :attribute telah terdaftar',
+        'integer' => 'harus berupa angka'
     ];
 }

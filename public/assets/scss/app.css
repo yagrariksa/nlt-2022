@@ -275,14 +275,14 @@ label {
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
-  background-image: url(/images/see.svg?7cc1c59bbae77854abfa83a016c3bdf7);
+  background-image: url(/images/see.svg?f196ee479a2c167cccfcf4424b486f18);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   transition: background-image 0.5s ease;
 }
 .form-group__see-password.unsee {
-  background-image: url(/images/unsee.svg?f46ac4b509b9917ec3348bf102c78421);
+  background-image: url(/images/unsee.svg?be6a9afb096d875d394992b24d0954b8);
 }
 .form-group__selected {
   font-size: 1.125rem;
@@ -306,7 +306,7 @@ label {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background-image: url(/images/dropdown-arrow.svg?662fe868c0cf0ed973372d0fb759b272);
+  background-image: url(/images/dropdown-arrow.svg?512ef9cca648640097afb8e35273d5d4);
   background-repeat: no-repeat;
   background-size: cover;
   transition: transform 0.3s ease-in-out 0s;
@@ -1384,7 +1384,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    background-image: url(/images/arrow-next.svg?165325e903f5ef48b77cf4d8e1891f37);
+    background-image: url(/images/arrow-next.svg?b9a1f393ea1e6e14abf477862ab4e95d);
     background-size: contain;
     background-repeat: no-repeat;
   }

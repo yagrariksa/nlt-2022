@@ -27,7 +27,7 @@
                 options='Universitas Sriwijaya,Universitas Jambi,Universitas Syiah Kuala,Universitas Batam,Universitas Muhammadiyah Palembang,Universitas Indonesia,Universitas Katolik Indonesia Atma Jaya,Universitas Kristen Krida Wacana,Universitas Tarumanagara,Universitas Trisakti,Universitas Pelita Harapan,Universitas Kristen Indonesia,Universitas Pembangunan Nasional Veteran Jakarta,Universitas Padjadjaran,Universitas Jenderal Achmad Yani,Maranatha Christian University,Universitas Swadaya Gunung Jati,Universitas Gadjah Mada,Universitas Sebelas Maret,Universitas Diponegoro,Universitas Palangka Raya,Universitas Brawijaya,Universitas Airlangga,Universitas Hang Tuah,Universitas Muhammadiyah Malang,Universitas Jember,Universitas Hasanuddin,Universitas Muslim Indonesia,Universitas Sam Ratulangi,Universitas Alkhairaat,Universitas Tadulako,Universitas Pattimura,Universitas Muhammadiyah Makassar,Universitas Halu Oleo,Universitas Bosowa,Universitas Khairun,Universitas Mataram,Universitas Islam Negeri Maulana Malik Ibrahim Malang'
                 class="" value="{{ Session::get('univ') ? Session::get('univ') : '' }}"
                 value="{{ old('univ') ? old('univ') : '' }}" />
-            <x-form.input-text id="email-univ" label="Email Unik Universitas"
+            <x-form.input-text id="email-univ" label="Email Unik Universitas (auto-fill ketika memilih univ)"
                 value="{{ old('email-univ') ? old('email-univ') : '' }}" attr="readonly" />
             <x-form.input-text id="akronim" label="akronim" value="{{ old('akronim') ? old('akronim') : '' }}"
                 class=" hidden" attr="readonly" />

@@ -69,10 +69,11 @@
     }
 
     @media screen and (max-width: 767.9px) {
-        max-width: 328px;
+        width: 28rem;
 
         &__close {
             margin-left: 0;
+            justify-self: end;
         }
     }
 }

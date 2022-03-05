@@ -28,6 +28,7 @@
     &__img {
         height: 26vh;
         border-radius: 8px;
+        max-width: 40vw;
     }
 
     &__value-label {
@@ -162,11 +163,13 @@
 
         &__sm {
             display: flex;
+            min-height: 75vh;
         }
 
         &__img {
             width: 100%;
             height: auto;
+            max-width: none;
         }
     }
 }

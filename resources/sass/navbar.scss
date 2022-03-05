@@ -19,7 +19,7 @@
         align-items: center;
         justify-content: space-between;
         background-color: $white;
-        border-bottom: 1px solid $rich-black-40;
+        // border-bottom: 1px solid $rich-black-40;
     }
 
     &__burger {
@@ -104,6 +104,13 @@
         cursor: pointer;
         // border: 2px outset $rich-black-40;
         // outline-offset: 2px;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        &-img {
+            width: 1.3rem;
+        }
     }
 
     &__right-btn {

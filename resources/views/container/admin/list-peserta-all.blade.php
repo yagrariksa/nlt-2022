@@ -9,6 +9,7 @@
     <div class="adm-dashboard__header">
         <h1 class="adm-dashboard__title">List Seluruh Peserta</h1>
         <div class="adm-dashboard__filter-div">
+            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
             <button class="adm-dashboard__excel" onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
                 <img src="{{ url('assets/img/excel.svg') }}" alt="">
                 DOWNLOAD EXCEL
@@ -20,9 +21,9 @@
                     <div class="dialog__filter--quest-box">
                         <h4>Urutkan Berdasarkan</h4>
                         <select name="" id="select-column-sorter">
-                            <option value="nama" selected>Nama</option>
-                            <option value="univ">Asal Universitas</option>
-                            <option value="jabatan">Jabatan</option>
+                            <option value="peserta-nama" selected>Nama Peserta</option>
+                            <option value="peserta-univ">Asal Universitas</option>
+                            <option value="peserta-jabatan">Jabatan</option>
                         </select>
                     </div>
                     <div class="dialog__filter--quest-box">
@@ -45,11 +46,6 @@
             <div class="dialog__bg"></div>
         </div>
     </div>
-    {{-- {{ $data->akronim }} --}}
-    {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
-    
-    <input type="text" class="adm-dashboard__input-search" id="filter-search"> --}}
-
     <table class="adm-table__table-head">
         <colgroup>
             <col span="1" style="width: 8%;">

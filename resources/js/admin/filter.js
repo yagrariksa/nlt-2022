@@ -18,13 +18,31 @@ const doSort = () => {
     ascending = $('#radio-ascending')[0].checked ? true : false
     columnSort = $('#select-column-sorter')[0].value
 
-    console.log(columnSort)
-    if (columnSort == 'univ') {
-        sortByUniv()
-    }
+    switch (columnSort) {
+        case 'univ':
+            sortByName()
+            break;
 
-    if (columnSort == 'jml') {
-        sortByJml()
+        case 'jml':
+            sortByJml()
+            break;
+
+        case 'peserta-nama':
+            sortByPesertaName()
+            break;
+
+
+        case 'peserta-univ':
+            sortByPesertaUniv()
+            break;
+
+        case 'peserta-jabatan':
+            sortByPesertaJabatan()
+            break;
+
+        default:
+            alert('default')
+            break;
     }
 
     if (columnSort == 'nama') {
@@ -138,6 +156,58 @@ const sortByJabatan = () => {
     })
     replaceTbody(manipulate, 'tableAdmListPesertaAll')
 }
+
+const sortByPesertaName = () => {
+
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__nama')
+        var bb = b.querySelector('.adm-table__nama')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate)
+}
+
+const sortByPesertaUniv = () => {
+
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__univ')
+        var bb = b.querySelector('.adm-table__univ')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate)
+}
+
+const sortByPesertaJabatan = () => {
+
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__jabatan')
+        var bb = b.querySelector('.adm-table__jabatan')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate)
+}
+
 
 const doSearch = (value) => {
     var data = tbody.querySelectorAll('tr')

@@ -2093,20 +2093,30 @@ var doSort = function doSort() {
   console.log(columnSort);
 
   if (columnSort == 'univ') {
-    sortByName();
+    sortByUniv();
   }
 
   if (columnSort == 'jml') {
     sortByJml();
   }
+
+  if (columnSort == 'nama') {
+    sortByName();
+  }
+
+  if (columnSort == 'univ') {
+    sortByUnivPAll();
+  }
+
+  if (columnSort == 'jabatan') {
+    sortByJabatan();
+  } // tambahin disini juga
+
 }; // replace data
 
 
-var tbody = document.querySelector('#tableAdmDashboard tbody');
-
-var replaceTbody = function replaceTbody(data) {
-  console.log(tbody);
-  console.log(data);
+var replaceTbody = function replaceTbody(data, idtable) {
+  var tbody = document.querySelector('#' + idtable + ' tbody');
   tbody.innerHTML = '';
 
   if (ascending) {
@@ -2129,8 +2139,7 @@ var resetSort = function resetSort() {
 }; // sort
 
 
-var sortByName = function sortByName() {
-  console.log('here univ');
+var sortByUniv = function sortByUniv() {
   manipulate.sort(function (a, b) {
     var aa = a.querySelector('.adm-table__univ');
     var bb = b.querySelector('.adm-table__univ');
@@ -2146,7 +2155,7 @@ var sortByName = function sortByName() {
 
     return 0;
   });
-  replaceTbody(manipulate);
+  replaceTbody(manipulate, 'tableAdmDashboard');
 };
 
 var sortByJml = function sortByJml() {
@@ -2155,7 +2164,61 @@ var sortByJml = function sortByJml() {
     var bb = b.querySelector('.adm-table__peserta');
     return parseInt(aa.innerHTML) - parseInt(bb.innerHTML);
   });
-  replaceTbody(manipulate);
+  replaceTbody(manipulate, 'tableAdmDashboard');
+};
+
+var sortByName = function sortByName() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__nama');
+    var bb = b.querySelector('.adm-table__nama');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
+};
+
+var sortByUnivPAll = function sortByUnivPAll() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__univ');
+    var bb = b.querySelector('.adm-table__univ');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
+};
+
+var sortByJabatan = function sortByJabatan() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__jabatan');
+    var bb = b.querySelector('.adm-table__jabatan');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate, 'tableAdmListPesertaAll');
 };
 
 var doSearch = function doSearch(value) {
@@ -2178,6 +2241,7 @@ var doSearch = function doSearch(value) {
 };
 
 $('button.adm-dashboard__btn-filter').click(function (e) {
+  console.log('ok');
   e.currentTarget.nextElementSibling.classList.add('active');
 });
 $('.button.adm-dashboard__dialog-filter--no').click(function (e) {

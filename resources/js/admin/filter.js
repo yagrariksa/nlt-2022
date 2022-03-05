@@ -20,20 +20,32 @@ const doSort = () => {
 
     console.log(columnSort)
     if (columnSort == 'univ') {
-        sortByName()
+        sortByUniv()
     }
 
     if (columnSort == 'jml') {
         sortByJml()
     }
 
+    if (columnSort == 'nama') {
+        sortByName()
+    }
+
+    if (columnSort == 'univ') {
+        sortByUnivPAll()
+    }
+
+    if (columnSort == 'jabatan') {
+        sortByJabatan()
+    }
+
+    // tambahin disini juga
+
 }
 
 // replace data
-const tbody = document.querySelector('#tableAdmDashboard tbody')
-const replaceTbody = (data) => {
-    console.log(tbody)
-    console.log(data)
+const replaceTbody = (data, idtable) => {
+    const tbody = document.querySelector('#' + idtable + ' tbody')
     tbody.innerHTML = ''
     if (ascending) {
         data.forEach(e => {
@@ -56,9 +68,7 @@ const resetSort = () => {
 
 
 // sort
-const sortByName = () => {
-    console.log('here univ')
-
+const sortByUniv = () => {
     manipulate.sort(function (a, b) {
         var aa = a.querySelector('.adm-table__univ')
         var bb = b.querySelector('.adm-table__univ')
@@ -72,16 +82,61 @@ const sortByName = () => {
         }
         return 0
     })
-    replaceTbody(manipulate)
+    replaceTbody(manipulate, 'tableAdmDashboard')
 }
 const sortByJml = () => {
     manipulate.sort(function (a, b) {
         var aa = a.querySelector('.adm-table__peserta')
         var bb = b.querySelector('.adm-table__peserta')
-
+        
         return parseInt(aa.innerHTML) - parseInt(bb.innerHTML)
     })
-    replaceTbody(manipulate)
+    replaceTbody(manipulate, 'tableAdmDashboard')
+}
+const sortByName = () => {
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__nama')
+        var bb = b.querySelector('.adm-table__nama')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate, 'tableAdmListPesertaAll')
+}
+const sortByUnivPAll = () => {
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__univ')
+        var bb = b.querySelector('.adm-table__univ')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate, 'tableAdmListPesertaAll')
+}
+const sortByJabatan = () => {
+    manipulate.sort(function (a, b) {
+        var aa = a.querySelector('.adm-table__jabatan')
+        var bb = b.querySelector('.adm-table__jabatan')
+
+        if (aa.innerHTML < bb.innerHTML) {
+            return -1
+        }
+        if (aa.innerHTML > bb.innerHTML) {
+            return 1
+        }
+        return 0
+    })
+    replaceTbody(manipulate, 'tableAdmListPesertaAll')
 }
 
 const doSearch = (value) => {
@@ -103,6 +158,7 @@ const doSearch = (value) => {
 }
 
 $('button.adm-dashboard__btn-filter').click(e => {
+    console.log('ok')
     e.currentTarget.nextElementSibling.classList.add('active')
 })
 

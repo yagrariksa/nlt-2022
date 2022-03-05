@@ -7,16 +7,16 @@
 
 @section('content')
     <h1 class="adm-dashboard__title">List Peserta</h1>
-    {{-- {{ $data->akronim }} --}}
-    {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
+    <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
     <div class="dialog">
         <h3 class="dialog__title">Urutkan Disini</h3>
         <div class="dialog__filter">
             <div class="dialog__filter--quest-box">
                 <h4>Urutkan Berdasarkan</h4>
                 <select name="" id="select-column-sorter">
-                    <option value="univ" selected>Nama Universitas</option>
-                    <option value="jml">Jumlah Peserta</option>
+                    <option value="nama" selected>Nama</option>
+                    <option value="univ">Asal Universitas</option>
+                    <option value="jabatan">Jabatan</option>
                 </select>
             </div>
             <div class="dialog__filter--quest-box">
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="dialog__bg"></div>
-    <input type="text" class="adm-dashboard__input-search" id="filter-search"> --}}
+    <input type="text" class="adm-dashboard__input-search" id="filter-search">
 
     <table class="adm-table__table-head">
         <colgroup>
@@ -69,7 +69,7 @@
         </thead>
     </table>
     <div class="adm-table__table-container">
-        <table class="adm-table__table list" id="tableAdmDashboard">
+        <table class="adm-table__table list" id="tableAdmListPesertaAll">
             <colgroup>
                 <col span="1" style="width: 8%;">
                 <col span="1" style="width: 50%;">
@@ -82,7 +82,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td class="adm-table__nama">{{ $p->nama }}</td>
                         <td class="adm-table__univ">{{ $p->univ->univ }}</td>
-                        <td class="adm-table__peserta">{{ $p->jabatan }}</td>
+                        <td class="adm-table__jabatan">{{ $p->jabatan }}</td>
                         {{-- <td>
                             <a class="adm-table__btn"
                                 href="{{ route('a.peserta', [

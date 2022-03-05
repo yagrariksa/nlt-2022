@@ -47,12 +47,13 @@ class AdminController extends Controller
     protected function a_view_list_univ(Request $request)
     {
         $data  = User::with('peserta')->get();
-
+        $jmlPeserta = Peserta::count();
         // dd($data);
         // dd($data);
         // return view('be.a.list-univ', [
         return view('container.admin.dashboard', [
-            'data' => $data
+            'data' => $data,
+            'jmlPeserta' => $jmlPeserta
         ]);
     }
 

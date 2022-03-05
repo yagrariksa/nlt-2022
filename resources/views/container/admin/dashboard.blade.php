@@ -58,7 +58,7 @@
                     </span>
                 </th>
                 <th><span>
-                        <span>Jumlah Peserta | <span class="color-champagne"> Total: 1328</span></span>
+                        <span>Jumlah Peserta | <span class="color-champagne"> Total: {{ $jmlPeserta }}</span></span>
                     </span>
                 </th>
                 <th></th>

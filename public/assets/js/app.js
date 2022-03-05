@@ -2090,14 +2090,31 @@ var manipulate = Array.from(asli); // function listener
 var doSort = function doSort() {
   ascending = $('#radio-ascending')[0].checked ? true : false;
   columnSort = $('#select-column-sorter')[0].value;
-  console.log(columnSort);
 
-  if (columnSort == 'univ') {
-    sortByName();
-  }
+  switch (columnSort) {
+    case 'univ':
+      sortByName();
+      break;
 
-  if (columnSort == 'jml') {
-    sortByJml();
+    case 'jml':
+      sortByJml();
+      break;
+
+    case 'peserta-nama':
+      sortByPesertaName();
+      break;
+
+    case 'peserta-univ':
+      sortByPesertaUniv();
+      break;
+
+    case 'peserta-jabatan':
+      sortByPesertaJabatan();
+      break;
+
+    default:
+      alert('default');
+      break;
   }
 }; // replace data
 
@@ -2154,6 +2171,60 @@ var sortByJml = function sortByJml() {
     var aa = a.querySelector('.adm-table__peserta');
     var bb = b.querySelector('.adm-table__peserta');
     return parseInt(aa.innerHTML) - parseInt(bb.innerHTML);
+  });
+  replaceTbody(manipulate);
+};
+
+var sortByPesertaName = function sortByPesertaName() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__nama');
+    var bb = b.querySelector('.adm-table__nama');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate);
+};
+
+var sortByPesertaUniv = function sortByPesertaUniv() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__univ');
+    var bb = b.querySelector('.adm-table__univ');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
+  });
+  replaceTbody(manipulate);
+};
+
+var sortByPesertaJabatan = function sortByPesertaJabatan() {
+  manipulate.sort(function (a, b) {
+    var aa = a.querySelector('.adm-table__jabatan');
+    var bb = b.querySelector('.adm-table__jabatan');
+
+    if (aa.innerHTML < bb.innerHTML) {
+      return -1;
+    }
+
+    if (aa.innerHTML > bb.innerHTML) {
+      return 1;
+    }
+
+    return 0;
   });
   replaceTbody(manipulate);
 };

@@ -88,7 +88,7 @@
 
     <div class="guideline">
         <div class="guideline__text">
-            <h1 class="xl guideline__title">Grab Our Guideline Book</h1>
+            <h1 class="xl guideline__title">Grab Our Guideline Book!</h1>
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
             <h4 class="guideline__desc">
                 For more details and requirements of MAHAVIRA 2022, please refer to this guideline!
@@ -124,8 +124,9 @@
         <h1 class="xl video__title--sm">Check Our Video</h1>
         <div class="video__container">
             <h1 class="video__title">Check Our <br>Profile Video!</h1>
-            <a href="#" class="button video__btn">CLICK HERE</a>
-            <a href="#" class="button video__btn--sm"><img src="{{ url('assets/img/play.svg') }}" alt=""></a>
+            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn">CLICK HERE</a>
+            <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn--sm"><img
+                    src="{{ url('assets/img/play.svg') }}" alt=""></a>
         </div>
     </div>
 
@@ -138,7 +139,31 @@
     </div>
 
     <div class="footer">
-        {{-- here --}}
+        <div class="footer__content">
+            <div class="footer__items">
+                <h3 class="footer__title">Visit</h3>
+                <div class="footer__desc">
+                    <div class="footer__desc--item">
+                        @include('components.svg.instagram')
+                        <a href="{{ url('https://www.instagram.com/amsaindonesia/') }}" target="_blank"
+                            rel="noopener noreferrer">amsaindonesia</a>
+                    </div>
+                    <div class="footer__desc--item">
+                        @include('components.svg.youtube')
+                        <a href="{{ url('https://amsaindonesia.org/amsa-indonesia/') }}" target="_blank"
+                            rel="noopener noreferrer">youtube.com/AMSAIndonesia</a>
+                    </div>
+                    <div class="footer__desc--item">
+                        @include('components.svg.web')
+                        <a href="{{ url('https://youtube.com/user/AMSAIndonesia') }}" target="_blank"
+                            rel="noopener noreferrer">amsaindonesia.org/amsa-indonesia/</a>
+                    </div>
+                </div>
+            </div>
+
+            <img src="{{ url('assets/img/footer-img.png') }}" alt="">
+        </div>
+        <h6 class="footer__copyright">AMSA UNAIR, 2022</h6>
     </div>
 @endsection
 

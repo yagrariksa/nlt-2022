@@ -9,11 +9,11 @@
     <div class="adm-dashboard__header">
         <h1 class="adm-dashboard__title">List Seluruh Peserta</h1>
         <div class="adm-dashboard__filter-div">
-            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
             <button class="adm-dashboard__excel" onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
                 <img src="{{ url('assets/img/excel.svg') }}" alt="">
                 DOWNLOAD EXCEL
             </button>
+            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
             <button class="btn-primary adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
             <div class="dialog">
                 <h3 class="dialog__title">Urutkan Disini</h3>

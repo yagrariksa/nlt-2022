@@ -11,6 +11,14 @@
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
+
+        .dialog {
+            gap: 0;
+
+            &__filter {
+                padding-bottom: 2rem;
+            }
+        }
     }
 
     &__title {
@@ -154,9 +162,19 @@
     }
 }
 
+@media screen and (max-width: 1400px) {
+    .adm-table {
+        &__table-container {
+            height: calc(100vh - 25.5rem);
+        }
+    }
+}
+
 @media screen and (max-width: 992px) {
     .adm-dashboard {
-        &__btn-filter {
+
+        &__btn-filter,
+        &__input-search {
             display: none;
         }
     }

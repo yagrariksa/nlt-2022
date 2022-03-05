@@ -1888,6 +1888,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: space-between;
   gap: 1rem;
 }
+.adm-dashboard__header .dialog {
+  gap: 0;
+}
+.adm-dashboard__header .dialog__filter {
+  padding-bottom: 2rem;
+}
 .adm-dashboard__title > span {
   font-size: 1.7rem;
   opacity: 0.7;
@@ -2006,8 +2012,13 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   font-weight: 700;
 }
 
+@media screen and (max-width: 1400px) {
+  .adm-table__table-container {
+    height: calc(100vh - 25.5rem);
+  }
+}
 @media screen and (max-width: 992px) {
-  .adm-dashboard__btn-filter {
+  .adm-dashboard__btn-filter, .adm-dashboard__input-search {
     display: none;
   }
 
@@ -2415,7 +2426,52 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: center;
   gap: 2rem;
   border-radius: 48px;
-  background-color: #B3B8BA;
+  background-image: url(/images/video-img.jpg?ac5744466a77518ea99ad93d6bfbf4e0);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.footer {
+  width: 100%;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rem;
+}
+.footer__content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4rem;
+}
+.footer__desc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.footer__desc--item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.footer__desc a {
+  text-decoration: none;
+  color: #001219;
+}
+.footer img {
+  border-radius: 16px;
+}
+.footer__copyright {
+  color: #667175;
 }
 
 @media screen and (max-width: 1400px) {
@@ -2498,7 +2554,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     display: none;
   }
   .guideline__img--sm {
-    width: 165%;
+    width: 155%;
     margin-left: -70px;
     display: unset;
     filter: drop-shadow(0px 10px 80px rgba(0, 0, 0, 0.1));

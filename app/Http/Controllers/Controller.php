@@ -17,6 +17,7 @@ class Controller extends BaseController
         'min' => 'minimal :min karakter',
         'mimes' => 'file harus bertipe png, jpg, jpeg',
         'email' => 'kolom :attribute harus berupa email',
-        'confirmed' => ':attribute tidak terkonfirmasi'
+        'confirmed' => ':attribute tidak terkonfirmasi',
+        'unique' => ':attribute harus unik / :attribute telah terdaftar'
     ];
 }

@@ -1881,7 +1881,19 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 
 .adm-dashboard__title {
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
+}
+.adm-dashboard__filter-div {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.7rem;
+  justify-content: flex-end;
+}
+.adm-dashboard__filter-div input {
+  border-radius: 100rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid black;
 }
 
 .adm-table__table-container {

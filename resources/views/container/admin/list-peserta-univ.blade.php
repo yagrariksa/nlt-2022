@@ -6,7 +6,15 @@
 @section('addclass', 'adm-dashboard')
 
 @section('content')
-    <h1 class="adm-dashboard__title">List Peserta Universitas (akronim) </h1>
+    <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span style="font-size: 1.7rem;
+                opacity: .7;
+                font-weight: 400;">{{ $univ }}</span>
+    </h1>
+    <div class="adm-dashboard__filter-div">
+        <button style="background-color: #1D6F42; color: white"
+            onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">DOWNLOAD
+            EXCEL</button>
+    </div>
     {{-- {{ $data->akronim }} --}}
     {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
     <div class="dialog">

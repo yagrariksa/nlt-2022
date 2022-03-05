@@ -6,8 +6,15 @@
 @section('addclass', 'adm-dashboard')
 
 @section('content')
-    <h1 class="adm-dashboard__title">List Peserta</h1>
-    <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
+    <h1 class="adm-dashboard__title">List Seluruh Peserta</h1>
+    <div class="adm-dashboard__filter-div">
+        <button style="background-color: #1D6F42; color: white" class=""
+            onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">DOWNLOAD
+            EXCEL</button>
+        <button>Urutkan Data</button>
+    </div>
+    {{-- {{ $data->akronim }} --}}
+    {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
     <div class="dialog">
         <h3 class="dialog__title">Urutkan Disini</h3>
         <div class="dialog__filter">
@@ -65,8 +72,8 @@
                     </span>
                 </th>
                 {{-- <th></th> --}}
-            </tr>
-        </thead>
+    </tr>
+    </thead>
     </table>
     <div class="adm-table__table-container">
         <table class="adm-table__table list" id="tableAdmListPesertaAll">

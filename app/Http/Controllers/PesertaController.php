@@ -320,7 +320,7 @@ class PesertaController extends Controller
 
     protected function d_action_delete_peserta($uid)
     {
-        $p = Peserta::where('uid', $uid);
+        $p = Peserta::where('uid', $uid)->first();
         if ($p->jabatan != 'Representative AMSA Universitas') {
             $p->delete();
             return redirect()->route('peserta', [

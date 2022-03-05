@@ -2,8 +2,19 @@
 var ascending = true
 var columnSort = 'univ'
 
+let asli = null
+let tbody = null
 // clone tbody Node
-let asli = $('#tableAdmDashboard tbody')[0].cloneNode(true);
+if (window.location.search == '?univ=list') {
+    asli = $('#tableAdmDashboard tbody')[0].cloneNode(true);
+    tbody = document.querySelector('#tableAdmDashboard tbody')
+} else if (window.location.search == '?object=peserta') {
+    asli = $('#tableAdmListPesertaAll tbody')[0].cloneNode(true);
+    tbody = document.querySelector('#tableAdmListPesertaAll tbody')
+}else if (window.location.search == '?object=peserta&mode=tampilan%20penuh'){
+    asli = $('#tableAdmListPesertaAllFull tbody')[0].cloneNode(true);
+    tbody = document.querySelector('#tableAdmListPesertaAllFull tbody')
+}
 
 // select tr
 asli = asli.querySelectorAll('tr')
@@ -15,55 +26,41 @@ let manipulate = Array.from(asli)
 // function listener
 const doSort = () => {
 
-    ascending = $('#radio-ascending')[0].checked ? true : false
-    columnSort = $('#select-column-sorter')[0].value
+    ascending = $('#select-column-sorter-ascending')[0].value == 'A-Z' ? true : false
+    columnSort = $('#select-column-sorter-column')[0].value
 
+    console.log(ascending)
+    console.log(columnSort)
+    
     switch (columnSort) {
-        case 'univ':
-            sortByName()
+        case 'Nama Universitas':
+            sortByUniv()
             break;
 
-        case 'jml':
+        case 'Jumlah Peserta':
             sortByJml()
             break;
 
-        case 'peserta-nama':
-            sortByPesertaName()
+        case 'Nama':
+            sortByName()
             break;
 
-
-        case 'peserta-univ':
-            sortByPesertaUniv()
+        case 'Asal Universitas':
+            sortByUnivPAll()
             break;
 
-        case 'peserta-jabatan':
-            sortByPesertaJabatan()
+        case 'Jabatan':
+            sortByJabatan()
             break;
 
         default:
             alert('default')
             break;
     }
-
-    if (columnSort == 'nama') {
-        sortByName()
-    }
-
-    if (columnSort == 'univ') {
-        sortByUnivPAll()
-    }
-
-    if (columnSort == 'jabatan') {
-        sortByJabatan()
-    }
-
-    // tambahin disini juga
-
 }
 
 // replace data
-const replaceTbody = (data, idtable) => {
-    const tbody = document.querySelector('#' + idtable + ' tbody')
+const replaceTbody = (data) => {
     tbody.innerHTML = ''
     if (ascending) {
         data.forEach(e => {
@@ -106,7 +103,7 @@ const sortByJml = () => {
     manipulate.sort(function (a, b) {
         var aa = a.querySelector('.adm-table__peserta')
         var bb = b.querySelector('.adm-table__peserta')
-        
+
         return parseInt(aa.innerHTML) - parseInt(bb.innerHTML)
     })
     replaceTbody(manipulate, 'tableAdmDashboard')
@@ -243,6 +240,7 @@ $('.button.adm-dashboard__dialog-filter--yes').click(e => {
 })
 
 $('input#filter-search').on('input', e => {
-    console.log(e.currentTarget.value)
+    // console.log(e.currentTarget.value)
+    // console.log(e.currentTarget.attributes['aria-idtable'].value)
     doSearch(e.currentTarget.value)
 })

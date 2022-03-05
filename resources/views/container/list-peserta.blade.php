@@ -32,22 +32,14 @@
                 <tr>
                     <th><span>
                             No.
-                            <img src="{{ url('assets/img/sort.svg') }}" alt="" class="table-sort"
-                                onclick="sortTable('listPeserta', 0)">
                         </span>
                     </th>
                     <th><span>
                             Nama
-                            <buton class="sort" data-sort="list-peserta__nama">
-                                <img src="{{ url('assets/img/sort.svg') }}" alt="" class="table-sort">
-                                {{-- onclick="sortTable('listPeserta', 1)"> --}}
-                            </buton>
                         </span>
                     </th>
                     <th><span>
                             Jabatan
-                            <img src="{{ url('assets/img/sort.svg') }}" alt="" class="table-sort"
-                                onclick="sortTable('listPeserta', 2)">
                         </span>
                     </th>
                     <th><span>
@@ -130,7 +122,7 @@
                         <h5 class="card__label card__label--jabatan">Jabatan</h5>
                         <h5 class="card__value card__value--jabatan">{{ $p->jabatan }}</h5>
                         <h5 class="card__label card__label--email">E-Mail</h5>
-                        <h5 class="card__value card__value--email">a@a.com</h5>
+                        <h5 class="card__value card__value--email">{{ $p->email }}</h5>
                         <h5 class="card__label card__label--notelp">No. Telepon</h5>
                         <h5 class="card__value card__value--notelp">{{ $p->handphone }}</h5>
                         <h5 class="card__label card__label--line">ID Line</h5>

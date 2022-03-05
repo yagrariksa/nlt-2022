@@ -20,7 +20,7 @@
                 <h4 class="detail-peserta__label detail-peserta__label--jabatan">Jabatan</h4>
                 <h4 class="detail-peserta__value detail-peserta__value--jabatan">{{ $data->jabatan }}</h4>
                 <h4 class="detail-peserta__label detail-peserta__label--email">E-Mail</h4>
-                <h4 class="detail-peserta__value detail-peserta__value--email">a@a.com</h4>
+                <h4 class="detail-peserta__value detail-peserta__value--email">{{ $data->email }}</h4>
                 <h4 class="detail-peserta__label detail-peserta__label--notelp">No. Telepon</h4>
                 <h4 class="detail-peserta__value detail-peserta__value--notelp">{{ $data->handphone }}</h4>
                 <h4 class="detail-peserta__label detail-peserta__label--line">ID Line</h4>
@@ -69,7 +69,7 @@
     <div class="detail-peserta__sm">
         <img src="{{ url('storage') . '/' . $data->foto_url }}" alt=""
             class="detail-peserta__img detail-peserta__img--foto">
-        
+
         <a href="{{ route('peserta', [
             'mode' => 'list',
             'object' => 'peserta',

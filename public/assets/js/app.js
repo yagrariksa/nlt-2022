@@ -2078,9 +2078,21 @@ $('.add-edit-peserta__batal').click(function () {
 
 // global var
 var ascending = true;
-var columnSort = 'univ'; // clone tbody Node
+var columnSort = 'univ';
+var asli = null;
+var tbody = null; // clone tbody Node
 
-var asli = $('#tableAdmDashboard tbody')[0].cloneNode(true); // select tr
+if (window.location.search == '?univ=list') {
+  asli = $('#tableAdmDashboard tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmDashboard tbody');
+} else if (window.location.search == '?object=peserta') {
+  asli = $('#tableAdmListPesertaAll tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmListPesertaAll tbody');
+} else if (window.location.search == '?object=peserta&mode=tampilan%20penuh') {
+  asli = $('#tableAdmListPesertaAllFull tbody')[0].cloneNode(true);
+  tbody = document.querySelector('#tableAdmListPesertaAllFull tbody');
+} // select tr
+
 
 asli = asli.querySelectorAll('tr'); // nodelist to array
 
@@ -2088,52 +2100,40 @@ asli = Array.from(asli);
 var manipulate = Array.from(asli); // function listener
 
 var doSort = function doSort() {
-  ascending = $('#radio-ascending')[0].checked ? true : false;
-  columnSort = $('#select-column-sorter')[0].value;
+  ascending = $('#select-column-sorter-ascending')[0].value == 'A-Z' ? true : false;
+  columnSort = $('#select-column-sorter-column')[0].value;
+  console.log(ascending);
+  console.log(columnSort);
 
   switch (columnSort) {
-    case 'univ':
-      sortByName();
+    case 'Nama Universitas':
+      sortByUniv();
       break;
 
-    case 'jml':
+    case 'Jumlah Peserta':
       sortByJml();
       break;
 
-    case 'peserta-nama':
-      sortByPesertaName();
+    case 'Nama':
+      sortByName();
       break;
 
-    case 'peserta-univ':
-      sortByPesertaUniv();
+    case 'Asal Universitas':
+      sortByUnivPAll();
       break;
 
-    case 'peserta-jabatan':
-      sortByPesertaJabatan();
+    case 'Jabatan':
+      sortByJabatan();
       break;
 
     default:
       alert('default');
       break;
   }
-
-  if (columnSort == 'nama') {
-    sortByName();
-  }
-
-  if (columnSort == 'univ') {
-    sortByUnivPAll();
-  }
-
-  if (columnSort == 'jabatan') {
-    sortByJabatan();
-  } // tambahin disini juga
-
 }; // replace data
 
 
-var replaceTbody = function replaceTbody(data, idtable) {
-  var tbody = document.querySelector('#' + idtable + ' tbody');
+var replaceTbody = function replaceTbody(data) {
   tbody.innerHTML = '';
 
   if (ascending) {
@@ -2324,7 +2324,8 @@ $('.button.adm-dashboard__dialog-filter--yes').click(function (e) {
   doSort();
 });
 $('input#filter-search').on('input', function (e) {
-  console.log(e.currentTarget.value);
+  // console.log(e.currentTarget.value)
+  // console.log(e.currentTarget.attributes['aria-idtable'].value)
   doSearch(e.currentTarget.value);
 });
 
@@ -2568,7 +2569,7 @@ for (var i = 0; i < selectItem.length; i++) {
   $('.form-group__selected').keypress(function (e) {
     e.stopPropagation();
     closeAllSelect(this);
-    this.previousSibling.classList.toggle('form-group__select-hide');
+    this.previousSibling.classList.remove('form-group__select-hide');
     this.classList.toggle('form-group__select-arrow-active');
   });
 }
@@ -2756,7 +2757,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--absensi')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.add('active');
-} else if (window.location.search == '?object=peserta') {
+} else if (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
   $('#nav__item--a-peserta')[0].classList.add('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');

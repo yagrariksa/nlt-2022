@@ -18,7 +18,7 @@
             <div class="dialog">
                 <h3 class="dialog__title">Urutkan Disini</h3>
                 <div class="dialog__filter">
-                    <div class="dialog__filter--quest-box">
+                    {{-- <div class="dialog__filter--quest-box">
                         <h4>Urutkan Berdasarkan</h4>
                         <select name="" id="select-column-sorter">
                             <option value="peserta-nama" selected>Nama Peserta</option>
@@ -36,7 +36,12 @@
                             <input type="radio" name="sorter" id="radio-descending">
                             <label for="radio-descending">Z-A</label>
                         </div>
-                    </div>
+                    </div> --}}
+                    <x-form.select-options id="select-column-sorter-column" label="Urutkan Berdasarkan"
+                        options='Nama,Asal Universitas,Jabatan' class="dialog__filter--quest-box" value="" />
+
+                    <x-form.select-options id="select-column-sorter-ascending" label="Urutkan Secara" options='A-Z,Z-A'
+                        class="dialog__filter--quest-box" value="" />
                 </div>
                 <div class="dialog__btn">
                     <span class="button dialog__btn-no adm-dashboard__dialog-filter--no">Reset</span>
@@ -106,9 +111,9 @@
 
     <div class="adm-footer">
         <div class="adm-footer__totals">
-            <h5 class="adm-footer__total">Total Universitas: 38</h5>
+            <h5 class="adm-footer__total">Total Universitas: {{ $jmlUniv }}</h5>
             <hr>
-            <h5 class="adm-footer__total">Total Peserta: 358</h5>
+            <h5 class="adm-footer__total">Total Peserta: {{ $jmlPeserta }}</h5>
         </div>
         <a href="{{ route('a.peserta', [
             'object' => 'peserta',

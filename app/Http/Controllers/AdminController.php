@@ -23,9 +23,13 @@ class AdminController extends Controller
 
             case 'peserta':
                 if ($univ) {
-                    return $this->a_view_list_peserta_by_univ($univ);
-                } else if ($uid) {
-                    return $this->a_view_detail_peserta($uid);
+                    if($mode) {
+                        return $this->a_view_list_peserta_by_univ_all($univ);
+                    } else {
+                        return $this->a_view_list_peserta_by_univ($univ);
+                    }
+                } else if ($mode) {
+                    return $this->a_view_list_peserta_all_full();
                 } else {
                     return $this->a_view_list_peserta_all();
                 }
@@ -57,6 +61,14 @@ class AdminController extends Controller
         ]);
     }
 
+    protected function a_view_list_univ_full(Request $request)
+    {
+        $data  = User::with('peserta')->get();
+        return view('container.admin.dashboard-full', [
+            'data' => $data
+        ]);
+    }
+
     protected function a_view_list_peserta_by_univ($univ)
     {
         $data = User::with(['peserta'])->where('email', $univ)->first();
@@ -73,11 +85,34 @@ class AdminController extends Controller
         ]);
     }
 
+    protected function a_view_list_peserta_by_univ_all($univ)
+    {
+        $data = User::with(['peserta'])->where('email', $univ)->first();
+        $univ = $data->univ;
+        $akronim = $data->akronim;
+        $email = $data->email;
+        $data = $data->peserta;
+        return view('container.admin.list-peserta-univ-all', [
+            'data' => $data,
+            'univ' => $univ,
+            'akronim' => $akronim,
+            'email' => $email
+        ]);
+    }
+
     protected function a_view_list_peserta_all()
     {
         $data = Peserta::with('univ')->get();
         // return view('be.a.list-peserta-all', [
         return view('container.admin.list-peserta-all', [
+            'data' => $data
+        ]);
+    }
+
+    protected function a_view_list_peserta_all_full()
+    {
+        $data = Peserta::with('univ')->get();
+        return view('container.admin.list-peserta-all-full', [
             'data' => $data
         ]);
     }

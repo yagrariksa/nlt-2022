@@ -4,30 +4,63 @@
 
 .adm-dashboard {
 
-    &__title {
+    &__header {
         margin-top: 4rem;
         margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .dialog {
+            gap: 0;
+
+            &__filter {
+                padding-bottom: 2rem;
+            }
+        }
+    }
+
+    &__title {
+        >span {
+            font-size: 1.7rem;
+            opacity: .7;
+            font-weight: 400;
+        }
     }
 
     &__filter-div {
-        margin-bottom: 1rem;
         display: flex;
-        gap: .7rem;
         justify-content: flex-end;
-
-        input {
-            border-radius: 100rem;
-            padding: .5rem 1rem;
-            outline: none;
-            border: 1px solid black;
-        }
+        align-items: center;
+        gap: .7rem;
     }
+
+    &__input-search {
+        width: 24vw;
+        border-radius: 100rem;
+        padding: .5rem 1rem;
+        outline: none;
+        border: 2px solid $rich-black-40;
+    }
+
+    &__btn-filter {
+        cursor: pointer;
+    }
+
+    &__excel {
+        cursor: pointer;
+        background-color: transparent;
+        border: 2px solid #1D6F42;
+        color: #1D6F42;
+    }
+
 }
 
 .adm-table {
     &__table-container {
         width: 100%;
-        height: calc(100vh - 21rem);
+        height: calc(100vh - 22rem);
         overflow-y: auto;
         overflow-x: hidden;
         border-radius: 0 0 16px 16px;
@@ -86,6 +119,7 @@
         border-radius: .5rem;
         color: $white;
         background-color: $blue-sapphire;
+        white-space: nowrap;
 
         &:hover {
             color: $white;
@@ -98,7 +132,53 @@
     }
 }
 
+.adm-footer {
+    margin-top: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 18, 25, 0.15);
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+
+    &__totals {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        hr {
+            height: 32px;
+            width: 2px;
+            border-radius: 50rem;
+            border: 1px solid rgba($rich-black, 0);
+            background-color: $rich-black-10;
+            opacity: 1;
+        }
+    }
+
+    &__total {
+        font-weight: 700;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .adm-table {
+        &__table-container {
+            height: calc(100vh - 25.5rem);
+        }
+    }
+}
+
 @media screen and (max-width: 992px) {
+    .adm-dashboard {
+
+        &__btn-filter,
+        &__input-search {
+            display: none;
+        }
+    }
+
     .adm-table {
 
         &__table-head,
@@ -109,5 +189,9 @@
         &--sm {
             display: unset;
         }
+    }
+
+    .adm-footer {
+        display: none;
     }
 }

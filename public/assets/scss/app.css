@@ -2020,6 +2020,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .adm-footer__total {
   font-weight: 700;
 }
+.adm-footer__btns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 @media screen and (max-width: 1400px) {
   .adm-table__table-container {

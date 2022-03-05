@@ -106,15 +106,22 @@
         <div class="adm-footer__totals">
             <h5 class="adm-footer__total">Total Peserta: 358</h5>
         </div>
-        <a href="{{ route('a.peserta', [
-            'object' => 'peserta',
-            'univ' => $univ,
-            'mode' => 'tampilan penuh',
-        ]) }}"
-            class="button btn-primary">
-            <img src="{{ url('assets/img/fullscreen.svg') }}" alt="">
-            TAMPILAN PENUH
-        </a>
+        <div class="adm-footer__btns">
+            <button class="adm-dashboard__excel"
+                onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="">
+                DOWNLOAD EXCEL
+            </button>
+            <a href="{{ route('a.peserta', [
+                'object' => 'peserta',
+                'univ' => $univ,
+                'mode' => 'tampilan penuh',
+            ]) }}"
+                class="button btn-primary">
+                <img src="{{ url('assets/img/fullscreen.svg') }}" alt="">
+                TAMPILAN PENUH
+            </a>
+        </div>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
 

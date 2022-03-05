@@ -6,14 +6,16 @@
 @section('addclass', 'adm-dashboard')
 
 @section('content')
-    <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span style="font-size: 1.7rem;
-                opacity: .7;
-                font-weight: 400;">{{ $univ }}</span>
-    </h1>
-    <div class="adm-dashboard__filter-div">
-        <button style="background-color: #1D6F42; color: white"
-            onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">DOWNLOAD
-            EXCEL</button>
+    <div class="adm-dashboard__header">
+        <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span>{{ $univ }}</span>
+        </h1>
+        <div class="adm-dashboard__filter-div">
+            <button class="adm-dashboard__excel"
+                onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="">
+                DOWNLOAD EXCEL
+            </button>
+        </div>
     </div>
     {{-- {{ $data->akronim }} --}}
     {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
@@ -72,7 +74,10 @@
                         <span>Jabatan</span>
                     </span>
                 </th>
-                <th></th>
+                <th><span>
+                        <span>ID Line</span>
+                    </span>
+                </th>
             </tr>
         </thead>
     </table>
@@ -91,18 +96,25 @@
                         <td class="adm-table__nama">{{ $p->nama }}</td>
                         {{-- <td class="adm-table__univ">{{ $p->univ->univ }}</td> --}}
                         <td class="adm-table__peserta">{{ $p->jabatan }}</td>
-                        <td>
-                            <a class="adm-table__btn"
-                                href="{{ route('a.peserta', [
-                                    'object' => 'peserta',
-                                    'uid' => $p->uid,
-                                ]) }}"><img
-                                    src="{{ url('assets/img/view-details.svg') }}"> Detail</a>
-                        </td>
+                        <td class="adm-table__peserta">{{ $p->line }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="adm-footer">
+        <div class="adm-footer__totals">
+            <h5 class="adm-footer__total">Total Peserta: 358</h5>
+        </div>
+        <a href="{{ route('a.peserta', [
+            'object' => 'peserta',
+            'univ' => $univ,
+            'mode' => 'tampilan penuh',
+        ]) }}"
+            class="button btn-primary">
+            <img src="{{ url('assets/img/fullscreen.svg') }}" alt="">
+            TAMPILAN PENUH
+        </a>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
 

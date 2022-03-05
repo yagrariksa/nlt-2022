@@ -1,0 +1,48 @@
+.adm-full {
+    // ...
+
+    &__absolute {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    &__search-div {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        >input {
+            width: 90%;
+        }
+    }
+
+    &__table-container {
+        height: calc(100vh - 15.17rem);
+        overflow: auto;
+
+        td {
+            white-space: nowrap;
+        }
+    }
+
+    &__footer {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid $rich-black;
+        background-color: $white;
+    }
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+    }
+}

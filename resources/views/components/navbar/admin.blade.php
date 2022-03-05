@@ -1,6 +1,6 @@
 <div class="nav">
     <div class="nav__mobile">
-        <a href="{{ route('a.peserta') }}">
+        <a href="{{ route('a.peserta', ['univ' => 'list']) }}">
             <img src="{{ url('assets/img/logo-nlt.png') }}" alt="" class="nav__brand" id="nav__brand">
         </a>
         <div class="nav__burger">
@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="nav__group content">
-        <a href="{{ route('a.peserta') }}">
+        <a href="{{ route('a.peserta', ['univ' => 'list']) }}">
             <img src="{{ url('assets/img/logo-nlt.png') }}" alt="" class="nav__brand" id="nav__brand">
         </a>
 
@@ -17,7 +17,7 @@
             @if (Session::get('admin'))
                 <div class="nav__items">
                     <a href="
-                {{ route('a.peserta') }}
+                {{ route('a.peserta', ['univ' => 'list']) }}
                 " class="nav__item" id="nav__item--a-univ">LIST UNIVERSITAS <span></span></a>
                     <a href="
                 {{ route('a.peserta', [

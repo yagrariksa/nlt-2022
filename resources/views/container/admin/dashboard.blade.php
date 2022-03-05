@@ -6,38 +6,41 @@
 @section('addclass', 'adm-dashboard')
 
 @section('content')
-    <h1 class="adm-dashboard__title">List Universitas</h1>
-    <div class="adm-dashboard__filter-div" style="">
-        <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
-        <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
-        <div class="dialog">
-            <h3 class="dialog__title">Urutkan Disini</h3>
-            <div class="dialog__filter">
-                <div class="dialog__filter--quest-box">
-                    <h4>Urutkan Berdasarkan</h4>
-                    <select name="" id="select-column-sorter">
-                        <option value="univ" selected>Nama Universitas</option>
-                        <option value="jml">Jumlah Peserta</option>
-                    </select>
+    <div class="adm-dashboard__header">
+        <h1 class="adm-dashboard__title">List Universitas</h1>
+        <div class="adm-dashboard__filter-div" style="">
+            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Cari Universitas"
+                style="">
+            <button class="btn-primary adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
+            <div class="dialog">
+                <h3 class="dialog__title">Urutkan Disini</h3>
+                <div class="dialog__filter">
+                    <div class="dialog__filter--quest-box">
+                        <h4>Urutkan Berdasarkan</h4>
+                        <select name="" id="select-column-sorter">
+                            <option value="univ" selected>Nama Universitas</option>
+                            <option value="jml">Jumlah Peserta</option>
+                        </select>
+                    </div>
+                    <div class="dialog__filter--quest-box">
+                        <h4>Urutkan Secara</h4>
+                        <div class="dialog__filter--radio">
+                            <input type="radio" name="sorter" id="radio-ascending" checked>
+                            <label for="radio-ascending">A-Z</label>
+                        </div>
+                        <div class="dialog__filter--radio">
+                            <input type="radio" name="sorter" id="radio-descending">
+                            <label for="radio-descending">Z-A</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="dialog__filter--quest-box">
-                    <h4>Urutkan Secara</h4>
-                    <div class="dialog__filter--radio">
-                        <input type="radio" name="sorter" id="radio-ascending" checked>
-                        <label for="radio-ascending">A-Z</label>
-                    </div>
-                    <div class="dialog__filter--radio">
-                        <input type="radio" name="sorter" id="radio-descending">
-                        <label for="radio-descending">Z-A</label>
-                    </div>
+                <div class="dialog__btn">
+                    <span class="button dialog__btn-no adm-dashboard__dialog-filter--no">Reset</span>
+                    <span class="button dialog__btn-yes adm-dashboard__dialog-filter--yes">Terapkan</span>
                 </div>
             </div>
-            <div class="dialog__btn">
-                <span class="button dialog__btn-no adm-dashboard__dialog-filter--no">Reset</span>
-                <span class="button dialog__btn-yes adm-dashboard__dialog-filter--yes">Terapkan</span>
-            </div>
+            <div class="dialog__bg"></div>
         </div>
-        <div class="dialog__bg"></div>
     </div>
 
     <table class="adm-table__table-head">
@@ -91,6 +94,14 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="adm-footer">
+        <div class="adm-footer__totals">
+            <h5 class="adm-footer__total">Total Universitas: 38</h5>
+            <hr>
+            <h5 class="adm-footer__total">Total Peserta: 358</h5>
+        </div>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
 

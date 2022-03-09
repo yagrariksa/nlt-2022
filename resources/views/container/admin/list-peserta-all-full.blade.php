@@ -11,7 +11,7 @@
             <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
         </div>
         <div class="adm-full__table-container">
-            <table class="adm-table__table adm-table__table-head">
+            <table class="adm-table__table adm-table__table-head" id="tableAdmListPesertaAllFull">
                 <thead>
                     <tr>
                         <th><span>
@@ -68,9 +68,9 @@
 
         <div class="adm-full__footer">
             <div class="adm-footer__totals">
-                <h5 class="adm-footer__total">Total Universitas: 38</h5>
+                <h5 class="adm-footer__total">Total Universitas: {{ $jmlUniv }}</h5>
                 <hr>
-                <h5 class="adm-footer__total">Total Peserta: 358</h5>
+                <h5 class="adm-footer__total">Total Peserta: {{ $jmlPeserta }}</h5>
             </div>
             <div class="adm-full__btns">
                 <button class="adm-dashboard__excel"

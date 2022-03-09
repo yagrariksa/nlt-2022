@@ -9,8 +9,7 @@
     <div class="adm-dashboard__header">
         <h1 class="adm-dashboard__title">List Universitas</h1>
         <div class="adm-dashboard__filter-div" style="">
-            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Cari Universitas"
-                style="">
+            <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Cari Universitas">
             <button class="btn-primary adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
             <div class="dialog">
                 <h3 class="dialog__title">Urutkan Disini</h3>
@@ -34,10 +33,10 @@
                         </div>
                     </div> --}}
 
-                    <x-form.select-options id="select-column-sorter" label="Urutkan Berdasarkan"
-                        options='Nama Universitas, Jumlah Peserta' class="dialog__filter--quest-box" value="" />
+                    <x-form.select-options id="select-column-sorter-column" label="Urutkan Berdasarkan"
+                        options='Nama Universitas,Jumlah Peserta' class="dialog__filter--quest-box" value="" />
 
-                    <x-form.select-options id="select-column-sorter" label="Urutkan Secara" options='A-Z, Z-A'
+                    <x-form.select-options id="select-column-sorter-ascending" label="Urutkan Secara" options='A-Z,Z-A'
                         class="dialog__filter--quest-box" value="" />
 
                 </div>
@@ -105,9 +104,9 @@
 
     <div class="adm-footer">
         <div class="adm-footer__totals">
-            <h5 class="adm-footer__total">Total Universitas: 38</h5>
+            <h5 class="adm-footer__total">Total Universitas: {{ sizeof($data) }}</h5>
             <hr>
-            <h5 class="adm-footer__total">Total Peserta: 358</h5>
+            <h5 class="adm-footer__total">Total Peserta: {{ $jmlPeserta }}</h5>
         </div>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>

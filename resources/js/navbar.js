@@ -1,10 +1,10 @@
-$(document).ready(function(){
+$(document).ready(function () {
     $(".nav__burger").click(e => {
         e.currentTarget.classList.toggle("active");
         e.currentTarget.parentNode.nextElementSibling.classList.toggle("active");
     });
 
-    $(".nav__profile").click (e => {
+    $(".nav__profile").click(e => {
         e.currentTarget.nextElementSibling.classList.toggle("active");
     })
 });
@@ -20,32 +20,27 @@ if (window.location.search == '?mode=list&object=peserta') {
     $('#nav__item--souvenir')[0].classList.remove('active')
     $('#nav__item--absensi')[0].classList.remove('active')
     $('#nav__item--password')[0].classList.remove('active')
-}
-else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list') {
+} else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list') {
     $('#nav__item--peserta')[0].classList.remove('active')
     $('#nav__item--souvenir')[0].classList.add('active')
     $('#nav__item--absensi')[0].classList.remove('active')
     $('#nav__item--password')[0].classList.remove('active')
-}
-else if (window.location.pathname == '/absensi') {
+} else if (window.location.pathname == '/absensi') {
     $('#nav__item--peserta')[0].classList.remove('active')
     $('#nav__item--souvenir')[0].classList.remove('active')
     $('#nav__item--absensi')[0].classList.add('active')
     $('#nav__item--password')[0].classList.remove('active')
-}
-else if (window.location.pathname == '/setting') {
+} else if (window.location.pathname == '/setting') {
     $('#nav__item--peserta')[0].classList.remove('active')
     $('#nav__item--souvenir')[0].classList.remove('active')
     $('#nav__item--absensi')[0].classList.remove('active')
     $('#nav__item--password')[0].classList.add('active')
-}
-else if (window.location.search == '?object=peserta') {
+} else if (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
     $('#nav__item--a-peserta')[0].classList.add('active')
     $('#nav__item--a-souvenir')[0].classList.remove('active')
     $('#nav__item--a-absensi')[0].classList.remove('active')
     $('#nav__item--a-univ')[0].classList.remove('active')
-}
-else if(window.location.pathname == '/mahavira' && window.location.search == '?univ=list') {
+} else if (window.location.pathname == '/mahavira' && window.location.search == '?univ=list') {
     $('#nav__item--a-peserta')[0].classList.remove('active')
     $('#nav__item--a-souvenir')[0].classList.remove('active')
     $('#nav__item--a-absensi')[0].classList.remove('active')

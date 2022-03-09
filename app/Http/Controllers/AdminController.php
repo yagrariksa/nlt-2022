@@ -61,14 +61,6 @@ class AdminController extends Controller
         ]);
     }
 
-    protected function a_view_list_univ_full(Request $request)
-    {
-        $data  = User::with('peserta')->get();
-        return view('container.admin.dashboard-full', [
-            'data' => $data
-        ]);
-    }
-
     protected function a_view_list_peserta_by_univ($univ)
     {
         $data = User::with(['peserta'])->where('email', $univ)->first();
@@ -103,17 +95,25 @@ class AdminController extends Controller
     protected function a_view_list_peserta_all()
     {
         $data = Peserta::with('univ')->get();
+        $jmlPeserta = Peserta::count();
+        $jmlUniv = User::count();
         // return view('be.a.list-peserta-all', [
         return view('container.admin.list-peserta-all', [
-            'data' => $data
+            'data' => $data,
+            'jmlPeserta' => $jmlPeserta,
+            'jmlUniv' => $jmlUniv
         ]);
     }
 
     protected function a_view_list_peserta_all_full()
     {
         $data = Peserta::with('univ')->get();
+        $jmlPeserta = Peserta::count();
+        $jmlUniv = User::count();
         return view('container.admin.list-peserta-all-full', [
-            'data' => $data
+            'data' => $data,
+            'jmlPeserta' => $jmlPeserta,
+            'jmlUniv' => $jmlUniv
         ]);
     }
 
@@ -142,8 +142,8 @@ class AdminController extends Controller
     {
         
         $u = User::where('email', $univ)->first();
-        return Excel::download(new PesertaExport($univ), 'Response.xlsx');
-        // return Excel::download(new PesertaExport($univ), $u->akronim . '_Peserta_' . date('H-i_d-M') . '.xlsx');
+        // return Excel::download(new PesertaExport($univ), 'Response.xlsx');
+        return Excel::download(new PesertaExport($univ), $u->akronim . '_Peserta_' . date('H-i_d-M') . '.xlsx');
     }
 
     protected function a_excel_peserta_all()

@@ -133,7 +133,7 @@ for (let i = 0; i < selectItem.length; i++) {
     $('.form-group__selected').keypress(function(e) {
         e.stopPropagation();
         closeAllSelect(this);
-        this.previousSibling.classList.toggle('form-group__select-hide');
+        this.previousSibling.classList.remove('form-group__select-hide');
         this.classList.toggle('form-group__select-arrow-active');
     });
 }

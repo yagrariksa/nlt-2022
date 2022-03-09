@@ -204,3 +204,33 @@ $('.form-group__select-items').click(() => {
     $('#email-univ')[0].value = email;
     $('#akronim')[0].value = akronim;
 })
+
+// email univ on click -> dropdown univ muncul
+$('#email-univ').click(e => {
+    let listUniv = e.currentTarget.parentElement.previousElementSibling.children[1];
+    e.stopPropagation();
+    closeAllSelect(listUniv);
+    listUniv.previousSibling.classList.toggle('form-group__select-hide');
+    listUniv.classList.toggle('form-group__select-arrow-active');
+})
+
+function closeAllSelect(elm) {
+    let x, y, i, arrNo = [];
+    x = document.getElementsByClassName("form-group__select-items");
+    y = document.getElementsByClassName("form-group__selected");
+    for (i = 0; i < y.length; i++) {
+      if (elm == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("form-group__select-arrow-active");
+      }
+    }
+    for (i = 0; i < x.length; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("form-group__select-hide");
+        x[i].childNodes.forEach(x => {
+            x.style.display = 'block';
+        })
+      }
+    }
+  }

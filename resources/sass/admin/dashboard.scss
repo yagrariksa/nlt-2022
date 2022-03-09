@@ -160,6 +160,12 @@
     &__total {
         font-weight: 700;
     }
+
+    &__btns {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 }
 
 @media screen and (max-width: 1400px) {

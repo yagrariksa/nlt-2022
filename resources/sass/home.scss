@@ -215,6 +215,7 @@
 
 .timeline {
     min-height: calc(100vh - 6rem);
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -246,7 +247,7 @@
 
     &__ornament {
         width: 150%;
-        height: calc(100vh - 6rem);
+        height: calc(100% + 1.5rem);
         position: absolute;
         top: 0;
         left: 50%;
@@ -265,7 +266,7 @@
 
     &__block {
         width: 100%;
-        padding: 4rem 2.5rem;
+        padding: 2.5rem 2rem;
         position: relative;
         display: flex;
         align-items: center;
@@ -286,6 +287,14 @@
 
         &--green {
             border-color: $viridian-green;
+        }
+
+        &--middle-green {
+            border-color: $middle-blue-green;
+        }
+
+        &--flax {
+            border-color: $flax;
         }
     }
 
@@ -588,6 +597,7 @@
 
         &__container {
             height: 360px;
+            align-items: center;
         }
     }
 }

@@ -2325,6 +2325,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 
 .timeline {
   min-height: calc(100vh - 6rem);
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -2355,7 +2356,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .timeline__ornament {
   width: 150%;
-  height: calc(100vh - 6rem);
+  height: calc(100% + 1.5rem);
   position: absolute;
   top: 0;
   left: 50%;
@@ -2372,7 +2373,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .timeline__block {
   width: 100%;
-  padding: 4rem 2.5rem;
+  padding: 2.5rem 2rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -2392,6 +2393,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .timeline__line--green {
   border-color: #0A9396;
+}
+.timeline__line--middle-green {
+  border-color: #94D2BD;
+}
+.timeline__line--flax {
+  border-color: #E3CE8F;
 }
 .timeline__event {
   font-weight: 600;
@@ -2624,6 +2631,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .video__container {
     height: 360px;
+    align-items: center;
   }
 }
 @media screen and (max-width: 576px) {

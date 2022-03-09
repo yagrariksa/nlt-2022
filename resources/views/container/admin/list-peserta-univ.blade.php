@@ -10,11 +10,11 @@
         <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span>{{ $univ }}</span>
         </h1>
         <div class="adm-dashboard__filter-div">
-            <button class="adm-dashboard__excel"
+            {{-- <button class="adm-dashboard__excel"
                 onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">
                 <img src="{{ url('assets/img/excel.svg') }}" alt="">
                 DOWNLOAD EXCEL
-            </button>
+            </button> --}}
         </div>
     </div>
     {{-- {{ $data->akronim }} --}}

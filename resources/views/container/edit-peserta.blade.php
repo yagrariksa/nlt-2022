@@ -27,7 +27,7 @@
                 @if ($data->jabatan == 'Representative AMSA Universitas')
                     <x-form.input-text id="jabatan" label="Jabatan" value="{{ $data->jabatan }}" attr="readonly" />
                 @else
-                    <x-form.select-options id="jabatan" label="Jabatan" options='EB AMSA-Indonesia,Member'
+                    <x-form.select-options id="jabatan" label="Jabatan" options='EB AMSA-Indonesia,Member,AB AMSA-Indonesia,National Team,APH,Post AMSEP Presentation'
                         value="{{ old('jabatan') ? old('jabatan') : $data->jabatan }}" class="" />
                 @endif
 

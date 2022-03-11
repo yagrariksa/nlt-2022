@@ -110,8 +110,18 @@
             </div>
             <div class="timeline__block">
                 <hr class="timeline__line timeline__line--green">
-                <h3 class="timeline__event">Registration</h3>
-                <h4 class="timeline__date">5 March 2022</h4>
+                <h3 class="timeline__event">Early Registration</h3>
+                <h4 class="timeline__date">5 - 8 March 2022</h4>
+            </div>
+            <div class="timeline__block">
+                <hr class="timeline__line timeline__line--middle-green">
+                <h3 class="timeline__event">Extra Seat Registration</h3>
+                <h4 class="timeline__date">11-14 March 2022</h4>
+            </div>
+            <div class="timeline__block">
+                <hr class="timeline__line timeline__line--flax">
+                <h3 class="timeline__event">Delegates Announcement</h3>
+                <h4 class="timeline__date">15 March 2022</h4>
             </div>
             <div class="timeline__block">
                 <hr class="timeline__line">
@@ -122,7 +132,7 @@
     </div>
 
     <div class="video">
-        <h1 class="xl video__title--sm">Check Our Video</h1>
+        <h1 class="xl video__title--sm">Check Our Profile Video!</h1>
         <div class="video__container">
             <h1 class="video__title">Check Our <br>Profile Video!</h1>
             <a href="{{ url('https://youtu.be/Jji5z6HcS5o') }}" class="button video__btn" target="_blank"

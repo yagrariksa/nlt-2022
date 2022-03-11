@@ -9,10 +9,6 @@
     <div class="adm-dashboard__header">
         <h1 class="adm-dashboard__title">List Seluruh Peserta</h1>
         <div class="adm-dashboard__filter-div">
-            <button class="adm-dashboard__excel" onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="">
-                DOWNLOAD EXCEL
-            </button>
             <input type="text" class="adm-dashboard__input-search" id="filter-search" placeholder="Search" style="">
             <button class="btn-primary adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
             <div class="dialog">
@@ -115,14 +111,20 @@
             <hr>
             <h5 class="adm-footer__total">Total Peserta: {{ $jmlPeserta }}</h5>
         </div>
-        <a href="{{ route('a.peserta', [
-            'object' => 'peserta',
-            'mode' => 'tampilan penuh',
-        ]) }}"
-            class="button btn-primary">
-            <img src="{{ url('assets/img/fullscreen.svg') }}" alt="">
-            TAMPILAN PENUH
-        </a>
+        <div class="adm-footer__btns">
+            <button class="adm-dashboard__excel" onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="">
+                DOWNLOAD EXCEL
+            </button>
+            <a href="{{ route('a.peserta', [
+                'object' => 'peserta',
+                'mode' => 'tampilan penuh',
+            ]) }}"
+                class="button btn-primary">
+                <img src="{{ url('assets/img/fullscreen.svg') }}" alt="">
+                TAMPILAN PENUH
+            </a>
+        </div>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
 

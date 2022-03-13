@@ -2688,7 +2688,74 @@ $('.form-group__input-file .form-group__filename').map(function (x) {
   if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
     $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
   }
-});
+}); // MANIPULATE INPUT SELECT STYLE ON DIALOG BOX -> SELECT-OPTION-NEW
+
+var selectItemNew = $('.form-group--select-new'); //x
+
+for (var _i = 0; _i < selectItemNew.length; _i++) {
+  var _selectElement = selectItemNew[_i].getElementsByTagName('select')[0];
+
+  var _newSelectedElm = document.createElement('div');
+
+  _newSelectedElm.setAttribute('class', 'form-group__selected form-group__selected--new');
+
+  _newSelectedElm.innerHTML = _selectElement.options[_selectElement.selectedIndex].innerHTML;
+
+  selectItemNew[_i].prepend(_newSelectedElm);
+
+  var _newOptionContainerElm = document.createElement('div');
+
+  _newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');
+
+  for (var _j = 1; _j < _selectElement.length; _j++) {
+    var _newOptionElm = document.createElement('div');
+
+    _newOptionElm.innerHTML = _selectElement.options[_j].innerHTML;
+
+    _newOptionElm.addEventListener('click', function () {
+      var y, i, k, s, h, sl, yl;
+      s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+      sl = s.length;
+      h = this.parentNode.nextSibling;
+
+      for (i = 0; i < sl; i++) {
+        if (s.options[i].innerHTML == this.innerHTML) {
+          s.selectedIndex = i;
+          h.innerHTML = this.innerHTML;
+          y = this.parentNode.getElementsByClassName("form-group__same-as-selected-new");
+          yl = y.length;
+
+          for (k = 0; k < yl; k++) {
+            y[k].removeAttribute("class");
+          }
+
+          this.setAttribute("class", "form-group__same-as-selected-new");
+          break;
+        }
+      }
+
+      h.click();
+    });
+
+    _newOptionContainerElm.appendChild(_newOptionElm);
+  }
+
+  selectItemNew[_i].prepend(_newOptionContainerElm);
+
+  _newSelectedElm.addEventListener('click', function (e) {
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.previousSibling.classList.toggle('form-group__select-hide');
+    this.classList.toggle('form-group__select-arrow-active');
+  });
+
+  $('.form-group__selected').keypress(function (e) {
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.previousSibling.classList.remove('form-group__select-hide');
+    this.classList.toggle('form-group__select-arrow-active');
+  });
+}
 
 /***/ }),
 

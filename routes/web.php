@@ -32,6 +32,10 @@ Route::get('test', function () {
     return view('test');
 });
 
+Route::get('/registrasi-telah-ditutup', function () {
+    return view('container.closereg');
+})->name('closereg');
+
 Route::middleware('guest')->group(function () {
     Route::name('register')->prefix('registrasi')->group(function () {
         Route::get('/', [AuthController::class, 'view_regist']);

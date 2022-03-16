@@ -30,7 +30,8 @@
                     class="nav__item" id="nav__item--souvenir">SOUVENIR <span></span></a>
                 {{-- <a href="" class="nav__item" id="nav__item--about">ABOUT <span></span></a> --}}
             </div>
-            <h4 class="nav__profile">Halo, {{Auth::user()->akronim}} <img src="{{url('assets/img/profile.png')}}" alt="" class="nav__profile-img"></h4>
+            <h4 class="nav__profile">Halo, {{ Auth::user()->akronim }} <img src="{{ url('assets/img/profile.png') }}"
+                    alt="" class="nav__profile-img"></h4>
             <div class="nav__dropdown">
                 <a href="{{ route('akun.setting') }}" class="nav__item" id="nav__item--password"">UBAH PASSWORD</a>
                 <a href=" {{ route('logout') }}" class="   nav__item logout">LOGOUT</a>
@@ -38,7 +39,7 @@
         @else
             <div class="nav__right-btn">
                 <a href="{{ route('login') }}" class="button btn-secondary">MASUK</a>
-                <a href="{{ route('register') }}" class="button btn-primary">REGISTRASI</a>
+                <a href="{{ route('closereg') }}" class="button btn-primary">REGISTRASI</a>
             </div>
         @endif
     </div>

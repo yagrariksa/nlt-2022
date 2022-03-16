@@ -1,0 +1,46 @@
+.sponsor-page {
+    height: calc(100vh - 6rem);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__text {
+        width: 50%;
+        padding-bottom: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 4rem;
+    }
+
+    &__desc {
+        line-height: 35px;
+    }
+
+    &__logo {
+        height: 60vh;
+        width: 50vw;
+        position: fixed;
+        right: 0;
+        top: calc(50% - 3rem);
+        transform: translate(40%, -50%);
+    }
+
+    @media screen and (max-width: 768px) {
+        padding-top: 4rem;
+        align-items: flex-start;
+
+        &__text {
+            width: 100%;
+            padding: 0;
+        }
+
+        &__logo {
+            top: 100%;
+            right: 50%;
+            transform: translate(50%, -50%);
+        }
+    }
+}

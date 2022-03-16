@@ -2371,6 +2371,8 @@ __webpack_require__(/*! ./add-edit-peserta */ "./resources/js/add-edit-peserta.j
 
 __webpack_require__(/*! ./admin/filter */ "./resources/js/admin/filter.js");
 
+__webpack_require__(/*! ./home */ "./resources/js/home.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -2756,6 +2758,25 @@ for (var _i = 0; _i < selectItemNew.length; _i++) {
     this.classList.toggle('form-group__select-arrow-active');
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/home.js":
+/*!******************************!*\
+  !*** ./resources/js/home.js ***!
+  \******************************/
+/***/ (() => {
+
+var tempClone;
+var temp;
+$('.sponsors__logo-name').hover(function (e) {
+  tempClone = e.currentTarget.cloneNode(true);
+  temp = tempClone.lastElementChild.innerHTML;
+  e.currentTarget.lastElementChild.innerHTML = 'Click for more!';
+}, function (e) {
+  e.currentTarget.lastElementChild.innerHTML = temp;
+});
+console.log('ok');
 
 /***/ }),
 

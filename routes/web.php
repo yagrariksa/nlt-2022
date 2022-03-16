@@ -32,6 +32,10 @@ Route::get('test', function () {
     return view('test');
 });
 
+Route::get('/sponsor', function () {
+    return view('container.sponsor');
+})->name('sponsor');
+
 Route::middleware('guest')->group(function () {
     Route::name('register')->prefix('registrasi')->group(function () {
         Route::get('/', [AuthController::class, 'view_regist']);

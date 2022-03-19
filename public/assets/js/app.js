@@ -2373,6 +2373,8 @@ __webpack_require__(/*! ./admin/filter */ "./resources/js/admin/filter.js");
 
 __webpack_require__(/*! ./home */ "./resources/js/home.js");
 
+__webpack_require__(/*! ./souvenir */ "./resources/js/souvenir.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -3144,6 +3146,18 @@ function closeAllSelect(elm) {
     }
   }
 }
+
+/***/ }),
+
+/***/ "./resources/js/souvenir.js":
+/*!**********************************!*\
+  !*** ./resources/js/souvenir.js ***!
+  \**********************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  $('.detail-souvenir__right').height($('.detail-souvenir__left').height());
+});
 
 /***/ }),
 

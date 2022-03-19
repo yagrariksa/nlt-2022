@@ -28,8 +28,9 @@ Route::get('/', function () {
     return view('container.home');
 })->name('home');
 
-Route::get('test', function () {
-    return view('test');
+Route::get('/test', function () {
+    // return view('test');
+    return view('container.souvenir');
 });
 
 Route::get('/sponsor', function () {
@@ -45,7 +46,7 @@ Route::middleware('guest')->group(function () {
         Route::get('/', [AuthController::class, 'view_login']);
         Route::post('/', [AuthController::class, 'action_login']);
     });
-    Route::name('forgot-password')->prefix('forgot-password')->group(function(){
+    Route::name('forgot-password')->prefix('forgot-password')->group(function () {
         Route::get('/', [AuthController::class, 'view_forgot_password']);
         Route::post('/', [AuthController::class, 'action_forgot_password']);
     });
@@ -69,12 +70,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [PesertaController::class, 'd_action']);
         Route::delete('/', [PesertaController::class, 'd_action']);
     });
-    Route::name('souvenir')->prefix('souvenir')->group(function(){
+    Route::name('souvenir')->prefix('souvenir')->group(function () {
         Route::get('/', [SouvenirController::class, 'd_view']);
         Route::post('/', [SouvenirController::class, 'd_action']);
         Route::delete('/', [SouvenirController::class, 'd_action']);
     });
-    Route::get('absensi', function(){
+    Route::get('absensi', function () {
         return view('container.list-absensi');
     })->name('absensi');
 
@@ -94,7 +95,7 @@ Route::name('a.')->prefix('mahavira')->group(function () {
         Route::get('/', [AuthController::class, 'mahavira_view_login']);
         Route::post('/', [AuthController::class, 'mahavira_action_login']);
     });
-    Route::middleware('admin')->group(function(){
+    Route::middleware('admin')->group(function () {
         Route::get('/', [AdminController::class, 'a_view'])->name('peserta');
         Route::get('logout', [AuthController::class, 'mahavira_action_logout'])->name('logout');
     });

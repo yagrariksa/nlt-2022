@@ -2172,7 +2172,8 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     display: flex;
   }
 
-  .content.adm-dashboard,
+  .content.adm-login,
+.content.adm-dashboard,
 .content.adm-full {
     display: none;
   }

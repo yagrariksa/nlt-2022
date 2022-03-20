@@ -48,6 +48,68 @@
         }
     }
 
+    &__mobile-item {
+        width: 100%;
+        height: calc(100vh - 5rem);
+        padding: 0;
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 0;
+        z-index: -1;
+        transform: translateX(100%);
+        transition: transform .5s ease-in-out;
+        background-color: $white;
+
+        .content {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 4px;
+
+            hr {
+                width: 200px;
+                height: 2px;
+                margin: 40px 0;
+                border: none;
+                border-radius: 2px;
+                background-color: $rich-black-10;
+            }
+        }
+
+        .nav__item {
+            height: auto;
+            width: fit-content;
+            align-items: flex-start;
+
+            h2 {
+                color: $rich-black-40;
+            }
+
+            &--masuk h2 {
+                color: $rich-black;
+            }
+
+            &--registrasi h2,
+            &--logout h2 {
+                color: $mahogany;
+            }
+
+            &.active h2 {
+                color: $rich-black;
+            }
+        }
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
+
     &__group {
         height: inherit;
         margin: 0 auto;
@@ -77,6 +139,7 @@
         text-decoration: none;
         white-space: nowrap;
 
+        height: inherit;
         position: relative;
         display: flex;
         justify-content: center;
@@ -91,11 +154,26 @@
             height: 4px;
         }
 
+        &--masuk {
+            color: $mahogany;
+        }
+
+        &.button {
+            height: fit-content;
+        }
+
         &.active {
             span {
                 background-color: $rich-black;
             }
         }
+    }
+
+    &__right {
+        height: inherit;
+        display: flex;
+        align-items: center;
+        gap: 3rem;
     }
 
     &__profile {
@@ -150,37 +228,38 @@
     }
 }
 
+@media screen and (max-width: 1199.9px) {
+    .nav {
+        &__group.guest {
+            display: none;
+        }
+
+        &__mobile.guest {
+            display: flex;
+        }
+    }
+}
+
+@media screen and (max-width: 991.9px) {
+    .nav {
+        &__group.admin {
+            display: none;
+        }
+
+        &__mobile.admin {
+            display: flex;
+        }
+    }
+}
+
 @media screen and (max-width: 767.9px) {
     .nav {
-        &__brand {
-            width: 1.5rem;
+        &__group {
+            display: none;
         }
 
         &__mobile {
             display: flex;
-        }
-
-        &__group {
-            width: 100%;
-            height: fit-content;
-            padding: 0;
-            position: absolute;
-            top: 100%;
-            flex-direction: column;
-            justify-content: center;
-            align-items: stretch;
-            gap: 0;
-            z-index: -1;
-            transform: translateY(-120%);
-            transition: transform .5s ease-in-out;
-
-            img {
-                display: none;
-            }
-
-            &.active {
-                transform: translateY(0);
-            }
         }
 
         &__right-btn {
@@ -199,29 +278,11 @@
             gap: 0;
         }
 
-        &__dropdown {
-            position: relative;
-            align-items: center;
-            opacity: 1;
-            transform: none;
-            border: none;
-            visibility: visible;
-        }
-
-        &__item {
-            padding: 1.7rem 0;
-            background-color: $white;
-
-            &.logout {
-                color: $mahogany;
-            }
-
-            &.active {
-                background-color: $medium-champagne;
-            }
+        &__profile {
+            color: $rich-black-60;
 
             span {
-                display: none;
+                color: $rich-black;
             }
         }
     }

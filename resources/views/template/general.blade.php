@@ -29,6 +29,9 @@
     <div class="content @yield('addclass')">
         @yield('content')
     </div>
+    <div class="content adm-mobile">
+        @yield('admin-mobile')
+    </div>
 
     @yield('other')
 

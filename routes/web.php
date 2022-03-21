@@ -30,7 +30,8 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     // return view('test');
-    return view('container.souvenir');
+    // return view('container.souvenir');
+    return view('container.keranjang');
 });
 
 Route::get('/sponsor', function () {

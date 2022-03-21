@@ -2826,6 +2826,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: flex-start;
   gap: 4rem;
 }
+.detail-souvenir__left hr {
+  opacity: 1;
+  border-radius: 50rem;
+  border: 2px solid #001219;
+  background-color: #001219;
+}
 .detail-souvenir__title-section {
   display: flex;
   flex-direction: column;
@@ -2837,6 +2843,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .detail-souvenir__section-title {
   color: #667175;
+}
+.detail-souvenir .form-help a {
+  font-weight: 300;
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  color: #2B4BF2;
 }
 .detail-souvenir__harga {
   color: #EE9B00;
@@ -2873,4 +2885,49 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   max-width: 80%;
   border-radius: 1rem;
   box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+}
+
+.keranjang__title {
+  margin-bottom: 4rem;
+}
+.keranjang__cards {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1rem;
+}
+.keranjang__card {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background-color: #FFFFFF;
+}
+.keranjang__card--left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.keranjang__card--desc {
+  color: #667175;
+}
+.keranjang__card--right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.keranjang__card--harga {
+  color: #B3B8BA;
+}
+.keranjang__card--harga span {
+  color: #EE9B00;
+}
+.keranjang__card--arrow {
+  height: 1rem;
 }

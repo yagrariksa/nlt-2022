@@ -23,13 +23,16 @@
                 gambar, atau kondisi gadget yang digunakan untuk melihat gambar.
             </h4>
         </div>
+        <hr>
         <form class="detail-souvenir__form-section">
             <h3 class="detail-souvenir__section-title">Form Pemesanan</h3>
-            <x-form.select-options id="kantong" label="Nama Kantong" options='kantong 1, kantong 2, kantong 3'
+            <x-form.select-options id="kantong" label="Pilih Keranjang Alamat" options='kantong 1, kantong 2, kantong 3'
                 class="" value="{{ Session::get('kantong') ? Session::get('kantong') : '' }}"
-                value="{{ old('kantong') ? old('kantong') : '' }}" />
+                value="{{ old('kantong') ? old('kantong') : '' }}"
+                helper="*Jika keranjang tidak ada pada pilihan diatas, maka buat keranjang anda" helperUrl="#"
+                helperLink="disini" />
             <x-form.input-text id="item" label="Jumlah Item" value="{{ old('item') ? old('item') : '' }}" />
-            <x-form.text-area id="keterangan" label="Keterangan"
+            <x-form.text-area id="keterangan" label="Keterangan (ukuran, warna, atau catatan lain)"
                 value="{{ old('keterangan') ? old('keterangan') : '' }}" />
             <div class="detail-souvenir__total">
                 <h3 class="detail-souvenir__total--left">Total</h3>

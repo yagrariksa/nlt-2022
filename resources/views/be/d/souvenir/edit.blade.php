@@ -1,20 +1,24 @@
 @extends('be.dump.temp')
 
 @section('content')
-
+@dump($errors)
     <div class="card" id="souvenir">
         <div class="card-title"></div>
         <div class="card-desc"></div>
     </div>
     <form action="{{ route('souvenir', [
-        'mode' => 'add-new-item',
+        'mode' => 'edit-my-item',
     ]) }}" method="post">
         @csrf
+        <span>Nama barang : {{$s->nama}}</span>
+        <span>Harga barang : {{$s->harga}}</span>
+        <span>Berat barang : {{$s->berat_gram}}</span>
         <input type="hidden" name="item_name" id="item_name">
         <input type="hidden" name="item_id" id="item_id">
         <input type="hidden" name="harga" id="harga">
         <input type="hidden" name="berat_gram" id="berat_gram">
-        <h3>Form pemesanan</h3>
+        <input type="hidden" name="souv_id" id="" value="{{$s->souv_id}}">
+        <h3>EDIT Form pemesanan</h3>
         <span>pilih kantong</span>
         @if (sizeof(Auth::user()->kantong) == 0)
         <div class="" style="margin-left: 1rem; padding: 1rem; border: 1px solid red;">
@@ -29,7 +33,9 @@
         <select name="kantong" id="">
             <option value="" selected disabled>--pilih kantong--</option>
             @foreach (Auth::user()->kantong as $p)
-                <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                <option @if ($p->id == $s->kantong_id)
+                    selected
+                @endif value="{{ $p->id }}">{{ $p->nama }}</option>
             @endforeach
         </select>
         <a href="{{route('souvenir', [
@@ -39,10 +45,10 @@
             ])}}">tambah kantong</a>
         @endif
         <span>jumlah item</span>
-        <input type="number" name="jumlah" id="">
+        <input type="number" name="jumlah" id="" value="{{$s->jumlah}}">
         <span>keteramgam tambahan</span>
-        <textarea name="catatan" id="" cols="30" rows="10"></textarea>
-        <button type="submit">Pesan</button>
+        <textarea name="catatan" id="" cols="30" rows="10">{{$s->catatan}}</textarea>
+        <button type="submit">EDIT</button>
     </form>
 
     <script>
@@ -57,7 +63,7 @@
 
         const souvenirNode = document.querySelector('#souvenir');
 
-        const souvenirId = getParameterByName('s_id');
+        const souvenirId = "{{$s->json_id}}";
         var dodata;
         var url = "{{ url('/assets/json/souvenir.json') }}";
 

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PesertaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SouvenirController;
+use App\Models\Souvenir;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,9 +72,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [SouvenirController::class, 'd_action']);
         Route::delete('/', [SouvenirController::class, 'd_action']);
     });
-    Route::get('absensi', function(){
-        return view('container.list-absensi');
-    })->name('absensi');
+    Route::name('absensi')->prefix('absensi')->group(function(){
+        Route::get('/', [AbsenController::class, 'viewAbsen']);
+        Route::post('/', [AbsenController::class, 'doAbsen']);
+    });
 
     Route::name('akun.setting')->prefix('setting')->group(function () {
         // view account settings

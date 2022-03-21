@@ -1,7 +1,11 @@
 @extends('be.dump.temp')
 
 @section('content')
-
+    <a href="{{ route('souvenir', [
+        'mode' => 'list',
+        'object' => 'kantong',
+    ]) }}">lihat list
+        kantong</a>
     <div id="template" class="card hide">
         <div class="card-title"></div>
         <div class="card-desc"></div>
@@ -36,7 +40,8 @@
                 console.log(a)
                 content.appendChild(a)
                 a.addEventListener('click', () => {
-                    let url = "{{ route('souvenir', ['mode' => 'add']) }}" + "&s_id=" + e.uid
+                    let url = "{{ route('souvenir', ['mode' => 'detail']) }}" +
+                        "&object=katalog&s_id=" + e.uid
                     console.log(url)
                     window.location.replace(url)
                 })

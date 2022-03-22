@@ -90,6 +90,23 @@
             font-weight: 600;
         }
 
+        .button,
+        button {
+            width: fit-content;
+            margin: 5px;
+            text-decoration: none;
+            color: black;
+            padding: 3px 7px;
+            background-color: beige;
+            border-radius: 3px;
+            border: .7px solid black;
+        }
+
+        .button:hover,
+        button:hover {
+            background-color: blanchedalmond;
+        }
+
     </style>
 </head>
 
@@ -103,9 +120,11 @@
                     'mode' => 'list',
                     'object' => 'peserta',
                 ]) }}">peserta</a>
+            <a class="header__item" href="{{ route('absensi') }}">Absen</a>
             <a class="header__item"
                 href="{{ route('souvenir', [
                     'mode' => 'list',
+                    'object' => 'katalog',
                 ]) }}">Souvenir</a>
             <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>

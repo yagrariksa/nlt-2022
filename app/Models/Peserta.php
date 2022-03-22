@@ -25,4 +25,19 @@ class Peserta extends Model
     {
         return $this->hasMany(Souvenir::class, 'peserta_id', 'id');
     }
+
+    public function absen()
+    {
+        return $this->hasMany(Absen::class, 'peserta_id', 'id');
+    }
+
+    public function sudahAbsen($start, $end)
+    {
+        $d = Absen::where('peserta_id', $this->id)
+            ->where('created_at', '<', $start)
+            ->where('created_at', '>', $end)
+            ->first();
+
+        return $d ? true : false;
+    }
 }

@@ -30,7 +30,7 @@
         <h5 class="landing__by">by AMSA UNAIR</h5>
     </div>
 
-    <div class="about">
+    <div class="about" id="about">
         <div class="about__title">
             <h1 class="xl about__title--highlight">About</h1>
             <h1 class="xl about__title--light">MAHAVIRA <br>2022</h1>
@@ -50,7 +50,7 @@
         </h4>
     </div>
 
-    <div class="highlighted-agenda">
+    <div class="highlighted-agenda" id="agendas">
         <h1 class="highlighted-agenda__title">Our Highlighted Agendas</h1>
         <div class="highlighted-agenda__agendas">
             <div class="highlighted-agenda__agenda">
@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <div class="guideline">
+    <div class="guideline" id="guideline">
         <div class="guideline__text">
             <h1 class="xl guideline__title">Grab Our Guideline Book!</h1>
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
@@ -99,7 +99,7 @@
         <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img">
     </div>
 
-    <div class="timeline">
+    <div class="timeline" id="timeline">
         <h1 class="xl timeline__title">Timeline <img src="{{ url('assets/img/ic-timeline.svg') }}" alt=""></h1>
         <div class="timeline__desc">
             {{-- <img src="{{ url('assets/img/timeline-ornament.svg') }}" alt="" class="timeline__ornament"> --}}
@@ -146,11 +146,33 @@
         {{-- here --}}
     </div>
 
-    <div class="sponsors">
-        {{-- here --}}
+    <div class="sponsors" id="our-sponsor">
+        <h1 class="sponsors__title">Get To Know About <span>Our Sponsors</span></h1>
+        <div class="sponsors__list">
+            <div class="sponsors__logo-name" onclick="location.href= '{{ route('sponsor') }}'">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+        </div>
     </div>
 
-    <div class="footer">
+    <div class="footer" id="contact-us">
         <div class="footer__content">
             <div class="footer__items">
                 <h3 class="footer__title">Visit</h3>

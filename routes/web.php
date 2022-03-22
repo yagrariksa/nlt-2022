@@ -29,9 +29,15 @@ Route::get('/', function () {
     return view('container.home');
 })->name('home');
 
-Route::get('test', function () {
-    return view('test');
+Route::get('/test', function () {
+    // return view('test');
+    // return view('container.souvenir');
+    return view('container.keranjang');
 });
+
+Route::get('/sponsor', function () {
+    return view('container.sponsor');
+})->name('sponsor');
 
 Route::middleware('guest')->group(function () {
     Route::name('register')->prefix('registrasi')->group(function () {

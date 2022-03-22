@@ -78,16 +78,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [SouvenirController::class, 'd_action']);
         Route::delete('/', [SouvenirController::class, 'd_action']);
     });
-<<<<<<< HEAD
-    Route::get('absensi', function () {
-        return view('container.list-absensi');
-    })->name('absensi');
-=======
-    Route::name('absensi')->prefix('absensi')->group(function(){
+    Route::name('absensi')->prefix('absensi')->group(function () {
         Route::get('/', [AbsenController::class, 'viewAbsen']);
         Route::post('/', [AbsenController::class, 'doAbsen']);
     });
->>>>>>> origin/dev-yer
 
     Route::name('akun.setting')->prefix('setting')->group(function () {
         // view account settings

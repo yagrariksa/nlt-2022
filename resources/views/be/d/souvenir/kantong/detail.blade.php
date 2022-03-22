@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="" style="display: flex; flex-direction:column; gap: .5rem">
-        <span>Nama Katalog : {{ $k->nama }}</span>
+        <span>Nama KANTONG / KERANJANG : {{ $k->nama }}</span>
         <span>Alamat : {{ $k->alamat }}</span>
         <span>Jumlah Item : {{ $k->souv_total()['jumlah_item'] }}</span>
         <span>Total Harga : {{ $k->souv_total()['total_harga'] }}</span>
@@ -14,12 +14,17 @@
                 'object' => 'kantong',
                 'kid' => $k->kid,
             ]) }}">Edit
-            Katalog</a>
-        <form style="margin: 0; padding: 0" action="#" method="post">
+            KANTONG / KERANJANG</a>
+        <form style="margin: 0; padding: 0"
+            action="{{ route('souvenir', [
+                'mode' => 'delete-my-kantong',
+                'kid' => $k->kid,
+            ]) }}"
+            method="post">
             @csrf
             @method('delete')
             <input type="hidden" name="kid" value="{{ $k->kid }}">
-            <button type="submit">Hapus Katalog ini</button>
+            <button type="submit">Hapus KANTONG / KERANJANG ini</button>
         </form>
     </div>
     <table>

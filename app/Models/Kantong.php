@@ -31,7 +31,7 @@ class Kantong extends Model
         $a = 0;
         $b = 0;
         $c = 0;
-        foreach($this->souvenir as $s){
+        foreach ($this->souvenir as $s) {
             $a += $s->jumlah;
             $b += $s->total_harga;
             $c += $s->total_berat;
@@ -42,5 +42,15 @@ class Kantong extends Model
             'total_harga' => $b,
             'total_berat' => $c
         ];
+    }
+
+    public function souv_checker($json_id)
+    {
+        foreach ($this->souvenir as $s) {
+            if ($s->json_id == $json_id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -121,11 +121,7 @@
                     'object' => 'peserta',
                 ]) }}">peserta</a>
             <a class="header__item" href="{{ route('absensi') }}">Absen</a>
-            <a class="header__item"
-                href="{{ route('souvenir', [
-                    'mode' => 'list',
-                    'object' => 'katalog',
-                ]) }}">Souvenir</a>
+            <a class="header__item" href="{{ route('souvenir') }}">Souvenir</a>
             <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>
@@ -142,6 +138,7 @@
                     'object' => 'peserta',
                 ]) }}"
                     class="header__item">peserta</a>
+                <a class="header__item" href="{{ route('a.souvenir') }}">Souvenir</a>
                 <a href="{{ route('a.logout') }}" class="header__item">LogOut</a>
             </div>
         @endif

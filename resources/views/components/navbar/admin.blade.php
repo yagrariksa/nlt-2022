@@ -24,12 +24,10 @@
                     'object' => 'peserta',
                 ]) }}
                 " class="nav__item" id="nav__item--a-peserta">LIST PESERTA <span></span></a>
-                    <a href="javascript:alert('coming soon')
-                {{-- {{ route('souvenir', [
-                    'mode' => 'list',
-                ]) }} --}}
-                " class="nav__item" id="nav__item--a-souvenir">SOUVENIR <span></span></a>
-                    <a href="javascript:alert('coming soon')
+                    <a href="
+                    {{ route('a.souvenir') }}
+                " class="nav__item" id="nav__item--a-souvenir">SOUVENIR<span></span></a>
+                    <a href="
                 {{-- {{ route('souvenir', [
                     'mode' => 'list',
                 ]) }} --}}

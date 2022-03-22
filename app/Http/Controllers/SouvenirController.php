@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 
 class SouvenirController extends Controller
 {
     public function d_view(Request $request)
     {
+        // dd(Route::currentRouteName());
         $object = $request->query('object');
         $mode = $request->query('mode');
         $s_id = $request->query('s_id');
@@ -21,6 +23,10 @@ class SouvenirController extends Controller
         $kid = $request->query('kid');
         if ($redir == 'true') {
             Session::put('redir', explode(url('') . '/', url()->previous())[1]);
+            return redirect()->route(Route::currentRouteName(), [
+                'mode' => $mode,
+                'object' => $object
+            ]);
         }
 
         switch ($object) {
@@ -156,7 +162,15 @@ class SouvenirController extends Controller
                 break;
 
             case 'delete-my-kantong':
-                return true;
+                $k = Kantong::with('souvenir')->where('kid', $request->query('kid'))->first();
+                foreach ($k->souvenir as $s) {
+                    $s->delete();
+                }
+                $k->delete();
+                return redirect()->route('souvenir', [
+                    'mode' => 'list',
+                    'object' => 'kantong'
+                ]);
                 break;
 
             case 'edit-my-item':
@@ -199,8 +213,6 @@ class SouvenirController extends Controller
         Kantong::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
-            'jumlah' => 0, 'total_harga' => 0,
-            'total_berat_gram' => 0,
             'invoice_url' => null, 'total_ongkir' => 0,
             'user_id' => Auth::user()->id,
             'kid' => Str::random(5) . '-' . join('-', explode(' ', $request->nama))
@@ -261,8 +273,13 @@ class SouvenirController extends Controller
         ];
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
-        $k = Kantong::find($request->kantong);
+        $k = Kantong::with('souvenir')->find($request->kantong);
 
+        if ($k->souv_checker($request->item_id)) {
+            return redirect()->back()->with([
+                'msg' => 'item sudah ada di keranjang'
+            ]);
+        }
 
         $s = Souvenir::create([
             "json_id" => $request->item_id,

@@ -1,6 +1,9 @@
 @extends('be.dump.temp')
 
 @section('content')
+    @if (Session::has('msg'))
+        <span style="color:red">{{ Session::get('msg') }}</span>
+    @endif
 
     <div class="card" id="souvenir">
         <div class="card-title"></div>
@@ -17,26 +20,30 @@
         <h3>Form pemesanan</h3>
         <span>pilih kantong</span>
         @if (sizeof(Auth::user()->kantong) == 0)
-        <div class="" style="margin-left: 1rem; padding: 1rem; border: 1px solid red;">
-            <span>anda belum memiliki kantong</span>
-            <a href="{{route('souvenir', [
-                'mode' => 'add',
-                'object' => 'kantong',
-                'redirect' => 'true'
-            ])}}">buat sekarang</a>
-        </div>
+            <div class="" style="margin-left: 1rem; padding: 1rem; border: 1px solid red;">
+                <span>anda belum memiliki kantong</span>
+                <a
+                    href="{{ route('souvenir', [
+                        'mode' => 'add',
+                        'object' => 'kantong',
+                        'redirect' => 'true',
+                    ]) }}">buat
+                    sekarang</a>
+            </div>
         @else
-        <select name="kantong" id="">
-            <option value="" selected disabled>--pilih kantong--</option>
-            @foreach (Auth::user()->kantong as $p)
-                <option value="{{ $p->id }}">{{ $p->nama }}</option>
-            @endforeach
-        </select>
-        <a href="{{route('souvenir', [
-                'mode' => 'add',
-                'object' => 'kantong',
-                'redirect' => 'true'
-            ])}}">tambah kantong</a>
+            <select name="kantong" id="">
+                <option value="" selected disabled>--pilih kantong--</option>
+                @foreach (Auth::user()->kantong as $p)
+                    <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                @endforeach
+            </select>
+            <a
+                href="{{ route('souvenir', [
+                    'mode' => 'add',
+                    'object' => 'kantong',
+                    'redirect' => 'true',
+                ]) }}">tambah
+                kantong</a>
         @endif
         <span>jumlah item</span>
         <input type="number" name="jumlah" id="">
@@ -54,7 +61,7 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
-
+        
         const souvenirNode = document.querySelector('#souvenir');
 
         const souvenirId = getParameterByName('s_id');

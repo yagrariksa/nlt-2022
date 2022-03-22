@@ -4,7 +4,7 @@
     <a href="{{ route('souvenir', [
         'mode' => 'add',
         'object' => 'kantong',
-    ]) }}">Tambah Kantong</a>
+    ]) }}">Tambah KERANJANG / Kantong</a>
     <a href="{{ route('souvenir', [
         'mode' => 'list',
         'object' => 'katalog',
@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <th>no</th>
-                <th>nama katalog</th>
+                <th>nama Keranjang / Kantong</th>
                 <th>alamat</th>
                 <th>item</th>
                 <th>aksi</th>

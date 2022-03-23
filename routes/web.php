@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     // return view('test');
-    // return view('container.souvenir');
+    // return view('container.detail-souvenir');
     return view('container.keranjang');
 });
 

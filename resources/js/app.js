@@ -9,4 +9,4 @@ require('./detail-peserta');
 require('./add-edit-peserta');
 require('./admin/filter');
 require('./home');
-require('./souvenir');
+require('./detail-souvenir');

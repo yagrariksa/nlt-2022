@@ -86,7 +86,8 @@ class SouvenirController extends Controller
 
     protected function d_view_detail_souvenir($s_id)
     {
-        return view('be.d.souvenir.detail');
+        // return view('be.d.souvenir.detail');
+        return view('container.detail-souvenir');
     }
 
     protected function d_view_add_souvenir($s_id)
@@ -199,8 +200,6 @@ class SouvenirController extends Controller
         Kantong::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
-            'jumlah' => 0, 'total_harga' => 0,
-            'total_berat_gram' => 0,
             'invoice_url' => null, 'total_ongkir' => 0,
             'user_id' => Auth::user()->id,
             'kid' => Str::random(5) . '-' . join('-', explode(' ', $request->nama))

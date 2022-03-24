@@ -2899,7 +2899,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   position: fixed;
   top: 0;
   left: 50%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   transform: translateX(-50%);
@@ -2999,6 +2999,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     bottom: 24px;
     z-index: 1;
   }
+
+  .mobile-title {
+    display: flex;
+  }
 }
 .keranjang__title {
   margin-bottom: 4rem;
@@ -3020,6 +3024,14 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   background-color: #FFFFFF;
+  cursor: pointer;
+}
+.keranjang__card hr {
+  width: 100%;
+  display: none;
+  opacity: 1;
+  border: 0.5px solid rgba(0, 18, 25, 0.15);
+  border-radius: 1px;
 }
 .keranjang__card--left {
   display: flex;
@@ -3037,10 +3049,180 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .keranjang__card--harga {
   color: #B3B8BA;
+  white-space: nowrap;
 }
 .keranjang__card--harga span {
   color: #EE9B00;
 }
 .keranjang__card--arrow {
   height: 1rem;
+}
+
+@media screen and (max-width: 767.9px) {
+  .keranjang__title {
+    display: none;
+  }
+  .keranjang__card {
+    padding: 1.5rem 0;
+    flex-direction: column;
+    gap: 1.7rem;
+  }
+  .keranjang__card hr {
+    display: block;
+  }
+  .keranjang__card--left {
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+  .keranjang__card--right {
+    width: 100%;
+    padding: 0 1.5rem;
+    justify-content: space-between;
+  }
+  .keranjang__card--harga {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+.detail-keranjang {
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.detail-keranjang__title {
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.detail-keranjang__card {
+  padding: 0 2rem;
+  align-items: stretch;
+}
+.detail-keranjang__card--left {
+  padding: 2rem 0;
+}
+.detail-keranjang__card--right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.detail-keranjang__card--right hr {
+  display: block;
+  align-self: stretch;
+}
+.detail-keranjang__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.detail-keranjang__items {
+  box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background-color: #FFFFFF;
+}
+.detail-keranjang__item {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.detail-keranjang__item:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 18, 25, 0.15);
+}
+.detail-keranjang__item hr {
+  align-self: stretch;
+  opacity: 1;
+  border: 0.5px solid rgba(0, 18, 25, 0.15);
+  border-radius: 1px;
+}
+.detail-keranjang__item--left {
+  width: 100%;
+  padding: 2rem 0;
+}
+.detail-keranjang__item--line {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.detail-keranjang__item--title, .detail-keranjang__item--label {
+  text-align: start;
+  white-space: nowrap;
+}
+.detail-keranjang__item--harga, .detail-keranjang__item--jumlah, .detail-keranjang__item--keterangan {
+  text-align: end;
+}
+.detail-keranjang__item--keterangan {
+  white-space: pre-line;
+}
+.detail-keranjang__item--harga {
+  color: #EE9B00;
+}
+.detail-keranjang__item--harga-sm {
+  display: none;
+  color: #EE9B00;
+}
+.detail-keranjang__item--right {
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 767.9px) {
+  .detail-keranjang__title {
+    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .detail-keranjang__title > h1 {
+    display: none;
+  }
+  .detail-keranjang__title > a > img {
+    display: none;
+  }
+  .detail-keranjang__card {
+    padding: 0 1.7rem;
+    gap: 0;
+  }
+  .detail-keranjang__card--left {
+    padding: 1.7rem 0;
+  }
+  .detail-keranjang__card--right {
+    padding: 1.7rem 0;
+    justify-content: space-between;
+  }
+  .detail-keranjang__card--right hr {
+    display: none;
+  }
+  .detail-keranjang__action {
+    flex-direction: row-reverse;
+  }
+  .detail-keranjang__item {
+    flex-direction: column;
+    gap: 0;
+  }
+  .detail-keranjang__item hr {
+    display: none;
+  }
+  .detail-keranjang__item--harga {
+    display: none;
+  }
+  .detail-keranjang__item--harga-sm {
+    display: block;
+  }
+  .detail-keranjang__item--left, .detail-keranjang__item--right {
+    padding: 1.7rem 0;
+  }
 }

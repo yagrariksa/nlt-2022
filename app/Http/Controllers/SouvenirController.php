@@ -105,7 +105,8 @@ class SouvenirController extends Controller
 
     protected function d_view_list_kantong()
     {
-        return view('be.d.souvenir.kantong.list');
+        // return view('be.d.souvenir.kantong.list');
+        return view('container.keranjang');
     }
 
     protected function d_view_add_kantong()
@@ -132,7 +133,8 @@ class SouvenirController extends Controller
             ]);
         }
 
-        return view('be.d.souvenir.kantong.detail', [
+        // return view('be.d.souvenir.kantong.detail', [
+        return view('container.detail-keranjang', [
             'k' => $k
         ]);
     }

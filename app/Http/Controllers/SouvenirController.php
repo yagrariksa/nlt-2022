@@ -111,7 +111,8 @@ class SouvenirController extends Controller
 
     protected function d_view_add_kantong()
     {
-        return view('be.d.souvenir.kantong.add');
+        // return view('be.d.souvenir.kantong.add');
+        return view('container.add-keranjang');
     }
 
     protected function d_view_edit_kantong($kid)

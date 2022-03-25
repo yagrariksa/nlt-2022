@@ -92,13 +92,15 @@ class SouvenirController extends Controller
 
     protected function d_view_add_souvenir($s_id)
     {
+        // ga kepake
         return view('be.d.souvenir.add');
     }
 
     protected function d_view_edit_souvenir($s_id)
     {
         $s = Souvenir::where('souv_id', $s_id)->first();
-        return view('be.d.souvenir.edit', [
+        // return view('be.d.souvenir.edit', [
+        return view('container.edit-souvenir', [
             's' => $s
         ]);
     }
@@ -118,7 +120,8 @@ class SouvenirController extends Controller
     protected function d_view_edit_kantong($kid)
     {
         $k = Kantong::where('kid', $kid)->first();
-        return view('be.d.souvenir.kantong.edit', [
+        // return view('be.d.souvenir.kantong.edit', [
+        return view('container.edit-keranjang', [
             'k' => $k
         ]);
     }

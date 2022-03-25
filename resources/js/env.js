@@ -257,6 +257,12 @@ $('.form-group input').map(x => {
     }
 })
 
+$('.form-group textarea').map(x => {
+    if ($('.form-group textarea')[x].value != '') {
+        $('.form-group textarea')[x].classList.add('has-value');
+    }
+})
+
 $('.form-group__input-file .form-group__filename').map(x => {
     if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
         $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');

@@ -162,12 +162,12 @@
                     </div>
                     <div class="footer__desc--item">
                         @include('components.svg.youtube')
-                        <a href="{{ url('https://amsaindonesia.org/amsa-indonesia/') }}" target="_blank"
+                        <a href="{{ url('https://youtube.com/user/AMSAIndonesia') }}" target="_blank"
                             rel="noopener noreferrer">youtube.com/AMSAIndonesia</a>
                     </div>
                     <div class="footer__desc--item">
                         @include('components.svg.web')
-                        <a href="{{ url('https://youtube.com/user/AMSAIndonesia') }}" target="_blank"
+                        <a href="{{ url('https://amsaindonesia.org/amsa-indonesia/') }}" target="_blank"
                             rel="noopener noreferrer">amsaindonesia.org/amsa-indonesia/</a>
                     </div>
                 </div>

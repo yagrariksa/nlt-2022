@@ -10,7 +10,7 @@
         'object' => 'barang',
     ]) }}">Barang</a>
     <a href="{{ route('a.souvenir', [
-        'mode' => 'xx',
-        'object' => 'xx',
+        'mode' => 'list',
+        'object' => 'kantong',
     ]) }}">Penjualan</a>
 @endsection

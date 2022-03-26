@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Kantong;
 use App\Models\Souvenir;
 use Illuminate\Http\Request;
@@ -38,10 +39,6 @@ class SouvenirController extends Controller
 
                     case 'detail':
                         return $this->d_view_detail_souvenir($s_id);
-                        break;
-
-                    case 'add':
-                        return $this->d_view_add_souvenir($s_id);
                         break;
 
                     case 'edit':
@@ -86,13 +83,19 @@ class SouvenirController extends Controller
 
     protected function d_view_list_souvenir()
     {
-        return view('be.d.souvenir.list');
+        $barang = Barang::get();
+        return view('be.d.souvenir.list', [
+            'barang' => $barang
+        ]);
         // return view('container.list-souvenir');
     }
 
     protected function d_view_detail_souvenir($s_id)
     {
-        return view('be.d.souvenir.detail');
+        $b = Barang::where('bar_id', $s_id)->first();
+        return view('be.d.souvenir.detail', [
+            'b' => $b
+        ]);
     }
 
     protected function d_view_add_souvenir($s_id)
@@ -142,7 +145,6 @@ class SouvenirController extends Controller
         ]);
     }
 
-
     public function d_action(Request $request)
     {
         $mode = $request->query('mode');
@@ -183,9 +185,43 @@ class SouvenirController extends Controller
                 break;
 
             case 'submit-invoice':
-                return true;
+                if ($request->hasFile('img')) {
+                    $foto_url = join(
+                        "_",
+                        [
+                            time(),
+                            join('-', explode(' ', $request->nama)),
+                            "invoice"
+                        ]
+                    )  . "." . $request->img->extension();
+                    $request->img->storeAs('public', $foto_url);
+
+                    $k = Kantong::with('souvenir')->where('kid', $request->query('kid'))->first();
+                    $k->invoice_url = $foto_url;
+                    $k->save();
+                }
+                return redirect()->back();
                 break;
 
+            case 'submit-ongkir':
+                if ($request->hasFile('img')) {
+                    $foto_url = join(
+                        "_",
+                        [
+                            time(),
+                            join('-', explode(' ', $request->nama)),
+                            "bukti_ongkir"
+                        ]
+                    )  . "." . $request->img->extension();
+                    $request->img->storeAs('public', $foto_url);
+
+                    $k = Kantong::with('souvenir')->where('kid', $request->query('kid'))->first();
+                    $k->bukti_ongkir = $foto_url;
+                    $k->total_ongkir = $request->ongkir;
+                    $k->save();
+                }
+                return redirect()->back();
+                break;
             default:
                 return $this->d_action_redirect();
                 break;
@@ -205,7 +241,9 @@ class SouvenirController extends Controller
     {
         $rules = [
             'nama' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'penerima' => 'required',
+            'no' => 'required',
         ];
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
@@ -213,6 +251,8 @@ class SouvenirController extends Controller
         Kantong::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
+            'penerima' => $request->penerima,
+            'no' => $request->no,
             'invoice_url' => null, 'total_ongkir' => 0,
             'user_id' => Auth::user()->id,
             'kid' => Str::random(5) . '-' . join('-', explode(' ', $request->nama))
@@ -235,7 +275,9 @@ class SouvenirController extends Controller
     {
         $rules = [
             'nama' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'penerima' => 'required',
+            'no' => 'required',
         ];
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
@@ -249,6 +291,14 @@ class SouvenirController extends Controller
 
         if ($k->alamat != $request->alamat) {
             $k->alamat = $request->alamat;
+        }
+
+        if ($k->penerima != $request->penerima) {
+            $k->penerima = $request->penerima;
+        }
+
+        if ($k->no != $request->no) {
+            $k->no = $request->no;
         }
 
         $k->save();

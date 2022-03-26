@@ -67,6 +67,7 @@
             display: flex;
             flex-direction: row;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .card {

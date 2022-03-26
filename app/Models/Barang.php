@@ -25,4 +25,19 @@ class Barang extends Model
     {
         return $this->hasMany(GambarBarang::class, 'bid', 'id');
     }
+
+    public function terbeli()
+    {
+        return $this->hasMany(Souvenir::class, 'bar_id', 'json_id');
+    }
+
+    public function terbeli_count()
+    {
+        $total = 0;
+        $s = Souvenir::where('json_id', $this->bar_id)->get();
+        foreach ($s as $souv) {
+            $total += $souv->jumlah;
+        }
+        return $total;
+    }
 }

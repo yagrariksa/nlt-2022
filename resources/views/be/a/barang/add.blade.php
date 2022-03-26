@@ -1,6 +1,7 @@
 @extends('be.dump.temp')
 
 @section('content')
+@dump($errors)
     <form action="{{ route('a.souvenir', ['mode' => 'add-new-barang']) }}" method="post" enctype="multipart/form-data">
         <input type="text" name="nama" placeholder="nama">
         <input type="number" name="harga" placeholder="harga">

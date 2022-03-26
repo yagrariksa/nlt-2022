@@ -4,11 +4,13 @@
     <a href="{{ route('souvenir', [
         'mode' => 'add',
         'object' => 'kantong',
-    ]) }}">Tambah KERANJANG / Kantong</a>
+    ]) }}">Tambah KERANJANG /
+        Kantong</a>
     <a href="{{ route('souvenir', [
         'mode' => 'list',
         'object' => 'katalog',
-    ]) }}">Lihat Katalog Barang</a>
+    ]) }}">Lihat Katalog
+        Barang</a>
     <table>
         <thead>
             <tr>
@@ -27,7 +29,12 @@
                     <td>{{ $k->alamat }}</td>
                     <td>{{ $k->souv_total()['jumlah_item'] }}</td>
                     <td>
-                        <a class="button" href="#">edit</a>
+                        <a class="button"
+                            href="{{ route('souvenir', [
+                                'mode' => 'edit',
+                                'object' => 'kantong',
+                                'kid' => $k->kid,
+                            ]) }}">edit</a>
                         <a class="button"
                             href="{{ route('souvenir', [
                                 'mode' => 'detail',

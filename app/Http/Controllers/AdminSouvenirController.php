@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\GambarBarang;
+use App\Models\Kantong;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class AdminSouvenirController extends Controller
 {
@@ -58,6 +60,21 @@ class AdminSouvenirController extends Controller
                 }
                 break;
 
+            case 'kantong':
+                switch ($mode) {
+                    case 'list':
+                        return $this->kantong_list();
+                        break;
+
+                    case 'detail':
+                        return $this->kantong_detail($key);
+                        break;
+
+                    default:
+                        return $this->kantong_list();
+                        break;
+                }
+                break;
             default:
                 return view('be.a.souvenir');
                 break;
@@ -116,6 +133,24 @@ class AdminSouvenirController extends Controller
         ]);
     }
 
+    protected function kantong_list()
+    {
+        $b = Barang::get();
+        $kantong = Kantong::get();
+        return view('be.a.souvenir.list', [
+            'kantong' => $kantong,
+            'barang' => $b,
+        ]);
+    }
+
+    protected function kantong_detail($key)
+    {
+        $kantong = Kantong::with('souvenir')->where('kid', $key)->first();
+        return view('be.a.souvenir.detail', [
+            'k' => $kantong
+        ]);
+    }
+
     public function a_action(Request $request)
     {
         $mode = $request->query('mode');
@@ -165,10 +200,18 @@ class AdminSouvenirController extends Controller
             'berat' => 'required',
             'desc' => 'required',
             'kategori' => 'required',
-            'img' => 'required|file|mimes:png,jpg,jpef|max:2048'
         ];
 
         Validator::make($request->all(), $rules, $this->msg)->validate();
+
+        $b = Barang::create([
+            'bar_id' => Str::random(5) . '-' . join('-', explode(' ', $request->nama)),
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'berat' => $request->berat,
+            'desc' => $request->desc,
+            'kategori_id' => $request->kategori
+        ]);
 
         if ($request->hasFile('img')) {
             $foto_url = join(
@@ -180,21 +223,12 @@ class AdminSouvenirController extends Controller
                 ]
             )  . "." . $request->img->extension();
             $request->img->storeAs('public', $foto_url);
+
+            GambarBarang::create([
+                'url' => $foto_url,
+                'bid' => $b->id
+            ]);
         }
-
-        $b = Barang::create([
-            'bar_id' => Str::random(5) . '-' . join('-', explode(' ', $request->nama)),
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'berat' => $request->berat,
-            'desc' => $request->desc,
-            'kategori_id' => $request->kategori
-        ]);
-
-        GambarBarang::create([
-            'url' => $foto_url,
-            'bid' => $b->id
-        ]);
 
         return redirect()->route('a.souvenir', ['mode' => 'list', 'object' => 'barang']);
     }

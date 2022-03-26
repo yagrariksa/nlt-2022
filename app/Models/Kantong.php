@@ -13,7 +13,8 @@ class Kantong extends Model
         'nama', 'jumlah', 'total_harga',
         'total_berat_gram', 'alamat',
         'invoice_url', 'total_ongkir',
-        'user_id', 'kid'
+        'user_id', 'kid',
+        'penerima', 'no', 'bukti_ongkir',
     ];
 
     public function souvenir()

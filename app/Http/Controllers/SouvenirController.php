@@ -93,38 +93,45 @@ class SouvenirController extends Controller
     protected function d_view_detail_souvenir($s_id)
     {
         $b = Barang::where('bar_id', $s_id)->first();
+        // coba cek ini dulu, ada yang berubah 
         return view('be.d.souvenir.detail', [
             'b' => $b
         ]);
+        // return view('container.detail-souvenir');
     }
 
     protected function d_view_add_souvenir($s_id)
     {
+        // ga kepake
         return view('be.d.souvenir.add');
     }
 
     protected function d_view_edit_souvenir($s_id)
     {
         $s = Souvenir::where('souv_id', $s_id)->first();
-        return view('be.d.souvenir.edit', [
+        // return view('be.d.souvenir.edit', [
+        return view('container.edit-souvenir', [
             's' => $s
         ]);
     }
 
     protected function d_view_list_kantong()
     {
-        return view('be.d.souvenir.kantong.list');
+        // return view('be.d.souvenir.kantong.list');
+        return view('container.keranjang');
     }
 
     protected function d_view_add_kantong()
     {
-        return view('be.d.souvenir.kantong.add');
+        // return view('be.d.souvenir.kantong.add');
+        return view('container.add-keranjang');
     }
 
     protected function d_view_edit_kantong($kid)
     {
         $k = Kantong::where('kid', $kid)->first();
-        return view('be.d.souvenir.kantong.edit', [
+        // return view('be.d.souvenir.kantong.edit', [
+        return view('container.edit-keranjang', [
             'k' => $k
         ]);
     }
@@ -140,7 +147,8 @@ class SouvenirController extends Controller
             ]);
         }
 
-        return view('be.d.souvenir.kantong.detail', [
+        // return view('be.d.souvenir.kantong.detail', [
+        return view('container.detail-keranjang', [
             'k' => $k
         ]);
     }

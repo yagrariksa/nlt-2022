@@ -2373,7 +2373,7 @@ __webpack_require__(/*! ./admin/filter */ "./resources/js/admin/filter.js");
 
 __webpack_require__(/*! ./home */ "./resources/js/home.js");
 
-__webpack_require__(/*! ./souvenir */ "./resources/js/souvenir.js");
+__webpack_require__(/*! ./detail-souvenir */ "./resources/js/detail-souvenir.js");
 
 /***/ }),
 
@@ -2417,6 +2417,54 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 $('button.detail-peserta__btn--delete').click(function (e) {
   e.currentTarget.nextElementSibling.classList.add('active');
 });
+
+/***/ }),
+
+/***/ "./resources/js/detail-souvenir.js":
+/*!*****************************************!*\
+  !*** ./resources/js/detail-souvenir.js ***!
+  \*****************************************/
+/***/ (function() {
+
+var _this = this;
+
+function getParameterByName(name) {
+  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+var souvenirNode = document.querySelector('.detail-souvenir');
+var souvenirId = getParameterByName('s_id');
+var dodata;
+var url = "{{ url('/assets/json/souvenir.json') }}";
+
+var populateData = function populateData() {
+  souvenirNode.querySelector('.detail-souvenir__title').textContent = _this.dodata.nama;
+  souvenirNode.querySelector('.detail-souvenir__desc').textContent = _this.dodata.desc;
+  souvenirNode.querySelector('.detail-souvenir__img').textContent = _this.dodata.img;
+  souvenirNode.querySelector('.detail-souvenir__berat').textContent = _this.dodata.berat;
+  souvenirNode.querySelector('.detail-souvenir__harga').textContent = _this.dodata.harga;
+  souvenirNode.querySelector('.detail-souvenir__submit').setAttribute('href', souvenirNode.querySelector('.detail-souvenir__submit').getAttribute('href') + '&s_id=' + _this.dodata.uid);
+};
+
+var getData = function getData() {
+  fetch(url).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    _this.dodata = data.filter(function (e) {
+      return e.uid == souvenirId;
+    })[0];
+    console.log(_this.dodata);
+    populateData();
+  });
+};
+
+getData();
 
 /***/ }),
 
@@ -2686,6 +2734,11 @@ $('.form-group input[readonly]').map(function (x) {
 $('.form-group input').map(function (x) {
   if ($('.form-group input')[x].value != '') {
     $('.form-group input')[x].classList.add('has-value');
+  }
+});
+$('.form-group textarea').map(function (x) {
+  if ($('.form-group textarea')[x].value != '') {
+    $('.form-group textarea')[x].classList.add('has-value');
   }
 });
 $('.form-group__input-file .form-group__filename').map(function (x) {
@@ -3146,18 +3199,6 @@ function closeAllSelect(elm) {
     }
   }
 }
-
-/***/ }),
-
-/***/ "./resources/js/souvenir.js":
-/*!**********************************!*\
-  !*** ./resources/js/souvenir.js ***!
-  \**********************************/
-/***/ (() => {
-
-$(document).ready(function () {
-  $('.detail-souvenir__right').height($('.detail-souvenir__left').height());
-});
 
 /***/ }),
 

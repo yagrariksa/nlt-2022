@@ -94,10 +94,10 @@ class SouvenirController extends Controller
     {
         $b = Barang::where('bar_id', $s_id)->first();
         // coba cek ini dulu, ada yang berubah 
-        return view('be.d.souvenir.detail', [
+        // return view('be.d.souvenir.detail', [
+        return view('container.detail-souvenir', [
             'b' => $b
         ]);
-        // return view('container.detail-souvenir');
     }
 
     protected function d_view_add_souvenir($s_id)

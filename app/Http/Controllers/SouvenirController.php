@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Kantong;
+use App\Models\Kategori;
 use App\Models\Souvenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,10 +85,12 @@ class SouvenirController extends Controller
     protected function d_view_list_souvenir()
     {
         $barang = Barang::get();
-        return view('be.d.souvenir.list', [
-            'barang' => $barang
+        $kategori = Kategori::get();
+        // return view('be.d.souvenir.list', [
+        return view('container.list-souvenir', [
+            'barang' => $barang,
+            'kategori' => $kategori
         ]);
-        // return view('container.list-souvenir');
     }
 
     protected function d_view_detail_souvenir($s_id)

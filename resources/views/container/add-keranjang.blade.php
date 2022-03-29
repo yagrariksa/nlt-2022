@@ -1,6 +1,6 @@
 @extends('template.client')
 
-@section('title', 'Tambahkan Keranjang Alamat')
+@section('title', 'Tambahkan Keranjang')
 @section('seo-desc')
 @section('seo-img')
 
@@ -13,8 +13,8 @@
         class="add-keranjang__content">
         <div class="add-keranjang__input">
             @csrf
-            <h2 class="add-keranjang__title">Buat Keranjang Alamat</h2>
-            <h4 class="mobile-title">Buat Keranjang Alamat</h4>
+            <h2 class="add-keranjang__title">Buat Keranjang</h2>
+            <h4 class="mobile-title">Buat Keranjang</h4>
             <x-form.input-text id="keranjang" label="Nama Keranjang (Maks. 20 Karakter)"
                 value="{{ old('keranjang') ? old('keranjang') : '' }}" />
             <x-form.input-text id="nama" label="Nama Penerima" value="{{ old('nama') ? old('nama') : '' }}" />
@@ -22,7 +22,7 @@
             <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos" />
         </div>
         <div class="add-keranjang__bottom">
-            <button type="submit" class="btn-primary add-keranjang__submit">BUAT KERANJANG ALAMAT</button>
+            <button type="submit" class="btn-primary add-keranjang__submit">BUAT KERANJANG</button>
             <a href="#" class="add-keranjang__batal">Batalkan</a>
         </div>
     </form>

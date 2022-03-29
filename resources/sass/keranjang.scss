@@ -1,6 +1,9 @@
 .keranjang {
-    &__title {
+    &__title-div {
         margin-bottom: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     &__cards {
@@ -48,6 +51,8 @@
             gap: 2rem;
         }
 
+        &--berat,
+        &--ongkir,
         &--harga {
             color: $rich-black-40;
             white-space: nowrap;

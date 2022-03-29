@@ -46,7 +46,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <label for="select" class="form-group__control-label">Pilih Keranjang Alamat</label>
+                    <label for="select" class="form-group__control-label">Pilih Keranjang</label>
                     <i class="form-group__bar"></i>
                     <h6 class="form-help">
                         *Jika keranjang tidak ada pada pilihan diatas, maka buat keranjang anda

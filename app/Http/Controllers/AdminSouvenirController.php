@@ -27,7 +27,7 @@ class AdminSouvenirController extends Controller
                         break;
 
                     case 'add':
-                        return $this->kategori_add();
+                        return $this->kategori_add($key);
                         break;
 
                     case 'edit':
@@ -89,9 +89,13 @@ class AdminSouvenirController extends Controller
         ]);
     }
 
-    protected function kategori_add()
+    protected function kategori_add($key)
     {
-        $k = Kategori::where('parent_id', null)->get();
+        if ($key == 'parent') {
+            $k = null;
+        } else {
+            $k = Kategori::where('kat_id', $key)->first();
+        }
         return view('be.a.kategori.add', [
             'k' => $k
         ]);
@@ -100,16 +104,14 @@ class AdminSouvenirController extends Controller
     protected function kategori_edit($key)
     {
         $data = Kategori::where('kat_id', $key)->first();
-        $k = Kategori::where('parent_id', null)->get();
         return view('be.a.kategori.edit', [
             'data' => $data,
-            'k' => $k,
         ]);
     }
 
     protected function barang_list()
     {
-        $k = Kategori::with('barang')->get();
+        $k = Kategori::with('barang')->where('parent_id', null)->get();
         return view('be.a.barang.list', [
             'k' => $k
         ]);
@@ -117,7 +119,7 @@ class AdminSouvenirController extends Controller
 
     protected function barang_add()
     {
-        $k = Kategori::get();
+        $k = Kategori::where('parent_id', null)->get();
         return view('be.a.barang.add', [
             'k' => $k
         ]);
@@ -162,7 +164,11 @@ class AdminSouvenirController extends Controller
                     'parent_id' => $request->parent,
                     'kat_id' => Str::random(10)
                 ]);
-                return redirect()->route('a.souvenir', ['mode' => 'list', 'object' => 'kategori']);
+                return redirect()
+                    ->route('a.souvenir', [
+                        'mode' => 'list',
+                        'object' => 'kategori'
+                    ])->with('msg', 'sukses menambahkan kategori');
                 break;
 
             case 'edit-my-kategori':
@@ -170,7 +176,25 @@ class AdminSouvenirController extends Controller
                 $k->nama = $request->nama;
                 $k->parent_id = $request->parent;
                 $k->save();
-                return redirect()->route('a.souvenir', ['mode' => 'list', 'object' => 'kategori']);
+                return redirect()
+                    ->route('a.souvenir', [
+                        'mode' => 'list', 'object' => 'kategori'
+                    ])->with('msg', 'sukses mengubah kategori');
+                break;
+
+            case 'delete-my-kategori':
+                $k = Kategori::where('kat_id', $key)->first();
+                foreach ($k->barang as $b) {
+                    foreach ($b->gambar as $g) {
+                        $g->delete();
+                    }
+                    $b->delete();
+                }
+                $k->delete();
+                return redirect()
+                    ->route('a.souvenir', [
+                        'mode' => 'list', 'object' => 'kategori'
+                    ])->with('msg', 'sukses menghapus kategori');
                 break;
 
             case 'add-new-barang':
@@ -181,9 +205,18 @@ class AdminSouvenirController extends Controller
                 return $this->barang_edit_do($request, $key);
                 break;
 
+            case 'delete-my-barang':
+                $b = Barang::where('bar_id', $key)->first();
+                foreach ($b->gambar as $g) {
+                    $g->delete();
+                }
+                $b->delete();
+                return redirect()->back()->with('msg', 'sukses menghapus barang');
+                break;
+
             case 'delete-my-gambar':
                 GambarBarang::find($key)->delete();
-                return redirect()->back();
+                return redirect()->back()->with('msg', 'sukses menghapus gambar');
                 break;
 
             default:
@@ -230,7 +263,10 @@ class AdminSouvenirController extends Controller
             ]);
         }
 
-        return redirect()->route('a.souvenir', ['mode' => 'list', 'object' => 'barang']);
+        return redirect()
+            ->route('a.souvenir', [
+                'mode' => 'list', 'object' => 'barang'
+            ])->with('msg', 'sukses menambahkan barang');
     }
 
     protected function barang_edit_do(Request $request, $key)
@@ -272,6 +308,10 @@ class AdminSouvenirController extends Controller
         $b->kategori_id = $request->kategori;
         $b->save();
 
-        return redirect()->route('a.souvenir', ['mode' => 'list', 'object' => 'barang']);
+        return redirect()
+            ->route('a.souvenir', [
+                'mode' => 'list',
+                'object' => 'barang'
+            ])->with('msg', 'sukses mengubah barang');
     }
 }

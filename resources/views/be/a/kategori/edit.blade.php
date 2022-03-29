@@ -8,17 +8,14 @@
         ]) }}"
         method="post">
         @csrf
+        @if (!$data->parent_id)
+            <h2>Edit Kategori</h2>
+        @else
+            <h2>Edit Sub-Kategori <span style="color: red">Dari {{ $data->parent()->nama }}</span>
+            </h2>
+        @endif
         <input type="text" name="nama" placeholder="nama kategori" value="{{ $data->nama }}">
-        <select name="parent" id="">
-            <option value="" @if (!$data->parent_id) selected @endif disabled>--pilih parent--</option>
-            @foreach ($k as $item)
-                @if ($item->id != $data->id)
-                    <option @if ($data->parent_id == $item->id) selected @endif value="{{ $item->id }}">
-                        {{ $item->nama }}
-                    </option>
-                @endif
-            @endforeach
-        </select>
+        <input type="hidden" name="parent" value="{{ $data->parent_id ? $data->parent_id : '' }}">
         <button type="submit">EDIT</button>
     </form>
 @endsection

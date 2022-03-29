@@ -39,6 +39,9 @@
                         style="max-width: 10rem">
                 </span>
             @else
+                <hr style="height: 1px;
+                width: 100%;
+                background-color: black;">
                 <form
                     action="{{ route('souvenir', [
                         'mode' => 'submit-invoice',
@@ -50,13 +53,16 @@
                     <input type="file" name="img" id="">
                     <button type="submit">SUBMIT BUKTI BAYAR</button>
                 </form>
+                <hr style="height: 1px;
+                    width: 100%;
+                    background-color: black;">
             @endif
             {{-- else belum masa pembayaran
             tampilkan info tentang periode pembayaran --}}
         @else
             <hr style="height: 1px;
-                        width: 100%;
-                        background-color: black;">
+                            width: 100%;
+                            background-color: black;">
             <span>jika anda tidak merubah pesanan, kunjungi laman ### untuk mengecek ongkir</span>
             <span>lampirkan screenshot tarif ongkir sesuai berat-totalx dan tujuan (surabaya - alamat tujuan)</span>
             <span>dan jangan lupa tambahkan nominal ongkir pada kolom ongkir</span>
@@ -73,8 +79,8 @@
                 <button type="submit">submit</button>
             </form>
             <hr style="height: 1px;
-                        width: 100%;
-                        background-color: black;">
+                            width: 100%;
+                            background-color: black;">
         @endif
 
     </div>

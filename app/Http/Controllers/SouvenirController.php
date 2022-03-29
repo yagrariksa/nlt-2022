@@ -35,7 +35,7 @@ class SouvenirController extends Controller
             case 'katalog':
                 switch ($mode) {
                     case 'list':
-                        return $this->d_view_list_souvenir();
+                        return $this->d_view_list_souvenir($kid);
                         break;
 
                     case 'detail':
@@ -47,7 +47,7 @@ class SouvenirController extends Controller
                         break;
 
                     default:
-                        return $this->d_view_list_souvenir();
+                        return $this->d_view_list_souvenir($kid);
                         break;
                 }
                 break;
@@ -77,19 +77,25 @@ class SouvenirController extends Controller
                 break;
 
             default:
-                return $this->d_view_list_souvenir();
+                return $this->d_view_list_souvenir($kid);
                 break;
         }
     }
 
-    protected function d_view_list_souvenir()
+    protected function d_view_list_souvenir($kid)
     {
-        $barang = Barang::get();
-        $kategori = Kategori::get();
+        $k = Kategori::where('parent_id', null)->get();
+
+        if ($kid) {
+            $b = Kategori::where('parent_id', null)->where('kat_id', $kid)->get();
+        } else {
+            $b = $k;
+        }
+        // query barang from kategori
         // return view('be.d.souvenir.list', [
         return view('container.list-souvenir', [
-            'barang' => $barang,
-            'kategori' => $kategori
+            'barang' => $b,
+            'kategori' => $k
         ]);
     }
 

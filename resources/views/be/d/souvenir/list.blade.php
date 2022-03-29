@@ -76,7 +76,6 @@
     <script>
         //    create script for search-field
         var data = document.querySelectorAll('.souv__data-barang')
-        var size = data.size
         var noItem = document.querySelector('#souv__no-item')
 
         document.querySelector('#suov__list__search').addEventListener('input', (xx) => {

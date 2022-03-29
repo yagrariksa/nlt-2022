@@ -10,9 +10,8 @@
     <div class="detail-souvenir-sm">
         <h4 class="mobile-title">Detail Barang</h4>
         <div class="detail-souvenir-sm__images">
-            <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 1" class="detail-souvenir__img">
-            <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 2" class="detail-souvenir__img">
-            <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 3" class="detail-souvenir__img">
+            <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                alt="{{ $b->nama }}">
         </div>
     </div>
 
@@ -48,7 +47,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <label for="select" class="form-group__control-label">Pilih Keranjang Alamat</label>
+                    <label for="select" class="form-group__control-label">Pilih Keranjang</label>
                     <i class="form-group__bar"></i>
                     <h6 class="form-help">
                         *Jika keranjang tidak ada pada pilihan diatas, maka buat keranjang anda
@@ -59,10 +58,15 @@
                                 'redirect' => 'true',
                             ]) }}">disini</a>
                     </h6>
+                    @if ($errors->has('kantong'))
+                        <h6 class="form-help">{{ $errors->first('kantong') }}</h6>
+                    @endif
                 </div>
 
-                <x-form.input-text id="jumlah" label="Jumlah Item" value="{{ old('jumlah') ? old('jumlah') : '' }}" />
-                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)" />
+                <x-form.input-text id="jumlah" label="Jumlah Item"
+                    value="{{ old('jumlah') ? old('jumlah') : $s->jumlah }}" />
+                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)"
+                    value="{{ old('catatan') ? old('catatan') : $s->catatan }}" />
                 <div class="detail-souvenir__total">
                     <h3 class="detail-souvenir__total--left">Total</h3>
                     <h3 class="detail-souvenir__total--right">Rp0</h3>
@@ -72,9 +76,8 @@
         </div>
         <div class="detail-souvenir__right">
             <div class="detail-souvenir__images">
-                {{-- <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 1" class="detail-souvenir__img">
-                <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 2" class="detail-souvenir__img">
-                <img src="{{ url('assets/img/souvenir/nama item-1.jpg') }}" alt="Item 3" class="detail-souvenir__img"> --}}
+                <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                    alt="{{ $b->nama }}">
             </div>
         </div>
     </div>

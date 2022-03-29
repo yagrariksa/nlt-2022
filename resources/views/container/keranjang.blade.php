@@ -1,14 +1,23 @@
 @extends('template.client')
 
-@section('title', 'List Keranjang Alamat')
+@section('title', 'List Keranjang')
 @section('seo-desc')
 @section('seo-img')
 
 @section('addclass', 'keranjang')
 
 @section('content')
-    <h4 class="mobile-title">List Keranjang Alamat</h4>
-    <h1 class="keranjang__title">List Keranjang Alamat</h1>
+    <h4 class="mobile-title">List Keranjang</h4>
+    <div class="keranjang__title-div">
+        <h1 class="keranjang__title">List Keranjang</h1>
+        <a class="button btn-primary"
+            href="{{ route('souvenir', [
+                'mode' => 'add',
+                'object' => 'kantong',
+                'redirect' => 'true',
+            ]) }}">TAMBAH
+            KERANJANG</a>
+    </div>
     <div class="keranjang__cards">
 
         @foreach (Auth::user()->kantong as $k)
@@ -25,8 +34,8 @@
                 </div>
                 <hr>
                 <div class="keranjang__card--right">
-                    <h3 class="keranjang__card--harga">Grand Total : <span>Rp{{ $k->souv_total()['total_harga'] }}</span>
-                    </h3>
+                    <h4 class="keranjang__card--harga">Grand Total : <span>Rp{{ $k->souv_total()['total_harga'] }}</span>
+                    </h4>
                     <img src="{{ url('assets/img/keranjang-arrow.svg') }}" alt="">
                 </div>
             </div>

@@ -108,6 +108,11 @@
             background-color: blanchedalmond;
         }
 
+        .badges {
+            padding: 3px 10px;
+            border-radius: 99px;
+            background-color: rgba(127, 255, 212, 0.404)
+        }
     </style>
 </head>
 

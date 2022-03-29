@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Kantong;
+use App\Models\Kategori;
 use App\Models\Souvenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class SouvenirController extends Controller
             case 'katalog':
                 switch ($mode) {
                     case 'list':
-                        return $this->d_view_list_souvenir();
+                        return $this->d_view_list_souvenir($kid);
                         break;
 
                     case 'detail':
@@ -46,7 +47,7 @@ class SouvenirController extends Controller
                         break;
 
                     default:
-                        return $this->d_view_list_souvenir();
+                        return $this->d_view_list_souvenir($kid);
                         break;
                 }
                 break;
@@ -76,16 +77,24 @@ class SouvenirController extends Controller
                 break;
 
             default:
-                return $this->d_view_list_souvenir();
+                return $this->d_view_list_souvenir($kid);
                 break;
         }
     }
 
-    protected function d_view_list_souvenir()
+    protected function d_view_list_souvenir($kid)
     {
-        $barang = Barang::get();
+        $k = Kategori::where('parent_id', null)->get();
+
+        if ($kid) {
+            $b = Kategori::where('parent_id', null)->where('kat_id', $kid)->get();
+        } else {
+            $b = $k;
+        }
+        // query barang from kategori
         return view('be.d.souvenir.list', [
-            'barang' => $barang
+            'barang' => $b,
+            'kategori' => $k
         ]);
         // return view('container.list-souvenir');
     }

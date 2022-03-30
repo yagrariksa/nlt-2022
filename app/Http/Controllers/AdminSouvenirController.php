@@ -112,7 +112,8 @@ class AdminSouvenirController extends Controller
     protected function barang_list()
     {
         $k = Kategori::with('barang')->where('parent_id', null)->get();
-        return view('be.a.barang.list', [
+        // return view('be.a.barang.list', [
+        return view('container.admin.souvenir', [
             'k' => $k
         ]);
     }
@@ -173,7 +174,7 @@ class AdminSouvenirController extends Controller
                 return redirect()
                     ->route('a.souvenir', [
                         'mode' => 'list',
-                        'object' => 'kategori'
+                        'object' => 'barang'
                     ])->with('msg', 'sukses menambahkan kategori');
                 break;
 
@@ -189,7 +190,7 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 'object' => 'kategori'
+                        'mode' => 'list', 'object' => 'barang'
                     ])->with('msg', 'sukses mengubah kategori');
                 break;
 
@@ -204,7 +205,7 @@ class AdminSouvenirController extends Controller
                 $k->delete();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 'object' => 'kategori'
+                        'mode' => 'list', 'object' => 'barang'
                     ])->with('msg', 'sukses menghapus kategori');
                 break;
 

@@ -776,6 +776,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .dialog__title.blue {
   color: #005F73;
 }
+.dialog__title.normal {
+  color: #001219;
+}
 .dialog__message {
   color: #667175;
 }
@@ -1533,6 +1536,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .list-peserta__btn--edit {
   background-color: #EE9B00;
+}
+.list-peserta__btn--new {
+  background-color: #001219;
+}
+.list-peserta__btn--new:hover {
+  background-color: #E3CE8F !important;
 }
 .list-peserta__btn:hover {
   background-color: #001219;
@@ -3447,4 +3456,173 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .list-souvenir__etalase--sm {
     display: block;
   }
+}
+
+.badge {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 3px 10px;
+  font-weight: 500;
+  border-radius: 5rem;
+  white-space: nowrap;
+}
+.badge--parent {
+  background-color: #D5F7DC;
+}
+.badge--child {
+  background-color: #CCD4FC;
+}
+
+.adm-souvenir__title-div {
+  margin: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.adm-souvenir__content {
+  display: grid;
+  grid-template-columns: calc(100% - 21rem) 19rem;
+  gap: 2rem;
+}
+.adm-souvenir__left {
+  padding: 2rem;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+  border-radius: 2rem;
+}
+.adm-souvenir__left-top {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.adm-souvenir__left-top h4,
+.adm-souvenir__left-top a {
+  white-space: nowrap;
+}
+.adm-souvenir__left-top input {
+  width: 100%;
+}
+.adm-souvenir__section-title {
+  font-weight: 500;
+}
+.adm-souvenir__delete-dialog {
+  display: none;
+}
+.adm-souvenir__table tbody td > span {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+.adm-souvenir__right {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+  border-radius: 2rem;
+}
+.adm-souvenir__right-top {
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.adm-souvenir__legends {
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.adm-souvenir__legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.adm-souvenir__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.adm-souvenir__legend-color--utama {
+  background-color: #D5F7DC;
+}
+.adm-souvenir__legend-color--subkategori {
+  background-color: #CCD4FC;
+}
+.adm-souvenir__list-kategori {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.adm-souvenir__kategori {
+  padding: 1rem 2rem 1rem 2.25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.adm-souvenir__kategori.subkategori, .adm-souvenir__kategori.add-subkategori {
+  padding: 1rem 2rem 1rem 3.25rem;
+}
+.adm-souvenir__kategori > hr {
+  position: absolute;
+  left: 0.25rem;
+  height: 100%;
+  border: 4px solid #001219;
+  border-radius: 8px;
+}
+.adm-souvenir__kategori.kategori-utama > hr {
+  border-color: #D5F7DC;
+}
+.adm-souvenir__kategori.subkategori > hr, .adm-souvenir__kategori.add-subkategori > hr {
+  border-color: #CCD4FC;
+}
+.adm-souvenir__kategori.add-subkategori .adm-souvenir__kategori-title {
+  color: #B3B8BA;
+}
+.adm-souvenir__kategori-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-kategori__dialog,
+.edit-kategori__dialog {
+  display: none;
+  width: 600px;
+  padding: 4rem;
+}
+.add-kategori__dialog .dialog__title,
+.edit-kategori__dialog .dialog__title {
+  font-weight: 600;
+}
+.add-kategori__dialog .dialog__title > h4,
+.edit-kategori__dialog .dialog__title > h4 {
+  color: #0A9396;
+}
+.add-kategori__dialog .dialog__btn,
+.edit-kategori__dialog .dialog__btn {
+  flex-direction: column;
+  gap: 2rem;
+}
+.add-kategori__dialog .dialog__btn-yes,
+.edit-kategori__dialog .dialog__btn-yes {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 50rem;
+}
+.add-kategori__input,
+.edit-kategori__input {
+  width: 100%;
+  margin-bottom: 4rem;
 }

@@ -168,7 +168,7 @@ class AdminSouvenirController extends Controller
                 return redirect()
                     ->route('a.souvenir', [
                         'mode' => 'list',
-                        'object' => 'kategori'
+                        'object' => 'barang'
                     ])->with('msg', 'sukses menambahkan kategori');
                 break;
 
@@ -179,7 +179,7 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 'object' => 'kategori'
+                        'mode' => 'list', 'object' => 'barang'
                     ])->with('msg', 'sukses mengubah kategori');
                 break;
 

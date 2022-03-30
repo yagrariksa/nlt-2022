@@ -146,12 +146,11 @@
         <div class="adm-souvenir__right">
             <div class="adm-souvenir__right-top">
                 <h4 class="adm-souvenir__section-title">List Kategori</h4>
-                <a href="{{ route('a.souvenir', [
+                <a {{-- href="{{ route('a.souvenir', [
                     'mode' => 'add',
                     'object' => 'kategori',
                     'key' => 'parent',
-                ]) }}"
-                    class="list-peserta__btn list-peserta__btn--new add-kategori"><img
+                ]) }}" --}} class="list-peserta__btn list-peserta__btn--new add-new-kategori"><img
                         src="{{ url('assets/img/add.svg') }}"></a>
             </div>
 
@@ -202,13 +201,30 @@
                             </form>
                             <div class="dialog__bg"></div>
 
-                            <a href="{{ route('a.souvenir', [
+                            <a {{-- href="{{ route('a.souvenir', [
                                 'mode' => 'edit',
                                 'object' => 'kategori',
                                 'key' => $item->kat_id,
-                            ]) }}"
-                                class="list-peserta__btn list-peserta__btn--edit"><img
+                            ]) }}" --}} class="list-peserta__btn list-peserta__btn--edit edit-kategori"><img
                                     src="{{ url('assets/img/edit.svg') }}"></a>
+                            <form
+                                action="{{ route('a.souvenir', [
+                                    'mode' => 'edit-my-kategori',
+                                    'key' => $item->kat_id,
+                                ]) }}"
+                                method="post" class="add-kategori__dialog add-kategori__dialog--edit-kategori dialog">
+                                @csrf
+                                <h2 class="dialog__title normal">Edit Kategori Utama</h2>
+                                <x-form.input-text id="nama" class="edit-kategori__input" label="Nama Kategori"
+                                    value="{{ old('nama') ? old('nama') : $item->nama }}" />
+                                <input type="hidden" name="parent"
+                                    value="{{ $item->parent_id ? $item->parent_id : '' }}">
+                                <div class="dialog__btn">
+                                    <button type="submit" class="dialog__btn-yes">EDIT KATEGORI</button>
+                                    <a class="dialog__btn-batal">Batalkan</a>
+                                </div>
+                            </form>
+                            <div class="dialog__bg"></div>
                         </div>
                     </div>
 
@@ -246,13 +262,35 @@
                                 </form>
                                 <div class="dialog__bg"></div>
 
-                                <a href="{{ route('a.souvenir', [
+                                <a {{-- href="{{ route('a.souvenir', [
                                     'mode' => 'edit',
                                     'object' => 'kategori',
                                     'key' => $child->kat_id,
-                                ]) }}"
-                                    class="list-peserta__btn list-peserta__btn--edit"><img
+                                ]) }}" --}}
+                                    class="list-peserta__btn list-peserta__btn--edit edit-subkategori"><img
                                         src="{{ url('assets/img/edit.svg') }}"></a>
+                                <form
+                                    action="{{ route('a.souvenir', [
+                                        'mode' => 'edit-my-kategori',
+                                        'key' => $child->kat_id,
+                                    ]) }}"
+                                    method="post"
+                                    class="add-kategori__dialog add-kategori__dialog--edit-subkategori dialog">
+                                    @csrf
+                                    <div class="dialog__title">
+                                        <h2>Edit Sub-Kategori</h2>
+                                        <h4>Kategori Utama: {{ $item->nama }}</h4>
+                                    </div>
+                                    <x-form.input-text id="nama" class="edit-kategori__input" label="Sub-Kategori"
+                                        value="{{ old('nama') ? old('nama') : $child->nama }}" />
+                                    <input type="hidden" name="parent"
+                                        value="{{ $child->parent_id ? $child->parent_id : '' }}">
+                                    <div class="dialog__btn">
+                                        <button type="submit" class="dialog__btn-yes">EDIT SUB-KATEGORI</button>
+                                        <a class="dialog__btn-batal">Batalkan</a>
+                                    </div>
+                                </form>
+                                <div class="dialog__bg"></div>
                             </div>
                         </div>
                     @endforeach
@@ -261,13 +299,32 @@
                         <hr>
                         <h6 class="adm-souvenir__kategori-title">Tambah sub-kategori</h6>
                         <div class="adm-souvenir__kategori-btns">
-                            <a href="{{ route('a.souvenir', [
+                            <a {{-- href="{{ route('a.souvenir', [
                                 'mode' => 'add',
                                 'object' => 'kategori',
                                 'key' => $item->kat_id,
-                            ]) }}"
-                                class="list-peserta__btn list-peserta__btn--new add-kategori"><img
+                            ]) }}" --}}
+                                class="list-peserta__btn list-peserta__btn--new add-new-subkategori"><img
                                     src="{{ url('assets/img/add.svg') }}"></a>
+                            <form
+                                action="{{ route('a.souvenir', [
+                                    'mode' => 'add-new-kategori',
+                                ]) }}"
+                                method="post" class="add-kategori__dialog add-kategori__dialog--new-subkategori dialog">
+                                @csrf
+                                <div class="dialog__title">
+                                    <h2>Tambah Sub-Kategori</h2>
+                                    <h4>Kategori Utama: {{ $item->nama }}</h4>
+                                </div>
+                                <x-form.input-text id="nama" class="add-kategori__input" label="Sub-Kategori"
+                                    value="{{ old('nama') ? old('nama') : '' }}" />
+                                <input type="hidden" name="parent" value="{{ $item ? $item->id : '' }}">
+                                <div class="dialog__btn">
+                                    <button type="submit" class="dialog__btn-yes">TAMBAH SUB-KATEGORI</button>
+                                    <a class="dialog__btn-batal">Batalkan</a>
+                                </div>
+                            </form>
+                            <div class="dialog__bg"></div>
                         </div>
                     </div>
                 @endforeach
@@ -279,23 +336,15 @@
 @section('other')
     {{-- it can be modal, etc. --}}
 
-    {{-- NOTE :: INI MASIH BERANTAKAN A.K.A. BLM BEKERJA DENGAN BAIK:') --}}
     <form action="{{ route('a.souvenir', [
         'mode' => 'add-new-kategori',
     ]) }}" method="post"
-        class="add-kategori__dialog dialog">
+        class="add-kategori__dialog add-kategori__dialog--new-kategori dialog">
         @csrf
-        @if (\Request::get('key') == 'parent')
-            <h2 class="dialog__title">Tambah Kategori</h2>
-        @else
-            <div class="dialog__title">
-                <h2>Tambah Sub-Kategori</h2>
-                <h4>Kategori Utama: {nama kategori}</h4>
-            </div>
-        @endif
+        <h2 class="dialog__title normal">Tambah Kategori Utama</h2>
         <x-form.input-text id="nama" class="add-kategori__input" label="Nama Kategori"
             value="{{ old('nama') ? old('nama') : '' }}" />
-        <input type="hidden" name="parent" value="{ $k ? $k->id : '' }">
+        <input type="hidden" name="parent" value="">
         <div class="dialog__btn">
             <button type="submit" class="dialog__btn-yes">TAMBAH KATEGORI</button>
             <a class="dialog__btn-batal">Batalkan</a>
@@ -307,12 +356,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        $('.add-kategori').click(e => {
-            $('.add-kategori__dialog')[0].classList.add('active')
+        $('.add-new-kategori').click(() => {
+            $('.add-kategori__dialog--new-kategori')[0].classList.add('active')
         })
 
-        $('.dialog__btn-batal').click(() => {
-            $('.add-kategori__dialog')[0].classList.remove('active')
+        $('.add-new-subkategori').click(e => {
+            e.currentTarget.nextElementSibling.classList.add('active')
+        })
+
+        $('.edit-kategori').click(e => {
+            e.currentTarget.nextElementSibling.classList.add('active')
+        })
+
+        $('.edit-subkategori').click(e => {
+            e.currentTarget.nextElementSibling.classList.add('active')
+        })
+
+        $('.dialog__btn-batal').click(e => {
+            e.currentTarget.parentElement.parentElement.classList.remove('active')
         })
     </script>
 @endsection

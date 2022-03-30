@@ -776,6 +776,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .dialog__title.blue {
   color: #005F73;
 }
+.dialog__title.normal {
+  color: #001219;
+}
 .dialog__message {
   color: #667175;
 }
@@ -3592,21 +3595,34 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   gap: 0.5rem;
 }
 
-.add-kategori__dialog {
+.add-kategori__dialog,
+.edit-kategori__dialog {
   display: none;
   width: 600px;
+  padding: 4rem;
 }
-.add-kategori__dialog .dialog__btn {
+.add-kategori__dialog .dialog__title,
+.edit-kategori__dialog .dialog__title {
+  font-weight: 600;
+}
+.add-kategori__dialog .dialog__title > h4,
+.edit-kategori__dialog .dialog__title > h4 {
+  color: #0A9396;
+}
+.add-kategori__dialog .dialog__btn,
+.edit-kategori__dialog .dialog__btn {
   flex-direction: column;
   gap: 2rem;
 }
-.add-kategori__dialog .dialog__btn-yes {
+.add-kategori__dialog .dialog__btn-yes,
+.edit-kategori__dialog .dialog__btn-yes {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 50rem;
 }
-.add-kategori__input {
+.add-kategori__input,
+.edit-kategori__input {
   width: 100%;
   margin-bottom: 4rem;
 }

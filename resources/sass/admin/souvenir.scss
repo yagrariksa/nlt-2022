@@ -168,18 +168,30 @@
     }
 }
 
-.add-kategori {
+.add-kategori,
+.edit-kategori {
     &__dialog {
         display: none;
         width: 600px;
+        padding: 4rem;
 
-        .dialog__btn {
-            flex-direction: column;
-            gap: 2rem;
+        .dialog {
+            &__title {
+                font-weight: 600;
 
-            &-yes {
-                width: fit-content;
-                border-radius: 50rem;
+                >h4 {
+                    color: $viridian-green;
+                }
+            }
+
+            &__btn {
+                flex-direction: column;
+                gap: 2rem;
+
+                &-yes {
+                    width: fit-content;
+                    border-radius: 50rem;
+                }
             }
         }
     }

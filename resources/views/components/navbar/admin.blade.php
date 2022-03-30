@@ -13,14 +13,15 @@
                     'object' => 'peserta',
                 ]) }}
                 " class="nav__item" id="nav__item--a-peserta">LIST PESERTA <span></span></a>
-                    <a href="
+            <a href="
                     {{ route('a.souvenir') }}
                 " class="nav__item" id="nav__item--a-souvenir">SOUVENIR<span></span></a>
-                    <a href="
+            <a href="#
                 {{-- {{ route('souvenir', [
                     'mode' => 'list',
                 ]) }} --}}
-                " class="nav__item" id="nav__item--a-absensi">ABSENSI <span></span></a>
+                " class="nav__item" id="nav__item--a-absensi" onclick="alert('coming soon')">ABSENSI
+                <span></span></a>
         </div>
         <a href="{{ route('a.logout') }}" class="button btn-primary nav__item logout">LOGOUT</a>
     </div>

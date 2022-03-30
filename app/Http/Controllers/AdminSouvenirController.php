@@ -23,7 +23,7 @@ class AdminSouvenirController extends Controller
             case 'kategori':
                 switch ($mode) {
                     case 'list':
-                        return $this->kategori_list();
+                        return $this->barang_list();
                         break;
 
                     case 'add':
@@ -76,7 +76,7 @@ class AdminSouvenirController extends Controller
                 }
                 break;
             default:
-                return view('be.a.souvenir');
+                return $this->barang_list();
                 break;
         }
     }

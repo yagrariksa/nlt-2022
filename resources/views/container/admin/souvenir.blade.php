@@ -375,5 +375,26 @@
         $('.dialog__btn-batal').click(e => {
             e.currentTarget.parentElement.parentElement.classList.remove('active')
         })
+
+        let data = document.querySelectorAll('.adm-souvenir__table tbody tr')
+        document.querySelector('.adm-souvenir__input-search').addEventListener('input', (e) => {
+            let value = e.target.value
+
+            data.forEach(e => {
+                e.style.display = 'none'
+            });
+
+            if (value == null) {
+                data.forEach(e => {
+                    e.style.display = 'table-row'
+                })
+            } else {
+                data.forEach(e => {
+                    if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        e.style.display = 'table-row'
+                    }
+                })
+            }
+        })
     </script>
 @endsection

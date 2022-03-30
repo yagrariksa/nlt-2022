@@ -93,6 +93,10 @@ for (let i = 0; i < selectItem.length; i++) {
     let newSelectedElm = document.createElement('input');
     newSelectedElm.setAttribute('class', 'form-group__selected');
     newSelectedElm.placeholder = selectElement.options[selectElement.selectedIndex].innerHTML;
+    if (selectElement.selectedIndex != 0) {
+        newSelectedElm.placeholder = '';
+        newSelectedElm.value = selectElement.options[selectElement.selectedIndex].innerHTML;
+    }
     selectItem[i].prepend(newSelectedElm);
 
     let newOptionContainerElm = document.createElement('div');

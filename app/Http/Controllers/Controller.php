@@ -19,6 +19,7 @@ class Controller extends BaseController
         'email' => 'kolom :attribute harus berupa email',
         'confirmed' => ':attribute tidak terkonfirmasi',
         'unique' => ':attribute harus unik / :attribute telah terdaftar',
-        'integer' => 'harus berupa angka'
+        'integer' => 'harus berupa angka',
+        'max' => ':attribute maksimal :max karakter'
     ];
 }

@@ -10,16 +10,20 @@ class Souvenir extends Model
     use HasFactory;
 
     protected $fillable = [
-        'peserta_id',
-        'item_id',
-        'item_name',
-        'item_count',
-        'item_price',
+        'kantong_id',
+        'json_id',
+        'nama',
+        'jumlah',
+        'harga',
         'catatan',
+        'berat_gram',
+        'total_harga',
+        'total_berat',
+        'souv_id'
     ];
 
-    public function peserta()
+    public function kantong()
     {
-        return $this->belongsTo(Peserta::class, 'peserta_id', 'id');
+        return $this->belongsTo(Kantong::class, 'kantong_id', 'id');
     }
 }

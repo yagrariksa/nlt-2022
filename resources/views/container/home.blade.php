@@ -147,7 +147,29 @@
     </div>
 
     <div class="sponsors" id="our-sponsor">
-        {{-- here --}}
+        <h1 class="sponsors__title">Get To Know About <span>Our Sponsors</span></h1>
+        <div class="sponsors__list">
+            <div class="sponsors__logo-name" onclick="location.href= '{{ route('sponsor') }}'">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+            <div class="sponsors__logo-name">
+                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Excel</h4>
+            </div>
+        </div>
     </div>
 
     <div class="footer" id="contact-us">

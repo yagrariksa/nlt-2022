@@ -257,8 +257,68 @@ $('.form-group input').map(x => {
     }
 })
 
+$('.form-group textarea').map(x => {
+    if ($('.form-group textarea')[x].value != '') {
+        $('.form-group textarea')[x].classList.add('has-value');
+    }
+})
+
 $('.form-group__input-file .form-group__filename').map(x => {
     if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
         $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
     }
 })
+
+// MANIPULATE INPUT SELECT STYLE ON DIALOG BOX -> SELECT-OPTION-NEW
+let selectItemNew = $('.form-group--select-new'); //x
+
+for (let i = 0; i < selectItemNew.length; i++) {
+    let selectElement = selectItemNew[i].getElementsByTagName('select')[0];
+
+    let newSelectedElm = document.createElement('div');
+    newSelectedElm.setAttribute('class', 'form-group__selected form-group__selected--new');
+    newSelectedElm.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+    selectItemNew[i].prepend(newSelectedElm);
+
+    let newOptionContainerElm = document.createElement('div');
+    newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');
+
+    for (let j = 1; j < selectElement.length; j++) {
+        let newOptionElm = document.createElement('div');
+        newOptionElm.innerHTML = selectElement.options[j].innerHTML;
+        newOptionElm.addEventListener('click', function() {
+            let y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.nextSibling;
+            for (i = 0; i < sl; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("form-group__same-as-selected-new");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "form-group__same-as-selected-new");
+                break;
+              }
+            }
+            h.click();
+        })
+        newOptionContainerElm.appendChild(newOptionElm);
+    }
+    selectItemNew[i].prepend(newOptionContainerElm);
+    newSelectedElm.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.previousSibling.classList.toggle('form-group__select-hide');
+        this.classList.toggle('form-group__select-arrow-active');
+    });
+    $('.form-group__selected').keypress(function(e) {
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.previousSibling.classList.remove('form-group__select-hide');
+        this.classList.toggle('form-group__select-arrow-active');
+    });
+}

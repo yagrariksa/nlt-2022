@@ -56,8 +56,8 @@
                             <td class="adm-table__univ">{{ $p->univ->univ }}</td>
                             <td class="adm-table__jabatan">{{ $p->jabatan }}</td>
                             <td class="adm-table__handphone">{{ $p->handphone }}</td>
-                            <td class="adm-table__foto"><a href="{{ url('storage') . $p->foto_url }}" target="_blank"
-                                    rel="noopener noreferrer">Lihat</a></td>
+                            <td class="adm-table__foto"><a href="{{ url('storage') . '/' . $p->foto_url }}"
+                                    target="_blank" rel="noopener noreferrer">Lihat</a></td>
                             <td class="adm-table__email">{{ $p->email }}</td>
                             <td class="adm-table__line">{{ $p->line }}</td>
                         </tr>

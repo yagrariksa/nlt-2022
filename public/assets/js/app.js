@@ -2577,6 +2577,12 @@ for (var i = 0; i < selectItem.length; i++) {
   var newSelectedElm = document.createElement('input');
   newSelectedElm.setAttribute('class', 'form-group__selected');
   newSelectedElm.placeholder = selectElement.options[selectElement.selectedIndex].innerHTML;
+
+  if (selectElement.selectedIndex != 0) {
+    newSelectedElm.placeholder = '';
+    newSelectedElm.value = selectElement.options[selectElement.selectedIndex].innerHTML;
+  }
+
   selectItem[i].prepend(newSelectedElm);
   var newOptionContainerElm = document.createElement('div');
   newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');

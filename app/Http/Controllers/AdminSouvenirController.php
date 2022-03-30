@@ -121,7 +121,8 @@ class AdminSouvenirController extends Controller
     protected function barang_add()
     {
         $k = Kategori::where('parent_id', null)->get();
-        return view('be.a.barang.add', [
+        // return view('be.a.barang.add', [
+        return view('container.admin.add-barang', [
             'k' => $k
         ]);
     }
@@ -130,7 +131,8 @@ class AdminSouvenirController extends Controller
     {
         $k = Kategori::get();
         $b = Barang::where('bar_id', $key)->first();
-        return view('be.a.barang.edit', [
+        // return view('be.a.barang.edit', [
+        return view('container.admin.edit-barang', [
             'k' => $k,
             'b' => $b
         ]);

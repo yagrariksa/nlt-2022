@@ -1,0 +1,104 @@
+.keranjang {
+    &__title-div {
+        margin-bottom: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__cards {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    &__card {
+        padding: 2rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+        box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        background-color: $white;
+        cursor: pointer;
+
+        hr {
+            width: 100%;
+            display: none;
+            opacity: 1;
+            border: .5px solid $rich-black-10;
+            border-radius: 1px;
+        }
+
+        &--left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .5rem;
+        }
+
+        &--desc {
+            color: $rich-black-60;
+        }
+
+        &--right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        &--berat,
+        &--ongkir,
+        &--harga {
+            color: $rich-black-40;
+            white-space: nowrap;
+
+            span {
+                color: $gamboge;
+            }
+        }
+
+        &--arrow {
+            height: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .keranjang {
+        &__title {
+            display: none;
+        }
+
+        &__card {
+            padding: 1.5rem 0;
+            flex-direction: column;
+            gap: 1.7rem;
+
+            hr {
+                display: block;
+            }
+
+            &--left {
+                width: 100%;
+                padding: 0 1.5rem;
+            }
+
+            &--right {
+                width: 100%;
+                padding: 0 1.5rem;
+                justify-content: space-between;
+            }
+
+            &--harga {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 22px;
+            }
+        }
+    }
+}

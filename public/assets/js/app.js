@@ -2371,6 +2371,10 @@ __webpack_require__(/*! ./add-edit-peserta */ "./resources/js/add-edit-peserta.j
 
 __webpack_require__(/*! ./admin/filter */ "./resources/js/admin/filter.js");
 
+__webpack_require__(/*! ./home */ "./resources/js/home.js");
+
+__webpack_require__(/*! ./detail-souvenir */ "./resources/js/detail-souvenir.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -2413,6 +2417,54 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 $('button.detail-peserta__btn--delete').click(function (e) {
   e.currentTarget.nextElementSibling.classList.add('active');
 });
+
+/***/ }),
+
+/***/ "./resources/js/detail-souvenir.js":
+/*!*****************************************!*\
+  !*** ./resources/js/detail-souvenir.js ***!
+  \*****************************************/
+/***/ (function() {
+
+var _this = this;
+
+function getParameterByName(name) {
+  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+var souvenirNode = document.querySelector('.detail-souvenir');
+var souvenirId = getParameterByName('s_id');
+var dodata;
+var url = "{{ url('/assets/json/souvenir.json') }}";
+
+var populateData = function populateData() {
+  souvenirNode.querySelector('.detail-souvenir__title').textContent = _this.dodata.nama;
+  souvenirNode.querySelector('.detail-souvenir__desc').textContent = _this.dodata.desc;
+  souvenirNode.querySelector('.detail-souvenir__img').textContent = _this.dodata.img;
+  souvenirNode.querySelector('.detail-souvenir__berat').textContent = _this.dodata.berat;
+  souvenirNode.querySelector('.detail-souvenir__harga').textContent = _this.dodata.harga;
+  souvenirNode.querySelector('.detail-souvenir__submit').setAttribute('href', souvenirNode.querySelector('.detail-souvenir__submit').getAttribute('href') + '&s_id=' + _this.dodata.uid);
+};
+
+var getData = function getData() {
+  fetch(url).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    _this.dodata = data.filter(function (e) {
+      return e.uid == souvenirId;
+    })[0];
+    console.log(_this.dodata);
+    populateData();
+  });
+};
+
+getData();
 
 /***/ }),
 
@@ -2525,6 +2577,12 @@ for (var i = 0; i < selectItem.length; i++) {
   var newSelectedElm = document.createElement('input');
   newSelectedElm.setAttribute('class', 'form-group__selected');
   newSelectedElm.placeholder = selectElement.options[selectElement.selectedIndex].innerHTML;
+
+  if (selectElement.selectedIndex != 0) {
+    newSelectedElm.placeholder = '';
+    newSelectedElm.value = selectElement.options[selectElement.selectedIndex].innerHTML;
+  }
+
   selectItem[i].prepend(newSelectedElm);
   var newOptionContainerElm = document.createElement('div');
   newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');
@@ -2684,11 +2742,102 @@ $('.form-group input').map(function (x) {
     $('.form-group input')[x].classList.add('has-value');
   }
 });
+$('.form-group textarea').map(function (x) {
+  if ($('.form-group textarea')[x].value != '') {
+    $('.form-group textarea')[x].classList.add('has-value');
+  }
+});
 $('.form-group__input-file .form-group__filename').map(function (x) {
   if ($('.form-group__input-file .form-group__filename')[x].innerHTML != '') {
     $('.form-group__input-file .form-group__filename')[x].parentElement.nextElementSibling.classList.add('has-value');
   }
+}); // MANIPULATE INPUT SELECT STYLE ON DIALOG BOX -> SELECT-OPTION-NEW
+
+var selectItemNew = $('.form-group--select-new'); //x
+
+for (var _i = 0; _i < selectItemNew.length; _i++) {
+  var _selectElement = selectItemNew[_i].getElementsByTagName('select')[0];
+
+  var _newSelectedElm = document.createElement('div');
+
+  _newSelectedElm.setAttribute('class', 'form-group__selected form-group__selected--new');
+
+  _newSelectedElm.innerHTML = _selectElement.options[_selectElement.selectedIndex].innerHTML;
+
+  selectItemNew[_i].prepend(_newSelectedElm);
+
+  var _newOptionContainerElm = document.createElement('div');
+
+  _newOptionContainerElm.setAttribute('class', 'form-group__select-items form-group__select-hide');
+
+  for (var _j = 1; _j < _selectElement.length; _j++) {
+    var _newOptionElm = document.createElement('div');
+
+    _newOptionElm.innerHTML = _selectElement.options[_j].innerHTML;
+
+    _newOptionElm.addEventListener('click', function () {
+      var y, i, k, s, h, sl, yl;
+      s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+      sl = s.length;
+      h = this.parentNode.nextSibling;
+
+      for (i = 0; i < sl; i++) {
+        if (s.options[i].innerHTML == this.innerHTML) {
+          s.selectedIndex = i;
+          h.innerHTML = this.innerHTML;
+          y = this.parentNode.getElementsByClassName("form-group__same-as-selected-new");
+          yl = y.length;
+
+          for (k = 0; k < yl; k++) {
+            y[k].removeAttribute("class");
+          }
+
+          this.setAttribute("class", "form-group__same-as-selected-new");
+          break;
+        }
+      }
+
+      h.click();
+    });
+
+    _newOptionContainerElm.appendChild(_newOptionElm);
+  }
+
+  selectItemNew[_i].prepend(_newOptionContainerElm);
+
+  _newSelectedElm.addEventListener('click', function (e) {
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.previousSibling.classList.toggle('form-group__select-hide');
+    this.classList.toggle('form-group__select-arrow-active');
+  });
+
+  $('.form-group__selected').keypress(function (e) {
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.previousSibling.classList.remove('form-group__select-hide');
+    this.classList.toggle('form-group__select-arrow-active');
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/home.js":
+/*!******************************!*\
+  !*** ./resources/js/home.js ***!
+  \******************************/
+/***/ (() => {
+
+var tempClone;
+var temp;
+$('.sponsors__logo-name').hover(function (e) {
+  tempClone = e.currentTarget.cloneNode(true);
+  temp = tempClone.lastElementChild.innerHTML;
+  e.currentTarget.lastElementChild.innerHTML = 'Click for more!';
+}, function (e) {
+  e.currentTarget.lastElementChild.innerHTML = temp;
 });
+console.log('ok');
 
 /***/ }),
 
@@ -2725,7 +2874,7 @@ $('.button.list-peserta__batal').click(function (e) {
 $(document).ready(function () {
   $(".nav__burger").click(function (e) {
     e.currentTarget.classList.toggle("active");
-    e.currentTarget.parentNode.nextElementSibling.classList.toggle("active");
+    e.currentTarget.nextElementSibling.classList.toggle("active");
   });
   $(".nav__profile").click(function (e) {
     e.currentTarget.nextElementSibling.classList.toggle("active");
@@ -2736,37 +2885,75 @@ window.addEventListener('click', function (e) {
     $('.nav__dropdown')[0].classList.remove('active');
   }
 });
+$('.nav__right .nav__item').click(function (e) {
+  $('.nav__right .nav__item').map(function (x) {
+    $('.nav__right .nav__item')[x].classList.remove('active');
+  });
+  e.target.classList.add('active');
+});
+$('.nav__mobile-item .nav__item--sm').click(function (e) {
+  $('.nav__mobile-item .nav__item--sm').map(function (x) {
+    $('.nav__mobile-item .nav__item--sm')[x].classList.remove('active');
+  });
+  e.target.parentNode.classList.add('active');
+  $('.nav__burger')[0].classList.remove('active');
+  $('.nav__mobile-item')[0].classList.remove('active');
+});
 
 if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--peserta')[0].classList.add('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--absensi')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.remove('active');
+  $('#nav__item--peserta-sm')[0].classList.add('active');
+  $('#nav__item--souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--absensi-sm')[0].classList.remove('active');
+  $('#nav__item--password-sm')[0].classList.remove('active');
 } else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.add('active');
   $('#nav__item--absensi')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.remove('active');
+  $('#nav__item--peserta-sm')[0].classList.remove('active');
+  $('#nav__item--souvenir-sm')[0].classList.add('active');
+  $('#nav__item--absensi-sm')[0].classList.remove('active');
+  $('#nav__item--password-sm')[0].classList.remove('active');
 } else if (window.location.pathname == '/absensi') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--absensi')[0].classList.add('active');
   $('#nav__item--password')[0].classList.remove('active');
+  $('#nav__item--peserta-sm')[0].classList.remove('active');
+  $('#nav__item--souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--absensi-sm')[0].classList.add('active');
+  $('#nav__item--password-sm')[0].classList.remove('active');
 } else if (window.location.pathname == '/setting') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.remove('active');
   $('#nav__item--absensi')[0].classList.remove('active');
   $('#nav__item--password')[0].classList.add('active');
+  $('#nav__item--peserta-sm')[0].classList.remove('active');
+  $('#nav__item--souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--absensi-sm')[0].classList.remove('active');
+  $('#nav__item--password-sm')[0].classList.add('active');
 } else if (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
   $('#nav__item--a-peserta')[0].classList.add('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
   $('#nav__item--a-univ')[0].classList.remove('active');
+  $('#nav__item--a-peserta-sm')[0].classList.add('active');
+  $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--a-absensi-sm')[0].classList.remove('active');
+  $('#nav__item--a-univ-sm')[0].classList.remove('active');
 } else if (window.location.pathname == '/mahavira' && window.location.search == '?univ=list') {
   $('#nav__item--a-peserta')[0].classList.remove('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
   $('#nav__item--a-univ')[0].classList.add('active');
+  $('#nav__item--a-peserta-sm')[0].classList.remove('active');
+  $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--a-absensi-sm')[0].classList.remove('active');
+  $('#nav__item--a-univ-sm')[0].classList.add('active');
 }
 
 /***/ }),

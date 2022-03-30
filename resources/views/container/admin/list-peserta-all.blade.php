@@ -14,29 +14,10 @@
             <div class="dialog">
                 <h3 class="dialog__title">Urutkan Disini</h3>
                 <div class="dialog__filter">
-                    {{-- <div class="dialog__filter--quest-box">
-                        <h4>Urutkan Berdasarkan</h4>
-                        <select name="" id="select-column-sorter">
-                            <option value="peserta-nama" selected>Nama Peserta</option>
-                            <option value="peserta-univ">Asal Universitas</option>
-                            <option value="peserta-jabatan">Jabatan</option>
-                        </select>
-                    </div>
-                    <div class="dialog__filter--quest-box">
-                        <h4>Urutkan Secara</h4>
-                        <div class="dialog__filter--radio">
-                            <input type="radio" name="sorter" id="radio-ascending" checked>
-                            <label for="radio-ascending">A-Z</label>
-                        </div>
-                        <div class="dialog__filter--radio">
-                            <input type="radio" name="sorter" id="radio-descending">
-                            <label for="radio-descending">Z-A</label>
-                        </div>
-                    </div> --}}
-                    <x-form.select-options id="select-column-sorter-column" label="Urutkan Berdasarkan"
+                    <x-form.select-option-new id="select-column-sorter-column" label="Urutkan Berdasarkan"
                         options='Nama,Asal Universitas,Jabatan' class="dialog__filter--quest-box" value="" />
 
-                    <x-form.select-options id="select-column-sorter-ascending" label="Urutkan Secara" options='A-Z,Z-A'
+                    <x-form.select-option-new id="select-column-sorter-ascending" label="A-Z" options='A-Z,Z-A'
                         class="dialog__filter--quest-box" value="" />
                 </div>
                 <div class="dialog__btn">

@@ -1,0 +1,234 @@
+.detail-keranjang {
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+
+    &__title {
+        margin-bottom: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__card {
+        align-items: stretch;
+
+        &--left {
+            width: 40%;
+        }
+
+        &--right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1.5rem;
+
+            >.top {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-start;
+                gap: .5rem;
+
+                h4 {
+                    text-align: end;
+                }
+            }
+        }
+    }
+
+    &__action,
+    &__item-action {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: .5rem;
+    }
+
+    &__dialog-btn {
+        padding: 0.25rem 1rem;
+        border-radius: .5rem;
+        color: $white;
+        background-color: #2B4BF2;
+    }
+
+    &__items {
+        box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        background-color: $white;
+    }
+
+    &__item {
+        width: 100%;
+        padding: 0 2rem;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 2rem;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $rich-black-10;
+        }
+
+        hr {
+            align-self: stretch;
+            opacity: 1;
+            border: .5px solid $rich-black-10;
+            border-radius: 1px;
+        }
+
+        &--left {
+            width: 100%;
+            padding: 2rem 0;
+        }
+
+        &--line {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        &--title,
+        &--label {
+            text-align: start;
+            white-space: nowrap;
+        }
+
+        &--label {
+            color: $rich-black-60;
+        }
+
+        &--harga,
+        &--jumlah,
+        &--keterangan {
+            text-align: end;
+        }
+
+        &--keterangan {
+            white-space: pre-line;
+            max-width: 50%;
+        }
+
+        &--harga {
+            color: $gamboge;
+        }
+
+        &--harga-sm {
+            display: none;
+            color: $gamboge;
+        }
+
+        &--right {
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1199.9px) {
+    .detail-keranjang {
+        &__card {
+            flex-direction: column;
+            gap: 16px;
+
+            &--left {
+                width: 100%;
+            }
+
+            &--right {
+                align-items: flex-start;
+
+                >.top {
+                    align-items: flex-start;
+
+                    >h4 {
+                        text-align: start;
+                    }
+                }
+            }
+        }
+
+        &__action {
+            width: 100%;
+            display: grid;
+            grid-template-columns: calc(100% - 2rem) 1.5rem;
+            grid-template-areas:
+                'submit-ongkir edit'
+                'bukti-bayar delete'
+            ;
+            gap: 8px;
+        }
+
+        &__dialog-btn--submit-ongkir {
+            grid-area: submit-ongkir;
+        }
+
+        &__dialog-btn--bukti-bayar {
+            grid-area: bukti-bayar;
+        }
+
+        &__edit {
+            grid-area: edit;
+        }
+
+        &__delete {
+            grid-area: delete;
+        }
+
+        &__item {
+            flex-direction: column;
+            gap: 0;
+
+            hr {
+                display: none;
+            }
+
+            &--harga {
+                display: none;
+            }
+
+            &--harga-sm {
+                display: block;
+            }
+
+            &--left,
+            &--right {
+                padding: 1.7rem 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    .detail-keranjang {
+        &__title {
+            margin-bottom: 10px;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+
+            >h1 {
+                display: none;
+            }
+
+            >a>img {
+                display: none;
+            }
+        }
+
+        &__card {
+            padding: 1.5rem;
+
+            &--left {
+                padding: 0;
+            }
+        }
+    }
+}

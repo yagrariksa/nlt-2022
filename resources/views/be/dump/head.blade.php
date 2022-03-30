@@ -67,6 +67,7 @@
             display: flex;
             flex-direction: row;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .card {
@@ -90,6 +91,28 @@
             font-weight: 600;
         }
 
+        .button,
+        button {
+            width: fit-content;
+            margin: 5px;
+            text-decoration: none;
+            color: black;
+            padding: 3px 7px;
+            background-color: beige;
+            border-radius: 3px;
+            border: .7px solid black;
+        }
+
+        .button:hover,
+        button:hover {
+            background-color: blanchedalmond;
+        }
+
+        .badges {
+            padding: 3px 10px;
+            border-radius: 99px;
+            background-color: rgba(127, 255, 212, 0.404)
+        }
     </style>
 </head>
 
@@ -103,10 +126,8 @@
                     'mode' => 'list',
                     'object' => 'peserta',
                 ]) }}">peserta</a>
-            <a class="header__item"
-                href="{{ route('souvenir', [
-                    'mode' => 'list',
-                ]) }}">Souvenir</a>
+            <a class="header__item" href="{{ route('absensi') }}">Absen</a>
+            <a class="header__item" href="{{ route('souvenir') }}">Souvenir</a>
             <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>
@@ -123,6 +144,7 @@
                     'object' => 'peserta',
                 ]) }}"
                     class="header__item">peserta</a>
+                <a class="header__item" href="{{ route('a.souvenir') }}">Souvenir</a>
                 <a href="{{ route('a.logout') }}" class="header__item">LogOut</a>
             </div>
         @endif

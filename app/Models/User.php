@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'ketua',
         'email',
@@ -25,21 +20,11 @@ class User extends Authenticatable
         'akronim'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -54,4 +39,8 @@ class User extends Authenticatable
         return sizeof($this->peserta);
     }
 
+    public function kantong()
+    {
+        return $this->hasMany(Kantong::class, 'user_id', 'id');
+    }
 }

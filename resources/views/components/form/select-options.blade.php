@@ -14,6 +14,12 @@
     </select>
     <label for="select" class="form-group__control-label">{{ $label }}</label>
     <i class="form-group__bar"></i>
+    @if ($helper != '')
+        <h6 class="form-help">
+            {{ $helper ?? '' }}
+            <a href="{{ $helperUrl ?? '' }}">{{ $helperLink ?? '' }}</a>
+        </h6>
+    @endif
     @if ($errors->has($id))
         <h6 class="form-help">{{ $errors->first($id) }}</h6>
     @endif

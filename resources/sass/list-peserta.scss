@@ -97,6 +97,14 @@
             background-color: $gamboge;
         }
 
+        &--new {
+            background-color: $rich-black;
+
+            &:hover {
+                background-color: $flax !important;
+            }
+        }
+
         &:hover {
             background-color: $rich-black;
         }

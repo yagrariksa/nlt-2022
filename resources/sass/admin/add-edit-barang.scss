@@ -1,0 +1,125 @@
+.add-edit-barang {
+    min-height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    >form {
+        padding-bottom: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "title title"
+            "form-left form-right"
+            "btns btns";
+        column-gap: 2rem;
+    }
+
+    &__title {
+        grid-area: title;
+    }
+
+    &__form-left {
+        grid-area: form-left;
+    }
+
+    &__form-right {
+        grid-area: form-right;
+    }
+
+    &__img-container {
+        width: 100%;
+        margin-bottom: 4rem;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 16px;
+    }
+
+    &__imgs {
+        width: -webkit-fill-available;
+        padding-bottom: 1rem;
+        overflow-x: auto;
+        overflow-y: unset;
+    }
+
+    &__img-overflow {
+        width: fit-content;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    &__img {
+        width: 8rem;
+        height: 8rem;
+        position: relative;
+        overflow: hidden;
+
+        >img {
+            width: 8rem;
+            height: 8rem;
+            border-radius: .5rem;
+        }
+
+        >form {
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+            opacity: 0;
+            transition: all .8s ease-in-out;
+
+            button {
+                padding: 0;
+                text-align: center;
+                white-space: nowrap;
+                background-color: transparent;
+                color: $white;
+            }
+        }
+
+        >span {
+            position: absolute;
+            display: block;
+            content: "";
+            z-index: 0;
+            width: 0;
+            height: 0;
+            border-radius: 100%;
+            background: rgba($rich-black, .75);
+
+            transform: translate(-50%, -50%);
+            transition: width .6s, padding-top .6s;
+        }
+
+
+        &:hover {
+            >form {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            >span {
+                width: calc(100% * 2.25);
+                padding-top: calc(100% * 2.25);
+            }
+        }
+    }
+
+    &__btns {
+        grid-area: btns;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 3rem;
+    }
+}

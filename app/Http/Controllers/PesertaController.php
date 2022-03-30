@@ -55,9 +55,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
-                    // case 'dokumen':
-                    //     return $this->d_view_add_dokumen($uid);
-                    //     break;
+                        // case 'dokumen':
+                        //     return $this->d_view_add_dokumen($uid);
+                        //     break;
 
                     case 'peserta':
                         return $this->d_view_add_peserta($uid);
@@ -188,9 +188,9 @@ class PesertaController extends Controller
 
             case 'add':
                 switch ($object) {
-                    // case 'dokumen':
-                    //     return $this->d_action_add_dokumen($request, $uid);
-                    //     break;
+                        // case 'dokumen':
+                        //     return $this->d_action_add_dokumen($request, $uid);
+                        //     break;
 
                     case 'peserta':
                         return $this->d_action_add_peserta($request);
@@ -229,7 +229,14 @@ class PesertaController extends Controller
         $u = Auth::user();
 
         if ($request->hasFile('pas')) {
-            $foto_url = join("_", [time(), join('-', explode(' ', $request->nama)), "foto"])  . "." . $request->pas->extension();
+            $foto_url = join(
+                "_",
+                [
+                    time(),
+                    join('-', explode(' ', $request->nama)),
+                    "foto"
+                ]
+            )  . "." . $request->pas->extension();
             $request->pas->storeAs('public', $foto_url);
         }
 
@@ -330,7 +337,7 @@ class PesertaController extends Controller
                 'success' => 'Anda berhasil menghapus ' . $uid,
                 'success-title' => 'Berhasil Menghapus!'
             ]);
-        }else{
+        } else {
             return redirect()->route('peserta', [
                 'mode' => 'list',
                 'object' => 'peserta'

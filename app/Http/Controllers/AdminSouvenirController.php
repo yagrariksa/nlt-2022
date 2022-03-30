@@ -171,7 +171,7 @@ class AdminSouvenirController extends Controller
                     ->route('a.souvenir', [
                         'mode' => 'list',
                         'object' => 'barang'
-                    ])->with('msg', 'sukses menambahkan kategori');
+                    ])->with('msg_berhasil', 'Kategori '. $request->nama . ' berhasil ditambahkan.');
                 break;
 
             case 'edit-my-kategori':
@@ -181,8 +181,9 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 'object' => 'barang'
-                    ])->with('msg', 'sukses mengubah kategori');
+                        'mode' => 'list', 
+                        'object' => 'barang'
+                    ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil diubah.');
                 break;
 
             case 'delete-my-kategori':
@@ -197,7 +198,7 @@ class AdminSouvenirController extends Controller
                 return redirect()
                     ->route('a.souvenir', [
                         'mode' => 'list', 'object' => 'barang'
-                    ])->with('msg', 'sukses menghapus kategori');
+                    ])->with('msg_berhasil', 'Kategori ' . $k->nama . ' berhasil dihapus.');
                 break;
 
             case 'add-new-barang':
@@ -214,12 +215,12 @@ class AdminSouvenirController extends Controller
                     $g->delete();
                 }
                 $b->delete();
-                return redirect()->back()->with('msg', 'sukses menghapus barang');
+                return redirect()->back()->with('msg_berhasil', 'Barang ' . $b->nama . ' berhasil dihapus.');
                 break;
 
             case 'delete-my-gambar':
                 GambarBarang::find($key)->delete();
-                return redirect()->back()->with('msg', 'sukses menghapus gambar');
+                return redirect()->back()->with('msg_berhasil', 'Gambar berhasil dihapus.');
                 break;
 
             default:
@@ -269,7 +270,7 @@ class AdminSouvenirController extends Controller
         return redirect()
             ->route('a.souvenir', [
                 'mode' => 'list', 'object' => 'barang'
-            ])->with('msg', 'sukses menambahkan barang');
+            ])->with('msg_berhasil', 'Barang ' . $request->nama . ' berhasil ditambahkan.');
     }
 
     protected function barang_edit_do(Request $request, $key)
@@ -315,6 +316,6 @@ class AdminSouvenirController extends Controller
             ->route('a.souvenir', [
                 'mode' => 'list',
                 'object' => 'barang'
-            ])->with('msg', 'sukses mengubah barang');
+            ])->with('msg_berhasil', 'Barang ' . $request->nama . ' berhasil diubah.');
     }
 }

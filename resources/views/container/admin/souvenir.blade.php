@@ -335,6 +335,9 @@
 
 @section('other')
     {{-- it can be modal, etc. --}}
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
 
     <form action="{{ route('a.souvenir', [
         'mode' => 'add-new-kategori',

@@ -16,6 +16,7 @@ class AuthController extends Controller
     public function view_regist()
     {
         // return view('be.auth.reg');
+        return redirect()->route('closereg');
         return view('container.registrasi');
     }
 

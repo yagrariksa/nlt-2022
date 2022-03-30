@@ -14,9 +14,12 @@
                 ]) }}
                 " class="nav__item" id="nav__item--a-peserta">LIST PESERTA <span></span></a>
             <a href="
-                    {{ route('a.souvenir') }}
+                    {{ route('a.souvenir', [
+                        'mode' => 'list',
+                        'object' => 'barang',
+                    ]) }}
                 " class="nav__item" id="nav__item--a-souvenir">SOUVENIR<span></span></a>
-            <a href="#
+            <a href="
                 {{-- {{ route('souvenir', [
                     'mode' => 'list',
                 ]) }} --}}

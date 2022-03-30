@@ -35,9 +35,7 @@ Route::get('/test', function () {
     return view('container.keranjang');
 });
 
-Route::get('/registrasi-telah-ditutup', function () {
-    return view('container.closereg');
-})->name('closereg');
+
 Route::get('/sponsor', function () {
     return view('container.sponsor');
 })->name('sponsor');
@@ -47,6 +45,9 @@ Route::middleware('guest')->group(function () {
         Route::get('/', [AuthController::class, 'view_regist']);
         Route::post('/', [AuthController::class, 'action_regist']);
     });
+    Route::get('/registrasi-telah-ditutup', function () {
+        return view('container.closereg');
+    })->name('closereg');
     Route::name('login')->prefix('login')->group(function () {
         Route::get('/', [AuthController::class, 'view_login']);
         Route::post('/', [AuthController::class, 'action_login']);

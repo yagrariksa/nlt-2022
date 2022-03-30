@@ -3718,3 +3718,110 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   width: 100%;
   margin-bottom: 4rem;
 }
+
+.add-edit-barang {
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.add-edit-barang > form {
+  padding-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "title title" "form-left form-right" "btns btns";
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+.add-edit-barang__title {
+  grid-area: title;
+}
+.add-edit-barang__form-left {
+  grid-area: form-left;
+}
+.add-edit-barang__form-right {
+  grid-area: form-right;
+}
+.add-edit-barang__img-container {
+  width: 100%;
+  margin-bottom: 4rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+}
+.add-edit-barang__imgs {
+  width: -webkit-fill-available;
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  overflow-y: unset;
+}
+.add-edit-barang__img-overflow {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.add-edit-barang__img {
+  width: 8rem;
+  height: 8rem;
+  position: relative;
+  overflow: hidden;
+}
+.add-edit-barang__img > img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 0.5rem;
+}
+.add-edit-barang__img > form {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
+}
+.add-edit-barang__img > form button {
+  padding: 0;
+  text-align: center;
+  white-space: nowrap;
+  background-color: transparent;
+  color: #FFFFFF;
+}
+.add-edit-barang__img > span {
+  position: absolute;
+  display: block;
+  content: "";
+  z-index: 0;
+  width: 0;
+  height: 0;
+  border-radius: 100%;
+  background: rgba(0, 18, 25, 0.75);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, padding-top 0.6s;
+}
+.add-edit-barang__img:hover > form {
+  visibility: visible;
+  opacity: 1;
+}
+.add-edit-barang__img:hover > span {
+  width: 225%;
+  padding-top: 225%;
+}
+.add-edit-barang__btns {
+  grid-area: btns;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3rem;
+}

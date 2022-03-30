@@ -31,26 +31,6 @@
             </div>
 
             <x-form.input-img id="img" label="Foto Barang (Ukuran 1:1)" />
-
-            <div class="add-edit-barang__img-container">
-                <h4>Foto Terupload</h4>
-                <div class="add-edit-barang__imgs">
-                    <div class="add-edit-barang__img-overflow">
-                        @foreach ($b->gambar as $g)
-                            <div class="add-edit-barang__img">
-                                <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
-                                <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="h5">Click to delete</button>
-                                </form>
-                                <span></span>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="add-edit-barang__btns">
@@ -58,6 +38,26 @@
             <button type="submit" class="btn-primary">SIMPAN PERUBAHAN BARANG</button>
         </div>
     </form>
+
+    <div class="add-edit-barang__img-container">
+        <h4>Foto Terupload</h4>
+        <div class="add-edit-barang__imgs">
+            <div class="add-edit-barang__img-overflow">
+                @foreach ($b->gambar as $g)
+                    <div class="add-edit-barang__img">
+                        <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
+                        <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
+                            method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="h5">Click to delete</button>
+                        </form>
+                        <span></span>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('other')

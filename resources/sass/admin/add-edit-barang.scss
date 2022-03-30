@@ -1,7 +1,11 @@
 .add-edit-barang {
+    min-height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     >form {
-        min-height: calc(100vh - 6rem);
-        padding-bottom: 4rem;
+        padding-bottom: 2rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
@@ -24,7 +28,8 @@
     }
 
     &__img-container {
-        width: 44vw;
+        width: 100%;
+        margin-bottom: 4rem;
         padding: 1.5rem 1.5rem 0 1.5rem;
         display: flex;
         flex-direction: column;
@@ -51,14 +56,14 @@
     }
 
     &__img {
-        width: 128px;
-        height: 128px;
+        width: 8rem;
+        height: 8rem;
         position: relative;
         overflow: hidden;
 
         >img {
-            width: 128px;
-            height: 128px;
+            width: 8rem;
+            height: 8rem;
             border-radius: .5rem;
         }
 

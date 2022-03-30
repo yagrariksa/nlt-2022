@@ -3719,9 +3719,14 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   margin-bottom: 4rem;
 }
 
-.add-edit-barang > form {
+.add-edit-barang {
   min-height: calc(100vh - 6rem);
-  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.add-edit-barang > form {
+  padding-bottom: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "title title" "form-left form-right" "btns btns";
@@ -3738,7 +3743,8 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   grid-area: form-right;
 }
 .add-edit-barang__img-container {
-  width: 44vw;
+  width: 100%;
+  margin-bottom: 4rem;
   padding: 1.5rem 1.5rem 0 1.5rem;
   display: flex;
   flex-direction: column;
@@ -3764,14 +3770,14 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   gap: 1rem;
 }
 .add-edit-barang__img {
-  width: 128px;
-  height: 128px;
+  width: 8rem;
+  height: 8rem;
   position: relative;
   overflow: hidden;
 }
 .add-edit-barang__img > img {
-  width: 128px;
-  height: 128px;
+  width: 8rem;
+  height: 8rem;
   border-radius: 0.5rem;
 }
 .add-edit-barang__img > form {

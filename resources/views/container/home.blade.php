@@ -146,7 +146,7 @@
         {{-- here --}}
     </div>
 
-    <div class="sponsors" id="our-sponsor">
+    <div class="sponsors" id="our-sponsor" style="display: none">
         <h1 class="sponsors__title">Get To Know About <span>Our Sponsors</span></h1>
         <div class="sponsors__list">
             <div class="sponsors__logo-name" onclick="location.href= '{{ route('sponsor') }}'">
@@ -199,8 +199,4 @@
         </div>
         <h6 class="footer__copyright">AMSA UNAIR, 2022</h6>
     </div>
-@endsection
-
-@section('other')
-    {{-- it can be modal, etc. --}}
 @endsection

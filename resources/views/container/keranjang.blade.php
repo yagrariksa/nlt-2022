@@ -7,6 +7,10 @@
 @section('addclass', 'keranjang')
 
 @section('content')
+    <h6 class="souvenir-breadcrumb">
+        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+        <a href="" class="h6 souvenir-breadcrumb__item active">List Keranjang</a>
+    </h6>
     <h4 class="mobile-title">List Keranjang</h4>
     <div class="keranjang__title-div">
         <h1 class="keranjang__title">List Keranjang</h1>

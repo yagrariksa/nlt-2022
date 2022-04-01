@@ -3067,6 +3067,17 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   color: #EE9B00;
 }
 
+.souvenir-breadcrumb {
+  padding: 1.5rem 0;
+  color: #B3B8BA;
+}
+.souvenir-breadcrumb__item {
+  color: inherit;
+}
+.souvenir-breadcrumb__item.active {
+  color: #2B4BF2;
+}
+
 @media screen and (max-width: 991.9px) {
   .detail-souvenir {
     gap: 2rem;

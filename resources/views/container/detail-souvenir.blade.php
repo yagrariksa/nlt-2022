@@ -1,12 +1,16 @@
 @extends('template.client')
 
-@section('title', 'Detail Souvenir')
+@section('title', 'Detail Barang')
 @section('seo-desc')
 @section('seo-img')
 
     {{-- @section('addclass', 'detail-souvenir') --}}
 
 @section('content')
+    <h6 class="souvenir-breadcrumb">
+        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+        <a href="" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
+    </h6>
     <div class="detail-souvenir-sm">
         <h4 class="mobile-title">Detail Barang</h4>
         <div class="detail-souvenir-sm__images">

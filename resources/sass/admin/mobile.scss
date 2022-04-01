@@ -1,0 +1,47 @@
+.adm-mobile {
+    height: calc(100vh - 6rem);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: .5rem;
+    }
+
+    &__desc {
+        color: $rich-black-40;
+
+        span {
+            color: $rich-black-60;
+        }
+    }
+
+    &__images {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    &__img {
+        height: 32px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .content.adm-mobile {
+        display: flex;
+    }
+
+    .content.adm-login,
+    .content.adm-dashboard,
+    .content.adm-full {
+        display: none;
+    }
+}

@@ -22,8 +22,8 @@
                 <select name="kategori" id="kategori">
                     <option value=""></option>
                     @foreach ($k as $item)
-                        <option @if ($item->kat_id == $b->kategori_id) selected @endif value="{{ $item->kat_id }}" 
-                            >{{ $item->nama }}</option>
+                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }} 
+                            value="{{ $item->kat_id }}">{{ $item->nama }}</option>
                     @endforeach
                 </select>
                 <label for="select" class="form-group__control-label">Pilih Kategori</label>

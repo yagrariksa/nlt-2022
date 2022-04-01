@@ -21,12 +21,12 @@
                 <select name="kategori" id="kategori">
                     <option value=""></option>
                     @foreach ($k as $item)
-                        <option @if ($item->kat_id == \Request::get('kategori')) selected @endif value="{{ $item->kat_id }}"
-                            >{{ $item->nama }}</option>
+                        <option {{ $item->kat_id == \Request::get('kategori') ? 'selected' : '' }}
+                            value="{{ $item->kat_id }}">{{ $item->nama }}</option>
                         @if ($item->child())
                             @foreach ($item->child() as $child)
-                                <option @if ($child->kat_id == \Request::get('kategori')) selected @endif value="{{ $child->kat_id }}"
-                                    >{{ $child->nama }}</option>
+                                <option {{ $child->kat_id == \Request::get('kategori') ? 'selected' : '' }}
+                                    value="{{ $child->kat_id }}">{{ $child->nama }}</option>
                             @endforeach
                         @endif
                     @endforeach

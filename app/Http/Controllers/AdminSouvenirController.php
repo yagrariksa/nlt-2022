@@ -23,7 +23,7 @@ class AdminSouvenirController extends Controller
             case 'kategori':
                 switch ($mode) {
                     case 'list':
-                        return $this->kategori_list();
+                        return $this->barang_list();
                         break;
 
                     case 'add':
@@ -76,7 +76,7 @@ class AdminSouvenirController extends Controller
                 }
                 break;
             default:
-                return view('be.a.souvenir');
+                return $this->barang_list();
                 break;
         }
     }
@@ -162,6 +162,12 @@ class AdminSouvenirController extends Controller
         $key = $request->query('key');
         switch ($mode) {
             case 'add-new-kategori':
+                $rules = [
+                    'nama' => 'required',
+                ];
+
+                Validator::make($request->all(), $rules, $this->msg)->validate();
+
                 Kategori::create([
                     'nama' => $request->nama,
                     'parent_id' => $request->parent,
@@ -175,6 +181,11 @@ class AdminSouvenirController extends Controller
                 break;
 
             case 'edit-my-kategori':
+                $rules = [
+                    'nama' => 'required',
+                ];
+
+                Validator::make($request->all(), $rules, $this->msg)->validate();
                 $k = Kategori::where('kat_id', $key)->first();
                 $k->nama = $request->nama;
                 $k->parent_id = $request->parent;
@@ -235,7 +246,7 @@ class AdminSouvenirController extends Controller
             'nama' => 'required',
             'harga' => 'required',
             'berat' => 'required',
-            'desc' => 'required',
+            'desc' => 'required|max:400',
             'kategori' => 'required',
         ];
 

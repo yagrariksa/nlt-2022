@@ -2123,6 +2123,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   right: 0;
   top: 0;
   bottom: 0;
+  overflow: hidden;
 }
 .adm-full__search-div {
   margin-bottom: 2rem;
@@ -2155,6 +2156,48 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   gap: 16px;
 }
 
+.adm-mobile {
+  height: calc(100vh - 6rem);
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+}
+.adm-mobile__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.adm-mobile__desc {
+  color: #B3B8BA;
+}
+.adm-mobile__desc span {
+  color: #667175;
+}
+.adm-mobile__images {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.adm-mobile__img {
+  height: 32px;
+}
+
+@media screen and (max-width: 992px) {
+  .content.adm-mobile {
+    display: flex;
+  }
+
+  .content.adm-login,
+.content.adm-dashboard,
+.content.adm-full {
+    display: none;
+  }
+}
 .soon {
   width: 100%;
   height: calc(100vh - 12rem);
@@ -2776,6 +2819,55 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     height: 240px;
   }
 }
+.closereg {
+  height: calc(100vh - 6rem);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.closereg__text {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.closereg__title {
+  color: #BB3E03;
+  text-align: center;
+}
+.closereg__desc {
+  color: #B3B8BA;
+  text-align: center;
+}
+.closereg__desc a {
+  color: #BB3E03;
+}
+@media screen and (max-width: 992px) {
+  .closereg__text {
+    width: 50%;
+  }
+  .closereg__title {
+    width: 80%;
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .closereg__desc, .closereg__desc a {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .closereg__text {
+    width: 90%;
+  }
+  .closereg__title {
+    width: 60%;
+  }
+}
+
 .sponsor-page {
   height: calc(100vh - 6rem);
   position: relative;

@@ -35,6 +35,7 @@ Route::get('/test', function () {
     return view('container.keranjang');
 });
 
+
 Route::get('/sponsor', function () {
     return view('container.sponsor');
 })->name('sponsor');
@@ -44,6 +45,9 @@ Route::middleware('guest')->group(function () {
         Route::get('/', [AuthController::class, 'view_regist']);
         Route::post('/', [AuthController::class, 'action_regist']);
     });
+    Route::get('/registrasi-telah-ditutup', function () {
+        return view('container.closereg');
+    })->name('closereg');
     Route::name('login')->prefix('login')->group(function () {
         Route::get('/', [AuthController::class, 'view_login']);
         Route::post('/', [AuthController::class, 'action_login']);
@@ -99,7 +103,7 @@ Route::name('a.')->prefix('mahavira')->group(function () {
         Route::post('/', [AuthController::class, 'mahavira_action_login']);
     });
     Route::middleware('admin')->group(function () {
-        Route::get('/', function(){
+        Route::get('/', function () {
             return redirect()->route('a.peserta');
         });
         Route::get('logout', [AuthController::class, 'mahavira_action_logout'])->name('logout');

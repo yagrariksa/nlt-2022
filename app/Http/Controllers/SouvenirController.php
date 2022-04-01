@@ -84,7 +84,6 @@ class SouvenirController extends Controller
 
     protected function d_view_list_souvenir($kid)
     {
-        return view('container.souvenir-soon');
         $k = Kategori::where('parent_id', null)->get();
 
         if ($kid) {

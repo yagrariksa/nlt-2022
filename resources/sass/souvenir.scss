@@ -182,6 +182,19 @@
     }
 }
 
+.souvenir-breadcrumb {
+    padding: 1.5rem 0;
+    color: $rich-black-40;
+
+    &__item {
+        color: inherit;
+
+        &.active {
+            color: #2B4BF2;
+        }
+    }
+}
+
 @media screen and (max-width: 991.9px) {
     .detail-souvenir {
         gap: 2rem;

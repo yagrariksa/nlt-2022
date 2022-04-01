@@ -2481,6 +2481,20 @@ $('.dialog__bg').click(function () {
     }
   });
 });
+$('.detail-keranjang-card__bg').click(function () {
+  $('.detail-keranjang-card').map(function (x) {
+    if ($('.detail-keranjang-card')[x].classList.contains('active')) {
+      $('.detail-keranjang-card')[x].classList.remove('active');
+    }
+  });
+});
+$('.detail-keranjang-card__bg--invoice').click(function () {
+  $('.detail-keranjang-card__invoice').map(function (x) {
+    if ($('.detail-keranjang-card__invoice')[x].classList.contains('active')) {
+      $('.detail-keranjang-card__invoice')[x].classList.remove('active');
+    }
+  });
+});
 
 /***/ }),
 
@@ -3156,7 +3170,7 @@ var dataUniv = {
     email: 'uinma@nlt2022.com'
   }
 };
-$('.form-group__select-items').click(function () {
+$('#univ').click(function () {
   var univ = $('#univ')[0].value;
   var akronim, email;
 

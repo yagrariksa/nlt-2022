@@ -30,11 +30,10 @@
     <div class="content @yield('addclass')">
         @yield('content')
     </div>
-    <div class="content adm-mobile">
-        @yield('admin-mobile')
-    </div>
 
     @yield('other')
+
+    @yield('admin-mobile')
 
     {{-- Script --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"

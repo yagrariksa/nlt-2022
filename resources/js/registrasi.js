@@ -191,7 +191,7 @@ const dataUniv = {
     }
 }
 
-$('.form-group__select-items').click(() => {
+$('#univ').click(() => {
     let univ = $('#univ')[0].value;
     let akronim, email;
     for (let i = 0; i < 38; i++) {

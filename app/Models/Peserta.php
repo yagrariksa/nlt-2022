@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,11 +34,34 @@ class Peserta extends Model
 
     public function sudahAbsen($start, $end)
     {
+        $expstart = explode(' ', $start);
+        $expend = explode(' ', $end);
         $d = Absen::where('peserta_id', $this->id)
-            ->where('created_at', '<', $start)
-            ->where('created_at', '>', $end)
+            ->whereDate('created_at', $expstart[0])
+            ->whereTime('created_at', '>', $expstart[1])
+            ->whereTime('created_at', '<', $expend[1])
             ->first();
-
-        return $d ? true : false;
+        if ($d) {
+            return 'sudah-absen';
+        } else {
+            $current_time = date("Y-m-d H:i");
+            $sunrise = $start;
+            $sunset = $end;
+            $date1 = DateTime::createFromFormat('Y-m-d H:i', $current_time);
+            $date2 = DateTime::createFromFormat('Y-m-d H:i', $sunrise);
+            $date3 = DateTime::createFromFormat('Y-m-d H:i', $sunset);
+            if (
+                $date1 > $date2
+                && $date1 < $date3
+            ) {
+                return 'absen-sekarang';
+            } else if (
+                $date1 < $date2
+            ) {
+                return 'belum-saatnya-absen';
+            } else {
+                return 'tidak-absen';
+            }
+        }
     }
 }

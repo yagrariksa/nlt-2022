@@ -379,11 +379,10 @@ class SouvenirController extends Controller
     protected function d_action_edit_item(Request $request)
     {
         $rules = [
-            "item_name" => "required",
-            "item_id" => "required",
-            "harga" => "required",
-            "berat_gram" => "required",
-            "kantong" => "required",
+            // "item_name" => "required",
+            // "item_id" => "required",
+            // "harga" => "required",
+            // "berat_gram" => "required",
             "jumlah" => "required",
             "catatan" => "required",
         ];

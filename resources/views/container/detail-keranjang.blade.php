@@ -24,7 +24,7 @@
     <div class="keranjang__card detail-keranjang__card">
         <div class="keranjang__card--left detail-keranjang__card--left">
             <h3 class="keranjang__card--title">{{ $k->nama }}</h3>
-            <h4 class="keranjang__card--desc">{{$k->penerima}} - {{$k->no}}</h4>
+            <h4 class="keranjang__card--desc">{{ $k->penerima }} - {{ $k->no }}</h4>
             <h4 class="keranjang__card--desc">{{ $k->alamat }}</h4>
         </div>
         <div class="detail-keranjang__card--right">
@@ -121,16 +121,25 @@
                 <div class="detail-keranjang__item--right">
                     <h5 class="detail-keranjang__item--harga-sm">Rp{{ $item->harga }}</h5>
                     <div class="detail-keranjang__item-action">
-                        <a href="{{ route('souvenir', [
-                            'object' => 'katalog',
-                            'mode' => 'edit',
-                            's_id' => $item->souv_id,
-                        ]) }}"
-                            class="list-peserta__btn list-peserta__btn--edit"><img
-                                src="{{ url('assets/img/edit.svg') }}"></a>
+                        @if ($k->invoice_url)
+                            <a href="#"
+                                class="list-peserta__btn list-peserta__btn--edit" disabled><img
+                                    src="{{ url('assets/img/edit.svg') }}"></a>
 
-                        <button class="list-peserta__btn list-peserta__btn--delete"><img
-                                src="{{ url('assets/img/delete.svg') }}"></button>
+
+                            <button class="list-peserta__btn list-peserta__btn--delete" disabled><img
+                                    src="{{ url('assets/img/delete.svg') }}"></button>
+                        @else
+                            <a href="{{ route('souvenir', [
+                                'object' => 'katalog',
+                                'mode' => 'edit',
+                                's_id' => $item->souv_id,
+                            ]) }}"
+                                class="list-peserta__btn list-peserta__btn--edit"><img
+                                    src="{{ url('assets/img/edit.svg') }}"></a>
+                            <button class="list-peserta__btn list-peserta__btn--delete"><img
+                                    src="{{ url('assets/img/delete.svg') }}"></button>
+                        @endif
                         <form class="detail-keranjang__delete-dialog dialog"
                             action="{{ route('souvenir', [
                                 'mode' => 'delete-my-item',

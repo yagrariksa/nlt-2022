@@ -332,6 +332,14 @@ class AdminSouvenirController extends Controller
         $b->berat = $request->berat;
         $b->desc = $request->desc;
         $b->kategori_id = $request->kategori;
+
+        foreach ($b->terbeli as $souv) {
+            $souv->harga = $request->harga;
+            $souv->berat_gram = $request->berat;
+            $souv->total_harga = $souv->jumlah * $request->harga;
+            $souv->total_berat = $souv->jumlah * $request->berat;
+            $souv->save();
+        }
         $b->save();
 
         return redirect()

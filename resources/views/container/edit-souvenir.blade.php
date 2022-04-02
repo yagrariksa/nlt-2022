@@ -7,44 +7,53 @@
     {{-- @section('addclass', 'detail-souvenir') --}}
 
 @section('content')
+<h6 class="souvenir-breadcrumb">
+    <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+    <a href="" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
+</h6>
     <div class="detail-souvenir-sm">
         <h4 class="mobile-title">Detail Barang</h4>
         <div class="detail-souvenir-sm__images">
-            <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
-                alt="{{ $b->nama }}">
+            @if (sizeof($s->barang->gambar) != 0)
+                @foreach ($s->barang->gambar as $gambar)
+                    <img src="{{ url('storage') . '/' . $gambar->url }}" alt="{{ $s->barang->nama }}"
+                        class="detail-souvenir__img">
+                @endforeach
+            @endif
         </div>
     </div>
 
     <div class="detail-souvenir">
         <div class="detail-souvenir__left">
             <div class="detail-souvenir__title-section">
-                <h1 class="detail-souvenir__title"></h1>
-                <h3 class="detail-souvenir__harga"></h3>
+                <h1 class="detail-souvenir__title">{{ $s->barang->nama }}</h1>
+                <h3 class="detail-souvenir__harga">Rp {{ $s->barang->harga }}</h3>
             </div>
             <div class="detail-souvenir__desc-section">
                 <h3 class="detail-souvenir__section-title">Deskripsi</h3>
-                <h4 class="detail-souvenir__desc"></h4>
+                <h4 class="detail-souvenir__desc">{{ $s->barang->desc }}</h4>
             </div>
             <hr>
             <form action="{{ route('souvenir', [
-                'mode' => 'add-new-item',
+                'mode' => 'edit-my-item',
             ]) }}"
                 method="post" class="detail-souvenir__form-section">
                 @csrf
                 <h1 class="detail-souvenir__section-title">Form Pemesanan</h1>
-                <input type="hidden" name="item_name" id="item_name">
-                <input type="hidden" name="item_id" id="item_id">
-                <input type="hidden" name="harga" id="harga">
-                <input type="hidden" name="berat_gram" id="berat_gram">
+                <input type="hidden" name="item_name" id="item_name" value="{{ $s->barang->nama }}">
+                <input type="hidden" name="item_id" id="item_id" value="{{ $s->barang->bar_id }}">
+                <input type="hidden" name="harga" id="harga" value="{{ $s->barang->harga }}">
+                <input type="hidden" name="berat_gram" id="berat_gram" value="{{ $s->barang->berat }}">
                 <input type="hidden" name="souv_id" id="" value="{{ $s->souv_id }}">
+                <input type="hidden" name="kantong" id="" value="{{ $s->kantong_id }}">
                 {{-- special select-option --}}
                 <div class="form-group form-group--select">
                     <select name="kantong" id="kantong">
                         <option value=""></option>
                         @foreach (Auth::user()->kantong as $p)
-                            <option value="{{ $p->id }}">
-                                {{ $p->nama }}
-                            </option>
+                            <option @if ($p->id == $s->kantong_id)
+                                selected
+                            @endif value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                     <label for="select" class="form-group__control-label">Pilih Keranjang</label>
@@ -76,8 +85,8 @@
         </div>
         <div class="detail-souvenir__right">
             <div class="detail-souvenir__images">
-                <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
-                    alt="{{ $b->nama }}">
+                <img src="{{ sizeof($s->barang->gambar) != 0 ? url('storage') . '/' . $s->barang->gambar[0]->url : '' }}"
+                    alt="{{ $s->barang->nama }}">
             </div>
         </div>
     </div>
@@ -89,51 +98,6 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
-        function getParameterByName(name, url = window.location.href) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        const souvenirId = getParameterByName('s_id');
-        var dodata;
-        var url = "{{ url('/assets/json/souvenir.json') }}";
-
-        const populateData = () => {
-            $('.detail-souvenir__title')[0].textContent = this.dodata.nama;
-            $('.detail-souvenir__desc')[0].textContent = this.dodata.desc;
-            $('.detail-souvenir__harga')[0].textContent = 'Rp' + this.dodata.harga;
-            $('#item_id')[0].value = this.dodata.uid;
-            $('#item_name')[0].value = this.dodata.nama;
-            $('#harga')[0].value = this.dodata.harga;
-            $('#berat_gram')[0].value = this.dodata.berat;
-
-            let imgLen = Object.keys(this.dodata.img).length;
-            for (let i = 0; i < imgLen; i++) {
-                let imgElm = document.createElement('img');
-                imgElm.setAttribute('class', 'detail-souvenir__img');
-                imgElm.setAttribute('src', this.dodata.img[i]);
-                $('.detail-souvenir__images')[0].append(imgElm);
-                console.log($('.detail-souvenir-sm__images .slick-track')[0].append(imgElm));
-                console.log($('.detail-souvenir__images')[0].append(imgElm));
-            }
-        }
-
-        const getData = () => {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    this.dodata = data.filter((e) => {
-                        return e.uid == souvenirId
-                    })[0]
-                    populateData();
-                })
-        }
-        getData()
-
         // ngisi total
         $('#jumlah').change(() => {
             $('.detail-souvenir__total--right')[0].textContent = 'Rp' + this.dodata.harga * $('#jumlah')[0].value

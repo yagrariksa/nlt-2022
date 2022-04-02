@@ -118,34 +118,35 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         // search 
-        let data = document.querySelectorAll('.list-souvenir__card')
+        let dataListSouvenir = document.querySelectorAll('.list-souvenir__card')
         let noItem = document.querySelector('.list-souvenir__no-item')
 
         document.querySelector('#souvenir-search').addEventListener('input', (xx) => {
+            console.log(xx.target.value)
             let value = xx.target.value
-            let count = data.length
-            data.forEach(e => {
-                e.parentElement.previousElementSibling.style.display = 'none'
+            let count = dataListSouvenir.length
+            dataListSouvenir.forEach(e => {
+                // e.parentElement.previousElementSibling.style.display = 'none'
                 e.style.display = 'none'
             });
 
             if (value == null) {
-                data.forEach(e => {
-                    e.parentElement.previousElementSibling.style.display = 'block'
+                dataListSouvenir.forEach(e => {
+                    // e.parentElement.previousElementSibling.style.display = 'block'
                     e.style.display = 'flex'
                     count--
 
                 })
             } else {
-                data.forEach(e => {
+                dataListSouvenir.forEach(e => {
                     if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
-                        e.parentElement.previousElementSibling.style.display = 'block'
+                        // e.parentElement.previousElementSibling.style.display = 'block'
                         e.style.display = 'flex'
                         count--
                     }
                 })
             }
-            if (data.length == count) {
+            if (dataListSouvenir.length == count) {
                 noItem.style.display = 'block'
             } else {
                 noItem.style.display = 'none'

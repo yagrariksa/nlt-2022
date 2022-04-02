@@ -8,8 +8,12 @@
 
 @section('content')
     <h6 class="souvenir-breadcrumb">
-        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
-        <a href="" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
+        <a href="{{ route('souvenir', [
+            'mode' => 'list',
+            'object' => 'katalog',
+        ]) }}"
+            class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+        <a href="#" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
     </h6>
     <div class="detail-souvenir-sm">
         <h4 class="mobile-title">Detail Barang</h4>

@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <h5 class="landing__by">by AMSA UNAIR</h5>
+        <h5 class="landing__by">by AMSA-Unair</h5>
     </div>
 
     <div class="about" id="about">
@@ -88,11 +88,11 @@
 
     <div class="guideline" id="guideline">
         <div class="guideline__text">
-            <h1 class="xl guideline__title">Grab Our Guideline Book!</h1>
+            <h1 class="xl guideline__title">Grab Our Event Guideline!</h1>
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
             <h4 class="guideline__desc">
                 For more details and requirements of MAHAVIRA 2022, please refer to this guideline!
-                <a href="{{ url('https://drive.google.com/file/d/1LBbvvln-tWASnWQ4gQLhQmxnoVXBGPRr/view?usp=sharing') }}"
+                <a href="{{ url('assets/file') . '/Event Guideline of NLT 2022.pdf' }}"
                     class="button btn-primary guideline__btn">DOWNLOAD GUIDELINE</a>
             </h4>
         </div>

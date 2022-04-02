@@ -6,7 +6,7 @@
     gap: 8px;
 
     &__title {
-        margin-bottom: 4rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -15,6 +15,7 @@
     &__card {
         align-items: stretch;
         cursor: default;
+        margin-bottom: 3rem;
 
         &--left {
             width: 40%;
@@ -120,12 +121,21 @@
         }
 
         &--harga {
-            color: $gamboge;
+            color: $blue-RYB;
+
+            &-sm {
+                display: none;
+                color: $blue-RYB;
+            }
         }
 
-        &--harga-sm {
-            display: none;
+        &--total {
             color: $gamboge;
+
+            &-sm {
+                display: none;
+                color: $gamboge;
+            }
         }
 
         &--right {

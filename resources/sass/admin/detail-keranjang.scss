@@ -1,0 +1,14 @@
+.adm-detail-keranjang {
+    .keranjang {
+        &__card {
+
+            &--berat,
+            &--ongkir {
+                span {
+                    color: #2B4BF2;
+                }
+            }
+        }
+
+    }
+}

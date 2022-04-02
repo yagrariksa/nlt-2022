@@ -2039,7 +2039,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   border-collapse: collapse;
 }
 .adm-table__table td {
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 .adm-table__table tr {
   border-bottom: 0.7px solid rgba(0, 18, 25, 0.15);
@@ -3960,6 +3960,16 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .add-edit-barang__form-left {
   grid-area: form-left;
 }
+.add-edit-barang__two-in-arow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  gap: 2rem;
+}
+.add-edit-barang__two-in-arow > .form-group {
+  width: calc((100% - 2rem) / 2);
+}
 .add-edit-barang__form-right {
   grid-area: form-right;
 }
@@ -4095,7 +4105,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: space-between;
 }
 .absensi__title {
-  margin: 4rem 0;
+  margin: 2rem 0;
 }
 .absensi__pilihan-peserta {
   margin-bottom: 2rem;
@@ -4116,7 +4126,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .absensi-day__right {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
@@ -4146,6 +4156,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  margin-top: 2rem;
 }
 .absensi__bagian-index {
   display: flex;
@@ -4162,6 +4173,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .absensi__bagian-index--dibuka {
   background-color: #2B4BF2;
+}
+.absensi__bagian-index--dibuka:hover {
+  background-color: #CCD4FC;
 }
 .absensi__bagian-index--sudah-absen {
   background-color: #51DC6B;
@@ -4181,6 +4195,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .absensi-day__caption {
     display: none;
+  }
+  .absensi-day__btn {
+    width: 100%;
   }
   .absensi__index {
     display: grid;
@@ -4249,4 +4266,37 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .add-absensi__sorry > * {
   text-align: center;
+}
+
+.adm-absensi__table th > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.adm-absensi__table .malachite {
+  color: #51DC6B;
+  font-weight: 500;
+}
+.adm-absensi__tanda-absen {
+  width: 100%;
+  height: 100%;
+}
+.adm-absensi__tanda-absen--sudah {
+  text-decoration: none;
+  color: #51DC6B;
+}
+.adm-absensi__tanda-absen--aktif {
+  color: #2B4BF2;
+}
+.adm-absensi__tanda-absen--belum {
+  color: #B3B8BA;
+}
+.adm-absensi__tanda-absen--tidak {
+  color: #FFFFFF;
+}
+.adm-absensi__tanda-absen--tidak-bg {
+  background-color: #BB3E03;
+}
+.adm-absensi .adm-footer__total span {
+  color: #BB3E03;
 }

@@ -6,7 +6,7 @@
     justify-content: space-between;
 
     &__title {
-        margin: 4rem 0;
+        margin: 2rem 0;
     }
 
     &__pilihan-peserta {
@@ -30,7 +30,7 @@
 
         &__right {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
             gap: .5rem;
         }
@@ -68,6 +68,7 @@
         align-items: center;
         justify-content: center;
         gap: 2rem;
+        margin-top: 2rem;
     }
 
     &__bagian-index {
@@ -87,6 +88,10 @@
 
         &--dibuka {
             background-color: #2B4BF2;
+
+            &:hover {
+                background-color: #CCD4FC;
+            }
         }
 
         &--sudah-absen {
@@ -114,6 +119,10 @@
 
             &__caption {
                 display: none;
+            }
+
+            &__btn {
+                width: 100%;
             }
         }
 

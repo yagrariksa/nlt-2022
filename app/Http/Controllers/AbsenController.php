@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Validator;
 class AbsenController extends Controller
 {
     public $jadwal = [
-        ['2022-03-31 18:15', '2022-03-31 18:25'],
-        ['2022-03-31 18:30', '2022-03-31 18:35'],
-        ['2022-03-31 18:34', '2022-03-31 18:40'],
-        ['2022-04-02 17:20', '2022-04-02 22:30'],
-        ['2022-04-03 17:40', '2022-04-03 19:30'],
-        ['2022-04-10 13:20', '2022-04-10 13:30'],
+        ['2022-04-03 08:00', '2022-04-03 08:15'],
+        ['2022-04-03 12:30', '2022-04-03 12:45'],
+        ['2022-04-09 08:00', '2022-04-09 08:15'],
+        ['2022-04-09 12:30', '2022-04-09 12:45'], 
+        ['2022-04-10 08:00', '2022-04-10 08:15'],
+        ['2022-04-10 12:30', '2022-04-10 12:45'],
     ];
 
     public function viewAbsen(Request $request)
@@ -128,7 +128,8 @@ class AbsenController extends Controller
     public function admin()
     {
         $p = Peserta::get();
-        return view('be.a.absensi', [
+        // return view('be.a.absensi', [
+        return view('container.admin.absensi', [
             'peserta' => $p,
             'jadwal' => $this->jadwal
         ]);

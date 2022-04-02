@@ -103,4 +103,13 @@ if (window.location.search == '?mode=list&object=peserta') {
     $('#nav__item--a-souvenir-sm')[0].classList.add('active')
     $('#nav__item--a-absensi-sm')[0].classList.remove('active')
     $('#nav__item--a-univ-sm')[0].classList.remove('active')
+} else if (window.location.pathname == '/mahavira/absensi') {
+    $('#nav__item--a-peserta')[0].classList.remove('active')
+    $('#nav__item--a-souvenir')[0].classList.remove('active')
+    $('#nav__item--a-absensi')[0].classList.add('active')
+    $('#nav__item--a-univ')[0].classList.remove('active')
+    $('#nav__item--a-peserta-sm')[0].classList.remove('active')
+    $('#nav__item--a-souvenir-sm')[0].classList.remove('active')
+    $('#nav__item--a-absensi-sm')[0].classList.add('active')
+    $('#nav__item--a-univ-sm')[0].classList.remove('active')
 }

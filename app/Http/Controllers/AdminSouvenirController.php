@@ -158,7 +158,8 @@ class AdminSouvenirController extends Controller
     protected function kantong_detail($key)
     {
         $kantong = Kantong::with('souvenir')->where('kid', $key)->first();
-        return view('be.a.souvenir.detail', [
+        // return view('be.a.souvenir.detail', [
+        return view('container.admin.detail-keranjang', [
             'k' => $kantong
         ]);
     }

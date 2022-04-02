@@ -2,6 +2,7 @@
 
 @section('content')
     @dump($errors)
+    {{ $user->univ }}
     @if ($absen)
         <form action="{{ route('absensi') }}" method="post" enctype="multipart/form-data">
             <h1>{{ $day }}</h1>

@@ -36,7 +36,8 @@
                         'mode' => 'list',
                         'object' => 'katalog',
                         'kid' => $k->kat_id,
-                    ]) }}">
+                    ]) }}"
+                    {{ $k->kat_id == \Request::get('kid') ? 'selected' : '' }}>
                     {{ $k->nama }}</option>
             @endforeach
         </select>
@@ -71,7 +72,8 @@
                         @foreach ($kategori->barang as $b)
                             <div class="list-souvenir__card"
                                 onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
-                                <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                                <img class="modified__img"
+                                    src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
                                     alt="{{ $b->nama }}" class="list-souvenir__card--img">
                                 <div class="list-souvenir__card--white">
                                     <div class="list-souvenir__card--badge">
@@ -175,6 +177,11 @@
                     $(".list-souvenir__etalase--sm option")[x].setAttribute('selected', 'true')
                 }
             })
+        })
+
+        // modified image size
+        document.querySelectorAll('.modified__img').forEach(e => {
+            e.style.height = e.offsetWidth + 'px'
         })
     </script>
 @endsection

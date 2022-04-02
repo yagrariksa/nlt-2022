@@ -3694,6 +3694,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   flex-direction: column;
   border-radius: 18px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 .list-souvenir__card--white {
   padding: 1rem 1rem 1.5rem 1rem;
@@ -3744,6 +3745,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .list-souvenir__left {
     display: none;
+  }
+  .list-souvenir__right {
+    margin-top: 2rem;
   }
   .list-souvenir__etalase {
     display: none;
@@ -4068,4 +4072,168 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 }
 .adm-keranjang .adm-table__nama-keranjang a, .adm-keranjang .adm-table__pembayaran a {
   color: #2B4BF2;
+}
+
+.absensi {
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.absensi__title {
+  margin: 4rem 0;
+}
+.absensi__pilihan-peserta {
+  margin-bottom: 2rem;
+}
+.absensi__content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 1rem;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+}
+.absensi-day {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.absensi-day__right {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.absensi-day__caption {
+  margin-right: 0.5rem;
+  color: #B3B8BA;
+}
+.absensi-day__btn {
+  color: #FFFFFF;
+  border-radius: 0.5rem;
+}
+.absensi-day__btn--sudah-absen {
+  background-color: #51DC6B;
+}
+.absensi-day__btn--absen-sekarang {
+  background-color: #2B4BF2;
+}
+.absensi-day__btn--belum-saatnya-absen {
+  background-color: #B3B8BA;
+}
+.absensi-day__btn--tidak-absen {
+  background-color: #BB3E03;
+}
+.absensi__index {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.absensi__bagian-index {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.absensi__bagian-index span {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+}
+.absensi__bagian-index h5 {
+  white-space: nowrap;
+}
+.absensi__bagian-index--dibuka {
+  background-color: #2B4BF2;
+}
+.absensi__bagian-index--sudah-absen {
+  background-color: #51DC6B;
+}
+.absensi__bagian-index--tidak-absen {
+  background-color: #BB3E03;
+}
+.absensi__bagian-index--belum-dibuka {
+  background-color: #B3B8BA;
+}
+@media screen and (max-width: 767.9px) {
+  .absensi__title {
+    display: none;
+  }
+  .absensi-day__right {
+    flex-direction: column;
+  }
+  .absensi-day__caption {
+    display: none;
+  }
+  .absensi__index {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+  }
+}
+
+.add-absensi {
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 4rem;
+}
+.add-absensi form {
+  height: calc(100vh - 10rem);
+  width: 100%;
+  margin: 0 auto;
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.add-absensi__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.add-absensi__title-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.add-absensi__day-session {
+  color: #BB3E03;
+}
+.add-absensi__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+.add-absensi__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.add-absensi__bottom button {
+  width: 100%;
+}
+.add-absensi__sorry {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.add-absensi__sorry > * {
+  text-align: center;
 }

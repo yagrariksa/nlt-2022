@@ -196,7 +196,7 @@
                     <div class="detail-keranjang-card__left-top">
                         <h2>Upload Bukti Pembayaran</h2>
                         <h4 class="detail-keranjang-card__total-pembayaran">Total Pembayaran (termasuk ongkir) :
-                            <span>Rp{{ $k->total_ongkir }}</span>
+                            <span>Rp {{ $k->souv_total()['total_harga'] + $k->total_ongkir }}</span>
                         </h4>
                         <h4 class="detail-keranjang-card__rekening">Rekening Tujuan :
                             <span>BNI 0838455526 a/n Andiva Nurul Fitri</span>

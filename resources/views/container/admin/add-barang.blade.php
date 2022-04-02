@@ -12,7 +12,7 @@
         <div class="add-edit-barang__form-left">
             <x-form.input-text id="nama" label="Nama" value="{{ old('nama') ? old('nama') : '' }}" />
             <x-form.input-text id="harga" label="Harga" value="{{ old('harga') ? old('harga') : '' }}" />
-            <x-form.input-text id="berat" label="Berat" value="{{ old('berat') ? old('berat') : '' }}" />
+            <x-form.input-text id="berat" label="Berat (gram)" value="{{ old('berat') ? old('berat') : '' }}" />
             <x-form.text-area id="desc" label="Deskripsi" value="{{ old('desc') ? old('desc') : '' }}" />
         </div>
 

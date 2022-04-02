@@ -21,7 +21,7 @@
             <x-form.input-text id="penerima" label="Nama Penerima"
                 value="{{ old('penerima') ? old('penerima') : $k->penerima }}" />
             <x-form.input-text id="no" label="Nomor Penerima" value="{{ old('no') ? old('no') : $k->no }}" />
-            @if ($k->bukti_ongkir)
+            @if ($k->invoice_url)
                 <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos"
                     value="{{ old('alamat') ? old('alamat') : $k->alamat }}" attr="disabled" />
             @else

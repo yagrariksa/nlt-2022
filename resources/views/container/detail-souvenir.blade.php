@@ -53,7 +53,9 @@
                     <select name="kantong" id="kantong">
                         <option value=""></option>
                         @foreach (Auth::user()->kantong as $p)
-                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option @if ($p->id == old('kantong'))
+                                selected
+                            @endif value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                     <label for="select" class="form-group__control-label">Pilih Keranjang</label>
@@ -70,7 +72,7 @@
                 </div>
 
                 <x-form.input-text id="jumlah" label="Jumlah Item" value="{{ old('jumlah') ? old('jumlah') : '' }}" />
-                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)" />
+                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)" value="{{ old('catatan') ? old('catatan') : '' }}"/>
                 <div class="detail-souvenir__total">
                     <h3 class="detail-souvenir__total--left">Total</h3>
                     <h3 class="detail-souvenir__total--right">Rp0</h3>

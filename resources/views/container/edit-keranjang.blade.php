@@ -20,13 +20,23 @@
                 value="{{ old('nama') ? old('nama') : $k->nama }}" />
             <x-form.input-text id="penerima" label="Nama Penerima"
                 value="{{ old('penerima') ? old('penerima') : $k->penerima }}" />
-            <x-form.input-text id="nomor" label="Nomor Penerima" value="{{ old('nomor') ? old('nomor') : $k->nomor }}" />
-            <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos"
-                value="{{ old('alamat') ? old('alamat') : $k->alamat }}" />
+            <x-form.input-text id="no" label="Nomor Penerima" value="{{ old('no') ? old('no') : $k->no }}" />
+            @if ($k->invoice_url)
+                <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos"
+                    value="{{ old('alamat') ? old('alamat') : $k->alamat }}" attr="disabled" />
+            @else
+                <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos"
+                    value="{{ old('alamat') ? old('alamat') : $k->alamat }}" />
+            @endif
         </div>
         <div class="add-keranjang__bottom">
             <button type="submit" class="btn-primary add-keranjang__submit">EDIT KERANJANG</button>
-            <a href="#" class="add-keranjang__batal">Batalkan</a>
+            <a href="{{ route('souvenir', [
+                'mode' => 'detail',
+                'object' => 'kantong',
+                'kid' => $k->kid,
+            ]) }}"
+                class="add-keranjang__batal">Batalkan</a>
         </div>
     </form>
 @endsection

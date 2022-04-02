@@ -1418,13 +1418,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .dashboard__menu--souvenir {
   grid-area: souvenir;
   background-image: url(/images/souvenir.jpg?840f38d6579533e8b9b717568c65aff4);
-  filter: grayscale(1);
 }
 .dashboard__menu--absensi {
   grid-area: absensi;
   background-image: url(/images/absensi.jpg?a72304b452b3726adf56e2ccaa2230ce);
   background-position-y: 100%;
-  filter: grayscale(1);
 }
 
 @media screen and (max-width: 991.9px) {
@@ -1546,11 +1544,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .list-peserta__btn:hover {
   background-color: #001219;
 }
-.list-peserta__btn:disabled {
-  opacity: 0.7;
+.list-peserta__btn:disabled, .list-peserta__btn[disabled] {
+  background-color: #667175;
 }
-.list-peserta__btn:disabled:hover {
-  opacity: 0.5;
+.list-peserta__btn:disabled:hover, .list-peserta__btn[disabled]:hover {
+  opacity: 1;
+  cursor: default;
 }
 .list-peserta__sm {
   display: none;
@@ -2040,7 +2039,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   border-collapse: collapse;
 }
 .adm-table__table td {
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 .adm-table__table tr {
   border-bottom: 0.7px solid rgba(0, 18, 25, 0.15);
@@ -3069,6 +3068,17 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   color: #EE9B00;
 }
 
+.souvenir-breadcrumb {
+  padding: 1.5rem 0;
+  color: #B3B8BA;
+}
+.souvenir-breadcrumb__item {
+  color: inherit;
+}
+.souvenir-breadcrumb__item.active {
+  color: #2B4BF2;
+}
+
 @media screen and (max-width: 991.9px) {
   .detail-souvenir {
     gap: 2rem;
@@ -3151,11 +3161,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   gap: 2rem;
 }
-.keranjang__card--berat, .keranjang__card--ongkir, .keranjang__card--harga {
+.keranjang__card--berat, .keranjang__card--ongkir, .keranjang__card--total, .keranjang__card--harga {
   color: #B3B8BA;
   white-space: nowrap;
 }
-.keranjang__card--berat span, .keranjang__card--ongkir span, .keranjang__card--harga span {
+.keranjang__card--berat span, .keranjang__card--ongkir span, .keranjang__card--total span, .keranjang__card--harga span {
   color: #EE9B00;
 }
 .keranjang__card--arrow {
@@ -3197,13 +3207,15 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   gap: 8px;
 }
 .detail-keranjang__title {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .detail-keranjang__card {
   align-items: stretch;
+  cursor: default;
+  margin-bottom: 3rem;
 }
 .detail-keranjang__card--left {
   width: 40%;
@@ -3230,11 +3242,18 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: flex-end;
   gap: 0.5rem;
 }
+.detail-keranjang__item-action {
+  flex-direction: column;
+}
 .detail-keranjang__dialog-btn {
   padding: 0.25rem 1rem;
   border-radius: 0.5rem;
   color: #FFFFFF;
   background-color: #2B4BF2;
+  cursor: pointer;
+}
+.detail-keranjang__dialog-btn:disabled {
+  opacity: 0.7;
 }
 .detail-keranjang__items {
   box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
@@ -3284,9 +3303,16 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   max-width: 50%;
 }
 .detail-keranjang__item--harga {
-  color: #EE9B00;
+  color: #2B4BF2;
 }
 .detail-keranjang__item--harga-sm {
+  display: none;
+  color: #2B4BF2;
+}
+.detail-keranjang__item--total {
+  color: #EE9B00;
+}
+.detail-keranjang__item--total-sm {
   display: none;
   color: #EE9B00;
 }
@@ -3296,6 +3322,153 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+.detail-keranjang-card {
+  margin-top: 0;
+  padding: 4rem;
+  border-radius: 2rem;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: #FFFFFF;
+  z-index: 9;
+}
+.detail-keranjang-card.active {
+  display: flex;
+  -webkit-animation: fadein 0.2s ease-in-out;
+          animation: fadein 0.2s ease-in-out;
+}
+.detail-keranjang-card.active + .detail-keranjang-card__bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: unset;
+  z-index: 8;
+  background-color: rgba(0, 18, 25, 0.24);
+  -webkit-animation: fadein 0.2s ease-in-out;
+          animation: fadein 0.2s ease-in-out;
+}
+.detail-keranjang-card__left {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.detail-keranjang-card__left-top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.detail-keranjang-card__total-pembayaran {
+  color: #B3B8BA;
+}
+.detail-keranjang-card__total-pembayaran span {
+  color: #EE9B00;
+}
+.detail-keranjang-card__rekening {
+  color: #B3B8BA;
+}
+.detail-keranjang-card__rekening span {
+  color: #2B4BF2;
+}
+.detail-keranjang-card__rekening span.--hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.detail-keranjang-card__left-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+.detail-keranjang-card__peringatan {
+  color: #667175;
+}
+.detail-keranjang-card__peringatan span {
+  color: #BB3E03;
+}
+.detail-keranjang-card__btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+.detail-keranjang-card__right {
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.detail-keranjang-card__img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+.detail-keranjang-card__img-caption {
+  color: #667175;
+}
+.detail-keranjang-card__close {
+  position: absolute;
+  right: 4rem;
+  top: 4rem;
+  cursor: pointer;
+  font-weight: 700;
+  color: #001219;
+  text-decoration: none;
+}
+.detail-keranjang-card__close:hover {
+  color: #BB3E03;
+}
+.detail-keranjang-card__open-img, .detail-keranjang-card__close {
+  display: none;
+}
+.detail-keranjang-card .form-group {
+  margin-top: 1.5rem;
+}
+.detail-keranjang-card__bg, .detail-keranjang-card__bg--invoice {
+  display: none;
+}
+.detail-keranjang-card__invoice {
+  width: 600px;
+  max-width: calc(100% - 2.5rem);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  display: none;
+  transform: translate(-50%, -50%);
+  border-radius: 2rem;
+  z-index: 9;
+}
+.detail-keranjang-card__invoice.active {
+  display: flex;
+  -webkit-animation: fadein 0.2s ease-in-out;
+          animation: fadein 0.2s ease-in-out;
+}
+.detail-keranjang-card__invoice.active + .detail-keranjang-card__bg--invoice {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: unset;
+  z-index: 8;
+  background-color: rgba(0, 18, 25, 0.24);
+  -webkit-animation: fadein 0.2s ease-in-out;
+          animation: fadein 0.2s ease-in-out;
 }
 
 @media screen and (max-width: 1199.9px) {
@@ -3318,21 +3491,24 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .detail-keranjang__action {
     width: 100%;
     display: grid;
-    grid-template-columns: calc(100% - 2rem) 1.5rem;
-    grid-template-areas: "submit-ongkir edit" "bukti-bayar delete";
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    grid-template-areas: "submit-ongkir submit-ongkir" "bukti-bayar bukti-bayar" "delete edit";
     gap: 8px;
   }
   .detail-keranjang__dialog-btn--submit-ongkir {
     grid-area: submit-ongkir;
   }
-  .detail-keranjang__dialog-btn--bukti-bayar {
+  .detail-keranjang__dialog-btn--bukti-bayar, .detail-keranjang__dialog-btn--invoice {
     grid-area: bukti-bayar;
   }
   .detail-keranjang__edit {
     grid-area: edit;
+    width: 100%;
   }
   .detail-keranjang__delete {
     grid-area: delete;
+    width: 100%;
   }
   .detail-keranjang__item {
     flex-direction: column;
@@ -3349,6 +3525,29 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .detail-keranjang__item--left, .detail-keranjang__item--right {
     padding: 1.7rem 0;
+  }
+  .detail-keranjang__item-action {
+    flex-direction: row-reverse;
+  }
+}
+@media screen and (max-width: 991.9px) {
+  .detail-keranjang-card {
+    min-height: 80%;
+  }
+  .detail-keranjang-card__left {
+    width: 100%;
+  }
+  .detail-keranjang-card__right {
+    display: none;
+  }
+  .detail-keranjang-card__open-img, .detail-keranjang-card__close {
+    display: unset;
+  }
+  .detail-keranjang-card__submit {
+    width: 100%;
+  }
+  .detail-keranjang-card__cancel {
+    display: none;
   }
 }
 @media screen and (max-width: 767.9px) {
@@ -3369,6 +3568,11 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .detail-keranjang__card--left {
     padding: 0;
+  }
+}
+@media screen and (max-width: 575.9px) {
+  .detail-keranjang-card {
+    width: calc(100% - 3.5rem);
   }
 }
 .add-keranjang {
@@ -3448,6 +3652,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   position: -webkit-sticky;
   position: sticky;
   top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   border-radius: 16px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
 }
@@ -3465,6 +3673,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   font-weight: 500;
   color: #B3B8BA;
   border-bottom: 1px solid rgba(0, 18, 25, 0.15);
+  text-decoration: none;
 }
 .list-souvenir__etalase-btn:last-of-type {
   border: none;
@@ -3488,20 +3697,20 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .list-souvenir__cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 1.5rem 1rem;
 }
 .list-souvenir__card {
-  max-width: 300px;
-  width: 23%;
+  width: calc((100% - 3rem) / 4);
   display: flex;
   flex-direction: column;
   border-radius: 18px;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 .list-souvenir__card--white {
-  padding: 2rem 1.5rem;
+  padding: 1rem 1rem 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -3516,14 +3725,22 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .list-souvenir__card--harga {
   color: #EE9B00;
 }
+.list-souvenir__card--badge {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+}
 @media screen and (max-width: 1199.9px) {
   .list-souvenir__card {
-    width: 30%;
+    width: calc((100% - 2rem) / 3);
   }
 }
 @media screen and (max-width: 991.9px) {
   .list-souvenir__card {
-    width: 47%;
+    width: calc((100% - 1rem) / 2);
   }
 }
 @media screen and (max-width: 767.9px) {
@@ -3541,6 +3758,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .list-souvenir__left {
     display: none;
+  }
+  .list-souvenir__right {
+    margin-top: 2rem;
   }
   .list-souvenir__etalase {
     display: none;
@@ -3576,6 +3796,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   display: grid;
   grid-template-columns: calc(100% - 21rem) 19rem;
   gap: 2rem;
+  margin-bottom: 4rem;
 }
 .adm-souvenir__left {
   padding: 2rem;
@@ -3739,6 +3960,16 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .add-edit-barang__form-left {
   grid-area: form-left;
 }
+.add-edit-barang__two-in-arow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  gap: 2rem;
+}
+.add-edit-barang__two-in-arow > .form-group {
+  width: calc((100% - 2rem) / 2);
+}
 .add-edit-barang__form-right {
   grid-area: form-right;
 }
@@ -3824,4 +4055,248 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   justify-content: flex-end;
   gap: 3rem;
+}
+
+.adm-keranjang__toggle {
+  margin-left: 2rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  background-color: rgba(0, 18, 25, 0.15);
+  border: 2px solid #B3B8BA;
+  border-radius: 50rem;
+}
+.adm-keranjang__toggle-btn {
+  width: 230px;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  background-color: transparent;
+}
+.adm-keranjang__toggle-btn.active {
+  background-color: #FFFFFF;
+}
+.adm-keranjang .adm-full__table-container {
+  height: calc(100vh - 15.79rem);
+}
+.adm-keranjang .adm-full__absolute {
+  display: none;
+}
+.adm-keranjang .adm-full__absolute.active {
+  display: block;
+}
+.adm-keranjang .adm-table__pembayaran .terupload {
+  padding-right: 1rem;
+  color: #0A9396;
+}
+.adm-keranjang .adm-table__pembayaran .belum-upload {
+  color: #BB3E03;
+}
+.adm-keranjang .adm-table__nama-keranjang a, .adm-keranjang .adm-table__pembayaran a {
+  color: #2B4BF2;
+}
+
+.absensi {
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.absensi__title {
+  margin: 2rem 0;
+}
+.absensi__pilihan-peserta {
+  margin-bottom: 2rem;
+}
+.absensi__content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 1rem;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+}
+.absensi-day {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.absensi-day__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.absensi-day__caption {
+  margin-right: 0.5rem;
+  color: #B3B8BA;
+}
+.absensi-day__btn {
+  color: #FFFFFF;
+  border-radius: 0.5rem;
+}
+.absensi-day__btn--sudah-absen {
+  background-color: #51DC6B;
+}
+.absensi-day__btn--absen-sekarang {
+  background-color: #2B4BF2;
+}
+.absensi-day__btn--belum-saatnya-absen {
+  background-color: #B3B8BA;
+}
+.absensi-day__btn--tidak-absen {
+  background-color: #BB3E03;
+}
+.absensi__index {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.absensi__bagian-index {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.absensi__bagian-index span {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+}
+.absensi__bagian-index h5 {
+  white-space: nowrap;
+}
+.absensi__bagian-index--dibuka {
+  background-color: #2B4BF2;
+}
+.absensi__bagian-index--dibuka:hover {
+  background-color: #CCD4FC;
+}
+.absensi__bagian-index--sudah-absen {
+  background-color: #51DC6B;
+}
+.absensi__bagian-index--tidak-absen {
+  background-color: #BB3E03;
+}
+.absensi__bagian-index--belum-dibuka {
+  background-color: #B3B8BA;
+}
+@media screen and (max-width: 767.9px) {
+  .absensi__title {
+    display: none;
+  }
+  .absensi-day__right {
+    flex-direction: column;
+  }
+  .absensi-day__caption {
+    display: none;
+  }
+  .absensi-day__btn {
+    width: 100%;
+  }
+  .absensi__index {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+  }
+}
+
+.add-absensi {
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 4rem;
+}
+.add-absensi form {
+  height: calc(100vh - 10rem);
+  width: 100%;
+  margin: 0 auto;
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.add-absensi__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.add-absensi__title-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.add-absensi__day-session {
+  color: #BB3E03;
+}
+.add-absensi__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+.add-absensi__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.add-absensi__bottom button {
+  width: 100%;
+}
+.add-absensi__sorry {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.add-absensi__sorry > * {
+  text-align: center;
+}
+
+.adm-absensi__table th > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.adm-absensi__table .malachite {
+  color: #51DC6B;
+  font-weight: 500;
+}
+.adm-absensi__tanda-absen {
+  width: 100%;
+  height: 100%;
+}
+.adm-absensi__tanda-absen--sudah {
+  text-decoration: none;
+  color: #51DC6B;
+}
+.adm-absensi__tanda-absen--aktif {
+  color: #2B4BF2;
+}
+.adm-absensi__tanda-absen--belum {
+  color: #B3B8BA;
+}
+.adm-absensi__tanda-absen--tidak {
+  color: #FFFFFF;
+}
+.adm-absensi__tanda-absen--tidak-bg {
+  background-color: #BB3E03;
+}
+.adm-absensi .adm-footer__total span {
+  color: #BB3E03;
 }

@@ -6,7 +6,7 @@
     gap: 8px;
 
     &__title {
-        margin-bottom: 4rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -14,6 +14,8 @@
 
     &__card {
         align-items: stretch;
+        cursor: default;
+        margin-bottom: 3rem;
 
         &--left {
             width: 40%;
@@ -47,11 +49,20 @@
         gap: .5rem;
     }
 
+    &__item-action {
+        flex-direction: column;
+    }
+
     &__dialog-btn {
         padding: 0.25rem 1rem;
         border-radius: .5rem;
         color: $white;
         background-color: #2B4BF2;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: .7;
+        }
     }
 
     &__items {
@@ -114,12 +125,21 @@
         }
 
         &--harga {
-            color: $gamboge;
+            color: $blue-RYB;
+
+            &-sm {
+                display: none;
+                color: $blue-RYB;
+            }
         }
 
-        &--harga-sm {
-            display: none;
+        &--total {
             color: $gamboge;
+
+            &-sm {
+                display: none;
+                color: $gamboge;
+            }
         }
 
         &--right {
@@ -128,6 +148,179 @@
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
+        }
+    }
+
+    &-card {
+        margin-top: 0;
+        padding: 4rem;
+        border-radius: 2rem;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 2rem;
+        background-color: $white;
+        z-index: 9;
+
+        &.active {
+            display: flex;
+            animation: fadein .2s ease-in-out;
+
+            +.detail-keranjang-card__bg {
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                display: unset;
+                z-index: 8;
+                background-color: rgba($rich-black, 24%);
+                animation: fadein .2s ease-in-out;
+
+            }
+        }
+
+        &__left {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        &__left-top {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+
+        &__total-pembayaran {
+            color: $rich-black-40;
+
+            span {
+                color: $gamboge;
+            }
+        }
+
+        &__rekening {
+
+            color: $rich-black-40;
+
+            span {
+                color: #2B4BF2;
+
+                &.--hover:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        &__left-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 1.5rem;
+        }
+
+        &__peringatan {
+            color: $rich-black-60;
+
+            span {
+                color: $mahogany;
+            }
+        }
+
+        &__btns {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        &__right {
+            max-width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        &__img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        &__img-caption {
+            color: $rich-black-60;
+        }
+
+        &__close {
+            position: absolute;
+            right: 4rem;
+            top: 4rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: $rich-black;
+            text-decoration: none;
+
+            &:hover {
+                color: $mahogany;
+            }
+        }
+
+        &__open-img,
+        &__close {
+            display: none;
+        }
+
+        .form-group {
+            margin-top: 1.5rem;
+        }
+
+        &__bg,
+        &__bg--invoice {
+            display: none;
+        }
+
+        &__invoice {
+            width: 600px;
+            max-width: calc(100% - 2.5rem);
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            display: none;
+            transform: translate(-50%, -50%);
+            border-radius: 2rem;
+            z-index: 9;
+
+            &.active {
+                display: flex;
+                animation: fadein .2s ease-in-out;
+
+                +.detail-keranjang-card__bg--invoice {
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    display: unset;
+                    z-index: 8;
+                    background-color: rgba($rich-black, 24%);
+                    animation: fadein .2s ease-in-out;
+
+                }
+            }
         }
     }
 }
@@ -158,28 +351,37 @@
         &__action {
             width: 100%;
             display: grid;
-            grid-template-columns: calc(100% - 2rem) 1.5rem;
+            grid-template-columns: 50% 50%;
+            align-items: center;
             grid-template-areas:
-                'submit-ongkir edit'
-                'bukti-bayar delete'
+                'submit-ongkir submit-ongkir'
+                'bukti-bayar bukti-bayar'
+                'delete edit'
             ;
             gap: 8px;
         }
 
-        &__dialog-btn--submit-ongkir {
-            grid-area: submit-ongkir;
+        &__dialog-btn {
+            &--submit-ongkir {
+                grid-area: submit-ongkir;
+            }
+
+            &--bukti-bayar,
+            &--invoice {
+                grid-area: bukti-bayar;
+            }
+
         }
 
-        &__dialog-btn--bukti-bayar {
-            grid-area: bukti-bayar;
-        }
 
         &__edit {
             grid-area: edit;
+            width: 100%;
         }
 
         &__delete {
             grid-area: delete;
+            width: 100%;
         }
 
         &__item {
@@ -202,6 +404,37 @@
             &--right {
                 padding: 1.7rem 0;
             }
+
+            &-action {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991.9px) {
+    .detail-keranjang-card {
+        min-height: 80%;
+
+        &__left {
+            width: 100%;
+        }
+
+        &__right {
+            display: none;
+        }
+
+        &__open-img,
+        &__close {
+            display: unset;
+        }
+
+        &__submit {
+            width: 100%;
+        }
+
+        &__cancel {
+            display: none;
         }
     }
 }
@@ -230,5 +463,12 @@
                 padding: 0;
             }
         }
+    }
+}
+
+
+@media screen and (max-width: 575.9px) {
+    .detail-keranjang-card {
+        width: calc(100% - 3.5rem);
     }
 }

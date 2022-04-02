@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HasilJualBarangExport;
+use App\Exports\SouvenirExport;
 use App\Models\Barang;
 use App\Models\GambarBarang;
 use App\Models\Kantong;
@@ -9,6 +11,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class AdminSouvenirController extends Controller
@@ -54,6 +57,10 @@ class AdminSouvenirController extends Controller
                         return $this->barang_edit($key);
                         break;
 
+                    case 'excel':
+                        return $this->barang_excel();
+                        break;
+
                     default:
                         return $this->barang_list();
                         break;
@@ -68,6 +75,10 @@ class AdminSouvenirController extends Controller
 
                     case 'detail':
                         return $this->kantong_detail($key);
+                        break;
+
+                    case 'excel':
+                        return $this->kantong_excel();
                         break;
 
                     default:
@@ -129,7 +140,7 @@ class AdminSouvenirController extends Controller
 
     protected function barang_edit($key)
     {
-        $k = Kategori::get();
+        $k = Kategori::where('parent_id', null)->get();
         $b = Barang::where('bar_id', $key)->first();
         // return view('be.a.barang.edit', [
         return view('container.admin.edit-barang', [
@@ -138,11 +149,17 @@ class AdminSouvenirController extends Controller
         ]);
     }
 
+    protected function barang_excel()
+    {
+        return Excel::download(new HasilJualBarangExport(), 'all-data_Jual_Barang_' . date('H-i_d-M') . '.xlsx');
+    }
+
     protected function kantong_list()
     {
         $b = Barang::get();
         $kantong = Kantong::get();
-        return view('be.a.souvenir.list', [
+        // return view('be.a.souvenir.list', [
+        return view('container.admin.list-kantong', [
             'kantong' => $kantong,
             'barang' => $b,
         ]);
@@ -154,6 +171,11 @@ class AdminSouvenirController extends Controller
         return view('be.a.souvenir.detail', [
             'k' => $kantong
         ]);
+    }
+
+    protected function kantong_excel()
+    {
+        return Excel::download(new SouvenirExport(), 'all-data_Souvenir_' . date('H-i_d-M') . '.xlsx');
     }
 
     public function a_action(Request $request)
@@ -177,7 +199,7 @@ class AdminSouvenirController extends Controller
                     ->route('a.souvenir', [
                         'mode' => 'list',
                         'object' => 'barang'
-                    ])->with('msg_berhasil', 'Kategori '. $request->nama . ' berhasil ditambahkan.');
+                    ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil ditambahkan.');
                 break;
 
             case 'edit-my-kategori':
@@ -192,7 +214,7 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 
+                        'mode' => 'list',
                         'object' => 'barang'
                     ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil diubah.');
                 break;
@@ -224,6 +246,9 @@ class AdminSouvenirController extends Controller
                 $b = Barang::where('bar_id', $key)->first();
                 foreach ($b->gambar as $g) {
                     $g->delete();
+                }
+                foreach ($b->terbeli as $t) {
+                    $t->delete();
                 }
                 $b->delete();
                 return redirect()->back()->with('msg_berhasil', 'Barang ' . $b->nama . ' berhasil dihapus.');
@@ -321,6 +346,14 @@ class AdminSouvenirController extends Controller
         $b->berat = $request->berat;
         $b->desc = $request->desc;
         $b->kategori_id = $request->kategori;
+
+        foreach ($b->terbeli as $souv) {
+            $souv->harga = $request->harga;
+            $souv->berat_gram = $request->berat;
+            $souv->total_harga = $souv->jumlah * $request->harga;
+            $souv->total_berat = $souv->jumlah * $request->berat;
+            $souv->save();
+        }
         $b->save();
 
         return redirect()

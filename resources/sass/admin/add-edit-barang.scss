@@ -23,6 +23,18 @@
         grid-area: form-left;
     }
 
+    &__two-in-arow {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        gap: 2rem;
+
+        >.form-group {
+            width: calc((100% - 2rem)/2);
+        }
+    }
+
     &__form-right {
         grid-area: form-right;
     }

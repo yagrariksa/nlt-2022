@@ -2481,6 +2481,20 @@ $('.dialog__bg').click(function () {
     }
   });
 });
+$('.detail-keranjang-card__bg').click(function () {
+  $('.detail-keranjang-card').map(function (x) {
+    if ($('.detail-keranjang-card')[x].classList.contains('active')) {
+      $('.detail-keranjang-card')[x].classList.remove('active');
+    }
+  });
+});
+$('.detail-keranjang-card__bg--invoice').click(function () {
+  $('.detail-keranjang-card__invoice').map(function (x) {
+    if ($('.detail-keranjang-card__invoice')[x].classList.contains('active')) {
+      $('.detail-keranjang-card__invoice')[x].classList.remove('active');
+    }
+  });
+});
 
 /***/ }),
 
@@ -2837,7 +2851,6 @@ $('.sponsors__logo-name').hover(function (e) {
 }, function (e) {
   e.currentTarget.lastElementChild.innerHTML = temp;
 });
-console.log('ok');
 
 /***/ }),
 
@@ -2936,7 +2949,16 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--souvenir-sm')[0].classList.remove('active');
   $('#nav__item--absensi-sm')[0].classList.remove('active');
   $('#nav__item--password-sm')[0].classList.add('active');
-} else if (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
+} else if (window.location.pathname == '/souvenir') {
+  $('#nav__item--peserta')[0].classList.remove('active');
+  $('#nav__item--souvenir')[0].classList.add('active');
+  $('#nav__item--absensi')[0].classList.remove('active');
+  $('#nav__item--password')[0].classList.remove('active');
+  $('#nav__item--peserta-sm')[0].classList.remove('active');
+  $('#nav__item--souvenir-sm')[0].classList.add('active');
+  $('#nav__item--absensi-sm')[0].classList.remove('active');
+  $('#nav__item--password-sm')[0].classList.remove('active');
+} else if (window.location.pathname == '/mahavira/peserta' && window.location.search.includes('?object=peserta')) {
   $('#nav__item--a-peserta')[0].classList.add('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
@@ -2945,7 +2967,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
   $('#nav__item--a-absensi-sm')[0].classList.remove('active');
   $('#nav__item--a-univ-sm')[0].classList.remove('active');
-} else if (window.location.pathname == '/mahavira' && window.location.search == '?univ=list') {
+} else if (window.location.pathname == '/mahavira/peserta' && window.location.search.includes('?univ=list')) {
   $('#nav__item--a-peserta')[0].classList.remove('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
@@ -2954,6 +2976,24 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
   $('#nav__item--a-absensi-sm')[0].classList.remove('active');
   $('#nav__item--a-univ-sm')[0].classList.add('active');
+} else if (window.location.pathname == '/mahavira/souvenir' && (window.location.search == '?mode=list&object=barang' || window.location.search.includes('?mode=add') || window.location.search.includes('?mode=edit'))) {
+  $('#nav__item--a-peserta')[0].classList.remove('active');
+  $('#nav__item--a-souvenir')[0].classList.add('active');
+  $('#nav__item--a-absensi')[0].classList.remove('active');
+  $('#nav__item--a-univ')[0].classList.remove('active');
+  $('#nav__item--a-peserta-sm')[0].classList.remove('active');
+  $('#nav__item--a-souvenir-sm')[0].classList.add('active');
+  $('#nav__item--a-absensi-sm')[0].classList.remove('active');
+  $('#nav__item--a-univ-sm')[0].classList.remove('active');
+} else if (window.location.pathname == '/mahavira/absensi') {
+  $('#nav__item--a-peserta')[0].classList.remove('active');
+  $('#nav__item--a-souvenir')[0].classList.remove('active');
+  $('#nav__item--a-absensi')[0].classList.add('active');
+  $('#nav__item--a-univ')[0].classList.remove('active');
+  $('#nav__item--a-peserta-sm')[0].classList.remove('active');
+  $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
+  $('#nav__item--a-absensi-sm')[0].classList.add('active');
+  $('#nav__item--a-univ-sm')[0].classList.remove('active');
 }
 
 /***/ }),
@@ -3156,7 +3196,7 @@ var dataUniv = {
     email: 'uinma@nlt2022.com'
   }
 };
-$('.form-group__select-items').click(function () {
+$('#univ').click(function () {
   var univ = $('#univ')[0].value;
   var akronim, email;
 

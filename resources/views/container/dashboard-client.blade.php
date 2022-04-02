@@ -16,10 +16,12 @@
     </a>
     <a href="{{ route('souvenir', [
         'mode' => 'list',
-    ]) }}" class="dashboard__menu dashboard__menu--souvenir">
+        'object' => 'katalog',
+    ]) }}"
+        class="dashboard__menu dashboard__menu--souvenir">
         <h1>Souvenir <span></span></h1>
     </a>
-    <a href="{{ route('souvenir', [
+    <a href="{{ route('absensi', [
         'mode' => 'list',
     ]) }}" class="dashboard__menu dashboard__menu--absensi">
         <h1>Absensi <span></span></h1>

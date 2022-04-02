@@ -1,0 +1,44 @@
+.adm-absensi {
+    &__table {
+        th>span {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .malachite {
+            color: #51DC6B;
+            font-weight: 500;
+        }
+    }
+
+    &__tanda-absen {
+        width: 100%;
+        height: 100%;
+
+        &--sudah {
+            text-decoration: none;
+            color: #51DC6B;
+        }
+
+        &--aktif {
+            color: #2B4BF2;
+        }
+
+        &--belum {
+            color: $rich-black-40;
+        }
+
+        &--tidak {
+            color: $white;
+        }
+
+        &--tidak-bg {
+            background-color: $mahogany;
+        }
+    }
+
+    .adm-footer__total span {
+        color: $mahogany;
+    }
+}

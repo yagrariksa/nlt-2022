@@ -12,21 +12,21 @@
         <div class="add-edit-barang__form-left">
             <x-form.input-text id="nama" label="Nama" value="{{ old('nama') ? old('nama') : '' }}" />
             <x-form.input-text id="harga" label="Harga" value="{{ old('harga') ? old('harga') : '' }}" />
-            <x-form.input-text id="berat" label="Berat" value="{{ old('berat') ? old('berat') : '' }}" />
+            <x-form.input-text id="berat" label="Berat (gram)" value="{{ old('berat') ? old('berat') : '' }}" />
             <x-form.text-area id="desc" label="Deskripsi" value="{{ old('desc') ? old('desc') : '' }}" />
         </div>
 
         <div class="add-edit-barang__form-right">
             <div class="form-group form-group--select">
                 <select name="kategori" id="kategori">
-                    <option value=""></option>
+                <option value=""></option>
                     @foreach ($k as $item)
                         <option {{ $item->kat_id == \Request::get('kategori') ? 'selected' : '' }}
                             value="{{ $item->kat_id }}">{{ $item->nama }}</option>
                         @if ($item->child())
                             @foreach ($item->child() as $child)
                                 <option {{ $child->kat_id == \Request::get('kategori') ? 'selected' : '' }}
-                                    value="{{ $child->kat_id }}">{{ $child->nama }}</option>
+                                    value="{{ $child->kat_id }}">{{ $item->nama }}   {{ $child->nama }}</option>
                             @endforeach
                         @endif
                     @endforeach

@@ -8,7 +8,12 @@
 @section('content')
     <div class="adm-souvenir__title-div">
         <h1 class="adm-souvenir__title">Souvenir</h1>
-        <a class="button btn-primary" disabled>LIHAT DATA PENJUALAN</a>
+        <a class="button btn-primary"
+            href="{{ route('a.souvenir', [
+                'mode' => 'list',
+                'object' => 'kantong',
+            ]) }}">LIHAT DATA
+            PENJUALAN</a>
     </div>
 
     <div class="adm-souvenir__content">

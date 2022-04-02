@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <h5 class="landing__by">by AMSA UNAIR</h5>
+        <h5 class="landing__by">by AMSA-Unair</h5>
     </div>
 
     <div class="about" id="about">
@@ -88,11 +88,11 @@
 
     <div class="guideline" id="guideline">
         <div class="guideline__text">
-            <h1 class="xl guideline__title">Grab Our Guideline Book!</h1>
+            <h1 class="xl guideline__title">Grab Our Event Guideline!</h1>
             <img src="{{ url('assets/img/guide-book.png') }}" alt="" class="guideline__img--sm">
             <h4 class="guideline__desc">
                 For more details and requirements of MAHAVIRA 2022, please refer to this guideline!
-                <a href="{{ url('https://drive.google.com/file/d/1LBbvvln-tWASnWQ4gQLhQmxnoVXBGPRr/view?usp=sharing') }}"
+                <a href="{{ url('assets/file') . '/Event Guideline of NLT 2022.pdf' }}"
                     class="button btn-primary guideline__btn">DOWNLOAD GUIDELINE</a>
             </h4>
         </div>
@@ -146,7 +146,7 @@
         {{-- here --}}
     </div>
 
-    <div class="sponsors" id="our-sponsor">
+    <div class="sponsors" id="our-sponsor" style="display: none">
         <h1 class="sponsors__title">Get To Know About <span>Our Sponsors</span></h1>
         <div class="sponsors__list">
             <div class="sponsors__logo-name" onclick="location.href= '{{ route('sponsor') }}'">
@@ -199,8 +199,4 @@
         </div>
         <h6 class="footer__copyright">AMSA UNAIR, 2022</h6>
     </div>
-@endsection
-
-@section('other')
-    {{-- it can be modal, etc. --}}
 @endsection

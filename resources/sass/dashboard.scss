@@ -29,25 +29,23 @@
             background-color: rgba($rich-black, 32%);
             @include blur;
         }
-    }
 
-    &__menu--list-peserta {
-        grid-area: list-peserta;
-        background-image: url('./../img/dashboard/list-peserta.jpg');
-        background-position-y: 100%;
-    }
+        &--list-peserta {
+            grid-area: list-peserta;
+            background-image: url('./../img/dashboard/list-peserta.jpg');
+            background-position-y: 100%;
+        }
 
-    &__menu--souvenir {
-        grid-area: souvenir;
-        background-image: url('./../img/dashboard/souvenir.jpg');
-        filter: grayscale(1);
-    }
+        &--souvenir {
+            grid-area: souvenir;
+            background-image: url('./../img/dashboard/souvenir.jpg');
+        }
 
-    &__menu--absensi {
-        grid-area: absensi;
-        background-image: url('./../img/dashboard/absensi.jpg');
-        background-position-y: 100%;
-        filter: grayscale(1);
+        &--absensi {
+            grid-area: absensi;
+            background-image: url('./../img/dashboard/absensi.jpg');
+            background-position-y: 100%;
+        }
     }
 }
 

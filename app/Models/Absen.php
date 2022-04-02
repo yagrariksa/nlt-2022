@@ -18,5 +18,4 @@ class Absen extends Model
         return $this->belongsTo(Peserta::class, 'peserta_id','id');
     }
 
-
 }

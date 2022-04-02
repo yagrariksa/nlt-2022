@@ -26,7 +26,7 @@
                         @if ($item->child())
                             @foreach ($item->child() as $child)
                                 <option {{ $child->kat_id == \Request::get('kategori') ? 'selected' : '' }}
-                                    value="{{ $child->kat_id }}">{{ $child->nama }}</option>
+                                    value="{{ $child->kat_id }}">{{ $item->nama }} >> {{ $child->nama }}</option>
                             @endforeach
                         @endif
                     @endforeach

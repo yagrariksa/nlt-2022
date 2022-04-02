@@ -19,31 +19,66 @@
                     $session = 1;
                 @endphp
                 @foreach ($jadwal as $j)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>Day {{ $day }}, Session {{ $session }}</td>
-                        <td>
-                            @switch($peserta->sudahAbsen($j[0], $j[1]))
-                                @case('sudah-absen')
-                                    <span style="background-color: greenyellow">done</span>
-                                @break
+                    @if ($session == 1)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>Day {{ $day }}</td>
+                            <td>
+                                @switch($peserta->sudahAbsen($j[0], $j[1]))
+                                    @case('sudah-absen')
+                                        <span style="background-color: greenyellow">Session {{ $session }}</span>
+                                    @break
 
-                                @case('absen-sekarang')
-                                    <span style="background-color: aquamarine">now</span>
-                                @break
+                                    @case('absen-sekarang')
+                                        <span style="background-color: aquamarine">
+                                            <a
+                                                href="{{ route('absensi', [
+                                                    'mode' => 'do',
+                                                    'peserta' => $peserta->uid,
+                                                ]) }}">Session {{ $session }}</a></span>
+                                    @break
 
-                                @case('belum-saatnya-absen')
-                                    <span style="background-color: beige">not yet</span>
-                                @break
+                                    @case('belum-saatnya-absen')
+                                        <span style="background-color: beige">Session {{ $session }}</span>
+                                    @break
 
-                                @case('tidak-absen')
-                                    <span style="background-color: red">hahaha</span>
-                                @break
+                                    @case('tidak-absen')
+                                        <span style="background-color: red">Session {{ $session }}</span>
+                                    @break
 
-                                @default
-                            @endswitch
+                                    @default
+                                @endswitch
+                    @endif
+
+                    @if ($session == 2)
+                        @switch($peserta->sudahAbsen($j[0], $j[1]))
+                            @case('sudah-absen')
+                                <span style="background-color: greenyellow">Session {{ $session }}</span>
+                            @break
+
+                            @case('absen-sekarang')
+                                <span style="background-color: aquamarine">
+                                    <a
+                                        href="{{ route('absensi', [
+                                            'mode' => 'do',
+                                            'peserta' => $peserta->uid,
+                                        ]) }}">Session {{ $session }}</a></span>
+                            @break
+
+                            @case('belum-saatnya-absen')
+                                <span style="background-color: beige">Session {{ $session }}</span>
+                            @break
+
+                            @case('tidak-absen')
+                                <span style="background-color: red">Session {{ $session }}</span>
+                            @break
+
+                            @default
+                        @endswitch
                         </td>
-                    </tr>
+
+                        </tr>
+                    @endif
                     @php
                         if ($session == 2) {
                             $day++;

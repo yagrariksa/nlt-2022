@@ -43,18 +43,25 @@
         <h4>Foto Terupload</h4>
         <div class="add-edit-barang__imgs">
             <div class="add-edit-barang__img-overflow">
-                @foreach ($b->gambar as $g)
+                @if (sizeof($b->gambar) == 1)
                     <div class="add-edit-barang__img">
-                        <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
-                        <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
-                            method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="h5">Click to delete</button>
-                        </form>
-                        <span></span>
+                        <img src="{{ url('storage') . '/' . $b->gambar[0]->url }}" alt="{{ $b->gambar[0]->url }}">
                     </div>
-                @endforeach
+                @else
+                    @foreach ($b->gambar as $g)
+                        <div class="add-edit-barang__img">
+                            <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
+                            <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
+                                method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="h5">Click to delete</button>
+                            </form>
+                            <span></span>
+                        </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </div>

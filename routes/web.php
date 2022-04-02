@@ -112,6 +112,9 @@ Route::name('a.')->prefix('mahavira')->group(function () {
             Route::post('/', [AdminSouvenirController::class, 'a_action']);
             Route::delete('/', [AdminSouvenirController::class, 'a_action']);
         });
+        Route::prefix('absensi')->name('absensi')->group(function () {
+            Route::get('/', [AbsenController::class, 'admin']);
+        });
         Route::get('peserta', [AdminController::class, 'a_view'])->name('peserta');
     });
 });

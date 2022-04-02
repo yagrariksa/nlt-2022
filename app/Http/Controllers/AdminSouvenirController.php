@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SouvenirExport;
 use App\Models\Barang;
 use App\Models\GambarBarang;
 use App\Models\Kantong;
@@ -9,6 +10,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class AdminSouvenirController extends Controller
@@ -68,6 +70,10 @@ class AdminSouvenirController extends Controller
 
                     case 'detail':
                         return $this->kantong_detail($key);
+                        break;
+
+                    case 'excel':
+                        return $this->kantong_excel();
                         break;
 
                     default:
@@ -156,6 +162,11 @@ class AdminSouvenirController extends Controller
         ]);
     }
 
+    protected function kantong_excel()
+    {
+        return Excel::download(new SouvenirExport(), 'all-data_Souvenir_' . date('H-i_d-M') . '.xlsx');
+    }
+
     public function a_action(Request $request)
     {
         $mode = $request->query('mode');
@@ -177,7 +188,7 @@ class AdminSouvenirController extends Controller
                     ->route('a.souvenir', [
                         'mode' => 'list',
                         'object' => 'barang'
-                    ])->with('msg_berhasil', 'Kategori '. $request->nama . ' berhasil ditambahkan.');
+                    ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil ditambahkan.');
                 break;
 
             case 'edit-my-kategori':
@@ -192,7 +203,7 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 
+                        'mode' => 'list',
                         'object' => 'barang'
                     ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil diubah.');
                 break;

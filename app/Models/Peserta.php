@@ -32,6 +32,18 @@ class Peserta extends Model
         return $this->hasMany(Absen::class, 'peserta_id', 'id');
     }
 
+    public function absenImage($start, $end)
+    {
+        $expstart = explode(' ', $start);
+        $expend = explode(' ', $end);
+        $d = Absen::where('peserta_id', $this->id)
+            ->whereDate('created_at', $expstart[0])
+            ->whereTime('created_at', '>', $expstart[1])
+            ->whereTime('created_at', '<', $expend[1])
+            ->first();
+        return $d->bukti;
+    }
+
     public function sudahAbsen($start, $end)
     {
         $expstart = explode(' ', $start);

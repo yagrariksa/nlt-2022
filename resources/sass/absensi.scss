@@ -87,6 +87,10 @@
 
         &--dibuka {
             background-color: #2B4BF2;
+
+            &:hover {
+                background-color: #CCD4FC;
+            }
         }
 
         &--sudah-absen {

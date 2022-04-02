@@ -189,7 +189,7 @@ class SouvenirController extends Controller
                 return redirect()->route('souvenir', [
                     'mode' => 'list',
                     'object' => 'kantong'
-                ]);
+                ])->with('msg', 'sukses menghapus kantong');
                 break;
 
             case 'edit-my-item':
@@ -197,8 +197,13 @@ class SouvenirController extends Controller
                 break;
 
             case 'delete-my-item':
-                Souvenir::find($id)->delete();
-                return redirect()->back();
+                $s = Souvenir::find($id);
+                $k = $s->kantong;
+                $k->total_ongkir = 0;
+                $k->bukti_ongkir = null;
+                $k->save();
+                $s->delete();
+                return redirect()->back()->with('msg', 'sukses menghapus item');
                 break;
 
             case 'submit-invoice':
@@ -217,7 +222,7 @@ class SouvenirController extends Controller
                     $k->invoice_url = $foto_url;
                     $k->save();
                 }
-                return redirect()->back();
+                return redirect()->back()->with('msg', 'sukses submit invoice');
                 break;
 
             case 'submit-ongkir':
@@ -237,7 +242,7 @@ class SouvenirController extends Controller
                     $k->total_ongkir = $request->ongkir;
                     $k->save();
                 }
-                return redirect()->back();
+                return redirect()->back()->with('msg', 'sukes submit ongkir');
                 break;
             default:
                 return $this->d_action_redirect();
@@ -285,14 +290,14 @@ class SouvenirController extends Controller
         return redirect()->route('souvenir', [
             'mode' => 'list',
             'object' => 'kantong'
-        ]);
+        ])->with('msg', 'sukses menambah keranjang');
     }
 
     protected function d_action_edit_kantong(Request $request)
     {
         $rules = [
             'nama' => 'required',
-            'alamat' => 'required',
+            // 'alamat' => 'required',
             'penerima' => 'required',
             'no' => 'required',
         ];
@@ -306,7 +311,7 @@ class SouvenirController extends Controller
             $k->kid = Str::random(5) . '-' . join('-', explode(' ', $request->nama));
         }
 
-        if ($k->alamat != $request->alamat) {
+        if ($k->alamat != $request->alamat && !$k->invoice_url) {
             $k->alamat = $request->alamat;
         }
 
@@ -323,7 +328,7 @@ class SouvenirController extends Controller
             'mode' => 'detail',
             'object' => 'kantong',
             'kid' => $k->kid
-        ]);
+        ])->with('msg', 'sukses mengubah keranjang');
     }
 
     protected function d_action_add_souvenir(Request $request)
@@ -361,12 +366,14 @@ class SouvenirController extends Controller
             "souv_id" => Str::random(5) . '-' . join('-', explode(' ', $request->item_name))
         ]);
 
+        $k->bukti_ongkir = null;
+        $k->total_ongkir = 0;
         $k->save();
         return redirect()->route('souvenir', [
             'mode' => 'detail',
             'object' => 'kantong',
             'kid' => $k->kid
-        ]);
+        ])->with('msg', 'sukses menambah item ke dalam keranjang');
     }
 
     protected function d_action_edit_item(Request $request)
@@ -392,11 +399,15 @@ class SouvenirController extends Controller
             "total_harga" => $request->harga * $request->jumlah,
             "total_berat" => $request->berat_gram * $request->jumlah,
         ]);
+        
+        $k->bukti_ongkir = null;
+        $k->total_ongkir = 0;
+        $k->save();
 
         return redirect()->route('souvenir', [
             'mode' => 'detail',
             'object' => 'kantong',
             'kid' => $k->kid,
-        ]);
+        ])->with('msg', 'sukses mengubah item pada keranjang');
     }
 }

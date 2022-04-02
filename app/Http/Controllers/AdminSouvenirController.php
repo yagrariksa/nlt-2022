@@ -135,7 +135,7 @@ class AdminSouvenirController extends Controller
 
     protected function barang_edit($key)
     {
-        $k = Kategori::get();
+        $k = Kategori::where('parent_id', null)->get();
         $b = Barang::where('bar_id', $key)->first();
         // return view('be.a.barang.edit', [
         return view('container.admin.edit-barang', [

@@ -22,8 +22,14 @@
                 <select name="kategori" id="kategori">
                     <option value=""></option>
                     @foreach ($k as $item)
-                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }} 
+                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }}
                             value="{{ $item->kat_id }}">{{ $item->nama }}</option>
+                        @if ($item->child())
+                            @foreach ($item->child() as $child)
+                                <option {{ $child->kat_id == $b->kategori_id ? 'selected' : '' }}
+                                    value="{{ $child->kat_id }}">{{ $item->nama }}   {{ $child->nama }}</option>
+                            @endforeach
+                        @endif
                     @endforeach
                 </select>
                 <label for="select" class="form-group__control-label">Pilih Kategori</label>

@@ -24,7 +24,7 @@
     <div class="keranjang__card detail-keranjang__card">
         <div class="keranjang__card--left detail-keranjang__card--left">
             <h3 class="keranjang__card--title">{{ $k->nama }}</h3>
-            <h4 class="keranjang__card--desc">Nama lengkap - nomor telpon</h4>
+            <h4 class="keranjang__card--desc">{{$k->penerima}} - {{$k->no}}</h4>
             <h4 class="keranjang__card--desc">{{ $k->alamat }}</h4>
         </div>
         <div class="detail-keranjang__card--right">

@@ -85,7 +85,7 @@ $totalTerbeli = 0;
                             <td class="adm-table__pembayaran">
                                 @if ($k->invoice_url)
                                     <span class="terupload">Terupload</span>
-                                    <a href="{{ url('storage') . '/' . $k->invoice_url }}">Lihat</a>
+                                    <a href="{{ url('storage') . '/' . $k->invoice_url }}" target="_blank" rel="noopener noreferrer">Lihat</a>
                                 @else
                                     <span class="belum-upload">Belum Diupload</span>
                                 @endif
@@ -108,7 +108,7 @@ $totalTerbeli = 0;
             </div>
             <div class="adm-full__btns">
                 <button class="adm-dashboard__excel" {{-- LINK EXCELNYA DIGANTI NANTI --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                    onclick="window.open('{{ route('a.souvenir', ['object' => 'kantong', 'mode' => 'excel']) }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>
@@ -177,8 +177,8 @@ $totalTerbeli = 0;
                 <h5 class="adm-footer__total">Jumlah Barang Terbeli: {{ $totalTerbeli }}</h5>
             </div>
             <div class="adm-full__btns">
-                <button class="adm-dashboard__excel" {{-- LINK EXCELNYA DIGANTI NANTI --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                <button class="adm-dashboard__excel"
+                    onclick="window.open('{{ route('a.souvenir', ['object' => 'barang', 'mode' => 'excel']) }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>

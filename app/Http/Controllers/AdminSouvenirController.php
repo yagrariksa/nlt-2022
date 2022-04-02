@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HasilJualBarangExport;
 use App\Exports\SouvenirExport;
 use App\Models\Barang;
 use App\Models\GambarBarang;
@@ -54,6 +55,10 @@ class AdminSouvenirController extends Controller
 
                     case 'edit':
                         return $this->barang_edit($key);
+                        break;
+
+                    case 'excel':
+                        return $this->barang_excel();
                         break;
 
                     default:
@@ -142,6 +147,11 @@ class AdminSouvenirController extends Controller
             'k' => $k,
             'b' => $b
         ]);
+    }
+
+    protected function barang_excel()
+    {
+        return Excel::download(new HasilJualBarangExport(), 'all-data_Jual_Barang_' . date('H-i_d-M') . '.xlsx');
     }
 
     protected function kantong_list()
@@ -237,6 +247,9 @@ class AdminSouvenirController extends Controller
                 $b = Barang::where('bar_id', $key)->first();
                 foreach ($b->gambar as $g) {
                     $g->delete();
+                }
+                foreach ($b->terbeli as $t) {
+                    $t->delete();
                 }
                 $b->delete();
                 return redirect()->back()->with('msg_berhasil', 'Barang ' . $b->nama . ' berhasil dihapus.');

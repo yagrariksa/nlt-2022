@@ -108,7 +108,7 @@
             </div>
             <div class="adm-full__btns">
                 <button class="adm-dashboard__excel" {{-- link excel diganti ya --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                    onclick="window.open('{{ route('a.absensi.excel') }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>

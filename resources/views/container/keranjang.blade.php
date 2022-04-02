@@ -54,4 +54,10 @@
 
 @section('other')
     {{-- it can be modal, etc. --}}
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+    @if (Session::has('msg_gagal'))
+        <x-alert.error title="Error!" desc="{{ Session::get('msg_gagal') }}" />
+    @endif
 @endsection

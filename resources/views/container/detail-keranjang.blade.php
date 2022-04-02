@@ -181,6 +181,12 @@
 @endsection
 
 @section('other')
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+    @if (Session::has('msg_gagal'))
+        <x-alert.error title="Error!" desc="{{ Session::get('msg_gagal') }}" />
+    @endif
     @if ($k->bukti_ongkir)
         {{-- if tanggal sudah masa pembayaran --}}
         @if ($k->invoice_url)

@@ -17,6 +17,7 @@
                     class="nav__item" id="nav__item--absensi">ABSENSI <span></span></a>
                 <a href="{{ route('souvenir', [
                     'mode' => 'list',
+                    'object' => 'katalog',
                 ]) }}"
                     class="nav__item" id="nav__item--souvenir">SOUVENIR <span></span></a>
             </div>

@@ -148,7 +148,8 @@ class AdminSouvenirController extends Controller
     {
         $b = Barang::get();
         $kantong = Kantong::get();
-        return view('be.a.souvenir.list', [
+        // return view('be.a.souvenir.list', [
+        return view('container.admin.list-kantong', [
             'kantong' => $kantong,
             'barang' => $b,
         ]);

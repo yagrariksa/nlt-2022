@@ -3779,6 +3779,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   display: grid;
   grid-template-columns: calc(100% - 21rem) 19rem;
   gap: 2rem;
+  margin-bottom: 4rem;
 }
 .adm-souvenir__left {
   padding: 2rem;
@@ -4027,4 +4028,44 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   align-items: center;
   justify-content: flex-end;
   gap: 3rem;
+}
+
+.adm-keranjang__toggle {
+  margin-left: 2rem;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  background-color: rgba(0, 18, 25, 0.15);
+  border: 2px solid #B3B8BA;
+  border-radius: 50rem;
+}
+.adm-keranjang__toggle-btn {
+  width: 230px;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  background-color: transparent;
+}
+.adm-keranjang__toggle-btn.active {
+  background-color: #FFFFFF;
+}
+.adm-keranjang .adm-full__table-container {
+  height: calc(100vh - 15.79rem);
+}
+.adm-keranjang .adm-full__absolute {
+  display: none;
+}
+.adm-keranjang .adm-full__absolute.active {
+  display: block;
+}
+.adm-keranjang .adm-table__pembayaran .terupload {
+  padding-right: 1rem;
+  color: #0A9396;
+}
+.adm-keranjang .adm-table__pembayaran .belum-upload {
+  color: #BB3E03;
+}
+.adm-keranjang .adm-table__nama-keranjang a, .adm-keranjang .adm-table__pembayaran a {
+  color: #2B4BF2;
 }

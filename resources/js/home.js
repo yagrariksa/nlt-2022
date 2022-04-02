@@ -7,5 +7,3 @@ $('.sponsors__logo-name').hover(e => {
 }, e => {
     e.currentTarget.lastElementChild.innerHTML = temp;
 })
-
-console.log('ok')

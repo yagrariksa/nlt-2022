@@ -1,0 +1,54 @@
+.adm-keranjang {
+    &__toggle {
+        margin-left: 2rem;
+        padding: .25rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .5rem;
+        background-color: $rich-black-10;
+        border: 2px solid $rich-black-40;
+        border-radius: 50rem;
+    }
+
+    &__toggle-btn {
+        width: 230px;
+        padding: 0.5rem 0;
+        white-space: nowrap;
+        background-color: transparent;
+
+        &.active {
+            background-color: $white;
+        }
+    }
+
+    .adm-full__table-container {
+        height: calc(100vh - 15.79rem);
+    }
+
+    .adm-full__absolute {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .adm-table {
+        &__pembayaran {
+            .terupload {
+                padding-right: 1rem;
+                color: $viridian-green;
+            }
+
+            .belum-upload {
+                color: $mahogany;
+            }
+        }
+
+        &__nama-keranjang a,
+        &__pembayaran a {
+            color: #2B4BF2;
+        }
+    }
+}

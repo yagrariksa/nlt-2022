@@ -16,7 +16,9 @@
     </a>
     <a href="{{ route('souvenir', [
         'mode' => 'list',
-    ]) }}" class="dashboard__menu dashboard__menu--souvenir">
+        'object' => 'katalog',
+    ]) }}"
+        class="dashboard__menu dashboard__menu--souvenir">
         <h1>Souvenir <span></span></h1>
     </a>
     <a href="{{ route('souvenir', [

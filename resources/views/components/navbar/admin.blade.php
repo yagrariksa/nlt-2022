@@ -1,6 +1,6 @@
 <div class="nav">
     <div class="nav__group content admin">
-        <a href="{{ route('home') }}">
+        <a href="{{ route('a.peserta', ['univ' => 'list']) }}">
             <img src="{{ url('assets/img/logo-nlt.png') }}" alt="" class="nav__brand" id="nav__brand">
         </a>
 
@@ -30,7 +30,7 @@
     </div>
 
     <div class="nav__mobile admin">
-        <a href="{{ route('home') }}">
+        <a href="{{ route('a.peserta', ['univ' => 'list']) }}">
             <img src="{{ url('assets/img/logo-nlt.png') }}" alt="" class="nav__brand" id="nav__brand">
         </a>
         <div class="nav__burger">

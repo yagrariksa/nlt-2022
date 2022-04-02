@@ -63,6 +63,11 @@
         &:disabled {
             opacity: .7;
         }
+
+        &:hover {
+            background-color: #CCD4FC;
+            color: $white;
+        }
     }
 
     &__items {

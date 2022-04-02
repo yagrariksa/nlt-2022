@@ -36,7 +36,7 @@
                         Lihat Bukti Ongkir</a>
                 @endif
                 @if ($k->invoice_url)
-                    <a href="{{ url('storage') . '/' . $k->bukti_ongkir }}" alt="{{ $k->bukti_ongkir }}"
+                    <a href="{{ url('storage') . '/' . $k->invoice_url }}" alt="{{ $k->invoice_url }}"
                         target="_blank" rel="noopener noreferrer"
                         class="button detail-keranjang__dialog-btn detail-keranjang__dialog-btn--lihat-pembayaran">
                         Lihat Bukti Pembayaran</a>

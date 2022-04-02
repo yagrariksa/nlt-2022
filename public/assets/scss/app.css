@@ -1544,11 +1544,12 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .list-peserta__btn:hover {
   background-color: #001219;
 }
-.list-peserta__btn:disabled {
-  opacity: 0.7;
+.list-peserta__btn:disabled, .list-peserta__btn[disabled] {
+  background-color: #667175;
 }
-.list-peserta__btn:disabled:hover {
-  opacity: 0.5;
+.list-peserta__btn:disabled:hover, .list-peserta__btn[disabled]:hover {
+  opacity: 1;
+  cursor: default;
 }
 .list-peserta__sm {
   display: none;
@@ -3241,6 +3242,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   justify-content: flex-end;
   gap: 0.5rem;
 }
+.detail-keranjang__item-action {
+  flex-direction: column;
+}
 .detail-keranjang__dialog-btn {
   padding: 0.25rem 1rem;
   border-radius: 0.5rem;
@@ -3378,6 +3382,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .detail-keranjang-card__rekening span {
   color: #2B4BF2;
 }
+.detail-keranjang-card__rekening span.--hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 .detail-keranjang-card__left-bottom {
   display: flex;
   flex-direction: column;
@@ -3483,22 +3491,24 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   .detail-keranjang__action {
     width: 100%;
     display: grid;
-    grid-template-columns: calc(100% - 2rem) 1.5rem;
+    grid-template-columns: 50% 50%;
     align-items: center;
-    grid-template-areas: "submit-ongkir edit" "bukti-bayar delete";
+    grid-template-areas: "submit-ongkir submit-ongkir" "bukti-bayar bukti-bayar" "delete edit";
     gap: 8px;
   }
   .detail-keranjang__dialog-btn--submit-ongkir {
     grid-area: submit-ongkir;
   }
-  .detail-keranjang__dialog-btn--bukti-bayar {
+  .detail-keranjang__dialog-btn--bukti-bayar, .detail-keranjang__dialog-btn--invoice {
     grid-area: bukti-bayar;
   }
   .detail-keranjang__edit {
     grid-area: edit;
+    width: 100%;
   }
   .detail-keranjang__delete {
     grid-area: delete;
+    width: 100%;
   }
   .detail-keranjang__item {
     flex-direction: column;
@@ -3515,6 +3525,9 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   }
   .detail-keranjang__item--left, .detail-keranjang__item--right {
     padding: 1.7rem 0;
+  }
+  .detail-keranjang__item-action {
+    flex-direction: row-reverse;
   }
 }
 @media screen and (max-width: 991.9px) {

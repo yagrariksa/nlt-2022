@@ -22,6 +22,11 @@ class AbsenController extends Controller
 
     public function viewAbsen(Request $request)
     {
+        $now = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
+        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-03 07:00');
+        if ($now < $target) {
+            return view('container.souvenir-soon');
+        }
         $mode = $request->query('mode');
         $uid = $request->query('peserta');
         switch ($mode) {

@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Kantong;
 use App\Models\Kategori;
 use App\Models\Souvenir;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +18,11 @@ class SouvenirController extends Controller
 {
     public function d_view(Request $request)
     {
+        $now = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
+        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-03 07:00');
+        if ($now < $target) {
+            return view('container.souvenir-soon');
+        }
         // dd(Route::currentRouteName());
         $object = $request->query('object');
         $mode = $request->query('mode');
@@ -155,10 +161,17 @@ class SouvenirController extends Controller
                 'object' => 'kantong'
             ]);
         }
+        $t = false;
+        $now = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
+        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-09 00:00');
+        if ($now > $target) {
+            $t = true;
+        }
 
         // return view('be.d.souvenir.kantong.detail', [
         return view('container.detail-keranjang', [
-            'k' => $k
+            'k' => $k,
+            'timeforpay' => $t
         ]);
     }
 

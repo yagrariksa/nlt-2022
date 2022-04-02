@@ -109,11 +109,13 @@
             background-color: $rich-black;
         }
 
-        &:disabled {
-            opacity: .7;
+        &:disabled, &[disabled] {
+            // opacity: .7;
+            background-color: $rich-black-60;
 
             &:hover {
-                opacity: .5;
+                opacity: 1;
+                cursor: default;
             }
         }
     }

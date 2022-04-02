@@ -49,6 +49,10 @@
         gap: .5rem;
     }
 
+    &__item-action {
+        flex-direction: column;
+    }
+
     &__dialog-btn {
         padding: 0.25rem 1rem;
         border-radius: .5rem;
@@ -206,10 +210,16 @@
         }
 
         &__rekening {
+
             color: $rich-black-40;
 
             span {
                 color: #2B4BF2;
+
+                &.--hover:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -341,11 +351,12 @@
         &__action {
             width: 100%;
             display: grid;
-            grid-template-columns: calc(100% - 2rem) 1.5rem;
+            grid-template-columns: 50% 50%;
             align-items: center;
             grid-template-areas:
-                'submit-ongkir edit'
-                'bukti-bayar delete'
+                'submit-ongkir submit-ongkir'
+                'bukti-bayar bukti-bayar'
+                'delete edit'
             ;
             gap: 8px;
         }
@@ -355,7 +366,8 @@
                 grid-area: submit-ongkir;
             }
 
-            &--bukti-bayar {
+            &--bukti-bayar,
+            &--invoice {
                 grid-area: bukti-bayar;
             }
 
@@ -364,10 +376,12 @@
 
         &__edit {
             grid-area: edit;
+            width: 100%;
         }
 
         &__delete {
             grid-area: delete;
+            width: 100%;
         }
 
         &__item {
@@ -389,6 +403,10 @@
             &--left,
             &--right {
                 padding: 1.7rem 0;
+            }
+
+            &-action {
+                flex-direction: row-reverse;
             }
         }
     }

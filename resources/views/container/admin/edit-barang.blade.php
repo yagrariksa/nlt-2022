@@ -22,8 +22,14 @@
                 <select name="kategori" id="kategori">
                     <option value=""></option>
                     @foreach ($k as $item)
-                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }} 
+                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }}
                             value="{{ $item->kat_id }}">{{ $item->nama }}</option>
+                        @if ($item->child())
+                            @foreach ($item->child() as $child)
+                                <option {{ $child->kat_id == $b->kategori_id ? 'selected' : '' }}
+                                    value="{{ $child->kat_id }}">{{ $item->nama }}   {{ $child->nama }}</option>
+                            @endforeach
+                        @endif
                     @endforeach
                 </select>
                 <label for="select" class="form-group__control-label">Pilih Kategori</label>
@@ -43,18 +49,25 @@
         <h4>Foto Terupload</h4>
         <div class="add-edit-barang__imgs">
             <div class="add-edit-barang__img-overflow">
-                @foreach ($b->gambar as $g)
+                @if (sizeof($b->gambar) == 1)
                     <div class="add-edit-barang__img">
-                        <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
-                        <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
-                            method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="h5">Click to delete</button>
-                        </form>
-                        <span></span>
+                        <img src="{{ url('storage') . '/' . $b->gambar[0]->url }}" alt="{{ $b->gambar[0]->url }}">
                     </div>
-                @endforeach
+                @else
+                    @foreach ($b->gambar as $g)
+                        <div class="add-edit-barang__img">
+                            <img src="{{ url('storage') . '/' . $g->url }}" alt="{{ $g->url }}">
+                            <form action="{{ route('a.souvenir', ['mode' => 'delete-my-gambar', 'key' => $g->id]) }}"
+                                method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="h5">Click to delete</button>
+                            </form>
+                            <span></span>
+                        </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </div>

@@ -22,6 +22,11 @@ class Souvenir extends Model
         'souv_id'
     ];
 
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'json_id', 'bar_id');
+    }
+
     public function kantong()
     {
         return $this->belongsTo(Kantong::class, 'kantong_id', 'id');

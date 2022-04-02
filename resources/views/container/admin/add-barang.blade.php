@@ -19,14 +19,14 @@
         <div class="add-edit-barang__form-right">
             <div class="form-group form-group--select">
                 <select name="kategori" id="kategori">
-                    <option value=""></option>
+                <option value=""></option>
                     @foreach ($k as $item)
                         <option {{ $item->kat_id == \Request::get('kategori') ? 'selected' : '' }}
                             value="{{ $item->kat_id }}">{{ $item->nama }}</option>
                         @if ($item->child())
                             @foreach ($item->child() as $child)
                                 <option {{ $child->kat_id == \Request::get('kategori') ? 'selected' : '' }}
-                                    value="{{ $child->kat_id }}">{{ $child->nama }}</option>
+                                    value="{{ $child->kat_id }}">{{ $item->nama }}   {{ $child->nama }}</option>
                             @endforeach
                         @endif
                     @endforeach

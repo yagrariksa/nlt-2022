@@ -28,7 +28,7 @@ class Barang extends Model
 
     public function terbeli()
     {
-        return $this->hasMany(Souvenir::class, 'bar_id', 'json_id');
+        return $this->hasMany(Souvenir::class, 'json_id', 'bar_id');
     }
 
     public function terbeli_count()

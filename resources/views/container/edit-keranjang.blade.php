@@ -20,7 +20,7 @@
                 value="{{ old('nama') ? old('nama') : $k->nama }}" />
             <x-form.input-text id="penerima" label="Nama Penerima"
                 value="{{ old('penerima') ? old('penerima') : $k->penerima }}" />
-            <x-form.input-text id="nomor" label="Nomor Penerima" value="{{ old('nomor') ? old('nomor') : $k->nomor }}" />
+            <x-form.input-text id="no" label="Nomor Penerima" value="{{ old('no') ? old('no') : $k->no }}" />
             @if ($k->bukti_ongkir)
                 <x-form.text-area id="alamat" label="Alamat Lengkap Beserta Kodepos"
                     value="{{ old('alamat') ? old('alamat') : $k->alamat }}" attr="disabled" />

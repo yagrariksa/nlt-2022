@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SouvenirExport;
 use App\Models\Barang;
 use App\Models\GambarBarang;
 use App\Models\Kantong;
@@ -9,6 +10,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class AdminSouvenirController extends Controller
@@ -70,6 +72,10 @@ class AdminSouvenirController extends Controller
                         return $this->kantong_detail($key);
                         break;
 
+                    case 'excel':
+                        return $this->kantong_excel();
+                        break;
+
                     default:
                         return $this->kantong_list();
                         break;
@@ -129,7 +135,7 @@ class AdminSouvenirController extends Controller
 
     protected function barang_edit($key)
     {
-        $k = Kategori::get();
+        $k = Kategori::where('parent_id', null)->get();
         $b = Barang::where('bar_id', $key)->first();
         // return view('be.a.barang.edit', [
         return view('container.admin.edit-barang', [
@@ -157,6 +163,11 @@ class AdminSouvenirController extends Controller
         ]);
     }
 
+    protected function kantong_excel()
+    {
+        return Excel::download(new SouvenirExport(), 'all-data_Souvenir_' . date('H-i_d-M') . '.xlsx');
+    }
+
     public function a_action(Request $request)
     {
         $mode = $request->query('mode');
@@ -178,7 +189,7 @@ class AdminSouvenirController extends Controller
                     ->route('a.souvenir', [
                         'mode' => 'list',
                         'object' => 'barang'
-                    ])->with('msg_berhasil', 'Kategori '. $request->nama . ' berhasil ditambahkan.');
+                    ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil ditambahkan.');
                 break;
 
             case 'edit-my-kategori':
@@ -193,7 +204,7 @@ class AdminSouvenirController extends Controller
                 $k->save();
                 return redirect()
                     ->route('a.souvenir', [
-                        'mode' => 'list', 
+                        'mode' => 'list',
                         'object' => 'barang'
                     ])->with('msg_berhasil', 'Kategori ' . $request->nama . ' berhasil diubah.');
                 break;
@@ -322,6 +333,14 @@ class AdminSouvenirController extends Controller
         $b->berat = $request->berat;
         $b->desc = $request->desc;
         $b->kategori_id = $request->kategori;
+
+        foreach ($b->terbeli as $souv) {
+            $souv->harga = $request->harga;
+            $souv->berat_gram = $request->berat;
+            $souv->total_harga = $souv->jumlah * $request->harga;
+            $souv->total_berat = $souv->jumlah * $request->berat;
+            $souv->save();
+        }
         $b->save();
 
         return redirect()

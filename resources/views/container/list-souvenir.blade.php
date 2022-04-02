@@ -63,49 +63,50 @@
         </div>
 
         <div class="list-souvenir__right">
-            @foreach ($barang as $kategori)
-                @if (sizeof($kategori->barang) > 0 || sizeof($kategori->child()) > 0)
-                    <div class="list-souvenir__kategori" id="{{ $k->nama }}">
-                        <h2 class="kategori__title">{{ $kategori->nama }}</h2>
-                        <div class="list-souvenir__cards">
-                            @foreach ($kategori->barang as $b)
-                                <div class="list-souvenir__card"
-                                    onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
-                                    <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
-                                        alt="{{ $b->nama }}" class="list-souvenir__card--img">
-                                    <div class="list-souvenir__card--white">
-                                        <div class="list-souvenir__card--badge">
-                                            <h6 class="badge badge--parent">{{ $b->kategori->nama }}</h6>
-                                        </div>
-                                        <h4 class="list-souvenir__card--title">{{ $b->nama }}</h4>
-                                        <p class="list-souvenir__card--harga">Rp{{ $b->harga }}</p>
+            <div class="list-souvenir__cards">
+                @foreach ($barang as $kategori)
+                    @if (sizeof($kategori->barang) > 0 || sizeof($kategori->child()) > 0)
+                        {{-- <div class="list-souvenir__kategori" id="{{ $k->nama }}"> --}}
+                        {{-- <h2 class="kategori__title">{{ $kategori->nama }}</h2> --}}
+                        @foreach ($kategori->barang as $b)
+                            <div class="list-souvenir__card"
+                                onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
+                                <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                                    alt="{{ $b->nama }}" class="list-souvenir__card--img">
+                                <div class="list-souvenir__card--white">
+                                    <div class="list-souvenir__card--badge">
+                                        <h6 class="badge badge--parent">{{ $b->kategori->nama }}</h6>
                                     </div>
+                                    <h4 class="list-souvenir__card--title">{{ $b->nama }}</h4>
+                                    <p class="list-souvenir__card--harga">Rp{{ $b->harga }}</p>
                                 </div>
-                            @endforeach
-                            @if (sizeof($kategori->child()) > 0)
-                                @foreach ($kategori->child() as $c)
-                                    @foreach ($c->barang as $b)
-                                        <div class="list-souvenir__card"
-                                            onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
-                                            <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
-                                                alt="{{ $b->nama }}" class="list-souvenir__card--img">
-                                            <div class="list-souvenir__card--white">
-                                                <div class="list-souvenir__card--badge">
-                                                    <h6 class="badge badge--parent">{{ $b->kategori->parent()->nama }}
-                                                    </h6>
-                                                    <h6 class="badge badge--child">{{ $b->kategori->nama }}</h6>
-                                                </div>
-                                                <h4 class="list-souvenir__card--title">{{ $b->nama }}</h4>
-                                                <p class="list-souvenir__card--harga">Rp{{ $b->harga }}</p>
+                            </div>
+                        @endforeach
+                        @if (sizeof($kategori->child()) > 0)
+                            @foreach ($kategori->child() as $c)
+                                @foreach ($c->barang as $b)
+                                    <div class="list-souvenir__card"
+                                        onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
+                                        <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                                            alt="{{ $b->nama }}" class="list-souvenir__card--img">
+                                        <div class="list-souvenir__card--white">
+                                            <div class="list-souvenir__card--badge">
+                                                <h6 class="badge badge--parent">{{ $b->kategori->parent()->nama }}
+                                                </h6>
+                                                <h6 class="badge badge--child">{{ $b->kategori->nama }}</h6>
                                             </div>
+                                            <h4 class="list-souvenir__card--title">{{ $b->nama }}</h4>
+                                            <p class="list-souvenir__card--harga">Rp{{ $b->harga }}</p>
                                         </div>
-                                    @endforeach
+                                    </div>
                                 @endforeach
-                            @endif
-                        </div>
-                    </div>
-                @endif
-            @endforeach
+                            @endforeach
+                        @endif
+                        {{-- </div> --}}
+                    @endif
+                @endforeach
+            </div>
+
         </div>
     </div>
 @endsection

@@ -49,9 +49,7 @@
                     <select name="kantong" id="kantong">
                         <option value=""></option>
                         @foreach (Auth::user()->kantong as $p)
-                            <option value="{{ $p->id }}">
-                                {{ $p->nama }}
-                            </option>
+                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                     <label for="select" class="form-group__control-label">Pilih Keranjang</label>

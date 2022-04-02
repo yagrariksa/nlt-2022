@@ -145,6 +145,7 @@
                 ]) }}"
                     class="header__item">peserta</a>
                 <a class="header__item" href="{{ route('a.souvenir') }}">Souvenir</a>
+                <a class="header__item" href="{{ route('a.absensi') }}">absensi</a>
                 <a href="{{ route('a.logout') }}" class="header__item">LogOut</a>
             </div>
         @endif

@@ -67,6 +67,15 @@ if (window.location.search == '?mode=list&object=peserta') {
     $('#nav__item--souvenir-sm')[0].classList.remove('active')
     $('#nav__item--absensi-sm')[0].classList.remove('active')
     $('#nav__item--password-sm')[0].classList.add('active')
+} else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list&object=katalog') {
+    $('#nav__item--peserta')[0].classList.remove('active')
+    $('#nav__item--souvenir')[0].classList.add('active')
+    $('#nav__item--absensi')[0].classList.remove('active')
+    $('#nav__item--password')[0].classList.remove('active')
+    $('#nav__item--peserta-sm')[0].classList.remove('active')
+    $('#nav__item--souvenir-sm')[0].classList.add('active')
+    $('#nav__item--absensi-sm')[0].classList.remove('active')
+    $('#nav__item--password-sm')[0].classList.remove('active')
 } else if (window.location.pathname == '/mahavira/peserta' && (window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh')) {
     $('#nav__item--a-peserta')[0].classList.add('active')
     $('#nav__item--a-souvenir')[0].classList.remove('active')
@@ -95,4 +104,3 @@ if (window.location.search == '?mode=list&object=peserta') {
     $('#nav__item--a-absensi-sm')[0].classList.remove('active')
     $('#nav__item--a-univ-sm')[0].classList.remove('active')
 }
-// cek client

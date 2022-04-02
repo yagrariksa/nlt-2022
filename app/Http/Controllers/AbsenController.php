@@ -15,8 +15,8 @@ class AbsenController extends Controller
         ['2022-03-31 18:15', '2022-03-31 18:25'],
         ['2022-03-31 18:30', '2022-03-31 18:35'],
         ['2022-03-31 18:34', '2022-03-31 18:40'],
-        ['2022-04-02 04:20', '2022-04-02 13:30'],
-        ['2022-04-03 13:50', '2022-04-03 14:30'],
+        ['2022-04-02 17:20', '2022-04-02 18:30'],
+        ['2022-04-03 17:40', '2022-04-03 19:30'],
         ['2022-04-10 13:20', '2022-04-10 13:30'],
     ];
 
@@ -43,10 +43,10 @@ class AbsenController extends Controller
     {
         // Year-Month-Day Hour:Minute
 
-        return view('be.d.absensi.list', [
+        // return view('be.d.absensi.list', [
+        return view('container.list-absensi', [
             'jadwal' => $this->jadwal
         ]);
-        // return view('container.list-absensi');
     }
 
     protected function absen($uid)
@@ -76,7 +76,8 @@ class AbsenController extends Controller
                 $s++;
             }
         }
-        return view('be.d.absensi.do', [
+        // return view('be.d.absensi.do', [
+        return view('container.add-absensi', [
             'user' => $u,
             'day' => 'Day ' . $d . ', Sesi ' . $s,
             'absen' => $absen

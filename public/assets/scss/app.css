@@ -3935,6 +3935,16 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .add-edit-barang__form-left {
   grid-area: form-left;
 }
+.add-edit-barang__two-in-arow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  gap: 2rem;
+}
+.add-edit-barang__two-in-arow > .form-group {
+  width: calc((100% - 2rem) / 2);
+}
 .add-edit-barang__form-right {
   grid-area: form-right;
 }

@@ -12,8 +12,10 @@
         <h2 class="add-edit-barang__title">Edit Barang</h2>
         <div class="add-edit-barang__form-left">
             <x-form.input-text id="nama" label="Nama" value="{{ old('nama') ? old('nama') : $b->nama }}" />
-            <x-form.input-text id="harga" label="Harga" value="{{ old('harga') ? old('harga') : $b->harga }}" />
-            <x-form.input-text id="berat" label="Berat" value="{{ old('berat') ? old('berat') : $b->berat }}" />
+            <div class="add-edit-barang__two-in-arow">
+                <x-form.input-text id="harga" label="Harga" value="{{ old('harga') ? old('harga') : $b->harga }}" />
+                <x-form.input-text id="berat" label="Berat" value="{{ old('berat') ? old('berat') : $b->berat }}" />
+            </div>
             <x-form.text-area id="desc" label="Deskripsi" value="{{ old('desc') ? old('desc') : $b->desc }}" />
         </div>
 
@@ -22,12 +24,12 @@
                 <select name="kategori" id="kategori">
                     <option value=""></option>
                     @foreach ($k as $item)
-                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }}
-                            value="{{ $item->kat_id }}">{{ $item->nama }}</option>
+                        <option {{ $item->kat_id == $b->kategori_id ? 'selected' : '' }} value="{{ $item->kat_id }}">
+                            {{ $item->nama }}</option>
                         @if ($item->child())
                             @foreach ($item->child() as $child)
                                 <option {{ $child->kat_id == $b->kategori_id ? 'selected' : '' }}
-                                    value="{{ $child->kat_id }}">{{ $item->nama }}   {{ $child->nama }}</option>
+                                    value="{{ $child->kat_id }}">{{ $item->nama }} {{ $child->nama }}</option>
                             @endforeach
                         @endif
                     @endforeach

@@ -23,7 +23,7 @@
             <div class="add-edit-peserta__form-right">
                 <x-form.select-options id="jabatan" label="Jabatan"
                     options='EB AMSA-Indonesia,Member,AB AMSA-Indonesia,National Team,APH,Post AMSEP Presentation'
-                    value="{{ old('jabatan') }}" class="" />
+                    value="{{ old('jabatan') }}" class="" helper="" helperUrl='' helperLink='' />
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ old('pas') }}" />
             </div>
         </div>

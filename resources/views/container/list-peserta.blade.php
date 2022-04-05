@@ -72,7 +72,7 @@
                                     class="list-peserta__btn list-peserta__btn--view"><img
                                         src="{{ url('assets/img/view-details.svg') }}"></a>
                                 @if ($p->jabatan != 'Representative AMSA Universitas')
-                                    <button class="list-peserta__btn list-peserta__btn--delete"><img
+                                    <button class="list-peserta__btn list-peserta__btn--delete" disabled><img
                                             src="{{ url('assets/img/delete.svg') }}"></button>
                                 @else
                                     <button class="list-peserta__btn list-peserta__btn--delete" disabled><img

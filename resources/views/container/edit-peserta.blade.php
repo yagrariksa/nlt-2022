@@ -28,7 +28,7 @@
                     <x-form.input-text id="jabatan" label="Jabatan" value="{{ $data->jabatan }}" attr="readonly" />
                 @else
                     <x-form.select-options id="jabatan" label="Jabatan" options='EB AMSA-Indonesia,Member,AB AMSA-Indonesia,National Team,APH,Post AMSEP Presentation'
-                        value="{{ old('jabatan') ? old('jabatan') : $data->jabatan }}" class="" />
+                        value="{{ old('jabatan') ? old('jabatan') : $data->jabatan }}" class="" helper="" helperUrl='' helperLink='' />
                 @endif
 
                 <x-form.input-img id="pas" label="Pas Foto (JPG atau PNG)" value="{{ $data->foto_url }}" />

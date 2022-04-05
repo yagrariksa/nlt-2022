@@ -25,13 +25,13 @@
                     {{-- <x-form.input-img id="bukti" label="Bukti Kehadiran*" /> --}}
                     <div class="form-group @if ($errors->has('bukti')) has-error @endif">
                         <div class="form-group__input-file">
-                            <span for="'bukti'" class="form-group__filename"></span>
+                            <span for="bukti" class="form-group__filename"></span>
                             <div class="button btn-primary">
                                 <span class="lg">PILIH GAMBAR</span>
                                 <span class="sm">@include('components.svg.img')</span>
                             </div>
                         </div>
-                        <input type="file" accept="image/png, image/jpeg" name="'bukti'" id="'bukti'" value="" />
+                        <input type="file" accept="image/png, image/jpeg" name="bukti" id="bukti" value="" />
                         <label for="input" class="form-group__control-label">Bukti Kehadiran</label>
                         <i class="form-group__bar"></i>
                         @if ($errors->has('bukti'))

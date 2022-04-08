@@ -6,7 +6,7 @@
     gap: 8px;
 
     &__title {
-        margin-bottom: 4rem;
+        margin-bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -15,6 +15,7 @@
     &__card {
         align-items: stretch;
         cursor: default;
+        margin-bottom: 3rem;
 
         &--left {
             width: 40%;
@@ -46,6 +47,10 @@
         align-items: flex-end;
         justify-content: flex-end;
         gap: .5rem;
+    }
+
+    &__item-action {
+        flex-direction: column;
     }
 
     &__dialog-btn {
@@ -125,12 +130,21 @@
         }
 
         &--harga {
-            color: $gamboge;
+            color: $blue-RYB;
+
+            &-sm {
+                display: none;
+                color: $blue-RYB;
+            }
         }
 
-        &--harga-sm {
-            display: none;
+        &--total {
             color: $gamboge;
+
+            &-sm {
+                display: none;
+                color: $gamboge;
+            }
         }
 
         &--right {
@@ -201,10 +215,16 @@
         }
 
         &__rekening {
+
             color: $rich-black-40;
 
             span {
                 color: #2B4BF2;
+
+                &.--hover:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
         }
 
@@ -336,11 +356,12 @@
         &__action {
             width: 100%;
             display: grid;
-            grid-template-columns: calc(100% - 2rem) 1.5rem;
+            grid-template-columns: 50% 50%;
             align-items: center;
             grid-template-areas:
-                'submit-ongkir edit'
-                'bukti-bayar delete'
+                'submit-ongkir submit-ongkir'
+                'bukti-bayar bukti-bayar'
+                'delete edit'
             ;
             gap: 8px;
         }
@@ -350,7 +371,8 @@
                 grid-area: submit-ongkir;
             }
 
-            &--bukti-bayar {
+            &--bukti-bayar,
+            &--invoice {
                 grid-area: bukti-bayar;
             }
 
@@ -359,10 +381,12 @@
 
         &__edit {
             grid-area: edit;
+            width: 100%;
         }
 
         &__delete {
             grid-area: delete;
+            width: 100%;
         }
 
         &__item {
@@ -384,6 +408,10 @@
             &--left,
             &--right {
                 padding: 1.7rem 0;
+            }
+
+            &-action {
+                flex-direction: row-reverse;
             }
         }
     }

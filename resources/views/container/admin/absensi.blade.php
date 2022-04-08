@@ -108,7 +108,7 @@
             </div>
             <div class="adm-full__btns">
                 <button class="adm-dashboard__excel" {{-- link excel diganti ya --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                    onclick="window.open('{{ route('a.absensi.excel') }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>
@@ -126,6 +126,29 @@
         $('.adm-absensi__tanda-absen--tidak').map(x => {
             $('.adm-absensi__tanda-absen--tidak')[x].parentElement.classList.add(
                 'adm-absensi__tanda-absen--tidak-bg')
+        })
+
+        // search
+        var data = document.querySelectorAll('.adm-table__record')
+
+        document.querySelector('#adm-absensi-search').addEventListener('input', (e) => {
+            var value = e.target.value
+
+            data.forEach(e => {
+                e.style.display = 'none'
+            });
+
+            if (value == null) {
+                data.forEach(e => {
+                    e.style.display = 'table-row'
+                })
+            } else {
+                data.forEach(e => {
+                    if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        e.style.display = 'table-row'
+                    }
+                })
+            }
         })
     </script>
 @endsection

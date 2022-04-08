@@ -67,7 +67,7 @@ $totalTerbeli = 0;
                 </thead>
                 <tbody>
                     @foreach ($kantong as $k)
-                        <tr class="adm-table__record">
+                        <tr class="adm-table__record adm-table__record-keranjang">
                             <td>{{ $loop->iteration }}</td>
                             <td class="adm-table__nama-keranjang"><a
                                     href="{{ route('a.souvenir', [
@@ -85,7 +85,7 @@ $totalTerbeli = 0;
                             <td class="adm-table__pembayaran">
                                 @if ($k->invoice_url)
                                     <span class="terupload">Terupload</span>
-                                    <a href="{{ url('storage') . '/' . $k->invoice_url }}">Lihat</a>
+                                    <a href="{{ url('storage') . '/' . $k->invoice_url }}" target="_blank" rel="noopener noreferrer">Lihat</a>
                                 @else
                                     <span class="belum-upload">Belum Diupload</span>
                                 @endif
@@ -108,7 +108,7 @@ $totalTerbeli = 0;
             </div>
             <div class="adm-full__btns">
                 <button class="adm-dashboard__excel" {{-- LINK EXCELNYA DIGANTI NANTI --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                    onclick="window.open('{{ route('a.souvenir', ['object' => 'kantong', 'mode' => 'excel']) }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>
@@ -118,7 +118,7 @@ $totalTerbeli = 0;
 
     <div class="adm-full__absolute adm-keranjang__list-terjual">
         <div class="content adm-full__search-div">
-            <input type="text" class="adm-dashboard__input-search" id="filter-search--list-terjual"
+            <input type="text" class="adm-dashboard__input-search" id="filter-search--list-barang"
                 placeholder="Cari berdasarkan Barang atau jumlah terjual" style="">
             <div class="adm-keranjang__toggle">
                 <button class="h5 adm-keranjang__toggle-btn adm-keranjang__toggle-btn--list-alamat">
@@ -155,7 +155,7 @@ $totalTerbeli = 0;
                 </thead>
                 <tbody>
                     @foreach ($barang as $b)
-                        <tr class="adm-table__record">
+                        <tr class="adm-table__record adm-table__record-barang">
                             <td>{{ $loop->iteration }}</td>
                             <td class="adm-table__nama">{{ $b->nama }}</td>
                             <td class="adm-table__terbeli">{{ $b->terbeli_count() }}</td>
@@ -177,8 +177,8 @@ $totalTerbeli = 0;
                 <h5 class="adm-footer__total">Jumlah Barang Terbeli: {{ $totalTerbeli }}</h5>
             </div>
             <div class="adm-full__btns">
-                <button class="adm-dashboard__excel" {{-- LINK EXCELNYA DIGANTI NANTI --}}
-                    onclick="window.open('{{ route('a.peserta', ['object' => 'excel']) }}')">
+                <button class="adm-dashboard__excel"
+                    onclick="window.open('{{ route('a.souvenir', ['object' => 'barang', 'mode' => 'excel']) }}')">
                     <img src="{{ url('assets/img/excel.svg') }}" alt="">
                     DOWNLOAD EXCEL
                 </button>
@@ -200,6 +200,54 @@ $totalTerbeli = 0;
         $('.adm-keranjang__toggle-btn--list-alamat').click(() => {
             $('.adm-keranjang__list-alamat')[0].classList.add('active')
             $('.adm-keranjang__list-terjual')[0].classList.remove('active')
+        })
+
+        // search per keranjang alamat
+        var data = document.querySelectorAll('.adm-table__record-keranjang')
+
+        document.querySelector('#filter-search--list-terjual').addEventListener('input', (e) => {
+            var value = e.target.value
+            console.log(value)
+
+            data.forEach(e => {
+                e.style.display = 'none'
+            });
+
+            if (value == null) {
+                data.forEach(e => {
+                    e.style.display = 'table-row'
+                })
+            } else {
+                data.forEach(e => {
+                    if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        e.style.display = 'table-row'
+                    }
+                })
+            }
+        })
+
+        // search per barang
+        var data2 = document.querySelectorAll('.adm-table__record-barang')
+
+        document.querySelector('#filter-search--list-barang').addEventListener('input', (e) => {
+            var value = e.target.value
+            console.log(value)
+
+            data2.forEach(e => {
+                e.style.display = 'none'
+            });
+
+            if (value == null) {
+                data2.forEach(e => {
+                    e.style.display = 'table-row'
+                })
+            } else {
+                data2.forEach(e => {
+                    if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        e.style.display = 'table-row'
+                    }
+                })
+            }
         })
     </script>
 @endsection

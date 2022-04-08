@@ -8,8 +8,12 @@
 
 @section('content')
     <h6 class="souvenir-breadcrumb">
-        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
-        <a href="" class="h6 souvenir-breadcrumb__item active">List Keranjang</a>
+        <a href="{{ route('souvenir', [
+            'mode' => 'list',
+            'object' => 'katalog',
+        ]) }}"
+            class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+        <a href="#" class="h6 souvenir-breadcrumb__item active">List Keranjang</a>
     </h6>
     <h4 class="mobile-title">List Keranjang</h4>
     <div class="keranjang__title-div">
@@ -50,4 +54,10 @@
 
 @section('other')
     {{-- it can be modal, etc. --}}
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+    @if (Session::has('msg_gagal'))
+        <x-alert.error title="Error!" desc="{{ Session::get('msg_gagal') }}" />
+    @endif
 @endsection

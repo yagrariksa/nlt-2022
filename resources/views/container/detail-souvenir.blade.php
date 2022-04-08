@@ -8,8 +8,12 @@
 
 @section('content')
     <h6 class="souvenir-breadcrumb">
-        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
-        <a href="" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
+        <a href="{{ route('souvenir', [
+            'mode' => 'list',
+            'object' => 'katalog',
+        ]) }}"
+            class="h6 souvenir-breadcrumb__item">Souvenir</a> /
+        <a href="#" class="h6 souvenir-breadcrumb__item active">Detail Barang</a>
     </h6>
     <div class="detail-souvenir-sm">
         <h4 class="mobile-title">Detail Barang</h4>
@@ -49,7 +53,9 @@
                     <select name="kantong" id="kantong">
                         <option value=""></option>
                         @foreach (Auth::user()->kantong as $p)
-                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                            <option @if ($p->id == old('kantong')) 
+                                selected 
+                                @endif value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
                     </select>
                     <label for="select" class="form-group__control-label">Pilih Keranjang</label>
@@ -66,10 +72,11 @@
                 </div>
 
                 <x-form.input-text id="jumlah" label="Jumlah Item" value="{{ old('jumlah') ? old('jumlah') : '' }}" />
-                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)" />
+                <x-form.text-area id="catatan" label="Keterangan (ukuran, warna, atau catatan lain)"
+                    value="{{ old('catatan') ? old('catatan') : '' }}" />
                 <div class="detail-souvenir__total">
                     <h3 class="detail-souvenir__total--left">Total</h3>
-                    <h3 class="detail-souvenir__total--right">Rp0</h3>
+                    <h3 class="detail-souvenir__total--right" aria-harga="{{ $b->harga }}">Rp0</h3>
                 </div>
                 <button type="submit" class="btn-primary detail-souvenir__submit">PESAN</button>
             </form>
@@ -89,14 +96,21 @@
 
 @section('other')
     {{-- it can be modal, etc. --}}
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+    @if (Session::has('msg_gagal'))
+        <x-alert.error title="Error!" desc="{{ Session::get('msg_gagal') }}" />
+    @endif
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         // ngisi total
-        $('#jumlah').change(() => {
-            $('.detail-souvenir__total--right')[0].textContent = 'Rp' + $('#jumlah').dodata.harga *
-                $('#jumlah')[0].value
+        $('#jumlah').on('input', (e) => {
+            $('.detail-souvenir__total--right')[0].textContent = 'Rp' + ($('.detail-souvenir__total--right')[0]
+                .getAttribute('aria-harga') * $('#jumlah')[0]
+                .value)
         })
 
         // slider

@@ -2,31 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AbsensiExport;
 use App\Models\Absen;
 use App\Models\Peserta;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AbsenController extends Controller
 {
     public $jadwal = [
-        ['2022-04-02 14:00', '2022-04-02 14:30'],
-        ['2022-04-02 14:31', '2022-04-02 14:40'],
-        ['2022-04-02 14:41', '2022-04-02 15:45'],
-        ['2022-04-02 19:20', '2022-04-02 19:56'],
-        ['2022-04-02 19:57', '2022-04-02 23:40'],
-        ['2022-04-02 23:41', '2022-04-02 23:59'],
+        ['2022-04-03 08:00', '2022-04-03 08:15'],
+        ['2022-04-03 12:30', '2022-04-03 12:45'],
+        ['2022-04-09 08:00', '2022-04-09 08:15'],
+        ['2022-04-09 12:30', '2022-04-09 12:45'],
+        ['2022-04-10 08:00', '2022-04-10 08:15'],
+        ['2022-04-10 12:30', '2022-04-10 12:45'],
     ];
 
     public function viewAbsen(Request $request)
     {
+        $now = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
+        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-03 07:00');
+        if ($now < $target) {
+            return view('container.souvenir-soon');
+        }
         $mode = $request->query('mode');
         $uid = $request->query('peserta');
         switch ($mode) {
             case 'list':
-                return $this->list();
+                return $this->list($uid);
                 break;
 
             case 'do':
@@ -39,13 +46,18 @@ class AbsenController extends Controller
         }
     }
 
-    protected function list()
+    protected function list($uid = null)
     {
+        $p = null;
+        if ($uid != null) {
+            $p = Peserta::where('uid', $uid)->first();
+        }
         // Year-Month-Day Hour:Minute
 
         // return view('be.d.absensi.list', [
         return view('container.list-absensi', [
-            'jadwal' => $this->jadwal
+            'jadwal' => $this->jadwal,
+            'peserta' => $p
         ]);
     }
 
@@ -123,5 +135,10 @@ class AbsenController extends Controller
             'peserta' => $p,
             'jadwal' => $this->jadwal
         ]);
+    }
+
+    public function excel()
+    {
+        return Excel::download(new AbsensiExport($this->jadwal), 'all-data_Absensi_' . date('H-i_d-M') . '.xlsx');
     }
 }

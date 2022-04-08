@@ -8,18 +8,21 @@
 
 @section('content')
     <h6 class="souvenir-breadcrumb">
-        <a href="" class="h6 souvenir-breadcrumb__item">Souvenir</a> /
-        <a href="" class="h6 souvenir-breadcrumb__item">List Keranjang</a> /
-        <a href="" class="h6 souvenir-breadcrumb__item active">Detail Keranjang</a>
-    </h6>
-    <h4 class="mobile-title">Detail Keranjang</h4>
-    <div class="detail-keranjang__title">
-        <h1>Detail Keranjang</h1>
+        <a href="{{ route('souvenir', [
+            'mode' => 'list',
+            'object' => 'katalog',
+        ]) }}"
+            class="h6 souvenir-breadcrumb__item">Souvenir</a> /
         <a href="{{ route('souvenir', [
             'mode' => 'list',
             'object' => 'kantong',
         ]) }}"
-            class="button btn-primary">LIST KERANJANG <img src="{{ url('assets/img/white-arrow.svg') }}"></a>
+            class="h6 souvenir-breadcrumb__item">List Keranjang</a> /
+        <a href="#" class="h6 souvenir-breadcrumb__item active">Detail Keranjang</a>
+    </h6>
+    <h4 class="mobile-title">Detail Keranjang</h4>
+    <div class="detail-keranjang__title">
+        <h2>Detail Keranjang</h2>
     </div>
     <div class="keranjang__card detail-keranjang__card">
         <div class="keranjang__card--left detail-keranjang__card--left">
@@ -30,49 +33,56 @@
         <div class="detail-keranjang__card--right">
             <div class="top">
                 <h4 class="keranjang__card--berat">Total Berat : <span>{{ $k->souv_total()['total_berat'] }}
-                        (kg/gram?)</span></h4>
+                        gram</span></h4>
                 <h4 class="keranjang__card--ongkir">Ongkir : <span>Rp{{ $k->total_ongkir }}</span></h4>
                 <h4 class="keranjang__card--total">Grand Total :
                     <span>Rp{{ $k->souv_total()['total_harga'] + $k->total_ongkir }}</span>
                 </h4>
             </div>
             <div class="detail-keranjang__action">
-                @if ($k->bukti_ongkir)
-                    {{-- if tanggal sudah masa pembayaran --}}
-                    @if ($k->invoice_url)
-                        {{-- kalo udah bayar --}}
-                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir" disabled>
-                            Submit Ongkir</button>
-                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--invoice">
-                            Lihat Bukti Pembayaran</button>
+                @if ($timeforpay)
+                    @if ($k->bukti_ongkir)
+                        {{-- if tanggal sudah masa pembayaran --}}
+                        @if ($k->invoice_url)
+                            {{-- kalo udah bayar --}}
+                            <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir"
+                                disabled>
+                                Submit Ongkir</button>
+                            <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--invoice">
+                                Lihat Bukti Pembayaran</button>
+                        @else
+                            {{-- kalo belom bayar --}}
+                            <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir"
+                                disabled>
+                                Submit Ongkir</button>
+                            <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--bukti-bayar">
+                                Upload Bukti Pembayaran</button>
+                        @endif
                     @else
-                        {{-- kalo belom bayar --}}
-                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir" disabled>
+                        {{-- else belum masa pembayaran
+                                tampilkan info tentang periode pembayaran --}}
+                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir">
                             Submit Ongkir</button>
-                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--bukti-bayar">
+                        <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--bukti-bayar" disabled>
                             Upload Bukti Pembayaran</button>
                     @endif
-                @else
-                    {{-- else belum masa pembayaran
-                                tampilkan info tentang periode pembayaran --}}
-                    <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--submit-ongkir">
-                        Submit Ongkir</button>
-                    <button class="detail-keranjang__dialog-btn detail-keranjang__dialog-btn--bukti-bayar" disabled>
-                        Upload Bukti Pembayaran</button>
                 @endif
 
-                <a href="{{ route('souvenir', [
-                    'mode' => 'edit',
-                    'object' => 'kantong',
-                    'kid' => $k->kid,
-                ]) }}"
-                    class="list-peserta__btn list-peserta__btn--edit detail-keranjang__edit"><img
-                        src="{{ url('assets/img/edit.svg') }}"></a>
+                @if (!$timeforpay)
+                    <a href="{{ route('souvenir', [
+                        'mode' => 'edit',
+                        'object' => 'kantong',
+                        'kid' => $k->kid,
+                    ]) }}"
+                        class="list-peserta__btn list-peserta__btn--edit detail-keranjang__edit"><img
+                            src="{{ url('assets/img/edit.svg') }}"></a>
 
-                @if (!$k->invoice_url)
                     <button class="list-peserta__btn list-peserta__btn--delete detail-keranjang__delete"><img
                             src="{{ url('assets/img/delete.svg') }}"></button>
                 @else
+                    {{-- jika sudah membayar --}}
+                    <a href="#" class="list-peserta__btn list-peserta__btn--edit detail-keranjang__edit" disabled><img
+                            src="{{ url('assets/img/edit.svg') }}"></a>
                     <button class="list-peserta__btn list-peserta__btn--delete detail-keranjang__delete" disabled><img
                             src="{{ url('assets/img/delete.svg') }}"></button>
                 @endif
@@ -99,6 +109,9 @@
             </div>
         </div>
     </div>
+    <div class="detail-keranjang__title">
+        <h2>List Pembelian Barang</h2>
+    </div>
 
     <div class="detail-keranjang__items">
         @foreach ($k->souvenir as $item)
@@ -106,7 +119,7 @@
                 <div class="detail-keranjang__item--left">
                     <div class="detail-keranjang__item--line">
                         <h4 class="detail-keranjang__item--title">{{ $item->nama }}</h4>
-                        <h4 class="detail-keranjang__item--harga">Rp{{ $item->harga }}</h4>
+                        <h4 class="detail-keranjang__item--harga">Rp {{ $item->harga }}</h4>
                     </div>
                     <div class="detail-keranjang__item--line">
                         <h4 class="detail-keranjang__item--label">Jumlah</h4>
@@ -116,28 +129,29 @@
                         <h4 class="detail-keranjang__item--label">Keterangan</h4>
                         <h4 class="detail-keranjang__item--keterangan">{{ $item->catatan }}</h4>
                     </div>
+                    <div class="detail-keranjang__item--line">
+                        <h4 class="detail-keranjang__item--total">Sub-Total</h4>
+                        <h4 class="detail-keranjang__item--total">Rp {{ $item->total_harga }}</h4>
+                    </div>
                 </div>
                 <hr>
                 <div class="detail-keranjang__item--right">
-                    <h5 class="detail-keranjang__item--harga-sm">Rp{{ $item->harga }}</h5>
-                    <div class="detail-keranjang__item-action">
-                        @if ($k->invoice_url)
-                            <a href="#"
-                                class="list-peserta__btn list-peserta__btn--edit" disabled><img
+                    <div class="detail-keranjang__item-action" style="width: 100%;">
+                        @if ($timeforpay)
+                            <a style="width:100% " class="list-peserta__btn list-peserta__btn--edit" disabled><img
                                     src="{{ url('assets/img/edit.svg') }}"></a>
-
-
-                            <button class="list-peserta__btn list-peserta__btn--delete" disabled><img
+                            <button disabled style="width:100%" class="list-peserta__btn list-peserta__btn--delete"><img
                                     src="{{ url('assets/img/delete.svg') }}"></button>
                         @else
-                            <a href="{{ route('souvenir', [
-                                'object' => 'katalog',
-                                'mode' => 'edit',
-                                's_id' => $item->souv_id,
-                            ]) }}"
+                            <a style="width:100% "
+                                href="{{ route('souvenir', [
+                                    'object' => 'katalog',
+                                    'mode' => 'edit',
+                                    's_id' => $item->souv_id,
+                                ]) }}"
                                 class="list-peserta__btn list-peserta__btn--edit"><img
                                     src="{{ url('assets/img/edit.svg') }}"></a>
-                            <button class="list-peserta__btn list-peserta__btn--delete"><img
+                            <button style="width:100%" class="list-peserta__btn list-peserta__btn--delete"><img
                                     src="{{ url('assets/img/delete.svg') }}"></button>
                         @endif
                         <form class="detail-keranjang__delete-dialog dialog"
@@ -154,7 +168,7 @@
                                 “{{ $item->nama }}” dari keranjang ini?</h4>
                             <div class="dialog__btn">
                                 <span class="button dialog__btn-yes list-peserta__batal">Batal</span>
-                                <button type="submit" class="dialog__btn-no">Hapus</button>
+                                <button " type=" submit" class="dialog__btn-no">Hapus</button>
                             </div>
                             <input type="hidden" name="kid" value="{{ $k->kid }}">
                         </form>
@@ -167,6 +181,12 @@
 @endsection
 
 @section('other')
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+    @if (Session::has('msg_gagal'))
+        <x-alert.error title="Error!" desc="{{ Session::get('msg_gagal') }}" />
+    @endif
     @if ($k->bukti_ongkir)
         {{-- if tanggal sudah masa pembayaran --}}
         @if ($k->invoice_url)
@@ -187,7 +207,7 @@
                     <div class="detail-keranjang-card__left-top">
                         <h2>Upload Bukti Pembayaran</h2>
                         <h4 class="detail-keranjang-card__total-pembayaran">Total Pembayaran (termasuk ongkir) :
-                            <span>Rp{{ $k->total_ongkir }}</span>
+                            <span>Rp {{ $k->souv_total()['total_harga'] + $k->total_ongkir }}</span>
                         </h4>
                         <h4 class="detail-keranjang-card__rekening">Rekening Tujuan :
                             <span>BNI 0838455526 a/n Andiva Nurul Fitri</span>
@@ -228,12 +248,14 @@
             <div class="detail-keranjang-card__left">
                 @csrf
                 <div class="detail-keranjang-card__left-top">
+                    <h4 class="detail-keranjang-card__total-pembayaran">Total Berat :
+                        <span>{{ $k->souv_total()['total_berat'] }} gram</span>
+                    </h4>
+                    <h4 class="detail-keranjang-card__rekening">Link Cek Ongkir (kolom dimensi dikosongi):
+                        <span class="--hover"
+                            onclick="window.open('https://sicepat.com/deliveryFee')">sicepat.com/deliveryFee</span>
+                    </h4>
                     <h2>Submit Ongkir</h2>
-                    <h5 class="detail-keranjang-card__peringatan">
-                        <span>PERINGATAN!</span><br>
-                        Jika anda merubah pesanan atau alamat anda setelah submit ongkir, maka informasi
-                        ongkir akan otomatis di-reset. Oleh karena itu, anda harus kembali submit ongkir.
-                    </h5>
                     <x-form.input-text id="ongkir" label="Total Ongkir (SiCepat REG)"
                         value="{{ old('ongkir') ? old('ongkir') : '' }}" />
                     <x-form.input-img id="img" label="Screenshot Bukti Ongkir" />
@@ -241,6 +263,11 @@
                         class="detail-keranjang-card__open-img">Lihat Contoh Screenshot &rarr;</a>
                 </div>
                 <div class="detail-keranjang-card__left-bottom">
+                    <h5 class="detail-keranjang-card__peringatan">
+                        <span>PERINGATAN!</span><br>
+                        Jika anda merubah pesanan atau alamat anda setelah submit ongkir, maka informasi
+                        ongkir akan otomatis di-reset. Oleh karena itu, anda harus kembali submit ongkir.
+                    </h5>
                     <div class="detail-keranjang-card__btns">
                         <button type="submit" class="btn-primary detail-keranjang-card__submit">SUBMIT ONGKIR</button>
                         <a href="" class="detail-keranjang-card__cancel">Batalkan</a>

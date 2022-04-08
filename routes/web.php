@@ -114,6 +114,7 @@ Route::name('a.')->prefix('mahavira')->group(function () {
         });
         Route::prefix('absensi')->name('absensi')->group(function () {
             Route::get('/', [AbsenController::class, 'admin']);
+            Route::get('excel', [AbsenController::class, 'excel'])->name('.excel');
         });
         Route::get('peserta', [AdminController::class, 'a_view'])->name('peserta');
     });

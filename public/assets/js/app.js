@@ -2949,7 +2949,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--souvenir-sm')[0].classList.remove('active');
   $('#nav__item--absensi-sm')[0].classList.remove('active');
   $('#nav__item--password-sm')[0].classList.add('active');
-} else if (window.location.pathname == '/souvenir' && window.location.search == '?mode=list&object=katalog') {
+} else if (window.location.pathname == '/souvenir') {
   $('#nav__item--peserta')[0].classList.remove('active');
   $('#nav__item--souvenir')[0].classList.add('active');
   $('#nav__item--absensi')[0].classList.remove('active');
@@ -2958,7 +2958,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--souvenir-sm')[0].classList.add('active');
   $('#nav__item--absensi-sm')[0].classList.remove('active');
   $('#nav__item--password-sm')[0].classList.remove('active');
-} else if (window.location.pathname == '/mahavira/peserta' && window.location.search == '?object=peserta' | window.location.search == '?object=peserta&mode=tampilan%20penuh') {
+} else if (window.location.pathname == '/mahavira/peserta' && window.location.search.includes('?object=peserta')) {
   $('#nav__item--a-peserta')[0].classList.add('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
@@ -2967,7 +2967,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
   $('#nav__item--a-absensi-sm')[0].classList.remove('active');
   $('#nav__item--a-univ-sm')[0].classList.remove('active');
-} else if (window.location.pathname == '/mahavira/peserta' && window.location.search == '?univ=list') {
+} else if (window.location.pathname == '/mahavira/peserta' && window.location.search.includes('?univ=list')) {
   $('#nav__item--a-peserta')[0].classList.remove('active');
   $('#nav__item--a-souvenir')[0].classList.remove('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');
@@ -2976,7 +2976,7 @@ if (window.location.search == '?mode=list&object=peserta') {
   $('#nav__item--a-souvenir-sm')[0].classList.remove('active');
   $('#nav__item--a-absensi-sm')[0].classList.remove('active');
   $('#nav__item--a-univ-sm')[0].classList.add('active');
-} else if (window.location.pathname == '/mahavira/souvenir' && window.location.search == '?mode=list&object=barang') {
+} else if (window.location.pathname == '/mahavira/souvenir' && (window.location.search == '?mode=list&object=barang' || window.location.search.includes('?mode=add') || window.location.search.includes('?mode=edit'))) {
   $('#nav__item--a-peserta')[0].classList.remove('active');
   $('#nav__item--a-souvenir')[0].classList.add('active');
   $('#nav__item--a-absensi')[0].classList.remove('active');

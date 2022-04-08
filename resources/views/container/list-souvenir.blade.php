@@ -36,7 +36,8 @@
                         'mode' => 'list',
                         'object' => 'katalog',
                         'kid' => $k->kat_id,
-                    ]) }}">
+                    ]) }}"
+                    {{ $k->kat_id == \Request::get('kid') ? 'selected' : '' }}>
                     {{ $k->nama }}</option>
             @endforeach
         </select>
@@ -71,7 +72,8 @@
                         @foreach ($kategori->barang as $b)
                             <div class="list-souvenir__card"
                                 onclick="window.location.replace('{{ route('souvenir', ['mode' => 'detail', 'object' => 'katalog', 's_id' => $b->bar_id]) }}')">
-                                <img src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
+                                <img class="modified__img"
+                                    src="{{ sizeof($b->gambar) != 0 ? url('storage') . '/' . $b->gambar[0]->url : '' }}"
                                     alt="{{ $b->nama }}" class="list-souvenir__card--img">
                                 <div class="list-souvenir__card--white">
                                     <div class="list-souvenir__card--badge">
@@ -118,34 +120,35 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         // search 
-        let data = document.querySelectorAll('.list-souvenir__card')
+        let dataListSouvenir = document.querySelectorAll('.list-souvenir__card')
         let noItem = document.querySelector('.list-souvenir__no-item')
 
         document.querySelector('#souvenir-search').addEventListener('input', (xx) => {
+            console.log(xx.target.value)
             let value = xx.target.value
-            let count = data.length
-            data.forEach(e => {
-                e.parentElement.previousElementSibling.style.display = 'none'
+            let count = dataListSouvenir.length
+            dataListSouvenir.forEach(e => {
+                // e.parentElement.previousElementSibling.style.display = 'none'
                 e.style.display = 'none'
             });
 
             if (value == null) {
-                data.forEach(e => {
-                    e.parentElement.previousElementSibling.style.display = 'block'
+                dataListSouvenir.forEach(e => {
+                    // e.parentElement.previousElementSibling.style.display = 'block'
                     e.style.display = 'flex'
                     count--
 
                 })
             } else {
-                data.forEach(e => {
+                dataListSouvenir.forEach(e => {
                     if (e.innerText.toLowerCase().includes(value.toLowerCase())) {
-                        e.parentElement.previousElementSibling.style.display = 'block'
+                        // e.parentElement.previousElementSibling.style.display = 'block'
                         e.style.display = 'flex'
                         count--
                     }
                 })
             }
-            if (data.length == count) {
+            if (dataListSouvenir.length == count) {
                 noItem.style.display = 'block'
             } else {
                 noItem.style.display = 'none'
@@ -174,6 +177,11 @@
                     $(".list-souvenir__etalase--sm option")[x].setAttribute('selected', 'true')
                 }
             })
+        })
+
+        // modified image size
+        document.querySelectorAll('.modified__img').forEach(e => {
+            e.style.height = e.offsetWidth + 'px'
         })
     </script>
 @endsection

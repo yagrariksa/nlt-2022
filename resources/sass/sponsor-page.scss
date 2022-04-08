@@ -28,6 +28,11 @@
         transform: translate(40%, -50%);
     }
 
+    &__video {
+        width: 100%;
+        height: 90%;
+    }
+
     @media screen and (max-width: 768px) {
         padding-top: 4rem;
         align-items: flex-start;

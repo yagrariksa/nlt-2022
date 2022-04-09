@@ -2896,6 +2896,10 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   top: calc(50% - 3rem);
   transform: translate(40%, -50%);
 }
+.sponsor-page__video {
+  width: 100%;
+  height: 90%;
+}
 @media screen and (max-width: 768px) {
   .sponsor-page {
     padding-top: 4rem;

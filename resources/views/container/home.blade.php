@@ -146,28 +146,12 @@
         {{-- here --}}
     </div>
 
-    <div class="sponsors" id="our-sponsor" style="display: none">
+    <div class="sponsors" id="our-sponsor">
         <h1 class="sponsors__title">Get To Know About <span>Our Sponsors</span></h1>
         <div class="sponsors__list">
             <div class="sponsors__logo-name" onclick="location.href= '{{ route('sponsor') }}'">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
-                <h4 class="sponsors__name">Excel</h4>
-            </div>
-            <div class="sponsors__logo-name">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
-                <h4 class="sponsors__name">Excel</h4>
-            </div>
-            <div class="sponsors__logo-name">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
-                <h4 class="sponsors__name">Excel</h4>
-            </div>
-            <div class="sponsors__logo-name">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
-                <h4 class="sponsors__name">Excel</h4>
-            </div>
-            <div class="sponsors__logo-name">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="" class="sponsors__logo">
-                <h4 class="sponsors__name">Excel</h4>
+                <img src="{{ url('assets/img/logo-bank-bca.png') }}" alt="" class="sponsors__logo">
+                <h4 class="sponsors__name">Bank Central Asia</h4>
             </div>
         </div>
     </div>
@@ -199,4 +183,20 @@
         </div>
         <h6 class="footer__copyright">AMSA UNAIR, 2022</h6>
     </div>
+@endsection
+
+@section('other')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        let tempClone;
+        let temp;
+        $('.sponsors__logo-name').hover(e => {
+            tempClone = e.currentTarget.cloneNode(true);
+            temp = tempClone.lastElementChild.innerHTML;
+            e.currentTarget.lastElementChild.innerHTML = 'Click for more!';
+        }, e => {
+            e.currentTarget.lastElementChild.innerHTML = temp;
+        })
+    </script>
 @endsection

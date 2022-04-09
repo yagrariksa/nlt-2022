@@ -37,7 +37,7 @@ Route::get('/test', function () {
 
 
 Route::get('/sponsor', function () {
-    return view('container.sponsor');
+    return view('container.sponsor-bca');
 })->name('sponsor');
 
 Route::middleware('guest')->group(function () {

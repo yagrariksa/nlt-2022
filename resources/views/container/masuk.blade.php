@@ -22,6 +22,11 @@
             <button type="submit" class="btn-primary masuk__submit">MASUK</button>
         </div>
     </form>
+
+    <div class="floating-ads">
+        <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
+        <h4 class="floating-ads__close">&times;</h4>
+    </div>
 @endsection
 
 @section('other')
@@ -37,4 +42,12 @@
         <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success.regis') }}"
             another="{{ Session::get('email') }}" />
     @endif
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $('.floating-ads__close').click(e => {
+            e.target.parentElement.style.display = 'none';
+        })
+    </script>
 @endsection

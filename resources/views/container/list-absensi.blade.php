@@ -37,7 +37,7 @@ $namas = substr($namas, 1);
         </div>
 
 
-        @if($peserta != null)
+        @if ($peserta != null)
 
             <div class="absensi__content">
                 @php
@@ -109,18 +109,18 @@ $namas = substr($namas, 1);
 
             </div> {{-- penutu submit .absensi-day__right --}}
 
-        </div> {{-- absensi-day --}}
-        @endif
-        @php
-        if ($session == 2) {
-            $day++;
-            $session = 1;
-        } else {
-            $session++;
-        }
-        @endphp
-        @endforeach
-        </div> {{-- absensi__content --}}
+    </div> {{-- absensi-day --}}
+    @endif
+    @php
+    if ($session == 2) {
+        $day++;
+        $session = 1;
+    } else {
+        $session++;
+    }
+    @endphp
+    @endforeach
+    </div> {{-- absensi__content --}}
 
     @endif
 
@@ -144,6 +144,12 @@ $namas = substr($namas, 1);
             <h5>Belum Dibuka</h5>
         </div>
     </div>
+
+
+    <div class="floating-ads">
+        <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
+        <h4 class="floating-ads__close">&times;</h4>
+    </div>
 @endsection
 
 @section('other')
@@ -162,6 +168,11 @@ $namas = substr($namas, 1);
                 // console.log($("#list-souvenir__etalase")[0].value);
                 location.href = $("#list-souvenir__etalase")[0].value;
             })
+        })
+
+        // close ads
+        $('.floating-ads__close').click(e => {
+            e.target.parentElement.style.display = 'none';
         })
     </script>
 @endsection

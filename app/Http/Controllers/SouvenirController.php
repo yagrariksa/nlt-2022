@@ -163,7 +163,7 @@ class SouvenirController extends Controller
         }
         $t = false;
         $now = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
-        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-09 00:00');
+        $target = DateTime::createFromFormat('Y-m-d H:i', '2022-04-11 00:00');
         if ($now > $target) {
             $t = true;
         }

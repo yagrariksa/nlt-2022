@@ -4312,3 +4312,23 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
 .adm-detail-keranjang .keranjang__card--berat span, .adm-detail-keranjang .keranjang__card--ongkir span {
   color: #2B4BF2;
 }
+
+.floating-ads {
+  width: calc(100% - 4rem);
+  max-width: 500px;
+  position: fixed;
+  left: 4rem;
+  bottom: 3rem;
+  z-index: 9;
+}
+.floating-ads__img {
+  width: inherit;
+}
+.floating-ads__close {
+  color: #FFFFFF;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  background-color: #001219;
+}

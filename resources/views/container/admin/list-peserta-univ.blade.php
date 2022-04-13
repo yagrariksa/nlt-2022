@@ -98,15 +98,14 @@
                             target="_blank" rel="noopener noreferrer" class="sertif__link">Click to view</a>
                         <span></span>
                     </div>
-                    <button class="sertif__delete">DELETE</button>
-
+                    <button class="sertif__delete" data-id="{{ $img->id }}">DELETE</button>
                     <form class="sertif__delete-dialog dialog"
                         action="{{ route('a.peserta', ['mode' => 'delete-sertif']) }}" method="post">
                         @csrf
                         @method('delete')
 
                         <h3 class="dialog__title">Hapus Sertifikat?</h3>
-                        <input type="hidden" value="{{ $img->id }}" name="image">
+                        <input type="hidden" value="{{ $img->id }}" name="image" class="img-id">
                         <h4 class="dialog__message">Apakah anda yakin ingin menghapus sertifikat ini?</h4>
                         <div class="dialog__btn">
                             <span class="button dialog__btn-yes list-peserta__batal">Batal</span>
@@ -116,6 +115,7 @@
                     <div class="dialog__bg"></div>
                 </div>
             @endforeach
+
         </div>
     @else
         <div class="sertif__container-gallery sertif__container-gallery--none">
@@ -154,9 +154,11 @@
             });
         });
 
-        $('.sertif__delete').click(() => {
-            console.log('hei');
+        $('.sertif__delete').click(e => {
+            
             $('.sertif__delete-dialog')[0].classList.add('active')
+            $('.sertif__delete-dialog .img-id')[0].setAttribute('value', e.target.dataset.id)
+            
         })
     </script>
 @endsection

@@ -129,10 +129,17 @@
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
     <div class="" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0">
         @foreach ($sertif as $img)
-        <div class="" style="display: flex; flex-direction: column">
-            <img src="{{ url('storage') . '/' . $img->filename }}" alt="{{$img->filename}}" style="width: 100%">
-            <button style="width: 100%">DELETE</button>
-        </div>
+            <div class="" style="display: flex; flex-direction: column">
+                <img src="{{ url('storage') . '/' . $img->filename }}" alt="{{ $img->filename }}" style="width: 100%">
+
+                <form action="{{route('a.peserta', ['mode' => 'delete-sertif'])}}" method="post" style="margin: 0; padding: 0">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" value="{{ $img->id }}" name="image">
+                    <button type="submit" style="width: 100%">DELETE</button>
+                </form>
+
+            </div>
         @endforeach
     </div>
 

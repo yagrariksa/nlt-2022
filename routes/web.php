@@ -120,5 +120,6 @@ Route::name('a.')->prefix('mahavira')->group(function () {
         });
         Route::get('peserta', [AdminController::class, 'a_view'])->name('peserta');
         Route::post('peserta', [AdminController::class, 'submit'])->name('peserta');
+        Route::delete('peserta', [AdminController::class, 'submit'])->name('peserta');
     });
 });

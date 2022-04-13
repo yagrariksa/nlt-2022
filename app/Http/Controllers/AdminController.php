@@ -193,6 +193,11 @@ class AdminController extends Controller
                 ]);
                 break;
 
+            case 'delete-sertif':
+                Sertif::find($request->image)->delete();
+                return redirect()->back();
+                break;
+
             default:
                 return redirect()->route('a.peserta', [
                     'object' => 'peserta'

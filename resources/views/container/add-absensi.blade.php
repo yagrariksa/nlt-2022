@@ -79,7 +79,6 @@
 @endsection
 
 @section('other')
-    {{-- it can be modal, etc. --}}
     <div class="add-absensi__dialog dialog">
         <h3 class="dialog__title">Batalkan Absen?</h3>
         <h4 class="dialog__message">Apakah anda ingin membatalkan absensi?Informasi yang anda masukkan tidak akan tersimpan.
@@ -99,7 +98,7 @@
             $('.add-absensi__dialog')[0].classList.add('active')
         })
 
-        // close ads
+        // CLOSE ADS
         $('.floating-ads__close').click(e => {
             e.target.parentElement.style.display = 'none';
         })

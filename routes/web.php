@@ -29,11 +29,11 @@ Route::get('/', function () {
     return view('container.home');
 })->name('home');
 
-Route::get('/test', function () {
-    // return view('test');
-    // return view('container.detail-souvenir');
-    return view('container.keranjang');
-});
+// Route::get('/test', function () {
+//     // return view('test');
+//     // return view('container.detail-souvenir');
+//     return view('container.keranjang');
+// });
 
 
 Route::get('/sponsor', function () {
@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [AbsenController::class, 'doAbsen']);
     });
 
+    Route::get('sertif', [PesertaController::class, 'sertif'])->name('sertif');
+
     Route::name('akun.setting')->prefix('setting')->group(function () {
         // view account settings
         Route::get('/', [AuthController::class, 'view_acc_setting']); // show view settings
@@ -117,5 +119,7 @@ Route::name('a.')->prefix('mahavira')->group(function () {
             Route::get('excel', [AbsenController::class, 'excel'])->name('.excel');
         });
         Route::get('peserta', [AdminController::class, 'a_view'])->name('peserta');
+        Route::post('peserta', [AdminController::class, 'submit'])->name('peserta');
+        Route::delete('peserta', [AdminController::class, 'submit'])->name('peserta');
     });
 });

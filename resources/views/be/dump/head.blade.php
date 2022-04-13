@@ -128,6 +128,7 @@
                 ]) }}">peserta</a>
             <a class="header__item" href="{{ route('absensi') }}">Absen</a>
             <a class="header__item" href="{{ route('souvenir') }}">Souvenir</a>
+            <a class="header__item" href="{{ route('sertif') }}">sertif</a>
             <a class="header__item" href="{{ route('akun.setting') }}">ganti password</a>
             <a class="header__item" href="{{ route('logout') }}">LogOut</a>
         </div>

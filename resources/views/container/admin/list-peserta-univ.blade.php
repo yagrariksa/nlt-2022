@@ -10,44 +10,12 @@
         <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span>{{ $univ }}</span>
         </h1>
         <div class="adm-dashboard__filter-div">
-            {{-- <button class="adm-dashboard__excel"
-                onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">
-                <img src="{{ url('assets/img/excel.svg') }}" alt="">
-                DOWNLOAD EXCEL
-            </button> --}}
+            <a href="{{ route('a.peserta', ['object' => 'sertif', 'univ' => $email]) }}"
+                class="button btn-primary sertif__upload-btn">
+                UPLOAD SERTIFIKAT
+            </a>
         </div>
     </div>
-    {{-- {{ $data->akronim }} --}}
-    {{-- <button class="adm-dashboard__btn adm-dashboard__btn-filter">Urutkan Data</button>
-    <div class="dialog">
-        <h3 class="dialog__title">Urutkan Disini</h3>
-        <div class="dialog__filter">
-            <div class="dialog__filter--quest-box">
-                <h4>Urutkan Berdasarkan</h4>
-                <select name="" id="select-column-sorter">
-                    <option value="univ" selected>Nama Universitas</option>
-                    <option value="jml">Jumlah Peserta</option>
-                </select>
-            </div>
-            <div class="dialog__filter--quest-box">
-                <h4>Urutkan Secara</h4>
-                <div class="dialog__filter--radio">
-                    <input type="radio" name="sorter" id="radio-ascending" checked>
-                    <label for="radio-ascending">A-Z</label>
-                </div>
-                <div class="dialog__filter--radio">
-                    <input type="radio" name="sorter" id="radio-descending">
-                    <label for="radio-descending">Z-A</label>
-                </div>
-            </div>
-        </div>
-        <div class="dialog__btn">
-            <span class="button dialog__btn-no adm-dashboard__dialog-filter--no">Reset</span>
-            <span class="button dialog__btn-yes adm-dashboard__dialog-filter--yes">Terapkan</span>
-        </div>
-    </div>
-    <div class="dialog__bg"></div>
-    <input type="text" class="adm-dashboard__input-search" id="filter-search"> --}}
 
     <table class="adm-table__table-head">
         <colgroup>
@@ -66,10 +34,6 @@
                         <span>Nama</span>
                     </span>
                 </th>
-                {{-- <th><span>
-                        <span>Asal Universitas</span>
-                    </span>
-                </th> --}}
                 <th><span>
                         <span>Jabatan</span>
                     </span>
@@ -94,7 +58,6 @@
                     <tr class="adm-table__record">
                         <td>{{ $loop->iteration }}</td>
                         <td class="adm-table__nama">{{ $p->nama }}</td>
-                        {{-- <td class="adm-table__univ">{{ $p->univ->univ }}</td> --}}
                         <td class="adm-table__peserta">{{ $p->jabatan }}</td>
                         <td class="adm-table__peserta">{{ $p->line }}</td>
                     </tr>
@@ -123,10 +86,79 @@
             </a>
         </div>
     </div>
-    <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
+
+    {{-- SERTIF --}}
+    @if ($sertif->count())
+        <div class="sertif__container-gallery">
+            @foreach ($sertif as $img)
+                <div class="sertif__img-container">
+                    <div class="sertif__img">
+                        <img src="{{ url('storage') . '/' . $img->filename }}" alt="{{ $img->filename }}">
+                        <a href="{{ url('storage') . '/' . $img->filename }}" alt="{{ $img->filename }}"
+                            target="_blank" rel="noopener noreferrer" class="sertif__link">Click to view</a>
+                        <span></span>
+                    </div>
+                    <button class="sertif__delete" data-id="{{ $img->id }}">DELETE</button>
+                    <form class="sertif__delete-dialog dialog"
+                        action="{{ route('a.peserta', ['mode' => 'delete-sertif']) }}" method="post">
+                        @csrf
+                        @method('delete')
+
+                        <h3 class="dialog__title">Hapus Sertifikat?</h3>
+                        <input type="hidden" value="{{ $img->id }}" name="image" class="img-id">
+                        <h4 class="dialog__message">Apakah anda yakin ingin menghapus sertifikat ini?</h4>
+                        <div class="dialog__btn">
+                            <span class="button dialog__btn-yes list-peserta__batal">Batal</span>
+                            <button type="submit" class="dialog__btn-no">Hapus</button>
+                        </div>
+                    </form>
+                    <div class="dialog__bg"></div>
+                </div>
+            @endforeach
+
+        </div>
+    @else
+        <div class="sertif__container-gallery sertif__container-gallery--none">
+            <h2>Sertifikat Belum Diunggah</h2>
+            <h4>Anda dapat mengunggah sertifikat <a class="h4"
+                    href="{{ route('a.peserta', ['object' => 'sertif', 'univ' => $email]) }}">disini</a></h4>
+        </div>
+    @endif
 
 @endsection
 
 @section('other')
-    {{-- it can be modal, etc. --}}
+    @if (Session::has('msg_berhasil'))
+        <x-alert.sukses title="Berhasil!" desc="{{ Session::get('msg_berhasil') }}" />
+    @endif
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        const elementSpan = [];
+
+        document.querySelectorAll(".sertif__img").forEach((elm, x) => {
+            let addAnimation = false;
+            if (!elementSpan[x])
+                elementSpan[x] = elm.querySelector("span");
+
+            elm.addEventListener("mouseover", e => {
+                elementSpan[x].style.left = e.pageX - elm.offsetLeft + "px";
+                elementSpan[x].style.top = e.pageY - elm.offsetTop + "px";
+            });
+
+            elm.addEventListener("mouseout", e => {
+                elementSpan[x].style.left = e.pageX - elm.offsetLeft + "px";
+                elementSpan[x].style.top = e.pageY - elm.offsetTop + "px";
+            });
+        });
+
+        $('.sertif__delete').click(e => {
+            
+            $('.sertif__delete-dialog')[0].classList.add('active')
+            $('.sertif__delete-dialog .img-id')[0].setAttribute('value', e.target.dataset.id)
+            
+        })
+    </script>
 @endsection

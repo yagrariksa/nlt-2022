@@ -146,9 +146,15 @@ $namas = substr($namas, 1);
     </div>
 
 
-    <div class="floating-ads">
+    
+    <div class="text-float" style="width: calc(100% - 4rem);
+    max-width: 500px;
+    position: fixed;
+    right: 4rem;
+    bottom: 3rem;
+    z-index: 9;">
         <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
-        <h4 class="floating-ads__close">&times;</h4>
+        <h4 class="floating-ads__close">&times; TUTUP IKLAN</h4>
     </div>
 @endsection
 

@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Kantong::class, 'user_id', 'id');
     }
+
+    public function sertif()
+    {
+        return $this->hasMany(Sertif::class, 'univ_id', 'id');
+    }
 }

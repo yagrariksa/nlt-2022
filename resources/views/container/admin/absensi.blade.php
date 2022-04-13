@@ -26,36 +26,25 @@
                                 <span>Universitas</span>
                             </span>
                         </th>
-                        <th><span>
-                                <span>Day 1 - Sesi 1</span>
-                                <span class="malachite">08.00-08.15</span>
-                            </span>
-                        </th>
-                        <th><span>
-                                <span>Day 1 - Sesi 2</span>
-                                <span class="malachite">12.30-12.45</span>
-                            </span>
-                        </th>
-                        <th><span>
-                                <span>Day 2 - Sesi 1</span>
-                                <span class="malachite">08.00-08.15</span>
-                            </span>
-                        </th>
-                        <th><span>
-                                <span>Day 2 - Sesi 2</span>
-                                <span class="malachite">12.30-12.45</span>
-                            </span>
-                        </th>
-                        <th><span>
-                                <span>Day 3 - Sesi 1</span>
-                                <span class="malachite">08.00-08.15</span>
-                            </span>
-                        </th>
-                        <th><span>
-                                <span>Day 3 - Sesi 2</span>
-                                <span class="malachite">12.30-12.45</span>
-                            </span>
-                        </th>
+                        @php
+                            $ood = 1;
+                            $sess = 1;
+                        @endphp
+                        @foreach ($jadwal as $joy)
+                            <th><span>
+                                    <span>Day {{ $ood }} - Sesi {{ $sess }}</span>
+                                    <span class="malachite">{{ explode(' ', $joy[0])[1] }}-{{ explode(' ', $joy[1])[1] }}</span>
+                                </span>
+                            </th>
+                            @php
+                                if ($sess == 1) {
+                                    $sess++;
+                                } else {
+                                    $ood++;
+                                    $sess = 1;
+                                }
+                            @endphp
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>

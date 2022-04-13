@@ -23,10 +23,7 @@
         </div>
     </form>
 
-    <div class="floating-ads">
-        <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
-        <h4 class="floating-ads__close">&times;</h4>
-    </div>
+    
 @endsection
 
 @section('other')
@@ -42,7 +39,15 @@
         <x-alert.sukses title="{{ Session::get('title') }}" desc="{{ Session::get('success.regis') }}"
             another="{{ Session::get('email') }}" />
     @endif
-
+    <div class="text-float" style="width: calc(100% - 4rem);
+    max-width: 500px;
+    position: fixed;
+    right: 4rem;
+    bottom: 3rem;
+    z-index: 9;">
+        <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
+        <h4 class="floating-ads__close">&times; TUTUP IKLAN</h4>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>

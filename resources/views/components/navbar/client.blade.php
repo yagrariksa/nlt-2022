@@ -20,8 +20,8 @@
                     'object' => 'katalog',
                 ]) }}"
                     class="nav__item" id="nav__item--souvenir">SOUVENIR <span></span></a>
-                <a href="{{ route('sertif') }}"
-                    class="nav__item" id="nav__item--sertif">SERTIFIKAT <span></span></a>
+                <a href="{{ route('sertif') }}" class="nav__item" id="nav__item--sertif">SERTIFIKAT
+                    <span></span></a>
             </div>
             <h4 class="nav__profile">Halo, {{ Auth::user()->akronim }} <img
                     src="{{ url('assets/img/profile.png') }}" alt="" class="nav__profile-img"></h4>
@@ -76,9 +76,8 @@
                         class="nav__item" id="nav__item--souvenir-sm">
                         <h2>Souvenir</h2>
                     </a>
-                    <a href="{{ route('sertif') }}"
-                        class="nav__item" id="nav__item--sertif-sm">
-                        <h2>SERTIFIKAT</h2>
+                    <a href="{{ route('sertif') }}" class="nav__item" id="nav__item--sertif-sm">
+                        <h2>Sertifikat</h2>
                     </a>
                     <hr>
                     <a href="{{ route('akun.setting') }}" class="nav__item" id="nav__item--password-sm""><h2>Ubah Password</h2></a>

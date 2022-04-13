@@ -96,7 +96,8 @@ class PesertaController extends Controller
         if ($request->query('filename')) {
             return Storage::download('public/' . $request->query('filename'));
         }
-        return view('be.d.sertif');
+        // return view('be.d.sertif');
+        return view('container.sertif');
     }
 
     protected function d_view_default()

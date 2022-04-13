@@ -29,11 +29,11 @@ Route::get('/', function () {
     return view('container.home');
 })->name('home');
 
-Route::get('/test', function () {
-    // return view('test');
-    // return view('container.detail-souvenir');
-    return view('container.keranjang');
-});
+// Route::get('/test', function () {
+//     // return view('test');
+//     // return view('container.detail-souvenir');
+//     return view('container.keranjang');
+// });
 
 
 Route::get('/sponsor', function () {

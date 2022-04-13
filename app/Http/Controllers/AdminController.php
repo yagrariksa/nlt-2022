@@ -68,7 +68,8 @@ class AdminController extends Controller
     protected function a_view_add_excel($univ)
     {
         $u = User::where('email', $univ)->first();
-        return view('be.a.sertif', [
+        // return view('be.a.sertif', [
+        return view('container.admin.add-sertif', [
             'univ' => $u
         ]);
     }
@@ -190,12 +191,12 @@ class AdminController extends Controller
                 return redirect()->route('a.peserta', [
                     'object' => 'peserta',
                     'univ' => $u->email
-                ]);
+                ])->with('msg_berhasil', 'Berhasil menambahkan sertifikat.');
                 break;
 
             case 'delete-sertif':
                 Sertif::find($request->image)->delete();
-                return redirect()->back();
+                return redirect()->back()->with('msg_berhasil', 'Berhasil menghapus sertifikat.');
                 break;
 
             default:

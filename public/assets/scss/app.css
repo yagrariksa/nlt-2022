@@ -276,14 +276,14 @@ label {
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
-  background-image: url(/images/see.svg?7cc1c59bbae77854abfa83a016c3bdf7);
+  background-image: url(/images/see.svg?f196ee479a2c167cccfcf4424b486f18);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   transition: background-image 0.5s ease;
 }
 .form-group__see-password.unsee {
-  background-image: url(/images/unsee.svg?f46ac4b509b9917ec3348bf102c78421);
+  background-image: url(/images/unsee.svg?be6a9afb096d875d394992b24d0954b8);
 }
 .form-group--select-new {
   margin-top: 0;
@@ -310,7 +310,7 @@ label {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background-image: url(/images/dropdown-arrow.svg?662fe868c0cf0ed973372d0fb759b272);
+  background-image: url(/images/dropdown-arrow.svg?512ef9cca648640097afb8e35273d5d4);
   background-repeat: no-repeat;
   background-size: cover;
   transition: transform 0.3s ease-in-out 0s;
@@ -1447,7 +1447,7 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    background-image: url(/images/arrow-next.svg?165325e903f5ef48b77cf4d8e1891f37);
+    background-image: url(/images/arrow-next.svg?b9a1f393ea1e6e14abf477862ab4e95d);
     background-size: contain;
     background-repeat: no-repeat;
   }
@@ -4331,4 +4331,145 @@ button.btn-secondary:focus, button.btn-secondary:focus-within, button.btn-second
   left: 0;
   top: -0.5rem;
   background-color: #001219;
+}
+
+.sertif__container-gallery {
+  min-height: calc(100vh - 9rem);
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 3rem 1.5rem;
+}
+.sertif__container-gallery--none {
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.sertif__container-gallery--none h2,
+.sertif__container-gallery--none h4 {
+  width: 30%;
+  text-align: center;
+  color: #B3B8BA;
+}
+.sertif__container-gallery--none h2 > a,
+.sertif__container-gallery--none h4 > a {
+  color: #BB3E03;
+}
+.sertif__img-container {
+  width: calc((100% - 3rem) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.sertif__img {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.sertif__img img {
+  width: 100%;
+}
+.sertif__img > span {
+  position: absolute;
+  display: block;
+  content: "";
+  z-index: 0;
+  width: 0;
+  height: 0;
+  border-radius: 100%;
+  background: rgba(0, 18, 25, 0.75);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, padding-top 0.6s;
+}
+.sertif__img:hover > .sertif__link {
+  visibility: visible;
+  opacity: 1;
+}
+.sertif__img:hover > span {
+  width: 225%;
+  padding-top: 225%;
+}
+.sertif__link {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.8s ease-in-out;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.sertif__delete {
+  cursor: pointer;
+  background-color: #BB3E03;
+  color: #FFFFFF;
+}
+.sertif__delete:hover {
+  background-color: #001219;
+}
+.sertif__upload-btn {
+  white-space: nowrap;
+}
+@media screen and (max-width: 992px) {
+  .sertif__img-container {
+    width: calc((100% - 1.5rem) / 2);
+  }
+}
+@media screen and (max-width: 768px) {
+  .sertif__container-gallery--none h2 {
+    width: 75%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .sertif__img-container {
+    width: 100%;
+  }
+}
+
+.add-sertif {
+  min-height: calc(100vh - 6rem);
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.add-sertif > form {
+  width: 100%;
+  min-height: calc(100vh - 6rem);
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-sertif__top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.add-sertif__title {
+  align-self: center;
+}
+.add-sertif__bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.add-sertif__submit {
+  width: 100%;
 }

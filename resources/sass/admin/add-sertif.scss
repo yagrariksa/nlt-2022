@@ -1,0 +1,42 @@
+.add-sertif {
+    min-height: calc(100vh - 6rem);
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    >form {
+        width: 100%;
+        min-height: calc(100vh - 6rem);
+        padding-bottom: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__top {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    &__title {
+        align-self: center;
+    }
+
+    &__bottom {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    &__submit {
+        width: 100%;
+    }
+}

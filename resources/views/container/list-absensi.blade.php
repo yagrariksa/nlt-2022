@@ -153,8 +153,6 @@ $namas = substr($namas, 1);
 @endsection
 
 @section('other')
-    {{-- it can be modal, etc. --}}
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
@@ -170,7 +168,7 @@ $namas = substr($namas, 1);
             })
         })
 
-        // close ads
+        // CLOSE ADS
         $('.floating-ads__close').click(e => {
             e.target.parentElement.style.display = 'none';
         })

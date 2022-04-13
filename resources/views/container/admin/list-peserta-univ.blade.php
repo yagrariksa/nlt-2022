@@ -10,6 +10,9 @@
         <h1 class="adm-dashboard__title">List Peserta {{ $akronim }} <span>{{ $univ }}</span>
         </h1>
         <div class="adm-dashboard__filter-div">
+            <button onclick="window.open('{{ route('a.peserta', ['object' => 'sertif', 'univ' => $email]) }}')">
+                Upload Sertif
+            </button>
             {{-- <button class="adm-dashboard__excel"
                 onclick="window.open('{{ route('a.peserta', ['object' => 'excel', 'univ' => $email]) }}')">
                 <img src="{{ url('assets/img/excel.svg') }}" alt="">
@@ -124,6 +127,14 @@
         </div>
     </div>
     <h4 class="adm-table--sm">Harap Akses melalui desktop.</h4>
+    <div class="" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0">
+        @foreach ($sertif as $img)
+        <div class="" style="display: flex; flex-direction: column">
+            <img src="{{ url('storage') . '/' . $img->filename }}" alt="{{$img->filename}}" style="width: 100%">
+            <button style="width: 100%">DELETE</button>
+        </div>
+        @endforeach
+    </div>
 
 @endsection
 

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peserta;
+use App\Models\Sertif;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -87,6 +89,14 @@ class PesertaController extends Controller
                 return $this->d_view_default();
                 break;
         }
+    }
+
+    public function sertif(Request $request)
+    {
+        if ($request->query('filename')) {
+            return Storage::download('public/' . $request->query('filename'));
+        }
+        return view('be.d.sertif');
     }
 
     protected function d_view_default()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PesertaExport;
 use App\Models\Peserta;
+use App\Models\Sertif;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,7 +24,7 @@ class AdminController extends Controller
 
             case 'peserta':
                 if ($univ) {
-                    if($mode) {
+                    if ($mode) {
                         return $this->a_view_list_peserta_by_univ_all($univ);
                     } else {
                         return $this->a_view_list_peserta_by_univ($univ);
@@ -42,6 +43,9 @@ class AdminController extends Controller
                     return $this->a_excel_peserta_all();
                 }
 
+            case 'sertif':
+                return $this->a_view_add_excel($univ);
+                break;
             default:
                 return $this->a_view_list_univ($request);
                 break;
@@ -61,19 +65,29 @@ class AdminController extends Controller
         ]);
     }
 
+    protected function a_view_add_excel($univ)
+    {
+        $u = User::where('email', $univ)->first();
+        return view('be.a.sertif', [
+            'univ' => $u
+        ]);
+    }
+
     protected function a_view_list_peserta_by_univ($univ)
     {
-        $data = User::with(['peserta'])->where('email', $univ)->first();
+        $data = User::with(['peserta', 'sertif'])->where('email', $univ)->first();
         $univ = $data->univ;
         $akronim = $data->akronim;
         $email = $data->email;
+        $sertif = $data->sertif;
         $data = $data->peserta;
         // return view('be.a.list-peserta', [
         return view('container.admin.list-peserta-univ', [
             'data' => $data,
             'univ' => $univ,
             'akronim' => $akronim,
-            'email' => $email
+            'email' => $email,
+            'sertif' => $sertif
         ]);
     }
 
@@ -140,7 +154,7 @@ class AdminController extends Controller
 
     protected function a_excel_peserta_by_univ($univ)
     {
-        
+
         $u = User::where('email', $univ)->first();
         // return Excel::download(new PesertaExport($univ), 'Response.xlsx');
         return Excel::download(new PesertaExport($univ), $u->akronim . '_Peserta_' . date('H-i_d-M') . '.xlsx');
@@ -149,5 +163,41 @@ class AdminController extends Controller
     protected function a_excel_peserta_all()
     {
         return Excel::download(new PesertaExport('ALL'), 'all-data_Peserta_' . date('H-i_d-M') . '.xlsx');
+    }
+
+    public function submit(Request $request)
+    {
+        switch ($request->query('mode')) {
+            case 'upload-sertif':
+                $u = User::where('email', $request->email)->first();
+
+                foreach ($request->file('image') as $imagefile) {
+                    $foto_url = join(
+                        "_",
+                        [
+                            time(),
+                            "sertif",
+                            join('-', explode(' ', $imagefile->getClientOriginalName())),
+                        ]
+                    );
+                    $imagefile->storeAs('public', $foto_url);
+                    Sertif::create([
+                        'filename' => $foto_url,
+                        'univ_id' => $u->id
+                    ]);
+                }
+
+                return redirect()->route('a.peserta', [
+                    'object' => 'peserta',
+                    'univ' => $u->email
+                ]);
+                break;
+
+            default:
+                return redirect()->route('a.peserta', [
+                    'object' => 'peserta'
+                ]);
+                break;
+        }
     }
 }

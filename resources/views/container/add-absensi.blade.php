@@ -65,6 +65,17 @@
             <a href="{{ route('absensi', ['mode' => 'list']) }}">Kembali ke list absensi</a>
         </div>
     @endif
+
+
+    <div class="text-float" style="width: calc(100% - 4rem);
+    max-width: 500px;
+    position: fixed;
+    right: 4rem;
+    bottom: 3rem;
+    z-index: 9;">
+        <img src="{{ url('assets/img/floating-banner-bca.jpg') }}" alt="floating banner bca" class="floating-ads__img">
+        <h4 class="floating-ads__close">&times; TUTUP IKLAN</h4>
+    </div>
 @endsection
 
 @section('other')
@@ -86,6 +97,11 @@
         $('.add-absensi__batal').click(e => {
             e.preventDefault();
             $('.add-absensi__dialog')[0].classList.add('active')
+        })
+
+        // close ads
+        $('.floating-ads__close').click(e => {
+            e.target.parentElement.style.display = 'none';
         })
     </script>
 @endsection

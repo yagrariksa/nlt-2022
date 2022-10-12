@@ -172,51 +172,17 @@ class PesertaController extends Controller
             if (!$uid)
                 return $this->d_action_default();
 
-
-        switch ($mode) {
-            case 'delete':
-                switch ($object) {
-                    case 'peserta':
-                        return $this->d_action_delete_peserta($uid);
-                        break;
-
-                    default:
-                        return $this->error_page();
-                        break;
-                }
-                break;
-            case 'edit':
-                switch ($object) {
-                    case 'peserta':
-                        return $this->d_action_edit_peserta($request, $uid);
-                        break;
-
-                    default:
-                        return $this->error_page();
-                        break;
-                }
-                break;
-
-            case 'add':
-                switch ($object) {
-                        // case 'dokumen':
-                        //     return $this->d_action_add_dokumen($request, $uid);
-                        //     break;
-
-                    case 'peserta':
-                        return $this->d_action_add_peserta($request);
-                        break;
-
-                    default:
-                        return $this->error_page();
-                        break;
-                }
-                break;
-
-            default:
-                return $this->error_page();
-                break;
+        if ($object == 'peserta') {
+            if ($mode == 'delete') {
+                return $this->d_action_delete_peserta($uid);
+            } elseif ($mode == 'edit') {
+                return $this->d_action_edit_peserta($request, $uid);
+            } elseif ($mode == 'add') {
+                return $this->d_action_add_peserta($request);
+            }
         }
+
+        return $this->error_page();
     }
 
     protected function d_action_default()

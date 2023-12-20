@@ -14,11 +14,11 @@
             <x-form.input-text id="email" label="Universitas Email Spesial"
                 value="{{ Session::has('email') ? Session::get('email') : '' }}" />
             <x-form.input-password-session-error id="password" label="Password" error="error" />
-            <a href="{{ route('forgot-password') }}" class="masuk__lupa-password">Lupa Password Anda?</a>
+            <a href="{{ route('forgot-password') }}" class="masuk__lupa-password" id="lupa-password">Lupa Password Anda?</a>
         </div>
 
         <div class="masuk__bottom">
-            <p class="masuk__to-registrasi">Anda belum memiliki akun? <a href="{{ route('register') }}">Registrasi</a></p>
+            <p class="masuk__to-registrasi">Anda belum memiliki akun? <a href="{{ route('register') }}" id="registrasi">Registrasi</a></p>
             <button type="submit" class="btn-primary masuk__submit">MASUK</button>
         </div>
     </form>
